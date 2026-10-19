@@ -6,7 +6,7 @@ Current scope: **M1 feasibility prototype, partially verified**. A native OLE ta
 
 ## Development
 
-Latest M1 work: [reentry and native receiver tests](docs/reports/m1-resume.md). The final suite has 16 Core and 10 hidden native receiver cases. The receiver now permits reentry after Leave when the mouse button is observed held; F8/F9 diagnostics distinguish received and ignored activation. These tests do not replace the outstanding Explorer gesture validation.
+Latest M1 work: [reentry and native receiver tests](docs/reports/m1-resume.md). The final suite has 16 Core cases and 11 integration cases (10 hidden native receiver cases plus invalid shortcut-profile rejection). The receiver permits reentry after Leave when the mouse button is observed held; diagnostics distinguish button/hotkey activation and identify the selected shortcuts. Letters passed an automated keyboard control and two owner batch drops from Explorer with unchanged originals. The owner reports activation during dragging; mouse-up activation snapshots leave exact timing without independent corroboration. Full gesture and safe cancellation acceptance remain partial.
 
 Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.
 
@@ -38,7 +38,15 @@ Running the App without prototype arguments opens instructions. To prepare dispo
 pwsh -NoProfile -File scripts/start-prototype.ps1
 ```
 
-The prototype registers F8/F9 only for its lifetime. Use **Open fixtures**, then F8 to show the receiver near the cursor. Only that run's fixture directory is accepted. F9 rejects/closes; while a drag is inside it latches rejection until Drop/Leave instead of exposing another destination. Escape is handled by the drag source; a logged DragLeave alone cannot prove Escape cancellation. Close the prototype window to revoke OLE and hotkeys.
+The default FunctionKeys profile registers F8/F9 only for the prototype's lifetime. Physical F8 did not reach the prototype in two owner trials, although an automated F8/F9 control succeeded in the same run; the cause is unresolved. A separate Letters profile is available for testing:
+
+```powershell
+pwsh -NoProfile -File scripts/start-prototype.ps1 -ShortcutProfile Letters
+```
+
+Letters registers **Ctrl+Alt+D** to show the receiver and **Ctrl+Alt+X** to reject/close. The window and journal display the selected bindings; registration failure disables the prototype. This uses the same public RegisterHotKey API, with no input hooks or polling. Selection happens at launch, with only these two predefined profiles.
+
+Use **Open fixtures**, then the displayed activation shortcut to show the receiver near the cursor. Only that run's fixture directory is accepted. The rejection shortcut closes while idle; during a drag inside it latches rejection until Drop/Leave instead of exposing another destination. Escape is handled by the drag source; a logged DragLeave alone cannot prove Escape cancellation. Close the prototype window to revoke OLE and hotkeys. A successful automated shortcut control does not verify physical keyboard delivery or activation during an Explorer drag.
 
 The receiver records accepted paths; it does not copy, move or convert files. COPY/NONE are negotiated OLE effects. Keep every original journal under evidence/private; do not publish screenshots or identifiers. Validate after a trial with scripts/check-prototype-files.ps1 -RunFile followed by the run.json path printed by the launcher. Do not interpret success of the launcher as readiness; check the window and Ready journal event.
 

@@ -10,6 +10,8 @@ Usar `scripts/start-prototype.ps1`, conservar el `run.json` impreso y abrir **Op
 
 Antes de cada ensayo identificar el método de activación: botón, F8 antes del arrastre o F8 durante el arrastre. Empezar con el cuadro cerrado. No pulsar **Arm target** para el caso K1. Si ocurre algo distinto al procedimiento, registrar lo que se hizo realmente.
 
+Actualización tras K0: F8 físico tampoco apareció sin arrastre. Control automatizado F8/F9 del mismo run sí llegó al manejador; causa de diferencia de entrega sin resolver. Dos fallos físicos cierran la estrategia F8 sin cambios. Para otra vía usar `scripts/start-prototype.ps1 -ShortcutProfile Letters`: **Ctrl+Alt+D** activa, **Ctrl+Alt+X** rechaza/cierra. Aplicar K0/K1/C2 con las combinaciones mostradas, anotando perfil Letters; al soltar la combinación, liberar todas sus teclas manteniendo el ratón. Nunca presentar un ensayo Letters como éxito de F8.
+
 Después de cada ensayo, conservar un snapshot nuevo del diario append-only y ejecutar `scripts/check-prototype-files.ps1 -RunFile <run.json>`. Exigir nombres, cantidad, tamaños y SHA256 iguales al baseline. Referenciar el check y snapshot originales mediante hash; no publicar rutas personales, handles ni capturas. Registrar resultado en tracker/experimentos/hipótesis/estado.
 
 ## Matriz de aceptación
@@ -25,6 +27,10 @@ Después de cada ensayo, conservar un snapshot nuevo del diario append-only y ej
 | O1 | Entrar y salir manteniendo el arrastre; soltar únicamente sobre el fondo del host WinNativeFileU, fuera del cuadro receptor. | Corroborar destino físico y ausencia de aceptación/operación; hashes intactos. Puede quedar el cuadro visible hasta F9/cierre, limitación conocida. No soltar en escritorio, otras carpetas ni aplicaciones. |
 | D1 | Repetir K1 en cada configuración de monitor/DPI realmente disponible. | Registrar DPI, rectángulo dentro del área útil, foreground y recepción correcta por configuración. No cambiar ajustes globales ni afirmar compatibilidad con monitores ausentes. |
 | L1 | Cerrar normalmente el host cuando terminen los ensayos. | RevokeDragDrop hr0 en snapshot final y ausencia de la ventana observada. Esto no es una auditoría completa de recursos ni prueba por sí solo que todos los hotkeys se liberaron. |
+
+Los ids8/9 del diario identifican acciones de activación/rechazo; en el perfil Letters no significan teclas F8/F9. Los nuevos registros incluyen `profile`, `shortcut` y el origen `button`/`hotkey` de Armed. Examinar esos campos antes de clasificar el gesto.
+
+Resultados Letters posteriores: dos recepciones múltiples iniciales corroboradas y reporte humano favorable de activación durante drag; los Armed observan botón suelto, por lo que K1 conserva límite de cronología. R1 corroborado por4Leave con botón abajo/keepVisible y reentradas hasta DropAccepted count2. C1 falló según propietario; control Escape en Explorer sin receptor pendiente. C2 corroboró hotkey durante Tracking/CancelLatched/Leave sin entrega posterior, pero no DropRejected físico. No presentar estos logros parciales como aceptación completa de M1.
 
 ## Interpretación y cierre
 

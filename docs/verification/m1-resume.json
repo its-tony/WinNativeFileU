@@ -17,6 +17,12 @@
       "passed": 10,
       "failed": 0,
       "notExecuted": 0
+    },
+    "profile_validation": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
     }
   },
   "native_test_limit": "Synthetic IDataObject, direct receiver callbacks, real hidden HWND/STA/Register/Revoke/HGLOBAL; no Explorer/DoDragDrop/input injection",
@@ -27,7 +33,7 @@
   ],
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
   "pending": [
-    "F8 during Explorer drag",
+    "Physical configured shortcut during Explorer drag and release of all activation keys",
     "safe Escape/global source ending",
     "physical reentry/outside termination",
     "mixed DPI/monitors"
@@ -47,7 +53,18 @@
     "m1-k1-failed-snapshot-01.jsonl": "5badf76e85de33862198cb743adf4c0a43481c1e9f6189b77f73fe9f44a13330",
     "m1-k1-failed-result-01.json": "ac674cd2d086e42dd8e9dcb836382441664d630d864ef745fc86325a2b76a01a",
     "post_K1_fixture_check_private": "cb40fb3133a850213989df1321cca175bf77a2a16a66924080fd1b659c75d19c",
-    "m1-k1-hash-reference-01.json": "4632321e122556e5aacd8169d7146cc6bc4c2bce59a7d38a059a9dd8b60159c0"
+    "m1-k1-hash-reference-01.json": "4632321e122556e5aacd8169d7146cc6bc4c2bce59a7d38a059a9dd8b60159c0",
+    "m1-k0-control-final-01.jsonl": "971ca386e201e0d6151021b78d4c0ab7b69bfc09baa632a1128846ea0e904fb1",
+    "m1-k0-control-result-01.json": "b649d886bac82ea595e042d92b1afc8bb0045889dfdec798cebd4213f3e0d985",
+    "m1-shortcuts-build-01.json": "8e9fea7bc3673082ddcbe2e96c3e8a2a4234f4b7116346c61fd240596301b3aa",
+    "m1-shortcuts-core-01.trx": "fb3e14b04d12c93a062d2b8e7224c6bf16b6a0709c353a72c8fb4bc9521f7449",
+    "m1-shortcuts-integration-01.trx": "35977e28b8e9340948f3d6a011d3d149cbc5ab7dc3004137929175d5449df603",
+    "m1-letters-control-01.jsonl": "1d53cdf201dac474507d7269e60423e3ca6d977765eb193f252a9c133cb2fcb0",
+    "m1-letters-control-result-01.json": "a64aa3bec5e6714cce42ce5e5eb1ec70e83fb2fae0525bfb6cda800fce41bd01",
+    "m1-letters-batch-snapshot-01.jsonl": "7ce85f7cbcd132d577b06c12d6b985f2a5b08b3d72c935fb6861780aa3375a11",
+    "m1-letters-batch-result-01.json": "968393a495495406bfda089bdd8b12ba99adbb0cb3ca38748e97203de7a8d1dc",
+    "m1-letters-cancel-snapshot-01.jsonl": "94c56676b2d3d9b738dba07a3e97b5e1775768d552152cd3e46eb051eae032b1",
+    "m1-letters-cancel-result-01.json": "4b49514063d09a2c2644e842dff3ec6ab0a9321569c52921c15db6030f9a9a2a"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -81,8 +98,53 @@
     "post_K1_hotkey_events": 0,
     "post_K1_armed_events": 0,
     "post_K1_drop_events": 0,
-    "cause": "unresolved; physical mouse-up F8 control requested before retry or code change",
-    "window_still_open_observed": true,
-    "K1_equivalent_failures": 1
+    "cause": "Unresolved physical-versus-automated input delivery difference; no Fn/hardware/OLE cause established",
+    "window_still_open_observed": false,
+    "K1_equivalent_failures": 1,
+    "scope": "Original function-key session, before letter-profile implementation",
+    "K0_physical_result": "FAILED: F8 did not show receiver without drag; no event before automated control",
+    "physical_F8_failures": 2,
+    "unchanged_physical_F8_strategy": "closed after two failures; no repeated attempt",
+    "automated_F8_F9_control_after_physical_reports": "passed in same run; foreground preserved, DPI144",
+    "closed_with_RevokeDragDrop_hr": 0
+  },
+  "current_build_evidence": "m1-shortcuts-build-01.json",
+  "tests_total": 27,
+  "windows_integration_project_total": 11,
+  "letters_profile": {
+    "selection": "start-prototype.ps1 -ShortcutProfile Letters",
+    "registered_pair_only": [
+      "Ctrl+Alt+D",
+      "Ctrl+Alt+X"
+    ],
+    "registration": "passed",
+    "UI_labels": "observed selected profile",
+    "automated_activation_and_idle_rejection": "passed from Explorer with mouse released",
+    "Armed_origin": "hotkey",
+    "foreground_preserved": true,
+    "dpi": 144,
+    "physical_keyboard_control": "owner reports success; new activation/rejection hotkeys received after automated input ended",
+    "Explorer_drag": "owner reports activation during drag; two batch drops corroborated, activation mouse snapshots false leave exact timing unresolved",
+    "original_names_lengths_sha256_unchanged": true,
+    "hooks": false,
+    "polling": false,
+    "successful_owner_batch_drops": 2,
+    "files_per_drop": 2,
+    "activation_LeftButtonDown_observations": [
+      false,
+      false,
+      false
+    ],
+    "cancellation_controls": {
+      "Escape": "owner reports failure; source-alone control pending",
+      "receiver_rejection": "Ctrl+Alt+X/Tracking with held mouse -> CancelLatched -> Leave, no accepted drop after latch",
+      "rejection_through_drop": "not observed physically in this series"
+    }
+  },
+  "physical_reentry": {
+    "keep_visible_leaves": 4,
+    "mouse_held_on_Leave": true,
+    "reentered_and_received_two_files_COPY": true,
+    "originals_unchanged": true
   }
 }

@@ -103,13 +103,18 @@
         "evidence\\private\\m1-batch-result-01.json",
         "evidence\\private\\m1-oct19-launch-01.json",
         "evidence\\private\\m1-oct19-ready-result-01.json",
-        "evidence\\private\\m1-k1-failed-result-01.json"
+        "evidence\\private\\m1-k1-failed-result-01.json",
+        "evidence\\private\\m1-k0-control-result-01.json",
+        "evidence\\private\\m1-letters-launch-01.json",
+        "evidence\\private\\m1-letters-control-result-01.json",
+        "evidence\\private\\m1-letters-batch-result-01.json",
+        "evidence\\private\\m1-letters-cancel-result-01.json"
       ],
-      "attempts": 14,
-      "equivalent_failures": 1,
+      "attempts": 16,
+      "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Owner K1 failed: F8 showed no target; immutable journal still only Ready, no HotkeyReceived/Armed/drop. First documented equivalent K1 failure; request separate mouse-up physical F8 control before any retry"
+      "next_step": "Real reentry through4 held-mouse Leaves and count2 COPY accepted; CtrlAltX received while Tracking/held then latched and Leave without accepted drop. Escape failed, source-alone control pending; no full acceptance"
     },
     {
       "id": "M1_REVIEW",
@@ -192,6 +197,48 @@
       "success_criterion": "Reviewed physical M1 protocol with evidence conditions and current manual-session status",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Reviewed failed K1 owner report versus immutable journal; no causal overclaim, one failure, distinct K0 pending. Path/whitespace pass; originals private and source unchanged"
+    },
+    {
+      "id": "M1_SHORTCUTS",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-shortcuts-build-01.json",
+        "evidence\\private\\m1-shortcuts-build-01.json",
+        "evidence\\private\\m1-letters-control-result-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Build selectable fixture hotkey profiles and verify letter profile registration/activation/rejection on Windows",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "New code locked build0/27tests; actual Letters registration, CtrlAltD/Armed origin hotkey, focus unchanged, CtrlAltX/CancelIdle verified via tool. Physical keyboard/drag remains separate pending acceptance"
+    },
+    {
+      "id": "M1_LETTERS_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-letters-review-01.json",
+        "evidence\\private\\m1-letters-review-01.json",
+        "evidence\\private\\m1-letters-review-02.json",
+        "evidence\\private\\m1-letters-review-03.json",
+        "evidence\\private\\m1-letters-review-03.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "success_criterion": "Review bounded shortcut implementation,27 passed tests and honest automated-versus-physical evidence",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Final path/whitespace pass and manual scope review: Letters batch/reentry verified; activation timing, Escape and rejection-through-drop remain partial. Private originals excluded"
+    },
+    {
+      "id": "M1_ESCAPE",
+      "state": "EN_PROGRESO",
+      "evidence": [
+        "evidence\\private\\m1-letters-cancel-result-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 1,
+      "success_criterion": "Real source drag ends with physical Escape and no receiver acceptance, original hashes intact",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Owner reports physical Escape failed to end drag. First failure of this strategy; request distinct Explorer-alone control. Do not infer source ending from receiver Leave"
     }
   ],
   "history": [
@@ -814,6 +861,178 @@
       "evidence": "evidence\\private\\m1-k1-review-01.json",
       "sha256": "5c5970f57eda6d694470cb3573c388186a2e8f0545a3652825de6dae7d9d445d",
       "note": "Reviewed failed K1 owner report versus immutable journal; no causal overclaim, one failure, distinct K0 pending. Path/whitespace pass; originals private and source unchanged"
+    },
+    {
+      "at": "2026-10-19T14:32:28.483704-06:00",
+      "id": "M1_DESKTOP",
+      "event": "FALLO",
+      "attempt": 15,
+      "evidence": "evidence\\private\\m1-k0-control-result-01.json",
+      "sha256": "b649d886bac82ea595e042d92b1afc8bb0045889dfdec798cebd4213f3e0d985",
+      "note": "Second physical F8 activation failure, now without drag; close unchanged physical-F8 strategy. Automated F8/F9 succeeded in same run, cause unresolved; normal host close observed"
+    },
+    {
+      "at": "2026-10-19T14:32:28.749275-06:00",
+      "id": "M1_DESKTOP",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-k0-control-final-01.jsonl",
+      "sha256": "971ca386e201e0d6151021b78d4c0ab7b69bfc09baa632a1128846ea0e904fb1",
+      "note": "New automated F8/F9 success and focus-preserving Armed show hotkey route works; switch to selectable letter profile, not another unchanged physical-F8 retry"
+    },
+    {
+      "at": "2026-10-19T14:33:57.448674-06:00",
+      "id": "M1_SHORTCUTS",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:34:56.419982-06:00",
+      "id": "M1_SHORTCUTS",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-shortcuts-build-01.json",
+      "sha256": "8e9fea7bc3673082ddcbe2e96c3e8a2a4234f4b7116346c61fd240596301b3aa",
+      "note": "Compile selectable bounded letter/function-key profiles, dynamic labels/origin diagnostics and run existing receiver plus invalid-profile regression"
+    },
+    {
+      "at": "2026-10-19T14:35:31.725954-06:00",
+      "id": "M1_SHORTCUTS",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-shortcuts-build-01.json",
+      "sha256": "8e9fea7bc3673082ddcbe2e96c3e8a2a4234f4b7116346c61fd240596301b3aa",
+      "note": "Locked Windows build0,0warnings/errors;16Core+11integration passed (10hidden native +1profile rejection). TRX preserved; actual letter hotkey registration/activation next"
+    },
+    {
+      "at": "2026-10-19T14:35:31.889140-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:35:32.833142-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 16,
+      "evidence": "evidence\\private\\m1-letters-launch-01.json",
+      "sha256": "1deb7ed8411b3f2bb459e69280ea8554fe3004a8f7574903c673db72ae1a26fc",
+      "note": "New letter-profile strategy; fresh fixtures/log. Verify actual CtrlAltD/CtrlAltX outside drag before human trial; no unchanged F8 physical retry"
+    },
+    {
+      "at": "2026-10-19T14:37:02.067151-06:00",
+      "id": "M1_SHORTCUTS",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-letters-control-result-01.json",
+      "sha256": "a64aa3bec5e6714cce42ce5e5eb1ec70e83fb2fae0525bfb6cda800fce41bd01",
+      "note": "New code locked build0/27tests; actual Letters registration, CtrlAltD/Armed origin hotkey, focus unchanged, CtrlAltX/CancelIdle verified via tool. Physical keyboard/drag remains separate pending acceptance"
+    },
+    {
+      "at": "2026-10-19T14:37:02.308400-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 16,
+      "evidence": "evidence\\private\\m1-letters-control-result-01.json",
+      "sha256": "a64aa3bec5e6714cce42ce5e5eb1ec70e83fb2fae0525bfb6cda800fce41bd01",
+      "note": "Letter profile automated control passed, fresh Explorer fixtures/hashes verified. Asked owner physical mouse-up control then drag with CtrlAltD, release all keys; no M1 acceptance claim"
+    },
+    {
+      "at": "2026-10-19T14:38:08.043011-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:38:08.447179-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-letters-review-01.json",
+      "sha256": "cf4bdda96fbb67564cfee4463c7fa1f95d0063233dd556dfbff41c458b2e8dd9",
+      "note": "Review bounded profile source,27passed tests, new automated keyboard controls and docs that leave physical acceptance pending"
+    },
+    {
+      "at": "2026-10-19T14:38:33.927485-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-letters-review-01.json",
+      "sha256": "cf4bdda96fbb67564cfee4463c7fa1f95d0063233dd556dfbff41c458b2e8dd9",
+      "note": "Reviewed bounded profiles/partial registration cleanup/dynamic UI+origin; build27passed, runtime letter controls passed; no physical overclaim, private artifacts excluded and diff checks pass"
+    },
+    {
+      "at": "2026-10-19T14:41:43.888127-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 16,
+      "evidence": "evidence\\private\\m1-letters-batch-result-01.json",
+      "sha256": "968393a495495406bfda089bdd8b12ba99adbb0cb3ca38748e97203de7a8d1dc",
+      "note": "Owner reports Letters opens/receives during drag; two count2/COPY Unicode drops and original hashes corroborated. Hotkey-origin activations recorded button up: retain exact-timing limitation. Separate Escape/reject controls requested"
+    },
+    {
+      "at": "2026-10-19T14:42:32.058792-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-letters-batch-result-01.json",
+      "sha256": "968393a495495406bfda089bdd8b12ba99adbb0cb3ca38748e97203de7a8d1dc",
+      "note": "New owner batch success and mouse-up activation hints require bounded report update; code/build unchanged"
+    },
+    {
+      "at": "2026-10-19T14:42:32.290374-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:42:32.654038-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-letters-review-02.json",
+      "sha256": "7083ccbf9e5cf17851fab4426f74199b750c829cf0b72515cf52b010ef767084",
+      "note": "Review owner Letters batch report against actual callbacks; preserve timing uncertainty and pending safe-cancel acceptance"
+    },
+    {
+      "at": "2026-10-19T14:43:57.870430-06:00",
+      "id": "M1_ESCAPE",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-letters-cancel-result-01.json",
+      "sha256": "4b49514063d09a2c2644e842dff3ec6ab0a9321569c52921c15db6030f9a9a2a",
+      "note": "Owner reports physical Escape failed to end drag. First failure of this strategy; request distinct Explorer-alone control. Do not infer source ending from receiver Leave"
+    },
+    {
+      "at": "2026-10-19T14:43:58.035227-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 16,
+      "evidence": "evidence\\private\\m1-letters-cancel-result-01.json",
+      "sha256": "4b49514063d09a2c2644e842dff3ec6ab0a9321569c52921c15db6030f9a9a2a",
+      "note": "Real reentry through4 held-mouse Leaves and count2 COPY accepted; CtrlAltX received while Tracking/held then latched and Leave without accepted drop. Escape failed, source-alone control pending; no full acceptance"
+    },
+    {
+      "at": "2026-10-19T14:46:06.033660-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:46:06.341433-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-letters-review-03.json",
+      "sha256": "680af4e20e86436431c1c8f58100959ae8a56f4f36babbd263be805796525040",
+      "note": "Final review after physical batch/reentry and failed Escape reports; source27test build unchanged, source-alone Escape control pending"
+    },
+    {
+      "at": "2026-10-19T14:46:06.648839-06:00",
+      "id": "M1_LETTERS_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-letters-review-03.json",
+      "sha256": "680af4e20e86436431c1c8f58100959ae8a56f4f36babbd263be805796525040",
+      "note": "Final path/whitespace pass and manual scope review: Letters batch/reentry verified; activation timing, Escape and rejection-through-drop remain partial. Private originals excluded"
     }
   ]
 }

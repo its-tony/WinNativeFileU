@@ -17,3 +17,7 @@ Escape durante drag lo procesa el origen; DragLeave limpia el receptor. F9 duran
 WinUI AllowDrop: evita interop manual pero oculta parte del contrato nativo que queremos medir. HWND propio minimiza colisiones de registro y no cambia tecnología principal.
 Shell: comandos/context menu no prueban tecla durante drag izquierdo. Armar antes de arrastrar es fallback explícito.
 Pendiente de ejecución: registro COM real, recepción Explorer, hotkey durante drag, KeyUp, Escape, salida, originales intactos, foco y DPI. UIA/alto contraste/radial quedan fuera del prototipo; no se afirma accesibilidad final.
+
+## Actualización 2026-10-19 — perfiles acotados
+Dos ensayos físicos F8 fallaron sin eventos, durante y fuera de drag; un control automatizado del mismo run sí recibió F8/F9 y mostró target sin cambio de foco. No identifica causa hardware/Fn/Windows. Se añade una alternativa seleccionable al lanzar: Letters, Ctrl+Alt+D para activar y Ctrl+Alt+X para rechazar. FunctionKeys sigue disponible; registrar solo el par seleccionado con MOD_NOREPEAT, no ambos pares ni combinaciones arbitrarias. Registro fallido deshabilita y libera lo adquirido. Sin hooks ni lectura adicional de teclas.
+Mostrar etiquetas del perfil en host/receptor/diario. Registrar origen de Armed para evitar confundir botón con hotkey; ids8/9 son acciones, no nombres de teclas. Verificar build y control runtime antes de volver a solicitar gesto físico. La implementación del perfil no demuestra que el teclado físico lo entregue durante drag.
