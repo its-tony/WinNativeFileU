@@ -16,3 +16,7 @@
 | H-M1-AUTO | BLOQUEADO para automatización cruzada | sky.drag rechaza endpoint en proceso distinto antes de eventos. No prueba incompatibilidad Explorer/OLE; necesita gesto manual. |
 | H-M1-RECEIVE | VERIFIED IN WINDOWS PROTOTYPE, parcial | Enter/Over/DropAccepted COPY con un fixture Unicode desde Explorer; SHA256/nombres/tamaños intactos. Destino previamente armado, no tecla durante drag. |
 | H-M1-CANCEL | HYPOTHESIS | Segundo Enter/Over terminó con Leave sin Drop; puede ser salida o cancelación del origen. No se probó cuál ni resultado global Escape. |
+| H-M1-CLOSE | VERIFIED IN WINDOWS PROTOTYPE | Snapshot final nuevo contiene RevokeDragDrop hr0 y la ventana ya no figura en listado; no es todavía auditoría de todos los recursos/hotkeys. |
+| H-M1-REENTRY | VERIFICADO en receptor oculto; HYPOTHESIS física | Con botón inyectado abajo sin Escape mantiene AwaitingData y acepta reentrada. Requiere gesto real Explorer; soltar fuera puede dejar receptor visible hasta F9. |
+| H-M1-NATIVE | VERIFICADO en Windows, receptor oculto |10escenarios con HWND/STA/Register/Revoke y HGLOBAL nativos pasaron. Invocación directa; productor sintético, no Explorer/DoDragDrop. |
+| H-M1-DIAG | VERIFIED IN WINDOWS PROTOTYPE, parcial |HotkeyReceived/ArmIgnored reflejan F8 real con LeftButtonDown=false. F9 y texto Receiver closed comprobados tras corregir estado obsoleto; no durante drag. |

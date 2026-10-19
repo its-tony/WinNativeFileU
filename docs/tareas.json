@@ -95,13 +95,17 @@
         "evidence\\private\\m1-66337950ff28484380a659be85642b25\\events.jsonl",
         "evidence\\private\\m1-ready-armed-snapshot.jsonl",
         "evidence\\private\\m1-single-drop-snapshot.jsonl",
-        "evidence\\private\\m1-final-desktop-snapshot.jsonl"
+        "evidence\\private\\m1-final-desktop-snapshot.jsonl",
+        "evidence\\private\\m1-resume-launch-01.json",
+        "evidence\\private\\m1-resume-launch-02.json",
+        "evidence\\private\\m1-resume-final-ui-snapshot.jsonl",
+        "evidence\\private\\m1-resume-delivery-snapshot.jsonl"
       ],
-      "attempts": 7,
-      "equivalent_failures": 1,
+      "attempts": 11,
+      "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Partial: one Unicode DropAccepted verified; later Enter Over Leave without Drop. Cross-window automation rejected and physical Escape stopped Computer Use. Full ideal gesture/multiple/Escape outcome require new desktop session"
+      "next_step": "F8/F9 diagnostic UI verified with button up; no new Explorer drag callbacks yet. Native tests pass separately. Full acceptance waits for human gesture/new capability; do not repeat blocked cross-window automation"
     },
     {
       "id": "M1_REVIEW",
@@ -115,6 +119,35 @@
       "success_criterion": "Review privacy, documentation and small local commits",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Reviewed source/docs; path policy/diff checks pass and private logs fixtures screenshots SDK/binaries excluded; M1 desktop acceptance stays blocked"
+    },
+    {
+      "id": "M1_NATIVE",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-native-build-01.json",
+        "evidence\\private\\m1-native-build-02.json",
+        "evidence\\private\\m1-native-build-02.json",
+        "evidence\\private\\m1-native-build-03.json",
+        "evidence\\private\\m1-native-build-03.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "success_criterion": "Native fixture receiver regression matrix passes on Windows",
+      "abandon_condition": "Two equivalent failures; new evidence required",
+      "next_step": "Final locked build0 and26tests:16Core10native; no warnings/errors; F9 idle-close status regression passed"
+    },
+    {
+      "id": "M1_RESUME_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-resume-review-01.json",
+        "evidence\\private\\m1-resume-review-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Review resumed M1 code and evidence without entering M2",
+      "abandon_condition": "Two equivalent failures; new evidence required",
+      "next_step": "Source/docs/locks reviewed; diff and path policy pass; private native journals/TRX/fixtures excluded. Full M1 remains partial"
     }
   ],
   "history": [
@@ -122,7 +155,7 @@
       "at": "2026-10-18T18:23:51.492805-06:00",
       "id": "SDK",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:25:36.001094-06:00",
@@ -155,7 +188,7 @@
       "at": "2026-10-18T18:27:52.494646-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:27:53.993110-06:00",
@@ -170,7 +203,7 @@
       "at": "2026-10-18T18:28:57.448519-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:30:13.346567-06:00",
@@ -185,7 +218,7 @@
       "at": "2026-10-18T18:30:52.102284-06:00",
       "id": "REVIEW",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:30:52.445818-06:00",
@@ -208,7 +241,7 @@
       "at": "2026-10-18T18:31:30.187113-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:31:45.750559-06:00",
@@ -241,7 +274,7 @@
       "at": "2026-10-18T18:34:51.662427-06:00",
       "id": "REVIEW",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃƒÂ­citamente"
     },
     {
       "at": "2026-10-18T18:34:51.986741-06:00",
@@ -265,7 +298,7 @@
       "at": "2026-10-18T18:46:23.119225-06:00",
       "id": "M1_BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:46:50.485615-06:00",
@@ -280,7 +313,7 @@
       "at": "2026-10-18T18:47:21.745270-06:00",
       "id": "M1_BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:47:39.962105-06:00",
@@ -304,7 +337,7 @@
       "at": "2026-10-18T18:48:14.255940-06:00",
       "id": "M1_DESKTOP",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:48:15.258126-06:00",
@@ -336,7 +369,7 @@
       "at": "2026-10-18T18:49:56.258604-06:00",
       "id": "M1_BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:50:24.453306-06:00",
@@ -360,7 +393,7 @@
       "at": "2026-10-18T18:50:51.589042-06:00",
       "id": "M1_DESKTOP",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:50:52.903949-06:00",
@@ -411,7 +444,7 @@
       "at": "2026-10-18T18:56:44.559160-06:00",
       "id": "M1_REVIEW",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:56:44.942912-06:00",
@@ -439,6 +472,157 @@
       "evidence": "evidence\\private\\m1-review-01.json",
       "sha256": "ef2a7e8e6c9ff1436cb0e7fcde44d21fd468333c64fb2a0636715fbe1a965ccd",
       "note": "Reviewed source/docs; path policy/diff checks pass and private logs fixtures screenshots SDK/binaries excluded; M1 desktop acceptance stays blocked"
+    },
+    {
+      "at": "2026-10-18T19:06:53.225278-06:00",
+      "id": "M1_DESKTOP",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-resume-old-session-final.jsonl",
+      "sha256": "5c1e09ba11080ec30e03a8eac6c10b7b339b878825953c5424de1e25828707a1",
+      "note": "Owner resumed UI work; new final journal includes additional Leave attempts and successful RevokeDragDrop0. Cross-process drag restriction remains, do not repeat it"
+    },
+    {
+      "at": "2026-10-18T19:08:02.654345-06:00",
+      "id": "M1_NATIVE",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:08:37.951524-06:00",
+      "id": "M1_NATIVE",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-native-build-01.json",
+      "sha256": "a57677ff5c13e0cab3260275daa2c3169d5567a54972bb59064ab4620e8e5afc",
+      "note": "Compile event-time diagnostics/reentry and run hidden native CF_HDROP fixture regression matrix"
+    },
+    {
+      "at": "2026-10-18T19:09:45.629799-06:00",
+      "id": "M1_NATIVE",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:10:06.227889-06:00",
+      "id": "M1_NATIVE",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-native-build-02.json",
+      "sha256": "c756196c62b46867ccd3ac03f618506c8443ec07e7630c218a28f18d74505ef7",
+      "note": "Verify locked restore final suite; remove redundant Boolean-only test, retain nine native behavior regressions"
+    },
+    {
+      "at": "2026-10-18T19:10:43.246677-06:00",
+      "id": "M1_NATIVE",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-native-build-02.json",
+      "sha256": "c756196c62b46867ccd3ac03f618506c8443ec07e7630c218a28f18d74505ef7",
+      "note": "Final locked build0:16Core+9native receiver tests passed; no warnings/errors; callbacks synthetic, not Explorer source"
+    },
+    {
+      "at": "2026-10-18T19:10:43.353732-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:10:44.045224-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 8,
+      "evidence": "evidence\\private\\m1-resume-launch-01.json",
+      "sha256": "a798f297a88344c2aa10b896887583ec406b4d3643a118df35ef8db9bf3fd63d",
+      "note": "New diagnostic/reentry version, new fixtures/log; only allowed own-window UI tests, no repeat cross-window drag automation"
+    },
+    {
+      "at": "2026-10-18T19:12:04.666063-06:00",
+      "id": "M1_NATIVE",
+      "event": "REAPERTURA",
+      "evidence": "src\\WindowsIntegration\\DragOverlay.cs",
+      "sha256": "ebfc85f243ec1fc19423e6570af36e78e9dec6c6dbc6d355e6d919e0f209cfb5",
+      "note": "UI test exposed stale Already armed message after F9; add explicit closed status and native regression"
+    },
+    {
+      "at": "2026-10-18T19:12:04.884542-06:00",
+      "id": "M1_NATIVE",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:12:30.210753-06:00",
+      "id": "M1_NATIVE",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-native-build-03.json",
+      "sha256": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
+      "note": "Verify F9 status correction and ten native behavior tests with locked restore"
+    },
+    {
+      "at": "2026-10-18T19:12:57.178941-06:00",
+      "id": "M1_NATIVE",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-native-build-03.json",
+      "sha256": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
+      "note": "Final locked build0 and26tests:16Core10native; no warnings/errors; F9 idle-close status regression passed"
+    },
+    {
+      "at": "2026-10-18T19:12:57.414645-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:12:58.421471-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 9,
+      "evidence": "evidence\\private\\m1-resume-launch-02.json",
+      "sha256": "1162ed7a628a717b6272ff7b56d3d767d7ffb8cbdf0d9b57895b569f03dba4e7",
+      "note": "Launch final diagnostic version to verify F9 visible correction; fresh fixtures preserve old evidence"
+    },
+    {
+      "at": "2026-10-18T19:13:53.959581-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 10,
+      "evidence": "evidence\\private\\m1-resume-final-ui-snapshot.jsonl",
+      "sha256": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e",
+      "note": "Corrected version: Ready, F8 id8/Armed, F9 id9/CancelIdle and visible Receiver closed confirmed; no button held. Full Explorer gesture pending"
+    },
+    {
+      "at": "2026-10-18T19:16:26.484266-06:00",
+      "id": "M1_RESUME_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:16:26.914525-06:00",
+      "id": "M1_RESUME_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-resume-review-01.json",
+      "sha256": "43a973eb5dd734e8a5fa5cf8fb5905d10a2cdbcc64c91d736e8354b3c77e5e8a",
+      "note": "Review final reentry diagnostics/native tests docs; no private artifacts tracked"
+    },
+    {
+      "at": "2026-10-18T19:17:38.268829-06:00",
+      "id": "M1_DESKTOP",
+      "event": "BLOQUEADO",
+      "attempt": 11,
+      "evidence": "evidence\\private\\m1-resume-delivery-snapshot.jsonl",
+      "sha256": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e",
+      "note": "F8/F9 diagnostic UI verified with button up; no new Explorer drag callbacks yet. Native tests pass separately. Full acceptance waits for human gesture/new capability; do not repeat blocked cross-window automation"
+    },
+    {
+      "at": "2026-10-18T19:17:38.663750-06:00",
+      "id": "M1_RESUME_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-resume-review-01.json",
+      "sha256": "43a973eb5dd734e8a5fa5cf8fb5905d10a2cdbcc64c91d736e8354b3c77e5e8a",
+      "note": "Source/docs/locks reviewed; diff and path policy pass; private native journals/TRX/fixtures excluded. Full M1 remains partial"
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-18 America/Guatemala",
+  "scope": "M1 resume; M2 not started",
+  "milestone_acceptance": "partial",
+  "build_exit_code": 0,
+  "warnings": 0,
+  "errors": 0,
+  "tests": {
+    "core": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "native_receiver": {
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  },
+  "native_test_limit": "Synthetic IDataObject, direct receiver callbacks, real hidden HWND/STA/Register/Revoke/HGLOBAL; no Explorer/DoDragDrop/input injection",
+  "ui_verified": [
+    "F8 received before drag",
+    "ArmIgnored visible on repeated F8",
+    "F9 closes receiver with corrected accessible text"
+  ],
+  "observed_mouse_button_held": false,
+  "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
+  "pending": [
+    "F8 during Explorer drag",
+    "multiple Explorer selection",
+    "safe Escape/global source ending",
+    "physical reentry/outside termination",
+    "mixed DPI/monitors"
+  ],
+  "evidence_sha256": {
+    "m1-native-build-03.json": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
+    "m1-native-core-03.trx": "dda0b1d5116411f58a3b1b050e950f707ffac51ddd41d5a9cf7ddf942e5aaddf",
+    "m1-native-receiver-03.trx": "46da85d76823cdaedd1258aaf6d3b5762b70e43c1d4b0282b1ef4aa8c4f31de5",
+    "m1-resume-old-session-final.jsonl": "5c1e09ba11080ec30e03a8eac6c10b7b339b878825953c5424de1e25828707a1",
+    "m1-resume-final-ui-snapshot.jsonl": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e"
+  }
+}

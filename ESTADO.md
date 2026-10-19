@@ -1,12 +1,15 @@
 # Estado — WinNativeFileU
-Fecha de sesión: 2026-10-18, America/Guatemala (UTC-06:00).
-Alcance actual: propietario autorizó M1 en esta sesión; M2 prohibido. R0/M0 conservados como antecedentes.
-Destino confirmado por propietario: este repositorio existente; licencia MIT conservada.
-R0 entregables públicos y especificación completados con límites explícitos: fuentes oficiales y simulación web inspeccionadas; sin ejecutable nativo legítimo ni entorno macOS. REA 6.4.0 conectado, Ghidra disponible según proveedor; sin análisis nativo realizado. Tarea R0 VERIFICADO solo para investigación pública/documentación, no para comportamiento nativo.
-M0 base implementada y compilada: SDK 10.0.402 local verificado; Windows App SDK 2.5.1. build-03 con locked restore terminó0,0 advertencias/0 errores y4/4 pruebas de dominio aprobadas. Originales privados build-01/02 conservan fallos corregidos de configuración/plataforma. TRX preservado privado.
-Antecedente M0: ventana aún no ejecutada entonces. En M1 sí se ejecutó el host WinUI y receptor OLE; CI sigue sin ejecución remota. No hay radial, conversores, tray ni startup.
-M1: análisis previo en ADR0003, HWND/OLE/STA propio implementado con F8/F9 y whitelist de fixtures locales. Build final m1-build-03 salida0, 0 errores/advertencias y16/16tests.
-Primera ventana mostró error IntPtr en diario, corregido a Int64; evidencia original conservada. build-03 locked restore pasó con16/16tests y0 advertencias/errores.
-M1 ejecución real parcial: STA/OleInitialize0/RegisterDragDrop0, F8/F9 registrados. F8 desde Explorer muestra target sin cambio de foreground, DPI144. Recepción Explorer y cancelación pendientes: sky.drag bloquea destinos de otro proceso antes de generar callbacks. No repetir esa automatización; petición manual enviada al propietario. Fixtures conservan nombres/tamaños/SHA256. Snapshot privado m1-ready-armed-snapshot.jsonl y m1-automation-boundary-01.json.
-M1 recepción parcial VERIFICADA: propietario arrastró archivo al cuadro; diario real Enter/Over/DropAccepted COPY de niño-dos.txt, originales intactos por manifiesto. Ese target estaba armado antes del drag. Segundo intento muestra Enter/Over/Leave sin Drop; propietario reporta que no funciona. Causa exacta no determinada; no atribuir Leave a Escape sin prueba.
-M1_DESKTOP BLOQUEADO para aceptación completa: la automatización rechaza drag entre ventanas y luego el Escape físico del propietario detuvo Computer Use; no se hicieron más acciones UI. Snapshot final privado m1-final-desktop-snapshot.jsonl y m1-interruption-01.json. Pendientes gesto F8 durante drag, selección múltiple, cancelación segura y otros DPI/monitores. No repetir la automatización cruzada sin nueva capacidad/evidencia. No M2.
+Actualizado: 2026-10-18, America/Guatemala (UTC-06:00).
+
+**M1 parcial. No avanzar a M2.** El propietario autorizó continuar M1; R0/M0 se conservan en sus informes y commits.
+
+- Implementado y conservado en bc5fd96: reentrada tras Leave con botón observado abajo, diagnósticos F8/F9/ArmIgnored, estado accesible y texto correcto tras F9. No hooks, polling ni conversores.
+- Última compilación real Windows: m1-native-build-03.json, locked restore, salida0,0 advertencias/errores.16Core+10tests nativos aprobados. Los10 usan HWND/STA/Register/Revoke/HGLOBAL reales, IDataObject sintético y callbacks directos; no DoDragDrop/Explorer ni entrada inyectada.
+- Experiencia real anterior preservada: un fixture Unicode recibido desde Explorer con destino prearmado, archivos intactos por nombres/tamaños/SHA256. Diario final anterior añadió RevokeDragDrop0; ventana cerrada observada.
+- UI reanudada verificada: F8/Armed, F8 repetido/ArmIgnored y F9/CancelIdle. Texto final observado: Receiver closed. No file operation was performed. Pointer.LeftButtonDown=false; no prueba de activación durante drag. DPI observado144.
+- M1_DESKTOP BLOQUEADO para aceptación completa: sky.drag cruzado ya fue rechazado; no se repite. Se preparó nueva carpeta y solicitó un intento humano de dos archivos/F8 durante drag; sin resultado ni callbacks nuevos al snapshot m1-resume-delivery-snapshot.jsonl. La ventana quedó disponible; el cierre final de esa ejecución no se observó todavía.
+- Reentrada física, key-up durante drag, lote desde Explorer, Escape/F9 con final del origen, abandono y otros DPI/monitores siguen pendientes. Leave no prueba cancelación global. Soltar fuera después de Leave puede dejar el receptor visible hasta F9/cierre.
+
+Originales: evidence/private/m1-native-{build,core,receiver}-03.*, native-tests/, m1-resume-*.jsonl y diarios/checks de cada run. Resumen revisado docs/verification/m1-resume.json; informe docs/reports/m1-resume.md.
+Próximo experimento: leer resultado humano/diario nuevo, comparar hashes, preservar snapshot y reabrir tracker con evidencia nueva. No repetir tests/inventarios ya satisfechos sin cambio. No afirmar M1 completo hasta cumplir matriz real.
+CI configurada, sin ejecución remota; sin push/release ni modificación de licencia. Logs/fixtures/binarios fuera de Git.

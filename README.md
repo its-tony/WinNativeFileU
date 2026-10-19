@@ -6,6 +6,8 @@ Current scope: **M1 feasibility prototype, partially verified**. A native OLE ta
 
 ## Development
 
+Latest M1 work: [reentry and native receiver tests](docs/reports/m1-resume.md). The final suite has 16 Core and 10 hidden native receiver cases. The receiver now permits reentry after Leave when the mouse button is observed held; F8/F9 diagnostics distinguish received and ignored activation. These tests do not replace the outstanding Explorer gesture validation.
+
 Windows 11 x64; .NET SDK **10.0.402** (compatible 10.0.4xx patches allowed by global.json). Windows App SDK version is pinned in src/App/WinNativeFileU.App.csproj. Build tools may require Visual Studio/Windows SDK components; dependency restore uses NuGet.org. .NET and App SDK are development/runtime dependencies; REA, Ghidra and WSL are research tools only.
 
 The current checkout is shared with WSL through /mnt/j; do not create a duplicate checkout.
@@ -25,6 +27,7 @@ With an SDK on PATH, equivalent commands are:
 dotnet restore WinNativeFileU.slnx -p:Platform=x64 --locked-mode
 dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
 dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release
+dotnet test tests/WindowsIntegration.Tests/WinNativeFileU.WindowsIntegration.Tests.csproj --no-build --no-restore -c Release
 ```
 
 Running the App without prototype arguments opens instructions. To prepare disposable files, a baseline SHA256 manifest and a private journal:
