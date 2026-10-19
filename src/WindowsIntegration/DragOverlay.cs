@@ -17,20 +17,26 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly StreamWriter journal;
     private readonly bool nativeTestMode;
     private readonly Func<PointerObservation> readPointer;
+    private readonly PrototypeShortcuts shortcuts;
     private readonly InteractionSession session = new();
     private nint hwnd;
-    private bool oleInitialized, registered, hotkey8, hotkey9, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
+    private bool oleInitialized, registered, activationRegistered, rejectionRegistered, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
     private readonly int threadId = Environment.CurrentManagedThreadId;
-    private string caption = "M1 fixture receiver\nF8: show  /  F9: reject and close\nDrop: record paths only; originals untouched";
+    private string caption = "M1 fixture receiver\nDrop: record paths only; originals untouched";
     public event Action<string>? StatusChanged;
     internal InteractionState SessionState => session.State;
+    public string ActivationLabel => shortcuts.ActivationLabel;
+    public string RejectionLabel => shortcuts.RejectionLabel;
 
-    public DragOverlay(string fixtureRoot, string logPath) : this(fixtureRoot, logPath, false, ReadPointer) { }
+    public DragOverlay(string fixtureRoot, string logPath, PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys)
+        : this(fixtureRoot, logPath, false, ReadPointer, profile) { }
 
     // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
     // but neither register hotkeys nor show/move any desktop window.
-    internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer)
+    internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer,
+        PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys)
     {
+        shortcuts = PrototypeShortcuts.For(profile);
         this.nativeTestMode = nativeTestMode;
         this.readPointer = readPointer;
         root = Path.GetFullPath(fixtureRoot);
@@ -61,29 +67,33 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             Marshal.ThrowExceptionForHR(hr);
             registered = true;
             Log("RegisterDragDrop", new { hr, hwnd = hwnd.ToInt64() });
-            hotkey8 = !nativeTestMode && Native.RegisterHotKey(hwnd, 8, 0x4000, 0x77);
-            hotkey9 = !nativeTestMode && Native.RegisterHotKey(hwnd, 9, 0x4000, 0x78);
-            Log("Hotkeys", new { F8 = hotkey8, F9 = hotkey9 });
-            if (!nativeTestMode && (!hotkey8 || !hotkey9)) throw new Win32Exception("F8/F9 could not be registered; no hotkey is assumed available.");
+            activationRegistered = !nativeTestMode && Native.RegisterHotKey(hwnd, 8, shortcuts.Modifiers, shortcuts.ActivationKey);
+            rejectionRegistered = !nativeTestMode && Native.RegisterHotKey(hwnd, 9, shortcuts.Modifiers, shortcuts.RejectionKey);
+            Log("Hotkeys", new { profile = shortcuts.Name, activation = ActivationLabel, rejection = RejectionLabel,
+                activationRegistered, rejectionRegistered });
+            if (!nativeTestMode && (!activationRegistered || !rejectionRegistered))
+                throw new Win32Exception($"{ActivationLabel}/{RejectionLabel} could not be registered; no hotkey is assumed available.");
             Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString() });
         }
         catch { Dispose(); throw; }
     }
 
-    public void Arm()
+    public void Arm() => Arm("button");
+
+    private void Arm(string origin)
     {
         AssertThread();
         if (session.State != InteractionState.Idle)
         {
             Log("ArmIgnored", new { state = session.State.ToString(), pointer = readPointer() });
-            StatusChanged?.Invoke("Target already armed. Re-enter it, or use F9 to reject/close.");
+            StatusChanged?.Invoke($"Target already armed. Re-enter it, or use {RejectionLabel} to reject/close.");
             return;
         }
         if (!logHealthy) throw new IOException("Private journal unavailable; receiver disabled.");
         session.Activate();
         cancelled = acceptable = false;
-        if (nativeTestMode) { Log("ArmedForNativeTest", new { }); return; }
-        caption = "M1 fixture receiver\nDrag fixture files here. F9 rejects.\nF8 released: target stays open.";
+        if (nativeTestMode) { Log("ArmedForNativeTest", new { profile = shortcuts.Name }); return; }
+        caption = $"M1 fixture receiver\nDrag fixture files here. {RejectionLabel} rejects.\nRelease {ActivationLabel}: target stays open.";
         var before = Native.GetForegroundWindow();
         if (!Native.GetCursorPos(out var cursor)) { Finish("CursorUnavailable"); return; }
         var monitor = Native.MonitorFromPoint(cursor, 2);
@@ -98,8 +108,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         int y = Math.Clamp(cursor.Y - height / 2, info.Work.Top, info.Work.Bottom - height);
         if (!Native.SetWindowPos(hwnd, -1, x, y, width, height, 0x50)) { Finish("ShowFailed"); return; }
         Native.InvalidateRect(hwnd, 0, true);
-        Log("Armed", new { before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, pointer = readPointer() });
-        StatusChanged?.Invoke("Target armed. F8 stays released; drop only prepared fixtures.");
+        Log("Armed", new { origin, profile = shortcuts.Name, before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, pointer = readPointer() });
+        StatusChanged?.Invoke($"Target armed. Release {ActivationLabel}; drop only prepared fixtures.");
     }
 
     public void Cancel()
@@ -135,7 +145,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             acceptable = true;
             session.EnterAcceptedTarget();
             effect = DropPolicy.Effect(allowed, acceptable, cancelled);
-            caption = $"Valid fixture selection: {files.Length} file(s)\nRelease to record paths only.\nEscape cancels the source; F9 rejects.";
+            caption = $"Valid fixture selection: {files.Length} file(s)\nRelease to record paths only.\nEscape cancels the source; {RejectionLabel} rejects.";
             if (!Log("DragEnter", new { allowed, effect, keys, count = files.Length, x = point.X, y = point.Y })) effect = 0;
         }
         catch (Exception ex) { Log("DragEnterRejected", new { type = ex.GetType().Name, hr = ex.HResult }); }
@@ -161,7 +171,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             {
                 session.Reset(); session.Activate();
                 acceptable = dragInside = overLogged = false;
-                caption = "Pointer left target: re-enter to receive.\nNo drop was accepted.\nF9 rejects/closes this receiver.";
+                caption = $"Pointer left target: re-enter to receive.\nNo drop was accepted.\n{RejectionLabel} rejects/closes this receiver.";
                 Native.InvalidateRect(hwnd, 0, true);
                 StatusChanged?.Invoke("Pointer left while the button was held. Re-enter target; no files received.");
             }
@@ -260,8 +270,10 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         {
             if (msg == 0x312)
             {
-                Log("HotkeyReceived", new { id = (int)wp, state = session.State.ToString(), pointer = readPointer() });
-                if (wp == 8) Arm(); else if (wp == 9) Cancel();
+                if (wp is not (8 or 9)) return Native.DefWindowProcW(window, msg, wp, lp);
+                Log("HotkeyReceived", new { id = (int)wp, profile = shortcuts.Name,
+                    shortcut = wp == 8 ? ActivationLabel : RejectionLabel, state = session.State.ToString(), pointer = readPointer() });
+                if (wp == 8) Arm("hotkey"); else Cancel();
                 return 0;
             }
             if (msg == 0x21) return 3; // MA_NOACTIVATE
@@ -290,8 +302,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     {
         if (disposed) return;
         if (registered) { int hr = Native.RevokeDragDrop(hwnd); Log("RevokeDragDrop", new { hr }); registered = false; }
-        if (hotkey8) Native.UnregisterHotKey(hwnd, 8);
-        if (hotkey9) Native.UnregisterHotKey(hwnd, 9);
+        if (activationRegistered) Native.UnregisterHotKey(hwnd, 8);
+        if (rejectionRegistered) Native.UnregisterHotKey(hwnd, 9);
         if (hwnd != 0) Native.DestroyWindow(hwnd);
         Native.UnregisterClassW(className, Native.GetModuleHandleW(null));
         if (oleInitialized) Native.OleUninitialize();

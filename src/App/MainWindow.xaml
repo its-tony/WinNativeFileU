@@ -7,7 +7,7 @@
     <StackPanel Spacing="12" MaxWidth="560" HorizontalAlignment="Center" VerticalAlignment="Center">
       <TextBlock Text="WinNativeFileU" Style="{StaticResource TitleTextBlockStyle}" />
       <TextBlock Text="Explorer drag feasibility — M1" Style="{StaticResource SubtitleTextBlockStyle}" />
-      <TextBlock TextWrapping="Wrap" Text="Drag prepared fixture files from Explorer, tap F8, release the key, then release the files over the target. Escape cancels the source drag. No files are copied, moved or converted." />
+      <TextBlock x:Name="Instructions" TextWrapping="Wrap" Text="Start with scripts/start-prototype.ps1 to prepare disposable files and choose a shortcut profile." />
       <TextBlock x:Name="Status" TextWrapping="Wrap" />
       <StackPanel Orientation="Horizontal" Spacing="12">
         <Button x:Name="ArmButton" Content="Arm target" IsEnabled="False" Click="ArmTarget" />

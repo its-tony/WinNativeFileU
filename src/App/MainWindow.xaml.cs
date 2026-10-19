@@ -25,12 +25,19 @@ public sealed partial class MainWindow : Window
                 Status.Text = "Start with scripts/start-prototype.ps1 to prepare disposable fixtures and a private journal.";
                 return;
             }
-            overlay = new DragOverlay(root, log);
+            var profile = Option("--prototype-shortcuts") switch
+            {
+                null or "function-keys" => PrototypeShortcutProfile.FunctionKeys,
+                "letters" => PrototypeShortcutProfile.Letters,
+                _ => throw new ArgumentException("Shortcut profile must be function-keys or letters.")
+            };
+            overlay = new DragOverlay(root, log, profile);
+            Instructions.Text = $"Drag prepared fixture files from Explorer, tap {overlay.ActivationLabel}, release the keys, then release the files over the target. Escape cancels the source drag. No files are copied, moved or converted.";
             fixtureRoot = root;
             overlay.StatusChanged += message => Status.Text = message;
             ArmButton.IsEnabled = CancelButton.IsEnabled = true;
             FixturesButton.IsEnabled = true;
-            Status.Text = "Ready. F8 shows the target at the cursor; F9 rejects. Only the prepared fixture folder is accepted.";
+            Status.Text = $"Ready. {overlay.ActivationLabel} shows the target at the cursor; {overlay.RejectionLabel} rejects. Only the prepared fixture folder is accepted.";
         }
         catch (Exception ex) { Status.Text = $"Prototype unavailable: {ex.Message}"; }
         Closed += (_, _) => { overlay?.Dispose(); overlay = null; };
