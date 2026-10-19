@@ -1,0 +1,28 @@
+# Build and local tooling
+**/bin/
+**/obj/
+.vs/
+.idea/
+.tools/
+.tmp/
+artifacts/
+TestResults/
+**/__pycache__/
+*.user
+*.suo
+# Original research and proprietary artifacts must stay private
+evidence/private/
+research-artifacts/
+*.dmg
+*.pkg
+*.ipa
+*.app/
+*.har
+*.pcap*
+# Secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.key
+*.pem
