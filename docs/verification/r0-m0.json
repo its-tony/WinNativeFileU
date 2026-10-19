@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-18 America/Guatemala",
+  "scope": "R0 public research and M0 foundation only",
+  "sdk": "10.0.402",
+  "windows_app_sdk": "2.5.1",
+  "windows_build": "26200",
+  "build_exit_code": 0,
+  "build_warnings": 0,
+  "build_errors": 0,
+  "tests": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "manual_winui_test": false,
+  "explorer_gesture_test": false,
+  "remote_ci_executed": false,
+  "private_evidence_sha256": {
+    "build-03.json": "f717d88fdf6b52ef294d7872ed16b207af78667d804aa62df784fe083c6baca2",
+    "core-tests-03.trx": "d8e91190751cbaef32ca845484a17ebb56357aeb6e5381a802a39ec6af8139cd",
+    "sdk-provenance.json": "9f063a16e74fd2a7d8e4b5979bc71ccbd26c9ca96a50bdb2ccaf115c5e4bb486",
+    "rea-session.json": "77129678599dbb5613dadbd16e3fe22bd639420701d0c194ed001168aeca595c",
+    "web-observation.json": "eabb673854b18a6ab14902b191d978b42dfd47280a306c32c10ec9b56f9ef789"
+  }
+}

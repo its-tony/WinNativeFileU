@@ -1,0 +1,18 @@
+name: Bug report
+description: Report a reproducible failure without private files or identifiers
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Windows build, architecture and app version
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and sanitized evidence
+      description: Do not attach private files, credentials or personal paths.

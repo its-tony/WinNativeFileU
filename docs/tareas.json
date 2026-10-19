@@ -1,0 +1,217 @@
+{
+  "schema": 1,
+  "max_equivalent_failures": 2,
+  "tasks": [
+    {
+      "id": "R0",
+      "state": "EN_PROGRESO",
+      "evidence": [
+        "evidence\\private\\web-observation.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Research delivered with bounded findings",
+      "abandon_condition": "Two equivalent failures; require new evidence to reopen",
+      "next_step": "Public simulation observed; native acquisition blocked; Windows feasibility documentation in progress"
+    },
+    {
+      "id": "SDK",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\sdk-install-01.json",
+        "evidence\\private\\sdk-provenance.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Official SDK available locally",
+      "abandon_condition": "Two equivalent failures; require new evidence to reopen",
+      "next_step": "Official SDK extracted locally; SHA512 matches Microsoft metadata; dotnet --info exit0"
+    },
+    {
+      "id": "BUILD",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\build-01.json",
+        "evidence\\private\\build-02.json",
+        "evidence\\private\\build-03.json",
+        "evidence\\private\\build-03.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "success_criterion": "WinUI app compiles on Windows",
+      "abandon_condition": "Two equivalent failures; require new evidence to reopen",
+      "next_step": "Locked restore build and test exited0; Windows App compiled with0warnings0errors"
+    },
+    {
+      "id": "TEST",
+      "state": "VERIFICADO",
+      "evidence": [
+        "artifacts\\test-results\\core.trx"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Domain tests pass",
+      "abandon_condition": "Two equivalent failures; require new evidence to reopen",
+      "next_step": "Review TRX: four domain tests passed; no OLE/UI/runtime gesture tested"
+    },
+    {
+      "id": "REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\review-01.json",
+        "evidence\\private\\review-02.json",
+        "evidence\\private\\review-02.json"
+      ],
+      "attempts": 2,
+      "equivalent_failures": 0,
+      "success_criterion": "Diff reviewed; private evidence ignored",
+      "abandon_condition": "Two equivalent failures; require new evidence to reopen",
+      "next_step": "Candidate path policy and required research passed; manual source/docs reviewed; private SDK/research/bin/TRX ignored; no credential-pattern matches"
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-10-18T18:23:51.492805-06:00",
+      "id": "SDK",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:25:36.001094-06:00",
+      "id": "SDK",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\sdk-install-01.json",
+      "sha256": "ef5a2d34b6a865582155117c37f6c4d17c6dea8bfdb25293b8cbd4d4fdfb9dd8",
+      "note": "Install official SDK locally; inspect SHA512 provenance"
+    },
+    {
+      "at": "2026-10-18T18:26:42.184968-06:00",
+      "id": "R0",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\web-observation.json",
+      "sha256": "eabb673854b18a6ab14902b191d978b42dfd47280a306c32c10ec9b56f9ef789",
+      "note": "Public simulation observed; native acquisition blocked; Windows feasibility documentation in progress"
+    },
+    {
+      "at": "2026-10-18T18:27:49.441844-06:00",
+      "id": "SDK",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\sdk-provenance.json",
+      "sha256": "9f063a16e74fd2a7d8e4b5979bc71ccbd26c9ca96a50bdb2ccaf115c5e4bb486",
+      "note": "Official SDK extracted locally; SHA512 matches Microsoft metadata; dotnet --info exit0"
+    },
+    {
+      "at": "2026-10-18T18:27:52.494646-06:00",
+      "id": "BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:27:53.993110-06:00",
+      "id": "BUILD",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\build-01.json",
+      "sha256": "dbe25a41d8df1b92d0a21e4db579a86f07358004e58dccd701f90f8a7db490ff",
+      "note": "Restore/build Windows WinUI shell and run domain tests; review individual results"
+    },
+    {
+      "at": "2026-10-18T18:28:57.448519-06:00",
+      "id": "BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:30:13.346567-06:00",
+      "id": "BUILD",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\build-02.json",
+      "sha256": "fc5870fd95cdb6e93d1c933a2257978f36930926e1139f23ae43ddd0413a8548",
+      "note": "Explicit x64 solution platform added after MSB4126; restore and compile"
+    },
+    {
+      "at": "2026-10-18T18:30:52.102284-06:00",
+      "id": "REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:30:52.445818-06:00",
+      "id": "REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\review-01.json",
+      "sha256": "b5bd67def0a3473e56aa86aa13bc5514454c4a45625b169b1703450cf8fadf31",
+      "note": "Check candidate path policy and required research files; manual source review separate"
+    },
+    {
+      "at": "2026-10-18T18:31:27.672798-06:00",
+      "id": "BUILD",
+      "event": "REAPERTURA",
+      "evidence": "scripts\\build.ps1",
+      "sha256": "e61e7b453f202e6d5b76c3e4656cc840ef77236fbb2156b97ca999f845b376c9",
+      "note": "New evidence: actual App build succeeded in build-02; runner path mismatch diagnosed and explicit x64 removed from test command"
+    },
+    {
+      "at": "2026-10-18T18:31:30.187113-06:00",
+      "id": "BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:31:45.750559-06:00",
+      "id": "BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\build-03.json",
+      "sha256": "f717d88fdf6b52ef294d7872ed16b207af78667d804aa62df784fe083c6baca2",
+      "note": "Locked restore and corrected AnyCPU test invocation after documented path mismatch"
+    },
+    {
+      "at": "2026-10-18T18:32:04.932755-06:00",
+      "id": "BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\build-03.json",
+      "sha256": "f717d88fdf6b52ef294d7872ed16b207af78667d804aa62df784fe083c6baca2",
+      "note": "Locked restore build and test exited0; Windows App compiled with0warnings0errors"
+    },
+    {
+      "at": "2026-10-18T18:32:05.121709-06:00",
+      "id": "TEST",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "artifacts\\test-results\\core.trx",
+      "sha256": "d8e91190751cbaef32ca845484a17ebb56357aeb6e5381a802a39ec6af8139cd",
+      "note": "Review TRX: four domain tests passed; no OLE/UI/runtime gesture tested"
+    },
+    {
+      "at": "2026-10-18T18:34:51.662427-06:00",
+      "id": "REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:34:51.986741-06:00",
+      "id": "REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\review-02.json",
+      "sha256": "fc414f6c084cfb3439941b0bdb1b0574d08000e491091117621f4a74e0d4228c",
+      "note": "Final candidate paths after report/lock files; manual content and credential pattern review completed without matches"
+    },
+    {
+      "at": "2026-10-18T18:34:52.199820-06:00",
+      "id": "REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\review-02.json",
+      "sha256": "fc414f6c084cfb3439941b0bdb1b0574d08000e491091117621f4a74e0d4228c",
+      "note": "Candidate path policy and required research passed; manual source/docs reviewed; private SDK/research/bin/TRX ignored; no credential-pattern matches"
+    }
+  ]
+}

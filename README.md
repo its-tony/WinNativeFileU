@@ -1,0 +1,49 @@
+# WinNativeFileU
+
+An original open source Windows 11 file utility, inspired by keyboard-assisted contextual workflows. Files will be processed locally. This project is independent of Tangerine and its developer.
+
+Current scope: **R0 research and M0 foundation**. The source contains a minimal WinUI 3 diagnostic window and a pure session model with unit tests. Explorer drag-and-drop, global shortcuts, radial UI, conversion, tray and startup are **not implemented**. See [current status](ESTADO.md) and [delivery report](docs/reports/r0-m0.md) for actual verification results.
+
+## Development
+
+Windows 11 x64; .NET SDK **10.0.402** (compatible 10.0.4xx patches allowed by global.json). Windows App SDK version is pinned in src/App/WinNativeFileU.App.csproj. Build tools may require Visual Studio/Windows SDK components; dependency restore uses NuGet.org. .NET and App SDK are development/runtime dependencies; REA, Ghidra and WSL are research tools only.
+
+The current checkout is shared with WSL through /mnt/j; do not create a duplicate checkout.
+
+For a project-local SDK, run the reviewed official-source bootstrap:
+
+```powershell
+pwsh -NoProfile -File scripts/install-local-sdk.ps1
+pwsh -NoProfile -File scripts/build.ps1
+```
+
+The installer verifies the official archive SHA512, writes only .tools and private provenance, and refuses to overwrite an SDK directory. The build script prefers .tools/dotnet, restores, builds Release x64 and runs tests; it exits immediately on failure. After lock files have been generated, use -LockedRestore.
+
+With an SDK on PATH, equivalent commands are:
+
+```powershell
+dotnet restore WinNativeFileU.slnx -p:Platform=x64 --locked-mode
+dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
+dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release
+```
+
+Running the App output opens only a diagnostic window. It does not register input hooks, change files or enable startup. The unpackaged build includes Windows App SDK components; it still requires .NET 10 x64. Packaging and distribution are future milestones.
+
+## Structure
+
+- src/App: WinUI presentation and lifecycle.
+- src/Core: platform-independent domain model; no file I/O.
+- tests/Core.Tests: safety boundaries for activation, accepted data and reset.
+- docs/research/tangerine: evidence, functional analysis and Windows feasibility.
+- docs/decisions: architecture decisions.
+- evidence/private: ignored original research/build output; reviewed summaries belong in docs.
+
+No empty conversion or Windows adapter projects are included.
+
+## Research and roadmap
+
+Start with [research overview](docs/research/tangerine/overview.md), [sources](docs/research/tangerine/sources.md), [independent specification](docs/functional-specification.md) and [Windows feasibility](docs/research/tangerine/feasibility.md).
+
+R0 → M0 foundation → M1 actual Windows drag feasibility → M2 radial UI → M3 conversion → M4 background integration → M5 beta. **Do not begin the next milestone without the owner's instruction.** Unit tests and a successful build cannot prove an Explorer gesture.
+
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [MIT license](LICENSE)

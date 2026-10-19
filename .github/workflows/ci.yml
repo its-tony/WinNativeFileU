@@ -1,0 +1,25 @@
+name: Windows foundation
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-2025
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Restore, compile and test
+        shell: pwsh
+        run: ./scripts/build.ps1 -LockedRestore
+      - name: Test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-test-results
+          path: artifacts/test-results
+          if-no-files-found: ignore

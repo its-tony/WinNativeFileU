@@ -1,0 +1,13 @@
+name: Feature request
+description: Suggest a focused workflow
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow and expected benefit
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Accessibility, compatibility and file safety considerations

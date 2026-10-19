@@ -1,0 +1,5 @@
+# Architecture
+M0 implements only App and Core plus tests. App owns the WinUI Application and diagnostic Window; it does not invoke InteractionSession or pretend to receive files. Core owns a small pure session boundary: activation cannot supply data, accepted Drop snapshots selection, reset drops references. It performs no I/O, path validation, OLE calls or cancellation of another application.
+Future WindowsIntegration will own HWND/OLE/COM, input and placement. Future Converters will own cancellable jobs and output creation; no such projects exist yet.
+The adapter must validate real IDataObject/formats/effects/local paths before calling the domain. Labels compatible with files cannot be chosen before that data arrives. Delayed callbacks must not enter a new session after cancellation; generation identity is a requirement for the later adapter, not implemented concurrency safety in this single-thread model.
+M1: test actual Explorer input with disposable files. M2: radial/Acrylic/accessibility. M3: offline engines and output collision policy. M4: tray/single-instance/settings/optional startup. M5: license/dependency audit and packaging.
