@@ -19,6 +19,8 @@ public sealed class NativeReceiverTests
     [InlineData("limit")]
     [InlineData("lateDrop")]
     [InlineData("cancelIdle")]
+    [InlineData("leaveAtReceiver")]
+    [InlineData("leaveUnknown")]
     public void HiddenNativeReceiverHonorsFixtureBoundary(string scenario) => OnSta(() =>
     {
         // New evidence only; never delete preexisting data or use global temp.
@@ -42,7 +44,9 @@ public sealed class NativeReceiverTests
             _ => new[] { first, unicode }
         };
         var data = new FixtureDataObject(paths, scenario != "unsupported");
-        using (var target = new DragOverlay(fixtures, log, nativeTestMode: true, () => pointer))
+        bool? pointerOverReceiver = scenario switch { "leaveAtReceiver" => true, "leaveUnknown" => null, _ => false };
+        using (var target = new DragOverlay(fixtures, log, nativeTestMode: true, () => pointer,
+            isPointerOverReceiver: () => pointerOverReceiver))
         {
             target.Arm();
             if (scenario == "cancelIdle")
@@ -79,9 +83,16 @@ public sealed class NativeReceiverTests
                 target.DragLeave();
                 Assert.Equal(InteractionState.Idle, target.SessionState);
             }
+            if (scenario is "leaveAtReceiver" or "leaveUnknown")
+            {
+                // The source may end after Escape has already been released while
+                // the mouse remains held. Leave must not keep a stale receiver.
+                target.DragLeave();
+                Assert.Equal(InteractionState.Idle, target.SessionState);
+            }
             effect = mask;
             target.DragOver(1, default, ref effect);
-            bool accepted = !rejected && scenario is not ("cancel" or "escapeLeave" or "lateDrop");
+            bool accepted = !rejected && scenario is not ("cancel" or "escapeLeave" or "lateDrop" or "leaveAtReceiver" or "leaveUnknown");
             Assert.Equal(accepted ? 1u : 0u, effect);
             effect = mask;
             target.Drop(data, 0, default, ref effect);

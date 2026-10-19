@@ -17,6 +17,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly StreamWriter journal;
     private readonly bool nativeTestMode;
     private readonly Func<PointerObservation> readPointer;
+    private readonly Func<bool?> isPointerOverReceiver;
     private readonly PrototypeShortcuts shortcuts;
     private readonly InteractionSession session = new();
     private nint hwnd;
@@ -34,11 +35,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
     // but neither register hotkeys nor show/move any desktop window.
     internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer,
-        PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys)
+        PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys, Func<bool?>? isPointerOverReceiver = null)
     {
         shortcuts = PrototypeShortcuts.For(profile);
         this.nativeTestMode = nativeTestMode;
         this.readPointer = readPointer;
+        this.isPointerOverReceiver = isPointerOverReceiver ?? (nativeTestMode ? () => false : ObservePointerOverReceiver);
         root = Path.GetFullPath(fixtureRoot);
         if (!Directory.Exists(root) || !DropPolicy.IsWithinFixtureRoot(root, Path.Combine(root, "probe")))
             throw new ArgumentException("An existing local fixture directory is required.");
@@ -165,8 +167,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         try
         {
             var pointer = readPointer();
-            bool keepVisible = !cancelled && logHealthy && pointer.KeepReceiverAfterLeave;
-            Log("DragLeave", new { state = session.State.ToString(), cancelled, pointer, keepVisible });
+            bool? pointerOverReceiver = isPointerOverReceiver();
+            // Escape may already be up when Leave reaches this thread. Only a
+            // positive observation of leaving this window permits reentry wait.
+            bool keepVisible = !cancelled && logHealthy && pointer.KeepReceiverAfterLeave
+                && pointerOverReceiver is false;
+            Log("DragLeave", new { state = session.State.ToString(), cancelled, pointer, pointerOverReceiver, keepVisible });
             if (keepVisible)
             {
                 session.Reset(); session.Activate();
@@ -177,7 +183,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             }
             else
             {
-                Finish("LeaveOrSourceCancel");
+                Finish(pointerOverReceiver switch
+                {
+                    true => "LeaveOverReceiver",
+                    null => "LeaveLocationUnknown",
+                    _ => "LeaveOrSourceCancel"
+                });
                 StatusChanged?.Invoke("Target closed after Leave. No drop received; source cancellation is not confirmed by Leave alone.");
             }
         }
@@ -263,6 +274,13 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
 
     // Only two event-time signals; no polling or capture of arbitrary typing.
     private static PointerObservation ReadPointer() => new(Native.GetAsyncKeyState(1) < 0, Native.GetAsyncKeyState(0x1B) < 0);
+
+    private bool? ObservePointerOverReceiver()
+    {
+        if (!Native.GetCursorPos(out var cursor)) return null;
+        nint atPoint = Native.WindowFromPoint(cursor);
+        return atPoint == 0 ? null : atPoint == hwnd;
+    }
 
     private nint Procedure(nint window, uint msg, nuint wp, nint lp)
     {
