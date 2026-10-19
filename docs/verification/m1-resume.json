@@ -33,10 +33,10 @@
   ],
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
   "pending": [
-    "Physical configured shortcut during Explorer drag and release of all activation keys",
-    "Post-cleanup physical reentry and outside termination",
-    "mixed DPI/monitors",
-    "Physical rejected Drop after latched rejection"
+    "Independent timing corroboration of owner-confirmed shortcut activation during drag; do not repeat identical K1 without improved diagnostics",
+    "Outside termination on host background (O1 requested)",
+    "Other available DPI/monitor configurations",
+    "Physical rejected Drop after latched rejection (C2 requested)"
   ],
   "evidence_sha256": {
     "m1-native-build-03.json": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
@@ -78,7 +78,11 @@
     "m1-cleanup-ready-result-01.json": "ea630fd8ae2ed6f3e88a7c7b17afc3b2ad9eebfe111dbe9f4c799a6e6fd5f74d",
     "m1-letters-final-01.jsonl": "aab1e9b478fa2b15bcc7491b2d79f9e9b00469049e68861ff9c70c7b0bc594d4",
     "m1-cleanup-escape-success-01.jsonl": "230d5c2d1640a2f028fd0281dd4ddcdf009918f57544ae9de10522b0d560fd7e",
-    "m1-cleanup-escape-result-01.json": "f3c13e577e18970147a56a41758690f6cd7519a9fa91df5a6a7667a46d62cdcf"
+    "m1-cleanup-escape-result-01.json": "f3c13e577e18970147a56a41758690f6cd7519a9fa91df5a6a7667a46d62cdcf",
+    "m1-cleanup-reentry-01.jsonl": "e3aa5f7d3684161f62ad493242a8077283b2f09ba67151b296037d23a707b743",
+    "m1-cleanup-reentry-result-01.json": "04a2603f6b34ba61b69e62e39f63364377e76a0cc966ff125026bc4ef8eb4e07",
+    "m1-cleanup-reentry-result-02.json": "f22fe5d8637c35352a66d3b7274d222d541ad16036670323c2672ef23ec2a4cf",
+    "m1-reentry-review-01.json": "8e5a7aa1803eb5b34766761f5ec12b4066e3b16bca7b1e129c5a1fd8a32a96cd"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -160,7 +164,7 @@
     "mouse_held_on_Leave": true,
     "reentered_and_received_two_files_COPY": true,
     "originals_unchanged": true,
-    "scope": "Observed on prior build before final hit-test cleanup; hidden reentry regression passes on current build, new physical check pending"
+    "scope": "Historical prior-build result retained; current hit-test build now separately verified in two real sessions"
   },
   "leave_cleanup": {
     "scope": "Own receiver lifecycle; no source cancellation interception",
@@ -174,5 +178,32 @@
     "physical_result": "two successful owner Escape trials: thumbnail and receiver disappear, LeaveOverReceiver, no accepted drops, originals intact",
     "physical_EscapeDown": true,
     "already_released_Escape_limit": "synthetic hidden regression only; real successful trials sampled Escape down"
+  },
+  "current_build_physical_reentry": {
+    "classification": "VERIFIED IN WINDOWS PROTOTYPE",
+    "successful_trials": 2,
+    "kept_leaves_per_trial": [
+      9,
+      1
+    ],
+    "all_kept_leaves_mouse_held_and_outside": true,
+    "files_per_drop": 2,
+    "effect": 1,
+    "entry_keys": 1,
+    "drop_keys": 0,
+    "foreground_preserved": true,
+    "dpi": 144,
+    "originals_unchanged": true,
+    "owner_confirms_activation_during_drag": true,
+    "activation_sample_button_down": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "independent_activation_timing": "partial; sampled button released, preserve positive owner report",
+    "unchanged_K1_repetition": "do not repeat without new diagnostics",
+    "source_commit": "bbbd8d0"
   }
 }

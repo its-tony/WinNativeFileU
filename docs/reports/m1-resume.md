@@ -31,7 +31,7 @@ Los primeros runs se preservaron: build01 tenía4tests booleanos redundantes ret
 
 ## Limitations
 No se repitió sky.drag cruzado: la restricción conocida sigue vigente. La herramienta tampoco ofrece tecla intercalada con mouse hold. El ensayo humano confirmó selección múltiple usando el botón antes de arrastrar; la activación por F8 durante drag sigue pendiente.
-Siguen sin validación completa en Explorer: momento exacto de activación durante drag, liberación de teclas conservando drag, rechazo mediante Drop físico, abandono y otros DPI/monitores. Reentrada física corroborada antes del último cambio de hit-test; regresión de salida/reentrada pasa en la suite actual, repetición física actual pendiente. Escape y cierre propio ya tuvieron2ensayos humanos correctos. Las ejecuciones anteriores cerraron con RevokeDragDrop hr0; la nueva sigue abierta. Sin radial, motores, tray, startup, push ni release.
+Siguen sin validación completa en Explorer: corroboración independiente del momento exacto de activación durante drag, rechazo mediante Drop físico, abandono y otros DPI/monitores. La reentrada física ya se repitió y corroboró tras el último cambio de hit-test, además de la regresión oculta. Escape y cierre propio ya tuvieron2ensayos humanos correctos. Las ejecuciones anteriores cerraron con RevokeDragDrop hr0; la nueva sigue abierta. Sin radial, motores, tray, startup, push ni release.
 
 El19 se abrió otra sesión con el mismo build, Ready/STA/Register0 y F8/F9 disponibles. El propietario probó K1 sin Arm target y reportó **«F8 no mostró el cuadro»**; después confirmó que tampoco apareció con ratón suelto. Diario leído tras ambas respuestas: solo6eventos de arranque. Un control automatizado F8/F9 del mismo run sí produjo HotkeyReceived/Armed y CancelIdle, foco conservado y DPI144. La diferencia de entrega física/automatizada está observada; su causa no está establecida y no prueba un fallo de OLE, Fn ni del hardware. Se cerró normalmente con RevokeDragDrop0.
 
@@ -58,5 +58,9 @@ El reporte inicial de reentrada/rechazo/Escape está en m1-letters-cancel-snapsh
 
 El historial anterior queda acotado por m1-escape-clarification-01.json; la corrección/red/green están en m1-cleanup-*.json/TRX. Nueva verificación física en m1-cleanup-escape-success-01.jsonl y m1-cleanup-escape-result-01.json. La ausencia de Drop se combina con reporte humano y hashes; no se infiere fin global por Leave solo.
 
+Reentrada física del build corregido: propietario confirmó «Sí, activó durante el arrastre y recibió ambos tras reentrar». Dos sesiones a15:06:03 y15:06:24 terminan en DropAccepted count2/COPY1 tras9y1Leave conservados con botón abajo/puntero fuera, nuevas entradas keys1 y drop keys0. Foco conservado, DPI144, originales intactos. R1 verificado con el hit-test actual. Snapshot m1-cleanup-reentry-01.jsonl y resultado m1-cleanup-reentry-result-02.json (corrige transcripción de acentos y nota inicial de conteo; originales anteriores conservados).
+
+El reporte humano confirma el orden de activación durante drag; los5Armed nuevos observan botón suelto, de modo que la corroboración independiente de ese instante sigue parcial. No se descarta el reporte ni se repetirá K1 sin diagnóstico nuevo. C2/O1 solicitados por separado; no cambió código ni se repitió la suite29verde.
+
 ## Git and Next Milestone
-Corrección/reentrada en commit local bc5fd96; perfiles/launcher/regresión en39b1b16; cierre del receptor residual y2regresiones en bbbd8d0; reporte/estado aparte. Sin push. Próximo: completar cronología de activación, reentrada física tras último cambio y matriz restante. **No iniciar M2 ni declarar M1 terminado.**
+Corrección/reentrada en commit local bc5fd96; perfiles/launcher/regresión en39b1b16; cierre del receptor residual y2regresiones en bbbd8d0; reporte/estado aparte. Sin push. Próximo: correlacionar C2/O1 y completar diagnóstico/matriz restante. **No iniciar M2 ni declarar M1 terminado.**
