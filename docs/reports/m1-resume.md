@@ -9,6 +9,8 @@ La causa exacta del fallo original del propietario sigue sin demostrarse. **M1 c
 El diario anterior terminó con RevokeDragDrop hr0; nuevo listado confirmó ventana cerrada. En la ventana nueva se observaron F8→Armed, otro F8→ArmIgnored y F9→CancelIdle. Esos eventos muestran LeftButtonDown=false, así que no se promueven a activación durante drag.
 El texto de estado ahora es accesible con su contenido real. La revisión visible confirmó «Receiver closed. No file operation was performed.» después de F9. El target se ocultó y el manifiesto de fixtures siguió intacto.
 
+Resultado humano posterior: el propietario confirmó que el cuadro recibe ambos archivos y que lo abrió con **Arm target**. El diario conserva dos secuencias Enter/Over/DropAccepted, a las 19:18:06 y 19:18:19 (UTC-06:00), ambas count2 y COPY1, con los dos fixtures incluido el nombre Unicode. Cada Armed precedió a Enter, con LeftButtonDown=false y sin nuevo HotkeyReceived. **Recepción múltiple desde Explorer con receptor prearmado verificada**; no acredita F8 durante drag. Comprobación posterior: nombres, tamaños y SHA256 intactos en ambos originales. COPY es el efecto negociado; el prototipo solo registra rutas y no realiza una copia.
+
 ## Architecture Decisions
 [ADR0004](../decisions/0004-m1-diagnostics-reentry.md): snapshots en eventos, sin polling/hooks/registro de escritura; bit alto de GetAsyncKeyState con límites de permisos y observación instantánea. El estado de botón no demuestra OLE activo. Leave solo no acredita cancelación del origen.
 El receptor puede seguir abierto si se suelta fuera después de Leave, hasta F9 o cierre. Ese final y los botones intercambiados siguen pendientes; no se añadió sondeo global ni se afirmó cancelación segura universal.
@@ -22,11 +24,13 @@ Los tests crean STA/HWND/RegisterDragDrop reales y entregan CF_HDROP Unicode en 
 Los primeros runs se preservaron: build01 tenía4tests booleanos redundantes retirados; build02 tenía9nativos; build03 añade la regresión de textoF9. No se presenta conteo intermedio como suite final ni se repite compilación sin cambio.
 
 ## Limitations
-No se repitió sky.drag cruzado: la restricción conocida sigue vigente. La herramienta tampoco ofrece tecla intercalada con mouse hold. Se preparó carpeta nueva para un único intento humano con ambos archivos y F8 durante drag; resultado todavía pendiente al redactar.
-Siguen sin validación completa en Explorer: activación durante drag, liberación de tecla conservando drag, selección múltiple, Escape/F9 con final del origen corroborado, reentrada física, abandono y otros DPI/monitores. La recepción individual prearmada de la entrega anterior conserva su alcance. Sin radial, motores, tray, startup, push ni release.
+No se repitió sky.drag cruzado: la restricción conocida sigue vigente. La herramienta tampoco ofrece tecla intercalada con mouse hold. El ensayo humano confirmó selección múltiple usando el botón antes de arrastrar; la activación por F8 durante drag sigue pendiente.
+Siguen sin validación completa en Explorer: activación durante drag, liberación de tecla conservando drag, Escape/F9 con final del origen corroborado, reentrada física, abandono y otros DPI/monitores. El cierre de la ejecución más reciente no se observó. Sin radial, motores, tray, startup, push ni release.
 
 ## Evidence
 Originales privados: m1-resume-old-session-final.jsonl, m1-native-build-01/02/03.json, m1-native-core-01/02/03.trx, m1-native-receiver-01/02/03.trx; diarios/fixtures únicos en native-tests/; m1-resume-launch-01/02.json y snapshots/UI nuevos. Resumen [m1-resume.json](../verification/m1-resume.json).
+
+Recepción múltiple: m1-batch-drop-snapshot-01.jsonl (inmutable), m1-batch-operator-01.json (respuesta y método confirmado), m1-batch-result-01.json y check posterior del run. Tracker M1_BATCH VERIFICADO; M1_DESKTOP reabierto con evidencia nueva y cerrado BLOQUEADO para los criterios restantes. No se alteraron snapshots históricos ni se repitió build: no cambió el código.
 
 ## Git and Next Milestone
 Corrección/pruebas en commit local bc5fd96; reporte/estado aparte. Sin push. Próximo: completar diagnóstico del gesto real con evidencia nueva. **No iniciar M2 ni declarar M1 terminado.**

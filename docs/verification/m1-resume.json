@@ -25,11 +25,9 @@
     "ArmIgnored visible on repeated F8",
     "F9 closes receiver with corrected accessible text"
   ],
-  "observed_mouse_button_held": false,
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
   "pending": [
     "F8 during Explorer drag",
-    "multiple Explorer selection",
     "safe Escape/global source ending",
     "physical reentry/outside termination",
     "mixed DPI/monitors"
@@ -39,6 +37,27 @@
     "m1-native-core-03.trx": "dda0b1d5116411f58a3b1b050e950f707ffac51ddd41d5a9cf7ddf942e5aaddf",
     "m1-native-receiver-03.trx": "46da85d76823cdaedd1258aaf6d3b5762b70e43c1d4b0282b1ef4aa8c4f31de5",
     "m1-resume-old-session-final.jsonl": "5c1e09ba11080ec30e03a8eac6c10b7b339b878825953c5424de1e25828707a1",
-    "m1-resume-final-ui-snapshot.jsonl": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e"
+    "m1-resume-final-ui-snapshot.jsonl": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e",
+    "m1-batch-drop-snapshot-01.jsonl": "d20f77221ddd0c28d72c1f23639a2d1645824b2b9ddabc5f2e27508e0baa1275",
+    "m1-batch-operator-01.json": "91c2e33ac4bc98b00c3ec36be331979b6e7fb5e6c5e2d240b31436dcbff59d8d",
+    "m1-batch-result-01.json": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577"
+  },
+  "observed_mouse_button_held_at_activation": false,
+  "real_explorer_batch": {
+    "classification": "VERIFIED IN WINDOWS PROTOTYPE",
+    "successful_trials": 2,
+    "files_per_trial": 2,
+    "unicode_filename": true,
+    "activation_method": "Arm target button before dragging, confirmed by owner",
+    "new_F8_events_during_trials": 0,
+    "LeftButtonDown_at_activation": false,
+    "drop_local_times": [
+      "2026-10-18T19:18:06-06:00",
+      "2026-10-18T19:18:19-06:00"
+    ],
+    "negotiated_effect": 1,
+    "effect_name": "COPY; prototype records paths without copying files",
+    "original_names_lengths_sha256_unchanged": true,
+    "F8_during_drag_verified": false
   }
 }

@@ -99,13 +99,14 @@
         "evidence\\private\\m1-resume-launch-01.json",
         "evidence\\private\\m1-resume-launch-02.json",
         "evidence\\private\\m1-resume-final-ui-snapshot.jsonl",
-        "evidence\\private\\m1-resume-delivery-snapshot.jsonl"
+        "evidence\\private\\m1-resume-delivery-snapshot.jsonl",
+        "evidence\\private\\m1-batch-result-01.json"
       ],
-      "attempts": 11,
+      "attempts": 12,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "F8/F9 diagnostic UI verified with button up; no new Explorer drag callbacks yet. Native tests pass separately. Full acceptance waits for human gesture/new capability; do not repeat blocked cross-window automation"
+      "next_step": "Batch receipt verified with Arm target; full M1 still awaits F8 during drag/key release, real cancellation/reentry/outside ending and DPI matrix. Cross-window tool restriction unchanged; no equivalent retry"
     },
     {
       "id": "M1_REVIEW",
@@ -148,6 +149,31 @@
       "success_criterion": "Review resumed M1 code and evidence without entering M2",
       "abandon_condition": "Two equivalent failures; new evidence required",
       "next_step": "Source/docs/locks reviewed; diff and path policy pass; private native journals/TRX/fixtures excluded. Full M1 remains partial"
+    },
+    {
+      "id": "M1_BATCH",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-batch-result-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Real Explorer multi-file Unicode receipt with COPY and unchanged originals; prearmed scope",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Two real Explorer batch drops via prearmed Arm target; Unicode decoded, COPY1 negotiated and original names/lengths/SHA256 unchanged. Does not verify F8 during drag"
+    },
+    {
+      "id": "M1_BATCH_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-batch-review-01.json",
+        "evidence\\private\\m1-batch-review-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Reviewed batch-result documentation; original evidence remains ignored",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Path policy/diff checks exit0; manually reviewed actual button activation scope, two count2 COPY drops and original hashes. Private evidence excluded; code unchanged, prior26test result retained"
     }
   ],
   "history": [
@@ -623,6 +649,56 @@
       "evidence": "evidence\\private\\m1-resume-review-01.json",
       "sha256": "43a973eb5dd734e8a5fa5cf8fb5905d10a2cdbcc64c91d736e8354b3c77e5e8a",
       "note": "Source/docs/locks reviewed; diff and path policy pass; private native journals/TRX/fixtures excluded. Full M1 remains partial"
+    },
+    {
+      "at": "2026-10-18T19:20:48.663985-06:00",
+      "id": "M1_DESKTOP",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-batch-drop-snapshot-01.jsonl",
+      "sha256": "d20f77221ddd0c28d72c1f23639a2d1645824b2b9ddabc5f2e27508e0baa1275",
+      "note": "New owner manual trial: two count2 Unicode Explorer drops, COPY, original hashes intact; owner confirms Arm target button, not F8 during drag"
+    },
+    {
+      "at": "2026-10-18T19:20:48.875668-06:00",
+      "id": "M1_BATCH",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-batch-result-01.json",
+      "sha256": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577",
+      "note": "Two real Explorer batch drops via prearmed Arm target; Unicode decoded, COPY1 negotiated and original names/lengths/SHA256 unchanged. Does not verify F8 during drag"
+    },
+    {
+      "at": "2026-10-18T19:20:49.075607-06:00",
+      "id": "M1_DESKTOP",
+      "event": "BLOQUEADO",
+      "attempt": 12,
+      "evidence": "evidence\\private\\m1-batch-result-01.json",
+      "sha256": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577",
+      "note": "Batch receipt verified with Arm target; full M1 still awaits F8 during drag/key release, real cancellation/reentry/outside ending and DPI matrix. Cross-window tool restriction unchanged; no equivalent retry"
+    },
+    {
+      "at": "2026-10-18T19:21:46.393572-06:00",
+      "id": "M1_BATCH_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T19:21:46.859710-06:00",
+      "id": "M1_BATCH_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-batch-review-01.json",
+      "sha256": "f1ecb1a5e586a39dd435644201f2abd7bae0df5d6fb27a2a41da0782ec814e12",
+      "note": "Review batch evidence docs only; code unchanged, no build rerun; private originals excluded"
+    },
+    {
+      "at": "2026-10-18T19:22:01.569225-06:00",
+      "id": "M1_BATCH_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-batch-review-01.json",
+      "sha256": "f1ecb1a5e586a39dd435644201f2abd7bae0df5d6fb27a2a41da0782ec814e12",
+      "note": "Path policy/diff checks exit0; manually reviewed actual button activation scope, two count2 COPY drops and original hashes. Private evidence excluded; code unchanged, prior26test result retained"
     }
   ]
 }

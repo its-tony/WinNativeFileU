@@ -2,7 +2,7 @@
 
 An original open source Windows 11 file utility, inspired by keyboard-assisted contextual workflows. Files will be processed locally. This project is independent of Tangerine and its developer.
 
-Current scope: **M1 feasibility prototype, partially verified**. A native OLE target hosted by the WinUI app accepts only prepared fixture files. F8 activation from Explorer and one real Unicode file drop were observed; the full key-during-drag gesture, multiple selection and safe Escape cancellation remain unverified. M1 is not accepted as complete. Radial UI, conversion, tray and startup are not implemented. See [current status](ESTADO.md), [M1 results](docs/reports/m1.md) and [R0/M0 report](docs/reports/r0-m0.md).
+Current scope: **M1 feasibility prototype, partially verified**. A native OLE target hosted by the WinUI app accepts only prepared fixture files. F8 activation before dragging and real Explorer drops were observed, including two trials with both fixtures and a Unicode filename using **Arm target before dragging**. Original names, lengths and SHA256 hashes remained unchanged. The full key-during-drag gesture and safe Escape cancellation remain unverified. M1 is not accepted as complete. Radial UI, conversion, tray and startup are not implemented. See [current status](ESTADO.md), [latest M1 results](docs/reports/m1-resume.md) and [R0/M0 report](docs/reports/r0-m0.md).
 
 ## Development
 
