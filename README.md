@@ -6,7 +6,7 @@ Current scope: **M1 feasibility prototype, partially verified**. A native OLE ta
 
 ## Development
 
-Latest M1 work: [reentry and native receiver tests](docs/reports/m1-resume.md). The final suite has 16 Core cases and 11 integration cases (10 hidden native receiver cases plus invalid shortcut-profile rejection). The receiver permits reentry after Leave when the mouse button is observed held; diagnostics distinguish button/hotkey activation and identify the selected shortcuts. Letters passed an automated keyboard control and two owner batch drops from Explorer with unchanged originals. The owner reports activation during dragging; mouse-up activation snapshots leave exact timing without independent corroboration. Full gesture and safe cancellation acceptance remain partial.
+Latest M1 work: [receiver tests and cleanup](docs/reports/m1-resume.md). The final suite has 16 Core cases and 13 integration cases (12 hidden native receiver cases plus invalid shortcut-profile rejection). Letters passed keyboard controls and owner batch drops with unchanged originals. A residual receiver after source cancellation is corrected: Leave now keeps reentry available only when the pointer is observed outside the receiver with the mouse held. Two owner Escape trials closed both the drag thumbnail and receiver without accepted drops or changed files. The owner reports activation during dragging; mouse-up activation snapshots leave exact timing without independent corroboration. M1 remains partial for the other physical acceptance cases.
 
 Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.
 

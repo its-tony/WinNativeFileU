@@ -108,13 +108,16 @@
         "evidence\\private\\m1-letters-launch-01.json",
         "evidence\\private\\m1-letters-control-result-01.json",
         "evidence\\private\\m1-letters-batch-result-01.json",
-        "evidence\\private\\m1-letters-cancel-result-01.json"
+        "evidence\\private\\m1-letters-cancel-result-01.json",
+        "evidence\\private\\m1-cleanup-launch-01.json",
+        "evidence\\private\\m1-cleanup-ready-result-01.json",
+        "evidence\\private\\m1-cleanup-escape-result-01.json"
       ],
-      "attempts": 16,
+      "attempts": 17,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Real reentry through4 held-mouse Leaves and count2 COPY accepted; CtrlAltX received while Tracking/held then latched and Leave without accepted drop. Escape failed, source-alone control pending; no full acceptance"
+      "next_step": "Corrected build Escape/receiver closure physically corroborated twice; remaining exact activation timing, post-fix physical reentry/outside termination, rejection scope and DPI limits recorded separately"
     },
     {
       "id": "M1_REVIEW",
@@ -230,15 +233,44 @@
     },
     {
       "id": "M1_ESCAPE",
-      "state": "EN_PROGRESO",
+      "state": "VERIFICADO",
       "evidence": [
-        "evidence\\private\\m1-letters-cancel-result-01.json"
+        "evidence\\private\\m1-letters-cancel-result-01.json",
+        "evidence\\private\\m1-escape-clarification-01.json",
+        "evidence\\private\\m1-cleanup-escape-result-01.json"
       ],
       "attempts": 1,
       "equivalent_failures": 1,
       "success_criterion": "Real source drag ends with physical Escape and no receiver acceptance, original hashes intact",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Owner reports physical Escape failed to end drag. First failure of this strategy; request distinct Explorer-alone control. Do not infer source ending from receiver Leave"
+      "next_step": "Owner confirms both thumbnail and receiver disappear; two real held-mouse/Escape-down Leaves over receiver close it, no accepted drops, original hashes unchanged. Escape-already-up race only hidden regression; M1 acceptance still partial"
+    },
+    {
+      "id": "M1_LEAVE_CLEANUP",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-cleanup-red-02.json",
+        "evidence\\private\\m1-cleanup-green-01.json",
+        "evidence\\private\\m1-cleanup-green-01.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 1,
+      "success_criterion": "Regression for held mouse/Escape already released closes receiver on Leave over itself; outside reentry preserved; build and native tests pass",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Old decision reproduced exactly2failing regressions via valid full build; corrected condition passes29tests, including12hidden native receiver cases and1profile test. Actual geometric cleanup after human Escape still separate pending"
+    },
+    {
+      "id": "M1_CLEANUP_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-cleanup-review-01.json",
+        "evidence\\private\\m1-cleanup-review-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Review minimal Leave cleanup, expected red then29green tests and scoped physical evidence",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Reviewed one-shot own-HWND hit-test, fail-closed unknown location,29green after2expected red cases, and2real Escape closures. No source cancellation interception; private artifacts excluded and diff/path checks pass"
     }
   ],
   "history": [
@@ -1033,6 +1065,134 @@
       "evidence": "evidence\\private\\m1-letters-review-03.json",
       "sha256": "680af4e20e86436431c1c8f58100959ae8a56f4f36babbd263be805796525040",
       "note": "Final path/whitespace pass and manual scope review: Letters batch/reentry verified; activation timing, Escape and rejection-through-drop remain partial. Private originals excluded"
+    },
+    {
+      "at": "2026-10-19T14:49:37.661671-06:00",
+      "id": "M1_ESCAPE",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-escape-clarification-01.json",
+      "sha256": "b31e0db8fbd8e9d385a44358fa5d5c1425e6a0ddff77f4c8866706169a40f0bc",
+      "note": "Owner control: Explorer Escape works. Clarification: drag thumbnail vanished, only receiver remained. Narrow prior failure to stale target cleanup, preserve historical failed attempt; fix/check cleanup before acceptance"
+    },
+    {
+      "at": "2026-10-19T14:50:19.921940-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:54:16.203693-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-cleanup-red-interrupted-01.json",
+      "sha256": "66090c46e0f3c920e3121e05e68b4e5d5a75d926461d24be9f69362065cc2452",
+      "note": "Focused test invocation interrupted with no TRX, not a regression result. Change to previously successful full Windows build script with approved execution; source decision still old"
+    },
+    {
+      "at": "2026-10-19T14:54:16.414511-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:54:49.750628-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-cleanup-red-02.json",
+      "sha256": "7a38c31f6a28f28ef367618ef8cbacefb08bddc5f3cb4ba85f835e038ad32f70",
+      "note": "Expected negative test with established full build route: current old Leave decision should fail new same-target/unknown-location regressions, not considered final product failure"
+    },
+    {
+      "at": "2026-10-19T14:55:23.173733-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:55:48.063332-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-cleanup-green-01.json",
+      "sha256": "858cee2e0d2aee45c7835c17d437136d9c69c4ebb01e6536f4aa79ffb16c22bf",
+      "note": "Corrected Leave requires observed outside pointer for reentry; over-receiver/unknown close and reject late drop. Verify complete locked build/native regressions after expected negative reproduction"
+    },
+    {
+      "at": "2026-10-19T14:56:29.575116-06:00",
+      "id": "M1_LEAVE_CLEANUP",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-cleanup-green-01.json",
+      "sha256": "858cee2e0d2aee45c7835c17d437136d9c69c4ebb01e6536f4aa79ffb16c22bf",
+      "note": "Old decision reproduced exactly2failing regressions via valid full build; corrected condition passes29tests, including12hidden native receiver cases and1profile test. Actual geometric cleanup after human Escape still separate pending"
+    },
+    {
+      "at": "2026-10-19T14:56:29.798237-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:56:30.845753-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 17,
+      "evidence": "evidence\\private\\m1-cleanup-launch-01.json",
+      "sha256": "73dfac6264f9492012757d8c044481c71723078e92fd220299a03a77033ce318",
+      "note": "Launch new cleanup build with Letters and fresh fixtures; verify Ready before human Escape visual cleanup trial"
+    },
+    {
+      "at": "2026-10-19T14:57:55.552908-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 17,
+      "evidence": "evidence\\private\\m1-cleanup-ready-result-01.json",
+      "sha256": "ea630fd8ae2ed6f3e88a7c7b17afc3b2ad9eebfe111dbe9f4c799a6e6fd5f74d",
+      "note": "New cleanup build Ready and correct fresh fixtures; prior host revoked0 and both runs hashes intact. Asked owner Escape: verify thumbnail AND residual receiver disappear, no source-control injection"
+    },
+    {
+      "at": "2026-10-19T14:59:15.855936-06:00",
+      "id": "M1_ESCAPE",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-cleanup-escape-result-01.json",
+      "sha256": "f3c13e577e18970147a56a41758690f6cd7519a9fa91df5a6a7667a46d62cdcf",
+      "note": "Owner confirms both thumbnail and receiver disappear; two real held-mouse/Escape-down Leaves over receiver close it, no accepted drops, original hashes unchanged. Escape-already-up race only hidden regression; M1 acceptance still partial"
+    },
+    {
+      "at": "2026-10-19T14:59:16.037743-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 17,
+      "evidence": "evidence\\private\\m1-cleanup-escape-result-01.json",
+      "sha256": "f3c13e577e18970147a56a41758690f6cd7519a9fa91df5a6a7667a46d62cdcf",
+      "note": "Corrected build Escape/receiver closure physically corroborated twice; remaining exact activation timing, post-fix physical reentry/outside termination, rejection scope and DPI limits recorded separately"
+    },
+    {
+      "at": "2026-10-19T15:01:36.091810-06:00",
+      "id": "M1_CLEANUP_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T15:01:36.429759-06:00",
+      "id": "M1_CLEANUP_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-cleanup-review-01.json",
+      "sha256": "2db83d4caa8c12e041e4d62b1a753b1332eeda456db154be51acf9735a9e61b7",
+      "note": "Review minimal location guard, expected2red then29green regressions, clarified source-vs-residual-box defect and two real successful Escape trials"
+    },
+    {
+      "at": "2026-10-19T15:02:29.010489-06:00",
+      "id": "M1_CLEANUP_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-cleanup-review-01.json",
+      "sha256": "2db83d4caa8c12e041e4d62b1a753b1332eeda456db154be51acf9735a9e61b7",
+      "note": "Reviewed one-shot own-HWND hit-test, fail-closed unknown location,29green after2expected red cases, and2real Escape closures. No source cancellation interception; private artifacts excluded and diff/path checks pass"
     }
   ]
 }

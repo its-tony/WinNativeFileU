@@ -13,8 +13,8 @@
       "notExecuted": 0
     },
     "native_receiver": {
-      "total": 10,
-      "passed": 10,
+      "total": 12,
+      "passed": 12,
       "failed": 0,
       "notExecuted": 0
     },
@@ -34,9 +34,9 @@
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
   "pending": [
     "Physical configured shortcut during Explorer drag and release of all activation keys",
-    "safe Escape/global source ending",
-    "physical reentry/outside termination",
-    "mixed DPI/monitors"
+    "Post-cleanup physical reentry and outside termination",
+    "mixed DPI/monitors",
+    "Physical rejected Drop after latched rejection"
   ],
   "evidence_sha256": {
     "m1-native-build-03.json": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
@@ -64,7 +64,21 @@
     "m1-letters-batch-snapshot-01.jsonl": "7ce85f7cbcd132d577b06c12d6b985f2a5b08b3d72c935fb6861780aa3375a11",
     "m1-letters-batch-result-01.json": "968393a495495406bfda089bdd8b12ba99adbb0cb3ca38748e97203de7a8d1dc",
     "m1-letters-cancel-snapshot-01.jsonl": "94c56676b2d3d9b738dba07a3e97b5e1775768d552152cd3e46eb051eae032b1",
-    "m1-letters-cancel-result-01.json": "4b49514063d09a2c2644e842dff3ec6ab0a9321569c52921c15db6030f9a9a2a"
+    "m1-letters-cancel-result-01.json": "4b49514063d09a2c2644e842dff3ec6ab0a9321569c52921c15db6030f9a9a2a",
+    "m1-escape-clarification-01.json": "b31e0db8fbd8e9d385a44358fa5d5c1425e6a0ddff77f4c8866706169a40f0bc",
+    "m1-escape-clarification-snapshot-01.jsonl": "cb0cc96c2f95faec83c42960a7bae71692cbdc750b0e727c645ac0be128265fc",
+    "m1-cleanup-red-interrupted-01.json": "66090c46e0f3c920e3121e05e68b4e5d5a75d926461d24be9f69362065cc2452",
+    "m1-cleanup-red-02.json": "7a38c31f6a28f28ef367618ef8cbacefb08bddc5f3cb4ba85f835e038ad32f70",
+    "m1-cleanup-red-integration-02.trx": "0a95ed79b111fca33c0d2984f440d13dbea77e0d296a3c780db59fabc736bf60",
+    "m1-cleanup-green-01.json": "858cee2e0d2aee45c7835c17d437136d9c69c4ebb01e6536f4aa79ffb16c22bf",
+    "m1-cleanup-green-core-01.trx": "97f5a4dd8f2953ea72faa4584c75c88b3c4e5fef88865d582cb8b4c31b60fc75",
+    "m1-cleanup-green-integration-01.trx": "b886045f35f8a78c06b442aceac5193e34fbba589e0e49b338d27b812e9393c7",
+    "m1-cleanup-contracts-01.json": "7a01ea23b29e752fcf87f5fe634c93a57ae590a4b574fa4fb386495dea6fa782",
+    "m1-cleanup-ready-01.jsonl": "a813d5cd5ca9f079aff12f12385a082fbec5a361004bd01eed95ce29337c2fde",
+    "m1-cleanup-ready-result-01.json": "ea630fd8ae2ed6f3e88a7c7b17afc3b2ad9eebfe111dbe9f4c799a6e6fd5f74d",
+    "m1-letters-final-01.jsonl": "aab1e9b478fa2b15bcc7491b2d79f9e9b00469049e68861ff9c70c7b0bc594d4",
+    "m1-cleanup-escape-success-01.jsonl": "230d5c2d1640a2f028fd0281dd4ddcdf009918f57544ae9de10522b0d560fd7e",
+    "m1-cleanup-escape-result-01.json": "f3c13e577e18970147a56a41758690f6cd7519a9fa91df5a6a7667a46d62cdcf"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -108,9 +122,9 @@
     "automated_F8_F9_control_after_physical_reports": "passed in same run; foreground preserved, DPI144",
     "closed_with_RevokeDragDrop_hr": 0
   },
-  "current_build_evidence": "m1-shortcuts-build-01.json",
-  "tests_total": 27,
-  "windows_integration_project_total": 11,
+  "current_build_evidence": "m1-cleanup-green-01.json",
+  "tests_total": 29,
+  "windows_integration_project_total": 13,
   "letters_profile": {
     "selection": "start-prototype.ps1 -ShortcutProfile Letters",
     "registered_pair_only": [
@@ -136,7 +150,7 @@
       false
     ],
     "cancellation_controls": {
-      "Escape": "owner reports failure; source-alone control pending",
+      "Escape": "owner clarified former residual box; corrected build now2successful closures with source end reported, no accepted drop and hashes intact",
       "receiver_rejection": "Ctrl+Alt+X/Tracking with held mouse -> CancelLatched -> Leave, no accepted drop after latch",
       "rejection_through_drop": "not observed physically in this series"
     }
@@ -145,6 +159,20 @@
     "keep_visible_leaves": 4,
     "mouse_held_on_Leave": true,
     "reentered_and_received_two_files_COPY": true,
-    "originals_unchanged": true
+    "originals_unchanged": true,
+    "scope": "Observed on prior build before final hit-test cleanup; hidden reentry regression passes on current build, new physical check pending"
+  },
+  "leave_cleanup": {
+    "scope": "Own receiver lifecycle; no source cancellation interception",
+    "rule": "Wait for reentry only with observed outside pointer, held mouse, no sampled Escape and no cancellation/journal failure",
+    "pointer_over_receiver": "close",
+    "location_unknown": "close",
+    "negative_regression": "Old decision compiled but exactly2new cases failed Idle assertion;11integration+16Core passed",
+    "green_regression": "All29 passed after condition correction; native location hints injected",
+    "runner_limitation": "Focused invocation interrupted without TRX; established full Windows build used instead",
+    "new_runtime_ready": true,
+    "physical_result": "two successful owner Escape trials: thumbnail and receiver disappear, LeaveOverReceiver, no accepted drops, originals intact",
+    "physical_EscapeDown": true,
+    "already_released_Escape_limit": "synthetic hidden regression only; real successful trials sampled Escape down"
   }
 }

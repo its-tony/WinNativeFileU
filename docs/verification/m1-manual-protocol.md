@@ -32,6 +32,8 @@ Los ids8/9 del diario identifican acciones de activación/rechazo; en el perfil 
 
 Resultados Letters posteriores: dos recepciones múltiples iniciales corroboradas y reporte humano favorable de activación durante drag; los Armed observan botón suelto, por lo que K1 conserva límite de cronología. R1 corroborado por4Leave con botón abajo/keepVisible y reentradas hasta DropAccepted count2. C1 falló según propietario; control Escape en Explorer sin receptor pendiente. C2 corroboró hotkey durante Tracking/CancelLatched/Leave sin entrega posterior, pero no DropRejected físico. No presentar estos logros parciales como aceptación completa de M1.
 
+Actualización de C1 tras aclaración: el propietario confirmó que Escape terminaba la miniatura y quedaba solo nuestro cuadro. Versión corregida según ADR0005 cierra en Leave sobre receptor o ubicación desconocida y conserva espera solo con salida observada.29tests aprobados; propietario confirmó que desaparecen ambos en2ensayos con botón abajo/Escape abajo, LeaveOverReceiver,0aceptaciones y hashes intactos. C1 verificado para ese alcance; Escape ya liberado/ubicación desconocida probados en receptor oculto. R1 físico debe repetirse tras el cambio de hit-test; no repetir C1 satisfecho sin cambio/fallo nuevo.
+
 ## Interpretación y cierre
 
 Si F8 no muestra el cuadro, cancelar el origen con Escape antes de seguir. Examinar si hubo HotkeyReceived/Armed/ArmIgnored y el reporte físico antes de cambiar código o repetir. Dos fallos equivalentes cierran la estrategia; reapertura solo con evidencia nueva.
