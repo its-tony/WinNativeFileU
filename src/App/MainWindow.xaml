@@ -8,7 +8,7 @@
       <TextBlock Text="WinNativeFileU" Style="{StaticResource TitleTextBlockStyle}" />
       <TextBlock Text="Explorer drag feasibility — M1" Style="{StaticResource SubtitleTextBlockStyle}" />
       <TextBlock TextWrapping="Wrap" Text="Drag prepared fixture files from Explorer, tap F8, release the key, then release the files over the target. Escape cancels the source drag. No files are copied, moved or converted." />
-      <TextBlock x:Name="Status" TextWrapping="Wrap" AutomationProperties.Name="Prototype status" />
+      <TextBlock x:Name="Status" TextWrapping="Wrap" />
       <StackPanel Orientation="Horizontal" Spacing="12">
         <Button x:Name="ArmButton" Content="Arm target" IsEnabled="False" Click="ArmTarget" />
         <Button x:Name="CancelButton" Content="Reject / close target" IsEnabled="False" Click="CancelTarget" />

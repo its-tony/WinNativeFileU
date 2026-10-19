@@ -19,6 +19,8 @@ try {
     & $dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & $dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release --logger 'trx;LogFileName=core.trx' --results-directory artifacts/test-results
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    & $dotnet test tests/WindowsIntegration.Tests/WinNativeFileU.WindowsIntegration.Tests.csproj --no-build --no-restore -c Release --logger 'trx;LogFileName=windows-integration.trx' --results-directory artifacts/test-results
     exit $LASTEXITCODE
 }
 finally { Pop-Location }

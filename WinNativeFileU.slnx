@@ -9,5 +9,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Core.Tests/WinNativeFileU.Core.Tests.csproj" />
+    <Project Path="tests/WindowsIntegration.Tests/WinNativeFileU.WindowsIntegration.Tests.csproj" />
   </Folder>
 </Solution>

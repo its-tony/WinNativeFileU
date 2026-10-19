@@ -15,15 +15,24 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly string className = "WinNativeFileU.M1." + Guid.NewGuid().ToString("N");
     private readonly Native.WindowProc procedure;
     private readonly StreamWriter journal;
+    private readonly bool nativeTestMode;
+    private readonly Func<PointerObservation> readPointer;
     private readonly InteractionSession session = new();
     private nint hwnd;
     private bool oleInitialized, registered, hotkey8, hotkey9, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
     private readonly int threadId = Environment.CurrentManagedThreadId;
     private string caption = "M1 fixture receiver\nF8: show  /  F9: reject and close\nDrop: record paths only; originals untouched";
     public event Action<string>? StatusChanged;
+    internal InteractionState SessionState => session.State;
 
-    public DragOverlay(string fixtureRoot, string logPath)
+    public DragOverlay(string fixtureRoot, string logPath) : this(fixtureRoot, logPath, false, ReadPointer) { }
+
+    // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
+    // but neither register hotkeys nor show/move any desktop window.
+    internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer)
     {
+        this.nativeTestMode = nativeTestMode;
+        this.readPointer = readPointer;
         root = Path.GetFullPath(fixtureRoot);
         if (!Directory.Exists(root) || !DropPolicy.IsWithinFixtureRoot(root, Path.Combine(root, "probe")))
             throw new ArgumentException("An existing local fixture directory is required.");
@@ -52,10 +61,10 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             Marshal.ThrowExceptionForHR(hr);
             registered = true;
             Log("RegisterDragDrop", new { hr, hwnd = hwnd.ToInt64() });
-            hotkey8 = Native.RegisterHotKey(hwnd, 8, 0x4000, 0x77);
-            hotkey9 = Native.RegisterHotKey(hwnd, 9, 0x4000, 0x78);
+            hotkey8 = !nativeTestMode && Native.RegisterHotKey(hwnd, 8, 0x4000, 0x77);
+            hotkey9 = !nativeTestMode && Native.RegisterHotKey(hwnd, 9, 0x4000, 0x78);
             Log("Hotkeys", new { F8 = hotkey8, F9 = hotkey9 });
-            if (!hotkey8 || !hotkey9) throw new Win32Exception("F8/F9 could not be registered; no hotkey is assumed available.");
+            if (!nativeTestMode && (!hotkey8 || !hotkey9)) throw new Win32Exception("F8/F9 could not be registered; no hotkey is assumed available.");
             Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString() });
         }
         catch { Dispose(); throw; }
@@ -64,10 +73,16 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     public void Arm()
     {
         AssertThread();
-        if (session.State != InteractionState.Idle) return;
+        if (session.State != InteractionState.Idle)
+        {
+            Log("ArmIgnored", new { state = session.State.ToString(), pointer = readPointer() });
+            StatusChanged?.Invoke("Target already armed. Re-enter it, or use F9 to reject/close.");
+            return;
+        }
         if (!logHealthy) throw new IOException("Private journal unavailable; receiver disabled.");
         session.Activate();
         cancelled = acceptable = false;
+        if (nativeTestMode) { Log("ArmedForNativeTest", new { }); return; }
         caption = "M1 fixture receiver\nDrag fixture files here. F9 rejects.\nF8 released: target stays open.";
         var before = Native.GetForegroundWindow();
         if (!Native.GetCursorPos(out var cursor)) { Finish("CursorUnavailable"); return; }
@@ -83,7 +98,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         int y = Math.Clamp(cursor.Y - height / 2, info.Work.Top, info.Work.Bottom - height);
         if (!Native.SetWindowPos(hwnd, -1, x, y, width, height, 0x50)) { Finish("ShowFailed"); return; }
         Native.InvalidateRect(hwnd, 0, true);
-        Log("Armed", new { before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi });
+        Log("Armed", new { before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, pointer = readPointer() });
         StatusChanged?.Invoke("Target armed. F8 stays released; drop only prepared fixtures.");
     }
 
@@ -98,7 +113,11 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             Log("CancelLatched", new { });
             StatusChanged?.Invoke("Rejecting until Drop/Leave; source drag is not cancelled by hiding a window.");
         }
-        else Finish("CancelIdle");
+        else
+        {
+            Finish("CancelIdle");
+            StatusChanged?.Invoke("Receiver closed. No file operation was performed.");
+        }
     }
 
     public int DragEnter(IDataObject data, uint keys, NativePoint point, ref uint effect)
@@ -133,7 +152,25 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
 
     public int DragLeave()
     {
-        try { Log("DragLeave", new { state = session.State.ToString(), cancelled }); Finish("LeaveOrSourceCancel"); }
+        try
+        {
+            var pointer = readPointer();
+            bool keepVisible = !cancelled && logHealthy && pointer.KeepReceiverAfterLeave;
+            Log("DragLeave", new { state = session.State.ToString(), cancelled, pointer, keepVisible });
+            if (keepVisible)
+            {
+                session.Reset(); session.Activate();
+                acceptable = dragInside = overLogged = false;
+                caption = "Pointer left target: re-enter to receive.\nNo drop was accepted.\nF9 rejects/closes this receiver.";
+                Native.InvalidateRect(hwnd, 0, true);
+                StatusChanged?.Invoke("Pointer left while the button was held. Re-enter target; no files received.");
+            }
+            else
+            {
+                Finish("LeaveOrSourceCancel");
+                StatusChanged?.Invoke("Target closed after Leave. No drop received; source cancellation is not confirmed by Leave alone.");
+            }
+        }
         catch { session.Reset(); }
         return 0;
     }
@@ -214,11 +251,19 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         if (Environment.CurrentManagedThreadId != threadId) throw new InvalidOperationException("STA owner thread required.");
     }
 
+    // Only two event-time signals; no polling or capture of arbitrary typing.
+    private static PointerObservation ReadPointer() => new(Native.GetAsyncKeyState(1) < 0, Native.GetAsyncKeyState(0x1B) < 0);
+
     private nint Procedure(nint window, uint msg, nuint wp, nint lp)
     {
         try
         {
-            if (msg == 0x312) { if (wp == 8) Arm(); else if (wp == 9) Cancel(); return 0; }
+            if (msg == 0x312)
+            {
+                Log("HotkeyReceived", new { id = (int)wp, state = session.State.ToString(), pointer = readPointer() });
+                if (wp == 8) Arm(); else if (wp == 9) Cancel();
+                return 0;
+            }
             if (msg == 0x21) return 3; // MA_NOACTIVATE
             if (msg == 0x10) { Cancel(); return 0; }
             if (msg == 0x2E0) Log("DpiChanged", new { dpi = (uint)wp & 0xFFFF });
