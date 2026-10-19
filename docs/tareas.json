@@ -113,13 +113,14 @@
         "evidence\\private\\m1-cleanup-ready-result-01.json",
         "evidence\\private\\m1-cleanup-escape-result-01.json",
         "evidence\\private\\m1-cleanup-reentry-result-01.json",
-        "evidence\\private\\m1-cleanup-reentry-result-02.json"
+        "evidence\\private\\m1-cleanup-reentry-result-02.json",
+        "evidence\\private\\m1-reject-outside-result-01.json"
       ],
-      "attempts": 18,
+      "attempts": 19,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Correction: two current-build reentry trials have9+1 kept outside Leaves (10 total), each count2 COPY, foreground preserved DPI144; intact originals. Owner confirms activation during drag, instantaneous activation samples false. Result02 preserves exact owner text; prior shell-encoding artifact retained. Remaining C2/O1 and timing diagnostic; no unchanged K1 repetition or M2."
+      "next_step": "Owner confirms C2/O1;2rejections Tracking held -> latch -> Leave mouse-up over receiver,0accepted per rejection; outside Leave -> idle close,0accepted in final outside session. Separate accepted control retained. Names/lengths/SHA256 intact. Normal host close Revoke0 and subsequent window absent. No physical DropRejected observed; timing and other DPI limits remain, no identical repeated physical test or M2."
     },
     {
       "id": "M1_REVIEW",
@@ -1213,6 +1214,15 @@
       "evidence": "evidence\\private\\m1-cleanup-reentry-result-02.json",
       "sha256": "f22fe5d8637c35352a66d3b7274d222d541ad16036670323c2672ef23ec2a4cf",
       "note": "Correction: two current-build reentry trials have9+1 kept outside Leaves (10 total), each count2 COPY, foreground preserved DPI144; intact originals. Owner confirms activation during drag, instantaneous activation samples false. Result02 preserves exact owner text; prior shell-encoding artifact retained. Remaining C2/O1 and timing diagnostic; no unchanged K1 repetition or M2."
+    },
+    {
+      "at": "2026-10-19T15:13:31.692179-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 19,
+      "evidence": "evidence\\private\\m1-reject-outside-result-01.json",
+      "sha256": "02fddeff53ae23af058c1fcf0c46daa489f703a21f1a28998e2c683796ddc2f7",
+      "note": "Owner confirms C2/O1;2rejections Tracking held -> latch -> Leave mouse-up over receiver,0accepted per rejection; outside Leave -> idle close,0accepted in final outside session. Separate accepted control retained. Names/lengths/SHA256 intact. Normal host close Revoke0 and subsequent window absent. No physical DropRejected observed; timing and other DPI limits remain, no identical repeated physical test or M2."
     }
   ]
 }
