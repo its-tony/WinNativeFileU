@@ -19,6 +19,7 @@ public struct NativePoint { public int X, Y; }
 internal static class Native
 {
     internal delegate nint WindowProc(nint hwnd, uint msg, nuint wp, nint lp);
+    internal delegate bool MonitorEnumProc(nint monitor, nint dc, ref Rect rect, nint data);
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct WindowClass
     {
@@ -62,6 +63,10 @@ internal static class Native
     [DllImport("user32.dll")] internal static extern nint GetForegroundWindow();
     [DllImport("user32.dll")] internal static extern nint WindowFromPoint(NativePoint point);
     [DllImport("user32.dll")] internal static extern short GetAsyncKeyState(int key);
+    [DllImport("user32.dll")] internal static extern short GetKeyState(int key);
+    [DllImport("user32.dll")] internal static extern int GetMessageTime();
+    [DllImport("user32.dll")] internal static extern int GetSystemMetrics(int index);
+    [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool EnumDisplayMonitors(nint dc, nint clip, MonitorEnumProc callback, nint data);
     [DllImport("user32.dll")] internal static extern nint MonitorFromPoint(NativePoint point, uint flags);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool GetMonitorInfoW(nint monitor, ref MonitorInfo info);
     [DllImport("user32.dll")] internal static extern uint GetDpiForWindow(nint hwnd);

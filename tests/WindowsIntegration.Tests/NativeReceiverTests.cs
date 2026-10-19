@@ -21,6 +21,10 @@ public sealed class NativeReceiverTests
     [InlineData("cancelIdle")]
     [InlineData("leaveAtReceiver")]
     [InlineData("leaveUnknown")]
+    [InlineData("heldGateAllowed")]
+    [InlineData("heldGateIdle")]
+    [InlineData("heldGateEscape")]
+    [InlineData("heldGateButton")]
     public void HiddenNativeReceiverHonorsFixtureBoundary(string scenario) => OnSta(() =>
     {
         // New evidence only; never delete preexisting data or use global temp.
@@ -36,7 +40,8 @@ public sealed class NativeReceiverTests
         byte[] firstHash = SHA256.HashData(File.ReadAllBytes(first));
         byte[] secondHash = SHA256.HashData(File.ReadAllBytes(unicode));
         string log = Path.Combine(run, "journal.jsonl");
-        var pointer = new PointerObservation(true, false);
+        var pointer = new PointerObservation(scenario != "heldGateIdle", scenario == "heldGateEscape");
+        bool requireHeld = scenario.StartsWith("heldGate", StringComparison.Ordinal);
         var paths = scenario switch
         {
             "outside" => [Path.Combine(run, "outside.txt")],
@@ -46,9 +51,12 @@ public sealed class NativeReceiverTests
         var data = new FixtureDataObject(paths, scenario != "unsupported");
         bool? pointerOverReceiver = scenario switch { "leaveAtReceiver" => true, "leaveUnknown" => null, _ => false };
         using (var target = new DragOverlay(fixtures, log, nativeTestMode: true, () => pointer,
-            isPointerOverReceiver: () => pointerOverReceiver))
+            isPointerOverReceiver: () => pointerOverReceiver, requireHeldActivation: requireHeld))
         {
-            target.Arm();
+            if (requireHeld && scenario != "heldGateButton") target.ActivateFromHotkey(pointer);
+            else target.Arm();
+            if (requireHeld)
+                Assert.Equal(scenario == "heldGateAllowed" ? InteractionState.AwaitingData : InteractionState.Idle, target.SessionState);
             if (scenario == "cancelIdle")
             {
                 string? status = null;
@@ -60,7 +68,8 @@ public sealed class NativeReceiverTests
             uint mask = scenario == "moveOnly" ? 2u : 7u;
             uint effect = mask;
             Assert.Equal(0, target.DragEnter(data, 1, default, ref effect));
-            bool rejected = scenario is "moveOnly" or "unsupported" or "outside" or "limit" or "cancelIdle";
+            bool rejected = scenario is "moveOnly" or "unsupported" or "outside" or "limit" or "cancelIdle"
+                or "heldGateIdle" or "heldGateEscape" or "heldGateButton";
             Assert.Equal(rejected ? 0u : 1u, effect);
             if (scenario == "cancel") target.Cancel();
             if (scenario == "leaveReenter")
@@ -101,7 +110,7 @@ public sealed class NativeReceiverTests
         }
         var events = File.ReadLines(log).Select(line => JsonDocument.Parse(line).RootElement.Clone()).ToArray();
         var drops = events.Where(e => e.GetProperty("name").GetString() == "DropAccepted").ToArray();
-        bool shouldAccept = scenario is "multiple" or "leaveReenter";
+        bool shouldAccept = scenario is "multiple" or "leaveReenter" or "heldGateAllowed";
         Assert.Equal(shouldAccept ? 1 : 0, drops.Length);
         if (shouldAccept)
         {
@@ -111,6 +120,8 @@ public sealed class NativeReceiverTests
         }
         Assert.Contains(events, e => e.GetProperty("name").GetString() == "RegisterDragDrop" && e.GetProperty("details").GetProperty("hr").GetInt32() == 0);
         Assert.Contains(events, e => e.GetProperty("name").GetString() == "RevokeDragDrop" && e.GetProperty("details").GetProperty("hr").GetInt32() == 0);
+        if (requireHeld && scenario != "heldGateAllowed")
+            Assert.Contains(events, e => e.GetProperty("name").GetString() == "ActivationDeclined");
         Assert.Equal(firstHash, SHA256.HashData(File.ReadAllBytes(first)));
         Assert.Equal(secondHash, SHA256.HashData(File.ReadAllBytes(unicode)));
         Assert.Equal(2, Directory.GetFiles(fixtures).Length);

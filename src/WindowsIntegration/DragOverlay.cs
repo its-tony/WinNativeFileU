@@ -19,6 +19,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly Func<PointerObservation> readPointer;
     private readonly Func<bool?> isPointerOverReceiver;
     private readonly PrototypeShortcuts shortcuts;
+    private readonly bool requireHeldActivation;
     private readonly InteractionSession session = new();
     private nint hwnd;
     private bool oleInitialized, registered, activationRegistered, rejectionRegistered, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
@@ -29,16 +30,19 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     public string ActivationLabel => shortcuts.ActivationLabel;
     public string RejectionLabel => shortcuts.RejectionLabel;
 
-    public DragOverlay(string fixtureRoot, string logPath, PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys)
-        : this(fixtureRoot, logPath, false, ReadPointer, profile) { }
+    public DragOverlay(string fixtureRoot, string logPath, PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys,
+        bool requireHeldActivation = false)
+        : this(fixtureRoot, logPath, false, ReadPointer, profile, requireHeldActivation: requireHeldActivation) { }
 
     // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
     // but neither register hotkeys nor show/move any desktop window.
     internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer,
-        PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys, Func<bool?>? isPointerOverReceiver = null)
+        PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys, Func<bool?>? isPointerOverReceiver = null,
+        bool requireHeldActivation = false)
     {
         shortcuts = PrototypeShortcuts.For(profile);
         this.nativeTestMode = nativeTestMode;
+        this.requireHeldActivation = requireHeldActivation;
         this.readPointer = readPointer;
         this.isPointerOverReceiver = isPointerOverReceiver ?? (nativeTestMode ? () => false : ObservePointerOverReceiver);
         root = Path.GetFullPath(fixtureRoot);
@@ -72,17 +76,37 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             activationRegistered = !nativeTestMode && Native.RegisterHotKey(hwnd, 8, shortcuts.Modifiers, shortcuts.ActivationKey);
             rejectionRegistered = !nativeTestMode && Native.RegisterHotKey(hwnd, 9, shortcuts.Modifiers, shortcuts.RejectionKey);
             Log("Hotkeys", new { profile = shortcuts.Name, activation = ActivationLabel, rejection = RejectionLabel,
-                activationRegistered, rejectionRegistered });
+                activationRegistered, rejectionRegistered, requireHeldActivation });
             if (!nativeTestMode && (!activationRegistered || !rejectionRegistered))
                 throw new Win32Exception($"{ActivationLabel}/{RejectionLabel} could not be registered; no hotkey is assumed available.");
-            Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString() });
+            if (!nativeTestMode) ObserveDisplays();
+            Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString(), requireHeldActivation });
         }
         catch { Dispose(); throw; }
     }
 
-    public void Arm() => Arm("button");
+    public void Arm()
+    {
+        AssertThread();
+        if (requireHeldActivation) { DeclineActivation("button", readPointer()); return; }
+        Arm("button");
+    }
 
-    private void Arm(string origin)
+    internal void ActivateFromHotkey(PointerObservation pointer)
+    {
+        AssertThread();
+        if (requireHeldActivation && !pointer.KeepReceiverAfterLeave)
+        { DeclineActivation("hotkey", pointer); return; }
+        Arm("hotkey", pointer);
+    }
+
+    private void DeclineActivation(string origin, PointerObservation pointer)
+    {
+        Log("ActivationDeclined", new { origin, pointer, reason = "HeldMouseHotkeyRequired" });
+        StatusChanged?.Invoke($"Validation mode: begin dragging first, keep the mouse held, then tap/release {ActivationLabel}. Button prearming is disabled.");
+    }
+
+    private void Arm(string origin, PointerObservation? activationPointer = null)
     {
         AssertThread();
         if (session.State != InteractionState.Idle)
@@ -104,13 +128,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         // First move while hidden so GetDpiForWindow reflects the cursor's monitor.
         Native.SetWindowPos(hwnd, -1, cursor.X, cursor.Y, 360, 160, 0x10);
         uint dpi = Native.GetDpiForWindow(hwnd);
-        int width = Math.Min((int)(360 * dpi / 96), info.Work.Right - info.Work.Left);
-        int height = Math.Min((int)(160 * dpi / 96), info.Work.Bottom - info.Work.Top);
-        int x = Math.Clamp(cursor.X - width / 2, info.Work.Left, info.Work.Right - width);
-        int y = Math.Clamp(cursor.Y - height / 2, info.Work.Top, info.Work.Bottom - height);
+        var placement = OverlayPlacement.Calculate(cursor.X, cursor.Y,
+            info.Work.Left, info.Work.Top, info.Work.Right, info.Work.Bottom, dpi);
+        var (x, y, width, height) = placement;
         if (!Native.SetWindowPos(hwnd, -1, x, y, width, height, 0x50)) { Finish("ShowFailed"); return; }
         Native.InvalidateRect(hwnd, 0, true);
-        Log("Armed", new { origin, profile = shortcuts.Name, before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, pointer = readPointer() });
+        Log("Armed", new { origin, profile = shortcuts.Name, before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, work = info.Work, requireHeldActivation, pointer = activationPointer ?? readPointer() });
         StatusChanged?.Invoke($"Target armed. Release {ActivationLabel}; drop only prepared fixtures.");
     }
 
@@ -275,6 +298,25 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     // Only two event-time signals; no polling or capture of arbitrary typing.
     private static PointerObservation ReadPointer() => new(Native.GetAsyncKeyState(1) < 0, Native.GetAsyncKeyState(0x1B) < 0);
 
+    private void ObserveDisplays()
+    {
+        var displays = new List<object>();
+        Native.MonitorEnumProc callback = (nint monitor, nint dc, ref Native.Rect rect, nint data) =>
+        {
+            var info = new Native.MonitorInfo { Size = (uint)Marshal.SizeOf<Native.MonitorInfo>() };
+            if (!Native.GetMonitorInfoW(monitor, ref info)) return true;
+            // Own hidden HWND only; no cursor movement, focus change or settings change.
+            bool moved = Native.SetWindowPos(hwnd, 0, info.Work.Left, info.Work.Top, 1, 1, 0x14);
+            displays.Add(new { monitor = info.Monitor, work = info.Work,
+                primary = (info.Flags & 1) != 0, dpi = moved ? Native.GetDpiForWindow(hwnd) : 0u });
+            return true;
+        };
+        bool enumerated = Native.EnumDisplayMonitors(0, 0, callback, 0);
+        Log("Displays", new { enumerated, displayCount = Native.GetSystemMetrics(80),
+            swappedButtons = Native.GetSystemMetrics(23) != 0, displays });
+        GC.KeepAlive(callback);
+    }
+
     private bool? ObservePointerOverReceiver()
     {
         if (!Native.GetCursorPos(out var cursor)) return null;
@@ -289,9 +331,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             if (msg == 0x312)
             {
                 if (wp is not (8 or 9)) return Native.DefWindowProcW(window, msg, wp, lp);
+                var pointer = readPointer();
                 Log("HotkeyReceived", new { id = (int)wp, profile = shortcuts.Name,
-                    shortcut = wp == 8 ? ActivationLabel : RejectionLabel, state = session.State.ToString(), pointer = readPointer() });
-                if (wp == 8) Arm("hotkey"); else Cancel();
+                    shortcut = wp == 8 ? ActivationLabel : RejectionLabel, state = session.State.ToString(), pointer,
+                    queuedLeftButtonDown = Native.GetKeyState(1) < 0,
+                    messageAgeMs = unchecked((uint)Environment.TickCount - (uint)Native.GetMessageTime()), requireHeldActivation });
+                if (wp == 8) ActivateFromHotkey(pointer); else Cancel();
                 return 0;
             }
             if (msg == 0x21) return 3; // MA_NOACTIVATE
