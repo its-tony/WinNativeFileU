@@ -9,5 +9,5 @@ Objetivo: Windows11 x64, archivos locales, gesto contextual con teclado y drop; 
 6. Operaciones futuras crearán resultados nuevos con colisiones explícitas, temporales y cancelación; no sobrescribir originales.
 7. Sin red de ejecución, telemetría de teclas, inyección ni APIs privadas. Startup opcional desactivado inicialmente.
 8. Coordenadas/DPI/monitores deben validarse; ofrecer modo enfocable de teclado y semántica UI Automation, alto contraste y movimiento reducido.
-Criterios todavía pendientes: recepción Explorer, pulsación durante drag, foco, Escape/abandono, múltiples Unicode, rechazo de formatos/efectos, hashes intactos. No hay números prometidos de latencia/CPU/memoria.
-Prioridad: validar gesto antes de radial/Acrylic o motores. Alternativa de baja fricción: armar destino antes de arrastrar. Ninguna de las dos está demostrada por M0.
+Criterios de aceptación: recepción Explorer, pulsación durante drag, foco, Escape/abandono, múltiples Unicode, rechazo de formatos/efectos y hashes intactos. El estado de ejecución se mantiene en [ESTADO.md](../ESTADO.md) y el [protocolo M1](verification/m1-manual-protocol.md); esta especificación R0 no constituye evidencia de validación. No hay números prometidos de latencia/CPU/memoria.
+Prioridad: validar gesto antes de radial/Acrylic o motores. Alternativa de baja fricción: armar destino antes de arrastrar, verificada parcialmente durante M1 según sus informes. M0 no demostró ninguno de los gestos.

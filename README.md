@@ -8,6 +8,8 @@ Current scope: **M1 feasibility prototype, partially verified**. A native OLE ta
 
 Latest M1 work: [reentry and native receiver tests](docs/reports/m1-resume.md). The final suite has 16 Core and 10 hidden native receiver cases. The receiver now permits reentry after Leave when the mouse button is observed held; F8/F9 diagnostics distinguish received and ignored activation. These tests do not replace the outstanding Explorer gesture validation.
 
+Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.
+
 Windows 11 x64; .NET SDK **10.0.402** (compatible 10.0.4xx patches allowed by global.json). Windows App SDK version is pinned in src/App/WinNativeFileU.App.csproj. Build tools may require Visual Studio/Windows SDK components; dependency restore uses NuGet.org. .NET and App SDK are development/runtime dependencies; REA, Ghidra and WSL are research tools only.
 
 The current checkout is shared with WSL through /mnt/j; do not create a duplicate checkout.

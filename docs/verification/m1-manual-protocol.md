@@ -1,0 +1,34 @@
+# M1 — protocolo de validación física
+
+Fecha: 2026-10-19, America/Guatemala (UTC-06:00). Solo M1; no habilita M2.
+
+Este protocolo separa el gesto humano, los callbacks del receptor y las comprobaciones de archivos. Los tests con IDataObject sintético no sustituyen estos ensayos. La automatización disponible bloquea el arrastre Explorer→otra ventana y no permite intercalar una tecla con el botón retenido; no repetir esa estrategia sin capacidad nueva.
+
+## Preparación y evidencia
+
+Usar `scripts/start-prototype.ps1`, conservar el `run.json` impreso y abrir **Open fixtures**. Confirmar `Ready`, STA, `RegisterDragDrop` hr0 y ambos hotkeys disponibles en el diario de ese run. Aceptar exclusivamente sus dos archivos desechables; no probar con documentos personales. El receptor registra rutas, no realiza copias ni conversiones.
+
+Antes de cada ensayo identificar el método de activación: botón, F8 antes del arrastre o F8 durante el arrastre. Empezar con el cuadro cerrado. No pulsar **Arm target** para el caso K1. Si ocurre algo distinto al procedimiento, registrar lo que se hizo realmente.
+
+Después de cada ensayo, conservar un snapshot nuevo del diario append-only y ejecutar `scripts/check-prototype-files.ps1 -RunFile <run.json>`. Exigir nombres, cantidad, tamaños y SHA256 iguales al baseline. Referenciar el check y snapshot originales mediante hash; no publicar rutas personales, handles ni capturas. Registrar resultado en tracker/experimentos/hipótesis/estado.
+
+## Matriz de aceptación
+
+| ID | Procedimiento físico | Evidencia necesaria y límites |
+|---|---|---|
+| B1 | Armar con el botón antes de arrastrar ambos fixtures; soltar dentro del cuadro. | Ya verificado en dos ensayos: Enter/Over/DropAccepted count2, COPY1, Unicode y originales intactos. No satisface K1. |
+| K1 | Seleccionar ambos fixtures en Explorer; iniciar arrastre; sin soltar el ratón, pulsar y soltar F8; mover ligeramente dentro del cuadro y soltar allí. | Reporte humano confirma orden y liberación de tecla manteniendo el arrastre. Diario nuevo: HotkeyReceived id8 con LeftButtonDown=true → Armed → Enter/Over → DropAccepted count2/COPY1. Foreground antes=después, target permanece después de soltar F8, originales intactos. El estado instantáneo del botón solo no demuestra el gesto; correlacionarlo con reporte y callbacks. |
+| C1 | Durante otro arrastre dentro del receptor, pulsar Escape antes de soltar el ratón. | Propietario confirma desaparición del indicador de arrastre y fin del origen. Diario sin DropAccepted para ese ensayo, cierre propio y hashes intactos. Leave solo no prueba Escape ni cancelación global. |
+| C2 | Durante otro arrastre dentro del receptor, pulsar F9 y soltar sobre él. | HotkeyReceived id9 → CancelLatched → DropRejected → fin propio; sin DropAccepted y originales intactos. El callback devuelve NONE según código/tests nativos; el evento DropRejected actual no registra ese valor y no se presenta como medición nueva del efecto. F9 rechaza el receptor; no se afirma cancelación del origen por pulsarlo. |
+| R1 | Entrar con ambos fixtures; salir del cuadro manteniendo el ratón pulsado; volver a entrar y soltar dentro. | Leave con botón abajo, receptor conservado, nueva entrada y un único DropAccepted count2/COPY1; hashes intactos. No basta la prueba sintética de reentrada. |
+| O1 | Entrar y salir manteniendo el arrastre; soltar únicamente sobre el fondo del host WinNativeFileU, fuera del cuadro receptor. | Corroborar destino físico y ausencia de aceptación/operación; hashes intactos. Puede quedar el cuadro visible hasta F9/cierre, limitación conocida. No soltar en escritorio, otras carpetas ni aplicaciones. |
+| D1 | Repetir K1 en cada configuración de monitor/DPI realmente disponible. | Registrar DPI, rectángulo dentro del área útil, foreground y recepción correcta por configuración. No cambiar ajustes globales ni afirmar compatibilidad con monitores ausentes. |
+| L1 | Cerrar normalmente el host cuando terminen los ensayos. | RevokeDragDrop hr0 en snapshot final y ausencia de la ventana observada. Esto no es una auditoría completa de recursos ni prueba por sí solo que todos los hotkeys se liberaron. |
+
+## Interpretación y cierre
+
+Si F8 no muestra el cuadro, cancelar el origen con Escape antes de seguir. Examinar si hubo HotkeyReceived/Armed/ArmIgnored y el reporte físico antes de cambiar código o repetir. Dos fallos equivalentes cierran la estrategia; reapertura solo con evidencia nueva.
+
+Si hay recepción pero faltan los eventos/condiciones de K1, conservar el logro con su alcance real y dejar K1 pendiente. No convertir documentación de APIs o una compilación correcta en evidencia del gesto.
+
+M1 permanece parcial mientras falten los criterios físicos requeridos. Mantener explícitas las configuraciones no disponibles y los defectos observados. Ningún resultado de este protocolo autoriza M2, push o release.

@@ -87,7 +87,7 @@
     },
     {
       "id": "M1_DESKTOP",
-      "state": "BLOQUEADO",
+      "state": "EN_PROGRESO",
       "evidence": [
         "evidence\\private\\m1-launch-01.json",
         "evidence\\private\\m1-startup-failure-01.jpg",
@@ -100,13 +100,15 @@
         "evidence\\private\\m1-resume-launch-02.json",
         "evidence\\private\\m1-resume-final-ui-snapshot.jsonl",
         "evidence\\private\\m1-resume-delivery-snapshot.jsonl",
-        "evidence\\private\\m1-batch-result-01.json"
+        "evidence\\private\\m1-batch-result-01.json",
+        "evidence\\private\\m1-oct19-launch-01.json",
+        "evidence\\private\\m1-oct19-ready-result-01.json"
       ],
-      "attempts": 12,
+      "attempts": 13,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Batch receipt verified with Arm target; full M1 still awaits F8 during drag/key release, real cancellation/reentry/outside ending and DPI matrix. Cross-window tool restriction unchanged; no equivalent retry"
+      "next_step": "Fresh Oct19 session Ready/STA/Register0/F8F9true; correct new Explorer fixtures observed and hashes intact. Owner asked K1 without Arm target. Await physical result; no new hotkey/drag callback at snapshot, no blocked automation retry"
     },
     {
       "id": "M1_REVIEW",
@@ -174,6 +176,19 @@
       "success_criterion": "Reviewed batch-result documentation; original evidence remains ignored",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Path policy/diff checks exit0; manually reviewed actual button activation scope, two count2 COPY drops and original hashes. Private evidence excluded; code unchanged, prior26test result retained"
+    },
+    {
+      "id": "M1_PROTOCOL_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-protocol-review-01.json",
+        "evidence\\private\\m1-protocol-review-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Reviewed physical M1 protocol with evidence conditions and current manual-session status",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Path/whitespace policy passes; manually reviewed procedure distinction, actual logged fields and pending human K1. Originals ignored; no code changes or test rerun"
     }
   ],
   "history": [
@@ -699,6 +714,62 @@
       "evidence": "evidence\\private\\m1-batch-review-01.json",
       "sha256": "f1ecb1a5e586a39dd435644201f2abd7bae0df5d6fb27a2a41da0782ec814e12",
       "note": "Path policy/diff checks exit0; manually reviewed actual button activation scope, two count2 COPY drops and original hashes. Private evidence excluded; code unchanged, prior26test result retained"
+    },
+    {
+      "at": "2026-10-19T14:22:32.472291-06:00",
+      "id": "M1_DESKTOP",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-oct19-previous-final.jsonl",
+      "sha256": "764ce0cfd849e6a76627d66ea6038e049fa92848115c7d083e38ca5249f1fe9c",
+      "note": "Owner asks to continue on Oct19; new prior-session journal confirms RevokeDragDrop0. Prepare fresh manual F8-during-drag attempt; no repeated cross-process automation"
+    },
+    {
+      "at": "2026-10-19T14:22:40.131570-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:22:41.355634-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 13,
+      "evidence": "evidence\\private\\m1-oct19-launch-01.json",
+      "sha256": "ced0f25e06d39b6592b2e67070a1cf1ef3f401ec83c63099ee88864644d27d72",
+      "note": "Launch fresh fixture-only manual F8 session using existing26-test build; no changed code or equivalent automation retry"
+    },
+    {
+      "at": "2026-10-19T14:25:10.239302-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 13,
+      "evidence": "evidence\\private\\m1-oct19-ready-result-01.json",
+      "sha256": "db9245c2d0499277da6f841a23d4f55eb8a3f7f42104b6135017af7ec0aeddc5",
+      "note": "Fresh Oct19 session Ready/STA/Register0/F8F9true; correct new Explorer fixtures observed and hashes intact. Owner asked K1 without Arm target. Await physical result; no new hotkey/drag callback at snapshot, no blocked automation retry"
+    },
+    {
+      "at": "2026-10-19T14:25:41.479270-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:25:41.870288-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-protocol-review-01.json",
+      "sha256": "a0a3b79cd092a8cb3d90c2d4e09a82c0fa7b42211f54a9f846be43570769dd69",
+      "note": "Review physical acceptance protocol and Oct19 readiness docs, code unchanged; owner K1 result pending"
+    },
+    {
+      "at": "2026-10-19T14:26:02.772568-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-protocol-review-01.json",
+      "sha256": "a0a3b79cd092a8cb3d90c2d4e09a82c0fa7b42211f54a9f846be43570769dd69",
+      "note": "Path/whitespace policy passes; manually reviewed procedure distinction, actual logged fields and pending human K1. Originals ignored; no code changes or test rerun"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-18 America/Guatemala",
+  "date": "2026-10-19 America/Guatemala",
   "scope": "M1 resume; M2 not started",
   "milestone_acceptance": "partial",
   "build_exit_code": 0,
@@ -40,7 +40,10 @@
     "m1-resume-final-ui-snapshot.jsonl": "0517e79655a97881d42c14eccfacd5e1b5b185ce9253a5475027ca3946874d3e",
     "m1-batch-drop-snapshot-01.jsonl": "d20f77221ddd0c28d72c1f23639a2d1645824b2b9ddabc5f2e27508e0baa1275",
     "m1-batch-operator-01.json": "91c2e33ac4bc98b00c3ec36be331979b6e7fb5e6c5e2d240b31436dcbff59d8d",
-    "m1-batch-result-01.json": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577"
+    "m1-batch-result-01.json": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577",
+    "m1-oct19-previous-final.jsonl": "764ce0cfd849e6a76627d66ea6038e049fa92848115c7d083e38ca5249f1fe9c",
+    "m1-oct19-ready-01.jsonl": "5badf76e85de33862198cb743adf4c0a43481c1e9f6189b77f73fe9f44a13330",
+    "m1-oct19-ready-result-01.json": "db9245c2d0499277da6f841a23d4f55eb8a3f7f42104b6135017af7ec0aeddc5"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -59,5 +62,17 @@
     "effect_name": "COPY; prototype records paths without copying files",
     "original_names_lengths_sha256_unchanged": true,
     "F8_during_drag_verified": false
+  },
+  "manual_session_oct19": {
+    "prior_session_closed_with_revoke_hr": 0,
+    "fresh_session_ready": true,
+    "STA": true,
+    "RegisterDragDrop_hr": 0,
+    "F8_registered": true,
+    "F9_registered": true,
+    "fixture_names_lengths_sha256_unchanged": true,
+    "K1_physical_result": "pending owner gesture; no new hotkey/drag callbacks at readiness snapshot",
+    "code_changes": false,
+    "tests_rerun": false
   }
 }
