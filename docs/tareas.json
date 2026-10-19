@@ -114,13 +114,16 @@
         "evidence\\private\\m1-cleanup-escape-result-01.json",
         "evidence\\private\\m1-cleanup-reentry-result-01.json",
         "evidence\\private\\m1-cleanup-reentry-result-02.json",
-        "evidence\\private\\m1-reject-outside-result-01.json"
+        "evidence\\private\\m1-reject-outside-result-01.json",
+        "evidence\\private\\m1-held-launch-01.json",
+        "evidence\\private\\m1-held-ready-result-01.json",
+        "evidence\\private\\m1-held-doc-review-01.json"
       ],
-      "attempts": 19,
+      "attempts": 20,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Owner confirms C2/O1;2rejections Tracking held -> latch -> Leave mouse-up over receiver,0accepted per rejection; outside Leave -> idle close,0accepted in final outside session. Separate accepted control retained. Names/lengths/SHA256 intact. Normal host close Revoke0 and subsequent window absent. No physical DropRejected observed; timing and other DPI limits remain, no identical repeated physical test or M2."
+      "next_step": "Reviewed new bounded diagnostic source5d9c9d9 and42passed Windows tests. Real idle control declines and prearm disabled; one available display DPI144 observed. K1G human trial requested with fresh fixtures; preserve old ambiguity and do not mark complete or begin M2 until correlation. Owner authorization to proceed after completion persisted."
     },
     {
       "id": "M1_REVIEW",
@@ -274,6 +277,19 @@
       "success_criterion": "Review minimal Leave cleanup, expected red then29green tests and scoped physical evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Reviewed one-shot own-HWND hit-test, fail-closed unknown location,29green after2expected red cases, and2real Escape closures. No source cancellation interception; private artifacts excluded and diff/path checks pass"
+    },
+    {
+      "id": "M1_FINAL_BUILD",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-final-build-01.json",
+        "evidence\\private\\m1-final-build-01.json"
+      ],
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "success_criterion": "Windows locked build and held-activation gate/native fixture/placement regressions pass; no Explorer claim from tests",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Locked restore/build0,0warnings/errors;42passed:16Core+16hidden native receiver+1profile+9placement. Gate denies idle/Escape/button prearm and rejects late drops; held case accepts. Geometry scales/extreme coordinates tested synthetically; Explorer/display runtime still pending."
     }
   ],
   "history": [
@@ -1223,6 +1239,63 @@
       "evidence": "evidence\\private\\m1-reject-outside-result-01.json",
       "sha256": "02fddeff53ae23af058c1fcf0c46daa489f703a21f1a28998e2c683796ddc2f7",
       "note": "Owner confirms C2/O1;2rejections Tracking held -> latch -> Leave mouse-up over receiver,0accepted per rejection; outside Leave -> idle close,0accepted in final outside session. Separate accepted control retained. Names/lengths/SHA256 intact. Normal host close Revoke0 and subsequent window absent. No physical DropRejected observed; timing and other DPI limits remain, no identical repeated physical test or M2."
+    },
+    {
+      "at": "2026-10-19T15:38:16.086392-06:00",
+      "id": "M1_FINAL_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T15:38:42.786266-06:00",
+      "id": "M1_FINAL_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-final-build-01.json",
+      "sha256": "2f1f09108337a04386c0a3c93cc679e70ce027693929f37e7eb53779d34cc057",
+      "note": "Build changed held-activation gate and placement/display diagnostics; inspect actual results before native or Explorer claims"
+    },
+    {
+      "at": "2026-10-19T15:39:04.720461-06:00",
+      "id": "M1_FINAL_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-final-build-01.json",
+      "sha256": "2f1f09108337a04386c0a3c93cc679e70ce027693929f37e7eb53779d34cc057",
+      "note": "Locked restore/build0,0warnings/errors;42passed:16Core+16hidden native receiver+1profile+9placement. Gate denies idle/Escape/button prearm and rejects late drops; held case accepts. Geometry scales/extreme coordinates tested synthetically; Explorer/display runtime still pending."
+    },
+    {
+      "at": "2026-10-19T15:39:08.000650-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T15:39:08.710164-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 20,
+      "evidence": "evidence\\private\\m1-held-launch-01.json",
+      "sha256": "3513a2a7c3465ca89289cd07324cda0c6883613ec06af6441347956ebbd52396",
+      "note": "Launch changed validation gate Letters with fresh fixtures; inspect Ready/displays and perform idle-decline control before new physical K1G"
+    },
+    {
+      "at": "2026-10-19T15:40:51.579442-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 20,
+      "evidence": "evidence\\private\\m1-held-ready-result-01.json",
+      "sha256": "97e932638fc60cf89f8da910c334f4762cb2f970245381ebd015f1dfc9c72a68",
+      "note": "New gate runtime Ready/STA/Register0/Letters pair registered; idle hotkey declined with no Armed, Arm button disabled. One display enumerated DPI144, no swapped buttons.42tests pass, fresh originals intact. Discriminating human K1G requested; M2 gated on actual completion."
+    },
+    {
+      "at": "2026-10-19T15:42:54.230684-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 20,
+      "evidence": "evidence\\private\\m1-held-doc-review-01.json",
+      "sha256": "f6d2366a039f2f0ad1c58f3c2e4bcfedb5b3b77ce2a383722c51d96439062a00",
+      "note": "Reviewed new bounded diagnostic source5d9c9d9 and42passed Windows tests. Real idle control declines and prearm disabled; one available display DPI144 observed. K1G human trial requested with fresh fixtures; preserve old ambiguity and do not mark complete or begin M2 until correlation. Owner authorization to proceed after completion persisted."
     }
   ]
 }

@@ -6,7 +6,7 @@ Current scope: **M1 feasibility prototype, partially verified**. A native OLE ta
 
 ## Development
 
-Latest M1 work: [receiver tests and cleanup](docs/reports/m1-resume.md). The latest suite passed 16 Core cases and 13 integration cases (12 hidden native receiver cases plus invalid shortcut-profile rejection). Letters passed keyboard controls and owner batch drops with unchanged originals. The cleanup build passed two real reentry sessions, two owner Escape trials and two receiver rejections ending in Leave without accepted drops. Outside release kept the receiver visible until explicit rejection, a documented limitation. The host then closed normally with RevokeDragDrop hr0 and its window absent. No code changed after the 29-test build; subsequent work records physical evidence and limitations.
+Latest M1 work: [receiver tests and cleanup](docs/reports/m1-resume.md). The latest Windows build passed **42 tests**:16 Core and26 integration (16 hidden native receiver cases,1 profile case and9 placement cases). The new optional held-mouse gate rejects idle/Escape/button prearming and late drops after a declined activation; its Explorer trial is pending. The prior cleanup build passed real reentry, Escape and receiver rejection trials with unchanged originals. Outside release kept the receiver visible until explicit rejection, a documented limitation. That host closed normally with RevokeDragDrop hr0 and its window absent.
 
 Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.
 
@@ -46,6 +46,14 @@ pwsh -NoProfile -File scripts/start-prototype.ps1 -ShortcutProfile Letters
 
 Letters registers **Ctrl+Alt+D** to show the receiver and **Ctrl+Alt+X** to reject/close. The window and journal display the selected bindings; registration failure disables the prototype. This uses the same public RegisterHotKey API, with no input hooks or polling. Selection happens at launch, with only these two predefined profiles.
 
+To validate activation timing with prearming disabled:
+
+```powershell
+pwsh -NoProfile -File scripts/start-prototype.ps1 -ShortcutProfile Letters -RequireHeldActivation
+```
+
+This mode opens only when the activation hotkey observes the physical left mouse button held and Escape released. The Arm button is disabled. A held button alone is not proof of an OLE drag; correlate the owner gesture, hotkey/Armed sample and subsequent real Explorer callbacks. It is a diagnostic mode; the default still allows prearming. Startup logs available display work areas/DPI using only the app's hidden HWND. Queue state and message-age hints are logged only for the two registered actions, without arbitrary key capture. See [ADR0006](docs/decisions/0006-m1-held-activation-validation.md).
+
 Use **Open fixtures**, then the displayed activation shortcut to show the receiver near the cursor. Only that run's fixture directory is accepted. The rejection shortcut closes while idle; during a drag inside it latches rejection until Drop/Leave instead of exposing another destination. Escape is handled by the drag source; a logged DragLeave alone cannot prove Escape cancellation. Close the prototype window to revoke OLE and hotkeys. A successful automated shortcut control does not verify physical keyboard delivery or activation during an Explorer drag.
 
 The receiver records accepted paths; it does not copy, move or convert files. COPY/NONE are negotiated OLE effects. Keep every original journal under evidence/private; do not publish screenshots or identifiers. Validate after a trial with scripts/check-prototype-files.ps1 -RunFile followed by the run.json path printed by the launcher. Do not interpret success of the launcher as readiness; check the window and Ready journal event.
@@ -69,5 +77,6 @@ No conversion engine project is included.
 Start with [research overview](docs/research/tangerine/overview.md), [sources](docs/research/tangerine/sources.md), [independent specification](docs/functional-specification.md) and [Windows feasibility](docs/research/tangerine/feasibility.md).
 
 R0 → M0 foundation → M1 actual Windows drag feasibility → M2 radial UI → M3 conversion → M4 background integration → M5 beta. **Do not begin the next milestone without the owner's instruction.** Unit tests and a successful build cannot prove an Explorer gesture.
+The owner authorized completing M1 and then proceeding to M2 on2026-10-19; M2 remains gated on M1 verification.
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [MIT license](LICENSE)

@@ -1,7 +1,7 @@
 # Estado — WinNativeFileU
 Actualizado: 2026-10-19, America/Guatemala (UTC-06:00).
 
-**M1 parcial. No avanzar a M2.** El propietario autorizó continuar M1; R0/M0 se conservan en sus informes y commits.
+**M1 parcial; M2 autorizado después de verificar M1.** El propietario indicó el19 terminar M1 y después continuar M2. R0/M0 se conservan en sus informes y commits.
 
 - Implementado y conservado en bc5fd96: reentrada tras Leave con botón observado abajo, diagnósticos F8/F9/ArmIgnored, estado accesible y texto correcto tras F9. No hooks, polling ni conversores.
 - Última compilación real Windows: m1-cleanup-green-01.json, locked restore, salida0,0 advertencias/errores.29tests aprobados:16Core+12receptor nativo+1rechazo temprano de perfil inválido. Los12 usan HWND/STA/Register/Revoke/HGLOBAL reales y callbacks directos con datos/observaciones sintéticos; no bucle origen Explorer ni entrada inyectada.
@@ -21,5 +21,6 @@ Actualizado: 2026-10-19, America/Guatemala (UTC-06:00).
 - Cierre normal actual verificado: Alt+F4 sobre el host → RevokeDragDrop hr0 a15:12:46 y ventana ausente en consulta posterior; primera lista aún lo mostraba durante cierre asíncrono. Check posterior salida0, nombres/tamaños/SHA256 intactos. No auditoría universal de recursos/hotkeys.
 
 Originales: evidence/private/m1-native-{build,core,receiver}-03.*, native-tests/, m1-resume-*.jsonl y diarios/checks de cada run. Resumen revisado docs/verification/m1-resume.json; informe docs/reports/m1-resume.md.
-Próximo paso M1: analizar la discrepancia entre cronología humana y muestra de botón al activar antes de proponer otro K1; documentar y probar otras configuraciones solo si están disponibles. Host cerrado normalmente. C2/O1/reentrada/Escape ya correlacionados, sin pedir repeticiones idénticas. No repetir build sin cambio/fallo nuevo, F8 físico ni automatización cruzada sin evidencia nueva. M1 parcial, sin M2.
+Última suite ampliada: m1-final-build-01.json salida0,0advertencias/errores,42aprobadas:16Core+16receptor nativo oculto+1perfil+9geometría. TRX inmutables m1-final-core-01.trx/m1-final-integration-01.trx. Nuevo run Ready/STA/Register0/Letters registrados/RequireHeldActivation=true; botón Arm deshabilitado y control hotkey con botón suelto produce ActivationDeclined sin Armed. Inventario real: una pantalla, DPI144, botones no intercambiados. Otras escalas solo tienen pruebas numéricas, sin validación física. Archivos intactos y Explorer nuevo confirmado. Snapshot m1-held-ready-01.jsonl y resultado m1-held-ready-result-01.json.
+Próximo experimento M1: correlacionar ensayo K1G ya solicitado con el modo discriminante según ADR0006. Se exige apertura mediante muestra retenida, luego Enter/Over con teclas liberadas y recepción real; no se ha verificado todavía ese ensayo ni se atribuye causa a la discrepancia anterior. C2/O1/reentrada/Escape anteriores ya correlacionados. No repetir F8 físico ni automatización cruzada sin evidencia nueva. M2 queda pendiente del cierre verificado de M1.
 CI configurada, sin ejecución remota; sin push/release ni modificación de licencia. Logs/fixtures/binarios fuera de Git.

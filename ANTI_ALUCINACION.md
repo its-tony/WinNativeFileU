@@ -3,4 +3,4 @@ Use evidence labels and exact scope: OBSERVED (name the observed surface), STATI
 Never invent tool versions, artifacts, native execution, builds, tests, performance, or compatibility. Keep commands, exit codes, timestamps with America/Guatemala offset, provenance and hashes in evidence/private; publish reviewed summaries only.
 Two equivalent failures close a strategy. Use scripts/task_tracker.py; reopening requires new evidence and a reason. Do not erase failed evidence.
 No proprietary source/assets in implementation or Git. No DRM/licensing/access-control bypass. No Explorer injection, keylogging, private APIs or elevation requirement for the product. Originals are read-only by default. No destructive/irreversible changes without specific authorization.
-Scope updated by owner on 2026-10-18: M1 minimal Explorer drag/drop feasibility prototype and local tests/commits are authorized. No M2, conversion engine, final radial UI, push or release.
+Scope updated by owner on 2026-10-19: finish and verify M1 first, then proceed to M2 radial UI. Local tests/commits authorized. M2 is gated on M1 completion; no conversion engine, push or release.

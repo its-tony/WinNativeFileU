@@ -13,14 +13,20 @@
       "notExecuted": 0
     },
     "native_receiver": {
-      "total": 12,
-      "passed": 12,
+      "total": 16,
+      "passed": 16,
       "failed": 0,
       "notExecuted": 0
     },
     "profile_validation": {
       "total": 1,
       "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "placement": {
+      "total": 9,
+      "passed": 9,
       "failed": 0,
       "notExecuted": 0
     }
@@ -33,8 +39,7 @@
   ],
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
   "pending": [
-    "Independent timing corroboration of owner-confirmed shortcut activation during drag; improve diagnostics before repeating K1",
-    "Other DPI/monitor configurations: only DPI144 exercised; no compatibility claim for untested configurations"
+    "K1G physical Explorer trial with held-activation gate: held sample shared by hotkey/Armed, keys released while drag persists, count2 COPY drop, focus/hash preservation"
   ],
   "evidence_sha256": {
     "m1-native-build-03.json": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
@@ -83,7 +88,15 @@
     "m1-reentry-review-01.json": "8e5a7aa1803eb5b34766761f5ec12b4066e3b16bca7b1e129c5a1fd8a32a96cd",
     "m1-reject-outside-final-01.jsonl": "7d26878ca03b1a35b9212d30a3ea1779040c5ac122bca4a22c992d3ad2905953",
     "m1-reject-outside-result-01.json": "02fddeff53ae23af058c1fcf0c46daa489f703a21f1a28998e2c683796ddc2f7",
-    "m1-reject-outside-review-01.json": "7adb33f191a795f3a8636066228a57f6c20a08c9d86372a67894193897f39c16"
+    "m1-reject-outside-review-01.json": "7adb33f191a795f3a8636066228a57f6c20a08c9d86372a67894193897f39c16",
+    "m1-final-plan-01.json": "783dc7df29b0d27fb67fae120c52f6da94b51277b8aeb035f3b8102da725927c",
+    "m1-final-build-01.json": "2f1f09108337a04386c0a3c93cc679e70ce027693929f37e7eb53779d34cc057",
+    "m1-final-core-01.trx": "e108f4dfc94e35db463dad6cc28adf591458d6eeb4376475910a754d86f3d537",
+    "m1-final-integration-01.trx": "312eea83e520e1bbd3340e10cde0eb26278f09de9c591c25095340967baa90d6",
+    "m1-held-ready-01.jsonl": "d73dcda7c13846abd5f88cf8b0c32d9674159ee0a73697d6a5301a6c42be7121",
+    "m1-held-ready-result-01.json": "97e932638fc60cf89f8da910c334f4762cb2f970245381ebd015f1dfc9c72a68",
+    "m1-held-code-review-01.json": "58fbb6d8df3c6b8faa12e41f4a0a4678eef04162861afed69cffa9c249afa654",
+    "m1-held-doc-review-01.json": "f6d2366a039f2f0ad1c58f3c2e4bcfedb5b3b77ce2a383722c51d96439062a00"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -127,9 +140,9 @@
     "automated_F8_F9_control_after_physical_reports": "passed in same run; foreground preserved, DPI144",
     "closed_with_RevokeDragDrop_hr": 0
   },
-  "current_build_evidence": "m1-cleanup-green-01.json",
-  "tests_total": 29,
-  "windows_integration_project_total": 13,
+  "current_build_evidence": "m1-final-build-01.json",
+  "tests_total": 42,
+  "windows_integration_project_total": 26,
   "letters_profile": {
     "selection": "start-prototype.ps1 -ShortcutProfile Letters",
     "registered_pair_only": [
@@ -246,5 +259,31 @@
     "original_names_lengths_sha256_unchanged": true,
     "source_code_changed": false,
     "tests_rerun": false
+  },
+  "scope_authorization": "Owner2026-10-19: finish verified M1 first, then proceed to M2. No M2 implementation yet, no push/release.",
+  "held_activation_validation": {
+    "source_commit": "5d9c9d9",
+    "optional": true,
+    "launcher_flag": "-RequireHeldActivation",
+    "profile": "Letters",
+    "prearm_button": "disabled, observed",
+    "idle_hotkey": "real automated control declined; no Armed",
+    "shared_hotkey_and_Armed_sample": true,
+    "activation_gate": "physical left button observed held, Escape observed released",
+    "source_drag_detection": "not inferred from button alone; require owner gesture and real Explorer callbacks",
+    "queue_diagnostics": "left button and message age only when registered action arrives; no arbitrary key logging, hooks or polling; hints not cause proof",
+    "native_regressions": "held allowed; idle/Escape/button prearming denied, late drops rejected",
+    "geometry_regressions": 9,
+    "physical_K1G": "requested, awaiting result correlation",
+    "current_display_inventory": {
+      "enumerated": true,
+      "display_count": 1,
+      "dpi": [
+        144
+      ],
+      "swapped_buttons": false
+    },
+    "other_scales": "numeric geometry tests only; no physical claim or Windows setting change",
+    "originals_unchanged_before_trial": true
   }
 }
