@@ -5,6 +5,7 @@
   <Folder Name="/src/">
     <Project Path="src/App/WinNativeFileU.App.csproj" />
     <Project Path="src/Core/WinNativeFileU.Core.csproj" />
+    <Project Path="src/WindowsIntegration/WinNativeFileU.WindowsIntegration.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Core.Tests/WinNativeFileU.Core.Tests.csproj" />

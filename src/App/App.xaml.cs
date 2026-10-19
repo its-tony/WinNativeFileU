@@ -10,7 +10,7 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        window = new MainWindow();
+        window = new MainWindow(Environment.GetCommandLineArgs());
         window.Activate();
     }
 }
