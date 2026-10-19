@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-18 America/Guatemala",
+  "milestone": "M1",
+  "acceptance": "partial; not complete",
+  "build": {
+    "exit_code": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "tests": {
+    "passed": 16,
+    "failed": 0
+  },
+  "native_registration": {
+    "OleInitialize": 0,
+    "RegisterDragDrop": 0,
+    "apartment": "STA",
+    "F8": true,
+    "F9": true
+  },
+  "verified_scope": [
+    "one Unicode file received from Explorer with prearmed target",
+    "F8 activation before drag preserved foreground",
+    "fixture names sizes SHA256 unchanged"
+  ],
+  "observed_dpi": 144,
+  "event_counts": {
+    "OleInitialize": 1,
+    "WindowClassRegistered": 1,
+    "WindowCreated": 1,
+    "RegisterDragDrop": 1,
+    "Hotkeys": 1,
+    "Ready": 1,
+    "Armed": 2,
+    "DragEnter": 2,
+    "DragOver": 2,
+    "DropAccepted": 1,
+    "SessionEnded": 3,
+    "DragLeave": 1
+  },
+  "pending": [
+    "F8 during active Explorer drag",
+    "key release while retaining drag",
+    "multiple selection",
+    "safe Escape/F9 source termination",
+    "outside/reentry behavior",
+    "mixed DPI and monitors",
+    "graceful final shutdown"
+  ],
+  "automation_limit": "cross-window drag rejected before input; later physical Escape stopped Computer Use",
+  "private_evidence_sha256": {
+    "m1-build-03.json": "342f82f6670e1faceb4260257928844bc76ddb1ccad14e12356bd08d9309a2a4",
+    "m1-core-tests-03.trx": "2790bc7b82644e0184b1e2a4cc2e876f1c782dc0132ab45c743d3fe679317174",
+    "m1-final-desktop-snapshot.jsonl": "eb4c635333b828afbfd3ae12e6f07aba776516b03daf9888a5008643a90b35a4",
+    "m1-automation-boundary-01.json": "f68d8e8d3060ec4781ec3800371fcf6b1326cb627d622187c9cc8a73b456f72e",
+    "m1-interruption-01.json": "927abd2859ca105bbcc57c2250af6983de835ac20b439e99415ee4dc7cdbbc5a"
+  }
+}

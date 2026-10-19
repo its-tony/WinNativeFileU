@@ -4,15 +4,16 @@
   "tasks": [
     {
       "id": "R0",
-      "state": "EN_PROGRESO",
+      "state": "VERIFICADO",
       "evidence": [
-        "evidence\\private\\web-observation.json"
+        "evidence\\private\\web-observation.json",
+        "docs\\reports\\r0-m0.md"
       ],
       "attempts": 1,
       "equivalent_failures": 0,
       "success_criterion": "Research delivered with bounded findings",
       "abandon_condition": "Two equivalent failures; require new evidence to reopen",
-      "next_step": "Public simulation observed; native acquisition blocked; Windows feasibility documentation in progress"
+      "next_step": "Reconcile inherited task state with already delivered public research in e519edd/77b5ce6; no new native claim or repeated investigation"
     },
     {
       "id": "SDK",
@@ -70,33 +71,50 @@
     },
     {
       "id": "M1_BUILD",
-      "state": "PENDIENTE",
-      "evidence": [],
-      "attempts": 0,
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-build-01.json",
+        "evidence\\private\\m1-build-02.json",
+        "evidence\\private\\m1-build-02.json",
+        "evidence\\private\\m1-build-03.json",
+        "evidence\\private\\m1-build-03.json"
+      ],
+      "attempts": 3,
       "equivalent_failures": 0,
       "success_criterion": "Build native overlay and regression tests",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "M1 authorized by owner; no M2"
+      "next_step": "Corrected native-handle journal compiled with16passing tests and0warnings0errors"
     },
     {
       "id": "M1_DESKTOP",
-      "state": "PENDIENTE",
-      "evidence": [],
-      "attempts": 0,
-      "equivalent_failures": 0,
+      "state": "BLOQUEADO",
+      "evidence": [
+        "evidence\\private\\m1-launch-01.json",
+        "evidence\\private\\m1-startup-failure-01.jpg",
+        "evidence\\private\\m1-launch-02.json",
+        "evidence\\private\\m1-66337950ff28484380a659be85642b25\\events.jsonl",
+        "evidence\\private\\m1-ready-armed-snapshot.jsonl",
+        "evidence\\private\\m1-single-drop-snapshot.jsonl",
+        "evidence\\private\\m1-final-desktop-snapshot.jsonl"
+      ],
+      "attempts": 7,
+      "equivalent_failures": 1,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "M1 authorized by owner; no M2"
+      "next_step": "Partial: one Unicode DropAccepted verified; later Enter Over Leave without Drop. Cross-window automation rejected and physical Escape stopped Computer Use. Full ideal gesture/multiple/Escape outcome require new desktop session"
     },
     {
       "id": "M1_REVIEW",
-      "state": "PENDIENTE",
-      "evidence": [],
-      "attempts": 0,
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m1-review-01.json",
+        "evidence\\private\\m1-review-01.json"
+      ],
+      "attempts": 1,
       "equivalent_failures": 0,
       "success_criterion": "Review privacy, documentation and small local commits",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "M1 authorized by owner; no M2"
+      "next_step": "Reviewed source/docs; path policy/diff checks pass and private logs fixtures screenshots SDK/binaries excluded; M1 desktop acceptance stays blocked"
     }
   ],
   "history": [
@@ -242,6 +260,185 @@
       "evidence": "evidence\\private\\review-02.json",
       "sha256": "fc414f6c084cfb3439941b0bdb1b0574d08000e491091117621f4a74e0d4228c",
       "note": "Candidate path policy and required research passed; manual source/docs reviewed; private SDK/research/bin/TRX ignored; no credential-pattern matches"
+    },
+    {
+      "at": "2026-10-18T18:46:23.119225-06:00",
+      "id": "M1_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:46:50.485615-06:00",
+      "id": "M1_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-build-01.json",
+      "sha256": "0c6802292443c35b8eb81d5e7966c35abb8f15274485796817768d893a7541b4",
+      "note": "Compile own HWND OLE target and policy regressions, no M2 UI"
+    },
+    {
+      "at": "2026-10-18T18:47:21.745270-06:00",
+      "id": "M1_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:47:39.962105-06:00",
+      "id": "M1_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-build-02.json",
+      "sha256": "12fd53a0f106fc6882ba637dcf7dcc1fb3e88d8b58b8d3ca770c33a31663356f",
+      "note": "Add one DragOver observation and fixture navigation button before desktop tests"
+    },
+    {
+      "at": "2026-10-18T18:48:14.031302-06:00",
+      "id": "M1_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-build-02.json",
+      "sha256": "12fd53a0f106fc6882ba637dcf7dcc1fb3e88d8b58b8d3ca770c33a31663356f",
+      "note": "WinUI host and native adapter compile;16 tests pass,0warnings0errors; no desktop claim yet"
+    },
+    {
+      "at": "2026-10-18T18:48:14.255940-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:48:15.258126-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-launch-01.json",
+      "sha256": "96be7c7863c6a0536deeb9a0f548d2283f82140559cfa7357ff1fad17a0097f6",
+      "note": "Create disposable fixtures and launch prototype; inspect real window/journal next"
+    },
+    {
+      "at": "2026-10-18T18:49:55.709669-06:00",
+      "id": "M1_DESKTOP",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-startup-failure-01.jpg",
+      "sha256": "ae2404515eba1fecc5fad20badde234b8fc40a6e6c875d055b2b729ce5ad4151",
+      "note": "Window showed IntPtr JSON serialization error; launch exit0 was not readiness. Fix handles to Int64 and cleanup registration ordering"
+    },
+    {
+      "at": "2026-10-18T18:49:55.937194-06:00",
+      "id": "M1_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\WindowsIntegration\\DragOverlay.cs",
+      "sha256": "bc73f54314dbec5a6eb98d27566f375c69842533f80c0c28bb992cf5c3fbf0ce",
+      "note": "Desktop run exposed unsupported IntPtr journal serialization; handles now converted to Int64 and cleanup ownership set before logging"
+    },
+    {
+      "at": "2026-10-18T18:49:56.258604-06:00",
+      "id": "M1_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:50:24.453306-06:00",
+      "id": "M1_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-build-03.json",
+      "sha256": "342f82f6670e1faceb4260257928844bc76ddb1ccad14e12356bd08d9309a2a4",
+      "note": "Compile correction proven necessary by visible initialization error"
+    },
+    {
+      "at": "2026-10-18T18:50:51.267508-06:00",
+      "id": "M1_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-build-03.json",
+      "sha256": "342f82f6670e1faceb4260257928844bc76ddb1ccad14e12356bd08d9309a2a4",
+      "note": "Corrected native-handle journal compiled with16passing tests and0warnings0errors"
+    },
+    {
+      "at": "2026-10-18T18:50:51.589042-06:00",
+      "id": "M1_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:50:52.903949-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m1-launch-02.json",
+      "sha256": "2862566372dc768c1a7ce8a270fa227e76b0f019d8f2f4afc2de9ba1a1da7435",
+      "note": "New launch after proven IntPtr serialization correction; inspect Ready and OLE HRESULT"
+    },
+    {
+      "at": "2026-10-18T18:51:13.777816-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m1-66337950ff28484380a659be85642b25\\events.jsonl",
+      "sha256": "b5426e47ea88fa6aa276e49fd5598311394c1e112ca5fc4957f19b04e68fa5d9",
+      "note": "Corrected real startup: STA, OleInitialize0, RegisterDragDrop0, F8/F9true and Ready; Explorer receipt still pending"
+    },
+    {
+      "at": "2026-10-18T18:52:47.522481-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 5,
+      "evidence": "evidence\\private\\m1-ready-armed-snapshot.jsonl",
+      "sha256": "1f19aad664a0a7c04239b9adaf26f56547591e630554d966be34036ae0bf9485",
+      "note": "Real OLE registration and F8 activation from Explorer verified; foreground unchanged at150percent DPI. Cross-process drag automation rejected before callbacks; manual response requested"
+    },
+    {
+      "at": "2026-10-18T18:54:04.000879-06:00",
+      "id": "M1_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 6,
+      "evidence": "evidence\\private\\m1-single-drop-snapshot.jsonl",
+      "sha256": "eb4c635333b828afbfd3ae12e6f07aba776516b03daf9888a5008643a90b35a4",
+      "note": "Actual Explorer receipt of one Unicode fixture: Enter Over DropAccepted COPY, original manifest unchanged. Pre-armed flow only; key-during-drag and Escape pending"
+    },
+    {
+      "at": "2026-10-18T18:56:08.442150-06:00",
+      "id": "M1_DESKTOP",
+      "event": "BLOQUEADO",
+      "attempt": 7,
+      "evidence": "evidence\\private\\m1-final-desktop-snapshot.jsonl",
+      "sha256": "eb4c635333b828afbfd3ae12e6f07aba776516b03daf9888a5008643a90b35a4",
+      "note": "Partial: one Unicode DropAccepted verified; later Enter Over Leave without Drop. Cross-window automation rejected and physical Escape stopped Computer Use. Full ideal gesture/multiple/Escape outcome require new desktop session"
+    },
+    {
+      "at": "2026-10-18T18:56:44.559160-06:00",
+      "id": "M1_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-18T18:56:44.942912-06:00",
+      "id": "M1_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-review-01.json",
+      "sha256": "ef2a7e8e6c9ff1436cb0e7fcde44d21fd468333c64fb2a0636715fbe1a965ccd",
+      "note": "Review candidate path policy and private evidence exclusions after partial M1 runtime tests"
+    },
+    {
+      "at": "2026-10-18T18:57:36.233531-06:00",
+      "id": "R0",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "docs\\reports\\r0-m0.md",
+      "sha256": "ad9571e7250cddb0bdb41ae694541342dca72f647336dcd28821434e31d83a1d",
+      "note": "Reconcile inherited task state with already delivered public research in e519edd/77b5ce6; no new native claim or repeated investigation"
+    },
+    {
+      "at": "2026-10-18T18:57:36.432800-06:00",
+      "id": "M1_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m1-review-01.json",
+      "sha256": "ef2a7e8e6c9ff1436cb0e7fcde44d21fd468333c64fb2a0636715fbe1a965ccd",
+      "note": "Reviewed source/docs; path policy/diff checks pass and private logs fixtures screenshots SDK/binaries excluded; M1 desktop acceptance stays blocked"
     }
   ]
 }

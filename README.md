@@ -2,7 +2,7 @@
 
 An original open source Windows 11 file utility, inspired by keyboard-assisted contextual workflows. Files will be processed locally. This project is independent of Tangerine and its developer.
 
-Current scope: **R0 research and M0 foundation**. The source contains a minimal WinUI 3 diagnostic window and a pure session model with unit tests. Explorer drag-and-drop, global shortcuts, radial UI, conversion, tray and startup are **not implemented**. See [current status](ESTADO.md) and [delivery report](docs/reports/r0-m0.md) for actual verification results.
+Current scope: **M1 feasibility prototype, partially verified**. A native OLE target hosted by the WinUI app accepts only prepared fixture files. F8 activation from Explorer and one real Unicode file drop were observed; the full key-during-drag gesture, multiple selection and safe Escape cancellation remain unverified. M1 is not accepted as complete. Radial UI, conversion, tray and startup are not implemented. See [current status](ESTADO.md), [M1 results](docs/reports/m1.md) and [R0/M0 report](docs/reports/r0-m0.md).
 
 ## Development
 
@@ -27,18 +27,29 @@ dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
 dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release
 ```
 
-Running the App output opens only a diagnostic window. It does not register input hooks, change files or enable startup. The unpackaged build includes Windows App SDK components; it still requires .NET 10 x64. Packaging and distribution are future milestones.
+Running the App without prototype arguments opens instructions. To prepare disposable files, a baseline SHA256 manifest and a private journal:
+
+```powershell
+pwsh -NoProfile -File scripts/start-prototype.ps1
+```
+
+The prototype registers F8/F9 only for its lifetime. Use **Open fixtures**, then F8 to show the receiver near the cursor. Only that run's fixture directory is accepted. F9 rejects/closes; while a drag is inside it latches rejection until Drop/Leave instead of exposing another destination. Escape is handled by the drag source; a logged DragLeave alone cannot prove Escape cancellation. Close the prototype window to revoke OLE and hotkeys.
+
+The receiver records accepted paths; it does not copy, move or convert files. COPY/NONE are negotiated OLE effects. Keep every original journal under evidence/private; do not publish screenshots or identifiers. Validate after a trial with scripts/check-prototype-files.ps1 -RunFile followed by the run.json path printed by the launcher. Do not interpret success of the launcher as readiness; check the window and Ready journal event.
+
+No input hooks or startup changes are made. The unpackaged build includes Windows App SDK components; it still requires .NET 10 x64. Packaging and distribution are future milestones.
 
 ## Structure
 
 - src/App: WinUI presentation and lifecycle.
 - src/Core: platform-independent domain model; no file I/O.
+- src/WindowsIntegration: fixture-only HWND/OLE target, hotkey registration, placement and private diagnostics.
 - tests/Core.Tests: safety boundaries for activation, accepted data and reset.
 - docs/research/tangerine: evidence, functional analysis and Windows feasibility.
 - docs/decisions: architecture decisions.
 - evidence/private: ignored original research/build output; reviewed summaries belong in docs.
 
-No empty conversion or Windows adapter projects are included.
+No conversion engine project is included.
 
 ## Research and roadmap
 

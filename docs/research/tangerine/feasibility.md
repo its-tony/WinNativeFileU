@@ -40,6 +40,8 @@ La aceptación de M1 exigirá archivos válidos recibidos, cancelación segura y
 
 ## Límites abiertos
 
+Actualización de seguimiento: el prototipo M1 y sus resultados parciales están en [reporte M1](../../reports/m1.md). Este documento conserva el análisis previo de R0; no convierte sus hipótesis en validaciones del gesto completo.
+
 - Ninguna medida de CPU, memoria, latencia, estabilidad o accesibilidad está disponible en R0.
 - La ruta Shell es una alternativa documentada; no se ha registrado ninguna extensión ni modificado Explorer. Su despliegue y compatibilidad específicos con Windows 11 necesitan investigación posterior.
 - No se ha decidido un atajo definitivo ni se ha justificado un hook global. Una pulsación breve de modificador queda pendiente de diseño y evidencia.
