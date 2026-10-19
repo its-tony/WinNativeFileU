@@ -87,7 +87,7 @@
     },
     {
       "id": "M1_DESKTOP",
-      "state": "EN_PROGRESO",
+      "state": "VERIFICADO",
       "evidence": [
         "evidence\\private\\m1-launch-01.json",
         "evidence\\private\\m1-startup-failure-01.jpg",
@@ -117,13 +117,14 @@
         "evidence\\private\\m1-reject-outside-result-01.json",
         "evidence\\private\\m1-held-launch-01.json",
         "evidence\\private\\m1-held-ready-result-01.json",
-        "evidence\\private\\m1-held-doc-review-01.json"
+        "evidence\\private\\m1-held-doc-review-01.json",
+        "evidence\\private\\m1-completion-result-01.json"
       ],
-      "attempts": 20,
+      "attempts": 21,
       "equivalent_failures": 0,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Reviewed new bounded diagnostic source5d9c9d9 and42passed Windows tests. Real idle control declines and prearm disabled; one available display DPI144 observed. K1G human trial requested with fresh fixtures; preserve old ambiguity and do not mark complete or begin M2 until correlation. Owner authorization to proceed after completion persisted."
+      "next_step": "M1 scoped feasibility verified:2real gated held-button hotkey activations -> immediate Explorer Enter/Over count2 -> released-key Drop COPY, unchanged foreground/work area DPI144 and hashes. Owner confirms release ordering; first-only Over means intermediate keys1 not captured, limit explicit. Prior Escape/reentry/rejection/outside evidence retained; normal close Revoke0/window absent.42tests green. Owner-authorized M2 may begin, no M3/push."
     },
     {
       "id": "M1_REVIEW",
@@ -1296,6 +1297,15 @@
       "evidence": "evidence\\private\\m1-held-doc-review-01.json",
       "sha256": "f6d2366a039f2f0ad1c58f3c2e4bcfedb5b3b77ce2a383722c51d96439062a00",
       "note": "Reviewed new bounded diagnostic source5d9c9d9 and42passed Windows tests. Real idle control declines and prearm disabled; one available display DPI144 observed. K1G human trial requested with fresh fixtures; preserve old ambiguity and do not mark complete or begin M2 until correlation. Owner authorization to proceed after completion persisted."
+    },
+    {
+      "at": "2026-10-19T15:47:11.635834-06:00",
+      "id": "M1_DESKTOP",
+      "event": "VERIFICADO",
+      "attempt": 21,
+      "evidence": "evidence\\private\\m1-completion-result-01.json",
+      "sha256": "ec8e858c5ac5454167d15395d512cc92aff8efe147334316085453640f949aa6",
+      "note": "M1 scoped feasibility verified:2real gated held-button hotkey activations -> immediate Explorer Enter/Over count2 -> released-key Drop COPY, unchanged foreground/work area DPI144 and hashes. Owner confirms release ordering; first-only Over means intermediate keys1 not captured, limit explicit. Prior Escape/reentry/rejection/outside evidence retained; normal close Revoke0/window absent.42tests green. Owner-authorized M2 may begin, no M3/push."
     }
   ]
 }

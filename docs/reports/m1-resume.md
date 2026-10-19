@@ -1,5 +1,6 @@
 # M1 — continuación de diagnóstico y pruebas nativas
 Actualizado: 2026-10-19, America/Guatemala. M2 sigue fuera de alcance.
+Estado histórico de la continuación M1. El [informe de cierre posterior](m1-completion.md) acepta la viabilidad acotada con dos gestos retenidos reales y documenta sus límites. El propietario autorizó M2 después de ese cierre; las menciones de pendiente en este informe corresponden a su secuencia histórica.
 
 ## Summary
 Se corrigió el cuadro residual tras terminar el arrastre: Leave sobre el receptor o con ubicación desconocida cierra su sesión; solo una salida observada permite esperar reentrada.29tests pasan y dos ensayos humanos de Escape cerraron miniatura y cuadro sin entregar archivos ni alterar originales. La carrera de Escape ya liberado se cubre con regresión oculta; los dos ensayos físicos observaron Escape abajo.

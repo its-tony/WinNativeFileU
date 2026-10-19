@@ -1,7 +1,13 @@
 # Estado — WinNativeFileU
 Actualizado: 2026-10-19, America/Guatemala (UTC-06:00).
 
-**M1 parcial; M2 autorizado después de verificar M1.** El propietario indicó el19 terminar M1 y después continuar M2. R0/M0 se conservan en sus informes y commits.
+**M1 completado para viabilidad acotada. M2 autorizado como siguiente hito.** Ver [informe de aceptación](docs/reports/m1-completion.md). Dos gestos nuevos con gate activo observan botón retenido al activar, foco conservado e ingreso Explorer inmediato; ambos DropAccepted count2/COPY1/keys0, área útil DPI144 y originales intactos. Propietario confirma liberar teclas manteniendo el ratón. El primer Over registra41 y no se registró el estado intermedio1; ese límite se conserva explícito.
+
+M1_DESKTOP VERIFICADO,42tests aprobados, cierre final RevokeDragDrop0 y ventana ausente. Evidencia m1-completion-final-01.jsonl/m1-completion-result-01.json. Una pantalla real DPI144; otras escalas solo geometría numérica. F8 físico sin resolver, Letters verificado; salida exterior puede mantener cuadro hasta cierre explícito; DropRejected físico no observado pero rechazo funcional corroborado. Solo fixtures locales, sin conversión ni compatibilidad general.
+
+Próximo: M2 radial UI, Acrylic, selección, animaciones, temas, accesibilidad y tamaño/posición. El propietario autorizó esta transición después de verificar M1. No M3, push ni release. Lo siguiente conserva el historial anterior al cierre; sus pendientes quedan superados solo en el alcance del informe nuevo.
+
+## Historial previo al cierre M1
 
 - Implementado y conservado en bc5fd96: reentrada tras Leave con botón observado abajo, diagnósticos F8/F9/ArmIgnored, estado accesible y texto correcto tras F9. No hooks, polling ni conversores.
 - Última compilación real Windows: m1-cleanup-green-01.json, locked restore, salida0,0 advertencias/errores.29tests aprobados:16Core+12receptor nativo+1rechazo temprano de perfil inválido. Los12 usan HWND/STA/Register/Revoke/HGLOBAL reales y callbacks directos con datos/observaciones sintéticos; no bucle origen Explorer ni entrada inyectada.

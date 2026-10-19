@@ -2,8 +2,8 @@
 | ID | Estado | Proposición y límite |
 |---|---|---|
 | H-R0 | DOCUMENTADO | El flujo tap/release/drop está descrito en la web actual; App Store conserva texto de mantener Shift. Divergencia sin resolver en app nativa. |
-| H-OLE | HYPOTHESIS para aparición durante drag | Un HWND propio recibió un archivo y después dos lotes de dos archivos desde Explorer con target prearmado; aparición a mitad de drag aún no demostrada. |
-| H-KEY | HYPOTHESIS | Una combinación configurable mediante RegisterHotKey puede activar ese HWND durante el arrastre sin robar foco. No prueba una tecla modificadora aislada. |
+| H-OLE | VERIFIED IN WINDOWS PROTOTYPE, alcance M1 | Dos activaciones retenidas con gate sin prearmado, ingreso Explorer inmediato y recepción count2/COPY1, foco/hashes conservados a DPI144. Secuencia humana y límites de first-Over/key-up en informe de cierre. |
+| H-KEY | VERIFIED IN WINDOWS PROTOTYPE para Letters | Ctrl+Alt+D activa durante arrastre sin cambiar foco en dos gestos gate; no prueba una modificadora aislada ni resuelve F8 físico. |
 | H-FALLBACK | VERIFIED IN WINDOWS PROTOTYPE, alcance acotado | Botón Arm target antes del arrastre permitió dos recepciones múltiples desde Explorer; no demuestra el gesto ideal ni mide fiabilidad general. |
 | H-NATIVE | BLOQUEADO | Análisis estático/dinámico de Tangerine nativo: sin paquete legítimo ni Mac. No repetir búsqueda de DMG sin fuente oficial nueva. |
 | H-SDK | VERIFICADO parcialmente | SDK 10.0.402 instalado y ejecuta --info; no acredita compilación WinUI. |
@@ -22,4 +22,4 @@
 | H-M1-NATIVE | VERIFICADO en Windows, receptor oculto |12escenarios con HWND/STA/Register/Revoke y HGLOBAL nativos pasaron. Invocación directa; productor y pistas de posición sintéticos, no Explorer/DoDragDrop. Test adicional de perfil inválido no abre recursos. |
 | H-M1-LEAVE-CLEANUP | VERIFICADO en receptor oculto y dos cierres reales | Decisión anterior reprodujo2regresiones; tras exigir salida observada pasan29tests (12receptor).2ensayos reales cierran cuadro al Escape, con señal EscapeDown=true. El caso exacto Escape ya arriba queda probado sintéticamente, no trazado en los cierres reales. |
 | H-M1-DIAG | VERIFIED IN WINDOWS PROTOTYPE, parcial |HotkeyReceived/ArmIgnored reflejan F8 real con LeftButtonDown=false. F9 y texto Receiver closed comprobados tras corregir estado obsoleto; no durante drag. |
-| H-M1-HELD-GATE | VERIFICADO para suite y control negativo; K1G físico pendiente | Build42verde; gate rechaza botón suelto/Escape/prearmado y drops tardíos, acepta caso retenido en receptor oculto. UI Arm deshabilitado y hotkey idle real → ActivationDeclined. Inventario real una pantalla DPI144/botones no intercambiados; otras escalas solo geometría sintética. Próximo gesto físico discriminante pendiente; no identifica causa de muestras anteriores. |
+| H-M1-HELD-GATE | VERIFIED IN WINDOWS PROTOTYPE | Build42verde, control idle negativo y dos gestos Explorer con muestra retenida/ingreso inmediato/recepción count2/COPY1. Propietario confirma orden de liberación; first-Over41 y Drop0, sin muestra intermedia1. Foco/área útil/hashes conservados, cierre Revoke0/ventana ausente. Inventario una pantalla DPI144; otras escalas solo geometría. No identifica causa de muestras anteriores. |

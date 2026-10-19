@@ -1,7 +1,7 @@
 {
   "date": "2026-10-19 America/Guatemala",
   "scope": "M1 resume; M2 not started",
-  "milestone_acceptance": "partial",
+  "milestone_acceptance": "complete for bounded M1 feasibility: fixture-only, Letters, one physical DPI144 display",
   "build_exit_code": 0,
   "warnings": 0,
   "errors": 0,
@@ -38,9 +38,7 @@
     "F9 closes receiver with corrected accessible text"
   ],
   "prior_real_explorer_scope": "one Unicode file, prearmed receiver; unchanged original hashes",
-  "pending": [
-    "K1G physical Explorer trial with held-activation gate: held sample shared by hotkey/Armed, keys released while drag persists, count2 COPY drop, focus/hash preservation"
-  ],
+  "pending": [],
   "evidence_sha256": {
     "m1-native-build-03.json": "bea01ffe82157f13721ddee8e320658f9eafc8a4461591a7d43f11b63338d3ba",
     "m1-native-core-03.trx": "dda0b1d5116411f58a3b1b050e950f707ffac51ddd41d5a9cf7ddf942e5aaddf",
@@ -96,9 +94,12 @@
     "m1-held-ready-01.jsonl": "d73dcda7c13846abd5f88cf8b0c32d9674159ee0a73697d6a5301a6c42be7121",
     "m1-held-ready-result-01.json": "97e932638fc60cf89f8da910c334f4762cb2f970245381ebd015f1dfc9c72a68",
     "m1-held-code-review-01.json": "58fbb6d8df3c6b8faa12e41f4a0a4678eef04162861afed69cffa9c249afa654",
-    "m1-held-doc-review-01.json": "f6d2366a039f2f0ad1c58f3c2e4bcfedb5b3b77ce2a383722c51d96439062a00"
+    "m1-held-doc-review-01.json": "f6d2366a039f2f0ad1c58f3c2e4bcfedb5b3b77ce2a383722c51d96439062a00",
+    "m1-completion-final-01.jsonl": "04b2bfd4386e7ac0513855e200eed6fad966c961b76e1ceb76f92ee676599e9c",
+    "m1-completion-result-01.json": "ec8e858c5ac5454167d15395d512cc92aff8efe147334316085453640f949aa6",
+    "m1-completion-review-01.json": "6db165f337331b1da6a694ad13d9326626225f73bdbbc0e5651b2b3ad8a31b8c"
   },
-  "observed_mouse_button_held_at_activation": false,
+  "observed_mouse_button_held_at_activation": true,
   "real_explorer_batch": {
     "classification": "VERIFIED IN WINDOWS PROTOTYPE",
     "successful_trials": 2,
@@ -274,7 +275,7 @@
     "queue_diagnostics": "left button and message age only when registered action arrives; no arbitrary key logging, hooks or polling; hints not cause proof",
     "native_regressions": "held allowed; idle/Escape/button prearming denied, late drops rejected",
     "geometry_regressions": 9,
-    "physical_K1G": "requested, awaiting result correlation",
+    "physical_K1G": "VERIFIED:2held-gated activations, immediate Explorer entry and count2/COPY/keys0 drops, owner confirms key release ordering",
     "current_display_inventory": {
       "enumerated": true,
       "display_count": 1,
@@ -284,6 +285,26 @@
       "swapped_buttons": false
     },
     "other_scales": "numeric geometry tests only; no physical claim or Windows setting change",
-    "originals_unchanged_before_trial": true
+    "originals_unchanged_before_trial": true,
+    "key_release_limit": "Owner explicitly confirms requested order: release activation keys while retaining mouse, then drop. First Enter/Over=41 includes Ctrl+Alt+left; final Drop=0. Instrumentation logs only first Over, so intermediate keys1 not captured. No claim that Drop0 alone proves earlier key-up. Accepted with held-gate activation + immediate real Explorer callbacks + owner sequence + released-key Drop.",
+    "current_session_closed_with_RevokeDragDrop_hr": 0
+  },
+  "completion": {
+    "report": "docs/reports/m1-completion.md",
+    "owner_report": "SI, funciona re bien",
+    "real_gated_batch_trials": 2,
+    "held_at_activation": true,
+    "foreground_and_work_area_preserved": true,
+    "originals_unchanged": true,
+    "normal_close_RevokeDragDrop_hr": 0,
+    "window_count_after_close": 0,
+    "known_limits": [
+      "Fixture-only local files; no conversion",
+      "F8 physical delivery unresolved; Letters verified",
+      "Outside release may leave receiver visible until explicit close",
+      "Physical DropRejected not observed; rejection confirmed by owner/latch/Leave and synthetic Drop policy tests",
+      "Only one physical DPI configuration"
+    ],
+    "next_authorized_scope": "M2 radial UI; not started until closure commit; no M3/push/release"
   }
 }
