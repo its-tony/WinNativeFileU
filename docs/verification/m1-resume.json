@@ -43,7 +43,11 @@
     "m1-batch-result-01.json": "3a30ab7c844ab937b32359a7098093f6574b6d5cc84025e1080c59d96823d577",
     "m1-oct19-previous-final.jsonl": "764ce0cfd849e6a76627d66ea6038e049fa92848115c7d083e38ca5249f1fe9c",
     "m1-oct19-ready-01.jsonl": "5badf76e85de33862198cb743adf4c0a43481c1e9f6189b77f73fe9f44a13330",
-    "m1-oct19-ready-result-01.json": "db9245c2d0499277da6f841a23d4f55eb8a3f7f42104b6135017af7ec0aeddc5"
+    "m1-oct19-ready-result-01.json": "db9245c2d0499277da6f841a23d4f55eb8a3f7f42104b6135017af7ec0aeddc5",
+    "m1-k1-failed-snapshot-01.jsonl": "5badf76e85de33862198cb743adf4c0a43481c1e9f6189b77f73fe9f44a13330",
+    "m1-k1-failed-result-01.json": "ac674cd2d086e42dd8e9dcb836382441664d630d864ef745fc86325a2b76a01a",
+    "post_K1_fixture_check_private": "cb40fb3133a850213989df1321cca175bf77a2a16a66924080fd1b659c75d19c",
+    "m1-k1-hash-reference-01.json": "4632321e122556e5aacd8169d7146cc6bc4c2bce59a7d38a059a9dd8b60159c0"
   },
   "observed_mouse_button_held_at_activation": false,
   "real_explorer_batch": {
@@ -71,8 +75,14 @@
     "F8_registered": true,
     "F9_registered": true,
     "fixture_names_lengths_sha256_unchanged": true,
-    "K1_physical_result": "pending owner gesture; no new hotkey/drag callbacks at readiness snapshot",
+    "K1_physical_result": "FAILED: owner reports F8 did not show target; no HotkeyReceived/Armed/drag events in subsequent snapshot",
     "code_changes": false,
-    "tests_rerun": false
+    "tests_rerun": false,
+    "post_K1_hotkey_events": 0,
+    "post_K1_armed_events": 0,
+    "post_K1_drop_events": 0,
+    "cause": "unresolved; physical mouse-up F8 control requested before retry or code change",
+    "window_still_open_observed": true,
+    "K1_equivalent_failures": 1
   }
 }

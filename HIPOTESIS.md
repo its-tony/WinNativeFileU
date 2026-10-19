@@ -9,7 +9,7 @@
 | H-SDK | VERIFICADO parcialmente | SDK 10.0.402 instalado y ejecuta --info; no acredita compilación WinUI. |
 | H-BUILD | VERIFICADO en Windows para M0 | build-03 locked restore, App/Core/Tests compilados y4/4 tests;0 advertencias/0 errores. No ejecución manual WinUI ni integración Explorer. |
 | H-M1-BUILD | VERIFICADO para código compilado | m1-build-01: App/integración nativa/Core/Tests,16 tests aprobados. No ejecución real de OLE todavía. |
-| H-M1-F8 | HYPOTHESIS; automatización bloqueada, ensayo humano pendiente | F8 funciona antes del drag; no demostrada entrega durante drag. API no expone tecla en mouse hold y bloquea destino de otro proceso. Lotes anteriores fueron con Arm target. Sesión nueva del19 preparada para K1, todavía sin callback HotkeyReceived/drag en snapshot Ready. |
+| H-M1-F8 | FALLO físico observado; causa HYPOTHESIS | Propietario intentó K1 el19 y F8 no mostró el cuadro. Diario con6eventos de arranque y ningún HotkeyReceived/Armed/drag; ventana aún abierta. El control automatizado anterior a drag funcionó el18; no demuestra entrega de la tecla física hoy. Pendiente control humano con ratón suelto; no atribuir aún a OLE, hardware ni message pump. |
 | H-M1-SAFE | VERIFICADO automáticamente solo política | Máscaras nunca eligen MOVE; cancelación rechaza; límites léxicos de fixtures pasan tests. Reparse/archivos reales y cancelación OLE pendientes. |
 | H-M1-START | VERIFICADO en Windows | Arranque corregido: STA/OleInitialize0/RegisterDragDrop0/F8F9true/Ready. Primer fallo IntPtr conservado. |
 | H-M1-ARM | VERIFIED IN WINDOWS PROTOTYPE, parcial | F8 desde Explorer mostró target con foreground antes=después, DPI144. No fue durante drag. |

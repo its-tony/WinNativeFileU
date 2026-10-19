@@ -16,6 +16,7 @@ Después de cada ensayo, conservar un snapshot nuevo del diario append-only y ej
 
 | ID | Procedimiento físico | Evidencia necesaria y límites |
 |---|---|---|
+| K0 | Con ratón suelto y sin arrastre ni Arm target, pulsar F8; si aparece el cuadro, cerrarlo con F9. | Control de entrega física general, solicitado tras el fallo K1 del19. Correlacionar reporte con HotkeyReceived/Armed. No sustituirlo por la prueba automatizada del18 ni asumir que registro correcto equivale a recepción. |
 | B1 | Armar con el botón antes de arrastrar ambos fixtures; soltar dentro del cuadro. | Ya verificado en dos ensayos: Enter/Over/DropAccepted count2, COPY1, Unicode y originales intactos. No satisface K1. |
 | K1 | Seleccionar ambos fixtures en Explorer; iniciar arrastre; sin soltar el ratón, pulsar y soltar F8; mover ligeramente dentro del cuadro y soltar allí. | Reporte humano confirma orden y liberación de tecla manteniendo el arrastre. Diario nuevo: HotkeyReceived id8 con LeftButtonDown=true → Armed → Enter/Over → DropAccepted count2/COPY1. Foreground antes=después, target permanece después de soltar F8, originales intactos. El estado instantáneo del botón solo no demuestra el gesto; correlacionarlo con reporte y callbacks. |
 | C1 | Durante otro arrastre dentro del receptor, pulsar Escape antes de soltar el ratón. | Propietario confirma desaparición del indicador de arrastre y fin del origen. Diario sin DropAccepted para ese ensayo, cierre propio y hashes intactos. Leave solo no prueba Escape ni cancelación global. |

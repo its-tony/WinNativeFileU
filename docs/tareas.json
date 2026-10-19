@@ -102,13 +102,14 @@
         "evidence\\private\\m1-resume-delivery-snapshot.jsonl",
         "evidence\\private\\m1-batch-result-01.json",
         "evidence\\private\\m1-oct19-launch-01.json",
-        "evidence\\private\\m1-oct19-ready-result-01.json"
+        "evidence\\private\\m1-oct19-ready-result-01.json",
+        "evidence\\private\\m1-k1-failed-result-01.json"
       ],
-      "attempts": 13,
-      "equivalent_failures": 0,
+      "attempts": 14,
+      "equivalent_failures": 1,
       "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Fresh Oct19 session Ready/STA/Register0/F8F9true; correct new Explorer fixtures observed and hashes intact. Owner asked K1 without Arm target. Await physical result; no new hotkey/drag callback at snapshot, no blocked automation retry"
+      "next_step": "Owner K1 failed: F8 showed no target; immutable journal still only Ready, no HotkeyReceived/Armed/drop. First documented equivalent K1 failure; request separate mouse-up physical F8 control before any retry"
     },
     {
       "id": "M1_REVIEW",
@@ -182,13 +183,15 @@
       "state": "VERIFICADO",
       "evidence": [
         "evidence\\private\\m1-protocol-review-01.json",
-        "evidence\\private\\m1-protocol-review-01.json"
+        "evidence\\private\\m1-protocol-review-01.json",
+        "evidence\\private\\m1-k1-review-01.json",
+        "evidence\\private\\m1-k1-review-01.json"
       ],
-      "attempts": 1,
+      "attempts": 2,
       "equivalent_failures": 0,
       "success_criterion": "Reviewed physical M1 protocol with evidence conditions and current manual-session status",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Path/whitespace policy passes; manually reviewed procedure distinction, actual logged fields and pending human K1. Originals ignored; no code changes or test rerun"
+      "next_step": "Reviewed failed K1 owner report versus immutable journal; no causal overclaim, one failure, distinct K0 pending. Path/whitespace pass; originals private and source unchanged"
     }
   ],
   "history": [
@@ -770,6 +773,47 @@
       "evidence": "evidence\\private\\m1-protocol-review-01.json",
       "sha256": "a0a3b79cd092a8cb3d90c2d4e09a82c0fa7b42211f54a9f846be43570769dd69",
       "note": "Path/whitespace policy passes; manually reviewed procedure distinction, actual logged fields and pending human K1. Originals ignored; no code changes or test rerun"
+    },
+    {
+      "at": "2026-10-19T14:28:25.866151-06:00",
+      "id": "M1_DESKTOP",
+      "event": "FALLO",
+      "attempt": 14,
+      "evidence": "evidence\\private\\m1-k1-failed-result-01.json",
+      "sha256": "ac674cd2d086e42dd8e9dcb836382441664d630d864ef745fc86325a2b76a01a",
+      "note": "Owner K1 failed: F8 showed no target; immutable journal still only Ready, no HotkeyReceived/Armed/drop. First documented equivalent K1 failure; request separate mouse-up physical F8 control before any retry"
+    },
+    {
+      "at": "2026-10-19T14:29:33.660255-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m1-k1-failed-result-01.json",
+      "sha256": "ac674cd2d086e42dd8e9dcb836382441664d630d864ef745fc86325a2b76a01a",
+      "note": "New owner K1 failure and absence of hotkey events; update report/physical-control criteria without changing code or attributing cause"
+    },
+    {
+      "at": "2026-10-19T14:29:33.840080-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T14:29:34.138116-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-k1-review-01.json",
+      "sha256": "5c5970f57eda6d694470cb3573c388186a2e8f0545a3652825de6dae7d9d445d",
+      "note": "Review K1 failure record and distinct K0 physical control; source unchanged, no build repeated"
+    },
+    {
+      "at": "2026-10-19T14:29:43.594114-06:00",
+      "id": "M1_PROTOCOL_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m1-k1-review-01.json",
+      "sha256": "5c5970f57eda6d694470cb3573c388186a2e8f0545a3652825de6dae7d9d445d",
+      "note": "Reviewed failed K1 owner report versus immutable journal; no causal overclaim, one failure, distinct K0 pending. Path/whitespace pass; originals private and source unchanged"
     }
   ]
 }
