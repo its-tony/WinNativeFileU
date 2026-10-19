@@ -67,6 +67,36 @@
       "success_criterion": "Diff reviewed; private evidence ignored",
       "abandon_condition": "Two equivalent failures; require new evidence to reopen",
       "next_step": "Candidate path policy and required research passed; manual source/docs reviewed; private SDK/research/bin/TRX ignored; no credential-pattern matches"
+    },
+    {
+      "id": "M1_BUILD",
+      "state": "PENDIENTE",
+      "evidence": [],
+      "attempts": 0,
+      "equivalent_failures": 0,
+      "success_criterion": "Build native overlay and regression tests",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "M1 authorized by owner; no M2"
+    },
+    {
+      "id": "M1_DESKTOP",
+      "state": "PENDIENTE",
+      "evidence": [],
+      "attempts": 0,
+      "equivalent_failures": 0,
+      "success_criterion": "Real Explorer OLE receipt, hotkey and safe cancellation evidence",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "M1 authorized by owner; no M2"
+    },
+    {
+      "id": "M1_REVIEW",
+      "state": "PENDIENTE",
+      "evidence": [],
+      "attempts": 0,
+      "equivalent_failures": 0,
+      "success_criterion": "Review privacy, documentation and small local commits",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "M1 authorized by owner; no M2"
     }
   ],
   "history": [
@@ -74,7 +104,7 @@
       "at": "2026-10-18T18:23:51.492805-06:00",
       "id": "SDK",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:25:36.001094-06:00",
@@ -107,7 +137,7 @@
       "at": "2026-10-18T18:27:52.494646-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:27:53.993110-06:00",
@@ -122,7 +152,7 @@
       "at": "2026-10-18T18:28:57.448519-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:30:13.346567-06:00",
@@ -137,7 +167,7 @@
       "at": "2026-10-18T18:30:52.102284-06:00",
       "id": "REVIEW",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:30:52.445818-06:00",
@@ -160,7 +190,7 @@
       "at": "2026-10-18T18:31:30.187113-06:00",
       "id": "BUILD",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:31:45.750559-06:00",
@@ -193,7 +223,7 @@
       "at": "2026-10-18T18:34:51.662427-06:00",
       "id": "REVIEW",
       "event": "RESERVA",
-      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explÃ­citamente"
     },
     {
       "at": "2026-10-18T18:34:51.986741-06:00",
