@@ -127,6 +127,69 @@ public sealed class NativeReceiverTests
         Assert.Equal(2, Directory.GetFiles(fixtures).Length);
     });
 
+    [Theory]
+    [InlineData("sector")]
+    [InlineData("centerThenSector")]
+    [InlineData("sectorThenCenterDrop")]
+    [InlineData("reject")]
+    public void RadialDropRechecksSelectionWithoutChangingFixtureSafety(string scenario) => OnSta(() =>
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (directory != null && !File.Exists(Path.Combine(directory.FullName, "WinNativeFileU.slnx"))) directory = directory.Parent;
+        Assert.NotNull(directory);
+        string run = Path.Combine(directory.FullName, "evidence", "private", "native-tests", Guid.NewGuid().ToString("N"));
+        string fixtures = Path.Combine(run, "fixtures");
+        Directory.CreateDirectory(fixtures);
+        string file = Path.Combine(fixtures, "radial.txt");
+        File.WriteAllText(file, "Disposable radial boundary fixture.");
+        byte[] before = SHA256.HashData(File.ReadAllBytes(file));
+        string log = Path.Combine(run, "journal.jsonl");
+        var presentation = new FakePresentation { Selection = scenario == "centerThenSector" ? null : "PNG" };
+        var data = new FixtureDataObject([file]);
+        using (var target = new DragOverlay(fixtures, log, true, () => new(true, false), presentation: presentation))
+        {
+            target.Arm();
+            uint effect = 7;
+            target.DragEnter(data, 1, default, ref effect);
+            Assert.Equal(scenario == "centerThenSector" ? 0u : 1u, effect);
+            presentation.Selection = "PNG";
+            effect = 7; target.DragOver(1, default, ref effect);
+            Assert.Equal(1u, effect);
+            if (scenario == "sectorThenCenterDrop") presentation.Selection = null;
+            if (scenario == "reject") target.Cancel();
+            effect = 7; target.Drop(data, 0, default, ref effect);
+            Assert.Equal(scenario is "sector" or "centerThenSector" ? 1u : 0u, effect);
+            Assert.Equal(InteractionState.Idle, target.SessionState);
+        }
+        Assert.True(presentation.Initialized);
+        Assert.True(presentation.Disposed);
+        var events = File.ReadLines(log).Select(line => JsonDocument.Parse(line).RootElement.Clone()).ToArray();
+        var accepted = events.Where(e => e.GetProperty("name").GetString() == "DropAccepted").ToArray();
+        Assert.Equal(scenario is "sector" or "centerThenSector" ? 1 : 0, accepted.Length);
+        if (accepted.Length > 0)
+        {
+            Assert.Equal("PNG", accepted[0].GetProperty("details").GetProperty("selectedFormat").GetString());
+            Assert.True(accepted[0].GetProperty("details").GetProperty("previewOnly").GetBoolean());
+        }
+        Assert.Equal(before, SHA256.HashData(File.ReadAllBytes(file)));
+        Assert.Single(Directory.GetFiles(fixtures));
+    });
+
+    private sealed class FakePresentation : IOverlayPresentation
+    {
+        public int WidthDip => 460;
+        public int HeightDip => 460;
+        public string? Selection { get; set; }
+        public bool Initialized { get; private set; }
+        public bool Disposed { get; private set; }
+        public void Initialize(nint parentWindow) { Assert.NotEqual(0, parentWindow); Initialized = true; }
+        public void Resize(int width, int height) { }
+        public void Reset() { }
+        public void Reject() => Selection = null;
+        public string? SelectAt(double x, double y, double width, double height) => Selection;
+        public void Dispose() => Disposed = true;
+    }
+
     private static void OnSta(Action action)
     {
         Exception? failure = null;

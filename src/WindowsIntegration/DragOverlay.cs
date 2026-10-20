@@ -20,6 +20,9 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly Func<bool?> isPointerOverReceiver;
     private readonly PrototypeShortcuts shortcuts;
     private readonly bool requireHeldActivation;
+    private readonly IOverlayPresentation? presentation;
+    private bool presentationReady;
+    private string? selectedFormat;
     private readonly InteractionSession session = new();
     private nint hwnd;
     private bool oleInitialized, registered, activationRegistered, rejectionRegistered, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
@@ -31,18 +34,19 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     public string RejectionLabel => shortcuts.RejectionLabel;
 
     public DragOverlay(string fixtureRoot, string logPath, PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys,
-        bool requireHeldActivation = false)
-        : this(fixtureRoot, logPath, false, ReadPointer, profile, requireHeldActivation: requireHeldActivation) { }
+        bool requireHeldActivation = false, IOverlayPresentation? presentation = null)
+        : this(fixtureRoot, logPath, false, ReadPointer, profile, requireHeldActivation: requireHeldActivation, presentation: presentation) { }
 
     // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
     // but neither register hotkeys nor show/move any desktop window.
     internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer,
         PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys, Func<bool?>? isPointerOverReceiver = null,
-        bool requireHeldActivation = false)
+        bool requireHeldActivation = false, IOverlayPresentation? presentation = null)
     {
         shortcuts = PrototypeShortcuts.For(profile);
         this.nativeTestMode = nativeTestMode;
         this.requireHeldActivation = requireHeldActivation;
+        this.presentation = presentation;
         this.readPointer = readPointer;
         this.isPointerOverReceiver = isPointerOverReceiver ?? (nativeTestMode ? () => false : ObservePointerOverReceiver);
         root = Path.GetFullPath(fixtureRoot);
@@ -65,10 +69,17 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             };
             if (Native.RegisterClassExW(ref cls) == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
             Log("WindowClassRegistered", new { });
-            hwnd = Native.CreateWindowExW(0x08000088, className, "WinNativeFileU M1 Drop Target",
-                0x80800000, 0, 0, 360, 160, 0, 0, cls.Instance, 0);
+            hwnd = Native.CreateWindowExW(0x08000088, className, presentation == null ? "WinNativeFileU M1 Drop Target" : "WinNativeFileU M2 Radial Target",
+                presentation == null ? 0x80800000u : 0x80000000u, 0, 0, 360, 160, 0, 0, cls.Instance, 0);
             if (hwnd == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
             Log("WindowCreated", new { hwnd = hwnd.ToInt64() });
+            if (presentation != null)
+            {
+                presentation.Initialize(hwnd);
+                presentationReady = true;
+                ResizePresentation();
+                Log("PresentationReady", new { type = presentation.GetType().Name, presentation.WidthDip, presentation.HeightDip });
+            }
             hr = Native.RegisterDragDrop(hwnd, this);
             Marshal.ThrowExceptionForHR(hr);
             registered = true;
@@ -118,6 +129,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         if (!logHealthy) throw new IOException("Private journal unavailable; receiver disabled.");
         session.Activate();
         cancelled = acceptable = false;
+        selectedFormat = null;
+        presentation?.Reset();
         if (nativeTestMode) { Log("ArmedForNativeTest", new { profile = shortcuts.Name }); return; }
         caption = $"M1 fixture receiver\nDrag fixture files here. {RejectionLabel} rejects.\nRelease {ActivationLabel}: target stays open.";
         var before = Native.GetForegroundWindow();
@@ -129,7 +142,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         Native.SetWindowPos(hwnd, -1, cursor.X, cursor.Y, 360, 160, 0x10);
         uint dpi = Native.GetDpiForWindow(hwnd);
         var placement = OverlayPlacement.Calculate(cursor.X, cursor.Y,
-            info.Work.Left, info.Work.Top, info.Work.Right, info.Work.Bottom, dpi);
+            info.Work.Left, info.Work.Top, info.Work.Right, info.Work.Bottom, dpi,
+            presentation?.WidthDip ?? 360, presentation?.HeightDip ?? 160);
         var (x, y, width, height) = placement;
         if (!Native.SetWindowPos(hwnd, -1, x, y, width, height, 0x50)) { Finish("ShowFailed"); return; }
         Native.InvalidateRect(hwnd, 0, true);
@@ -141,6 +155,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     {
         AssertThread();
         cancelled = true;
+        presentation?.Reject();
         if (dragInside)
         {
             caption = "Cancelled: this target rejects drops.\nRelease here or cancel source with Escape.\nNo file operation will run.";
@@ -169,18 +184,22 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             var files = ReadFiles(data);
             acceptable = true;
             session.EnterAcceptedTarget();
-            effect = DropPolicy.Effect(allowed, acceptable, cancelled);
+            effect = DropPolicy.Effect(allowed, SelectFormat(point), cancelled);
             caption = $"Valid fixture selection: {files.Length} file(s)\nRelease to record paths only.\nEscape cancels the source; {RejectionLabel} rejects.";
             if (!Log("DragEnter", new { allowed, effect, keys, count = files.Length, x = point.X, y = point.Y })) effect = 0;
         }
-        catch (Exception ex) { Log("DragEnterRejected", new { type = ex.GetType().Name, hr = ex.HResult }); }
+        catch (Exception ex) { acceptable = false; Log("DragEnterRejected", new { type = ex.GetType().Name, hr = ex.HResult }); }
         Native.InvalidateRect(hwnd, 0, true);
         return 0;
     }
 
     public int DragOver(uint keys, NativePoint point, ref uint effect)
     {
-        effect = DropPolicy.Effect(effect, acceptable && session.State == InteractionState.Tracking && logHealthy, cancelled);
+        try
+        {
+            effect = DropPolicy.Effect(effect, acceptable && session.State == InteractionState.Tracking && logHealthy && SelectFormat(point), cancelled);
+        }
+        catch (Exception ex) { effect = 0; acceptable = false; Log("PresentationError", new { type = ex.GetType().Name, hr = ex.HResult }); }
         if (!overLogged) { overLogged = true; if (!Log("DragOver", new { effect, keys, x = point.X, y = point.Y })) effect = 0; }
         return 0;
     }
@@ -200,6 +219,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             {
                 session.Reset(); session.Activate();
                 acceptable = dragInside = overLogged = false;
+                selectedFormat = null;
+                presentation?.Reset();
                 caption = $"Pointer left target: re-enter to receive.\nNo drop was accepted.\n{RejectionLabel} rejects/closes this receiver.";
                 Native.InvalidateRect(hwnd, 0, true);
                 StatusChanged?.Invoke("Pointer left while the button was held. Re-enter target; no files received.");
@@ -225,11 +246,11 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         effect = 0;
         try
         {
-            if (session.State != InteractionState.Tracking || DropPolicy.Effect(allowed, acceptable && logHealthy, cancelled) == 0)
+            if (session.State != InteractionState.Tracking || DropPolicy.Effect(allowed, acceptable && logHealthy && SelectFormat(point), cancelled) == 0)
             { Log("DropRejected", new { allowed, cancelled }); return 0; }
             var files = ReadFiles(data);
             session.ReceiveDrop(files);
-            if (Log("DropAccepted", new { allowed, effect = DropPolicy.Copy, keys, count = files.Length, files }))
+            if (Log("DropAccepted", new { allowed, effect = DropPolicy.Copy, keys, count = files.Length, files, selectedFormat, previewOnly = presentation != null }))
             {
                 effect = DropPolicy.Copy;
                 StatusChanged?.Invoke($"Received {files.Length} fixture file(s). No file operation performed.");
@@ -284,6 +305,24 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         Native.ShowWindow(hwnd, 0);
         Log("SessionEnded", new { reason });
     }
+
+    private bool SelectFormat(NativePoint point)
+    {
+        if (presentation == null) return true;
+        if (cancelled || !Native.ScreenToClient(hwnd, ref point) || !Native.GetClientRect(hwnd, out var rect)) return false;
+        string? format = presentation.SelectAt(point.X, point.Y, rect.Right, rect.Bottom);
+        if (format != selectedFormat)
+        {
+            selectedFormat = format;
+            if (!Log("RadialSelection", new { selectedFormat, x = point.X, y = point.Y, width = rect.Right, height = rect.Bottom })) return false;
+        }
+        return format != null;
+    }
+
+    private void ResizePresentation()
+    {
+        if (presentationReady && Native.GetClientRect(hwnd, out var rect)) presentation!.Resize(rect.Right, rect.Bottom);
+    }
     private bool Log(string name, object details)
     {
         try { journal.WriteLine(JsonSerializer.Serialize(new { at = DateTimeOffset.Now, name, details }, new JsonSerializerOptions { IncludeFields = true })); return true; }
@@ -321,7 +360,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     {
         if (!Native.GetCursorPos(out var cursor)) return null;
         nint atPoint = Native.WindowFromPoint(cursor);
-        return atPoint == 0 ? null : atPoint == hwnd;
+        return atPoint == 0 ? null : atPoint == hwnd || (presentation != null && Native.IsChild(hwnd, atPoint));
     }
 
     private nint Procedure(nint window, uint msg, nuint wp, nint lp)
@@ -340,6 +379,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 return 0;
             }
             if (msg == 0x21) return 3; // MA_NOACTIVATE
+            if (msg == 5) ResizePresentation(); // WM_SIZE, owned presentation only.
             if (msg == 0x10) { Cancel(); return 0; }
             if (msg == 0x2E0) Log("DpiChanged", new { dpi = (uint)wp & 0xFFFF });
             if (msg == 0xF)
@@ -347,6 +387,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 var dc = Native.BeginPaint(window, out var paint);
                 try
                 {
+                    if (presentation != null) return 0;
                     Native.GetClientRect(window, out var rect);
                     Native.FillRect(dc, ref rect, 6);
                     rect.Left += 16; rect.Top += 16; rect.Right -= 16;
@@ -367,6 +408,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         if (registered) { int hr = Native.RevokeDragDrop(hwnd); Log("RevokeDragDrop", new { hr }); registered = false; }
         if (activationRegistered) Native.UnregisterHotKey(hwnd, 8);
         if (rejectionRegistered) Native.UnregisterHotKey(hwnd, 9);
+        presentation?.Dispose();
         if (hwnd != 0) Native.DestroyWindow(hwnd);
         Native.UnregisterClassW(className, Native.GetModuleHandleW(null));
         if (oleInitialized) Native.OleUninitialize();

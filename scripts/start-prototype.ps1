@@ -1,4 +1,4 @@
-param([switch]$PrepareOnly, [switch]$RequireHeldActivation,
+param([switch]$PrepareOnly, [switch]$RequireHeldActivation, [switch]$Radial,
     [ValidateSet('FunctionKeys', 'Letters')][string]$ShortcutProfile = 'FunctionKeys')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -14,13 +14,14 @@ $before = @(Get-ChildItem -LiteralPath $fixtures -File | ForEach-Object {
 $exe = Join-Path $root 'src/App/bin/Release/net10.0-windows10.0.22000.0/win-x64/WinNativeFileU.App.exe'
 $log = Join-Path $run 'events.jsonl'
 $profileName = if ($ShortcutProfile -eq 'Letters') { 'letters' } else { 'function-keys' }
-$metadata = @{ run=$run; fixtures=$fixtures; log=$log; executable=$exe; shortcutProfile=$profileName; requireHeldActivation=[bool]$RequireHeldActivation; before=$before; date=(Get-Date).ToString('o') }
+$metadata = @{ run=$run; fixtures=$fixtures; log=$log; executable=$exe; shortcutProfile=$profileName; requireHeldActivation=[bool]$RequireHeldActivation; radial=[bool]$Radial; before=$before; date=(Get-Date).ToString('o') }
 $metadata | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $run 'run.json')
 if (!$PrepareOnly) {
     if (!(Test-Path -LiteralPath $exe)) { throw 'Build Release before launching the prototype.' }
     # Hidden startup avoids a launcher console; the prototype's WinUI is the test surface.
     $launchArgs = @('--prototype-root', ('"'+$fixtures+'"'), '--prototype-log', ('"'+$log+'"'), '--prototype-shortcuts', $profileName)
     if ($RequireHeldActivation) { $launchArgs += '--prototype-require-held' }
+    if ($Radial) { $launchArgs += '--prototype-radial' }
     $process = Start-Process -FilePath $exe -ArgumentList $launchArgs -WindowStyle Hidden -PassThru
     $process.Id | Set-Content -LiteralPath (Join-Path $run 'pid.txt')
 }

@@ -21,6 +21,19 @@ public sealed class OverlayPlacementTests
     }
 
     [Theory]
+    [InlineData(0, 0, 2560, 1528, 144, 0, 0, 690)]
+    [InlineData(2560, 1528, 2560, 1528, 144, 1870, 838, 690)]
+    [InlineData(100, 100, 320, 240, 192, 0, 0, 240)]
+    public void RadialSquareFitsAvailableWorkArea(int cursorX, int cursorY, int right, int bottom, int dpi, int x, int y, int expectedHeight)
+    {
+        var placement = OverlayPlacement.Calculate(cursorX, cursorY, 0, 0, right, bottom, (uint)dpi, 460, 460);
+        Assert.Equal(x, placement.X);
+        Assert.Equal(y, placement.Y);
+        Assert.Equal(expectedHeight, placement.Height);
+        Assert.InRange(placement.Width, 1, right);
+    }
+
+    [Theory]
     [InlineData(0, 0, 1920, 1080, 0)]
     [InlineData(100, 0, 100, 1080, 144)]
     [InlineData(0, 100, 1920, 50, 144)]

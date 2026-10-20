@@ -32,7 +32,8 @@ public sealed partial class MainWindow : Window
                 _ => throw new ArgumentException("Shortcut profile must be function-keys or letters.")
             };
             bool requireHeld = Array.IndexOf(args, "--prototype-require-held") >= 0;
-            overlay = new DragOverlay(root, log, profile, requireHeld);
+            bool radial = Array.IndexOf(args, "--prototype-radial") >= 0;
+            overlay = new DragOverlay(root, log, profile, requireHeld, radial ? new RadialOverlayPresentation() : null);
             Instructions.Text = $"Drag prepared fixture files from Explorer, tap {overlay.ActivationLabel}, release the keys, then release the files over the target. Escape cancels the source drag. No files are copied, moved or converted.";
             fixtureRoot = root;
             overlay.StatusChanged += message => Status.Text = message;
@@ -42,6 +43,8 @@ public sealed partial class MainWindow : Window
             Status.Text = $"Ready. {overlay.ActivationLabel} shows the target at the cursor; {overlay.RejectionLabel} rejects. Only the prepared fixture folder is accepted.";
             if (requireHeld)
                 Status.Text = $"Validation mode: activation requires a held mouse button. Begin dragging, then tap/release {overlay.ActivationLabel}. Prearming is disabled.";
+            if (radial)
+                Instructions.Text = $"M2 radial experiment: drag prepared fixtures, tap/release {overlay.ActivationLabel}, then drop on an example format sector. Center/gaps/outside reject; {overlay.RejectionLabel} rejects. Labels are visual examples; no conversion is performed.";
         }
         catch (Exception ex) { Status.Text = $"Prototype unavailable: {ex.Message}"; }
         Closed += (_, _) => { overlay?.Dispose(); overlay = null; };

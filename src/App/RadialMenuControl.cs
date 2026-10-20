@@ -31,6 +31,7 @@ public sealed class RadialMenuControl : UserControl
     private readonly UISettings settings = new();
     public bool ReduceMotion { get; set; }
     public bool HighContrast { get; set; }
+    public bool ExternalDragSelection { get; set; }
     public event Action<string>? PreviewChanged;
 
     public RadialMenuControl()
@@ -75,6 +76,20 @@ public sealed class RadialMenuControl : UserControl
 
     public void RefreshAppearance() => Paint();
 
+    public string? SelectDragPoint(double x, double y)
+    {
+        int? index = state.HitTest(x, y, Side);
+        Select(index);
+        return index is int selected ? Labels[selected] : null;
+    }
+
+    public void ShowRejection()
+    {
+        state.Cancel(); Paint();
+        centerTitle.Text = "Drop rejected";
+        centerDetail.Text = "NO FILE OPERATION";
+    }
+
     private void Select(int? index)
     {
         if (state.SelectedIndex == index) return;
@@ -90,6 +105,7 @@ public sealed class RadialMenuControl : UserControl
 
     private void OnPointerMoved(object sender, PointerRoutedEventArgs args)
     {
+        if (ExternalDragSelection) return;
         var point = args.GetCurrentPoint(canvas).Position;
         Select(state.HitTest(point.X, point.Y, Side));
     }
@@ -131,7 +147,7 @@ public sealed class RadialMenuControl : UserControl
         }
         centerTitle.Foreground = centerDetail.Foreground = new SolidColorBrush(foreground);
         centerTitle.Text = state.SelectedIndex is int index ? Labels[index] : "Choose a format";
-        centerDetail.Text = state.SelectedIndex is null ? "VISUAL PREVIEW" : "SELECTED";
+        centerDetail.Text = state.SelectedIndex is null ? "VISUAL PREVIEW" : ExternalDragSelection ? "EXAMPLE FORMAT" : "SELECTED";
     }
 
     private void Animate(UIElement element, float from)
