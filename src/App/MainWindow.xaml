@@ -6,7 +6,7 @@
   <Grid Padding="32">
     <StackPanel Spacing="12" MaxWidth="560" HorizontalAlignment="Center" VerticalAlignment="Center">
       <TextBlock Text="WinNativeFileU" Style="{StaticResource TitleTextBlockStyle}" />
-      <TextBlock Text="Explorer drag feasibility — M1" Style="{StaticResource SubtitleTextBlockStyle}" />
+      <TextBlock x:Name="ExperimentTitle" Text="Explorer drag feasibility — M1" Style="{StaticResource SubtitleTextBlockStyle}" />
       <TextBlock x:Name="Instructions" TextWrapping="Wrap" Text="Start with scripts/start-prototype.ps1 to prepare disposable files and choose a shortcut profile." />
       <TextBlock x:Name="Status" TextWrapping="Wrap" />
       <StackPanel Orientation="Horizontal" Spacing="12">

@@ -61,7 +61,7 @@ public sealed class RadialMenuControl : UserControl
         Canvas.SetLeft(center, (Side - center.Width) / 2); Canvas.SetTop(center, 184);
         canvas.Children.Add(center);
         canvas.PointerMoved += OnPointerMoved;
-        canvas.PointerExited += (_, _) => Select(null);
+        canvas.PointerExited += (_, _) => { if (!ExternalDragSelection) Select(null); };
         KeyDown += OnKeyDown;
         ActualThemeChanged += (_, _) => Paint();
         Loaded += (_, _) => { Paint(); Animate(canvas, 0.97f); };
@@ -146,8 +146,8 @@ public sealed class RadialMenuControl : UserControl
             buttons[i].Foreground = new SolidColorBrush(selected ? (contrast ? background : Color.FromArgb(255, 37, 27, 24)) : foreground);
         }
         centerTitle.Foreground = centerDetail.Foreground = new SolidColorBrush(foreground);
-        centerTitle.Text = state.SelectedIndex is int index ? Labels[index] : "Choose a format";
-        centerDetail.Text = state.SelectedIndex is null ? "VISUAL PREVIEW" : ExternalDragSelection ? "EXAMPLE FORMAT" : "SELECTED";
+        centerTitle.Text = state.SelectedIndex is int index ? Labels[index] : ExternalDragSelection ? "Drag to choose" : "Choose a format";
+        centerDetail.Text = state.SelectedIndex is null ? (ExternalDragSelection ? "DROP ON A SECTOR" : "VISUAL PREVIEW") : ExternalDragSelection ? "EXAMPLE FORMAT" : "SELECTED";
     }
 
     private void Animate(UIElement element, float from)

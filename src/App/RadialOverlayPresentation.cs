@@ -22,8 +22,9 @@ public sealed class RadialOverlayPresentation : IOverlayPresentation
     private ThemeSettings? themeSettings;
     private bool rejected;
     private readonly UISettings settings = new();
-    public int WidthDip => 460;
-    public int HeightDip => 460;
+    public int WidthDip => 400;
+    public int HeightDip => 400;
+    public bool IsCircular => true;
 
     public void Initialize(nint parentWindow)
     {

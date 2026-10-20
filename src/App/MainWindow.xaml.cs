@@ -44,7 +44,11 @@ public sealed partial class MainWindow : Window
             if (requireHeld)
                 Status.Text = $"Validation mode: activation requires a held mouse button. Begin dragging, then tap/release {overlay.ActivationLabel}. Prearming is disabled.";
             if (radial)
+            {
+                Title = "WinNativeFileU — M2 Radial Experiment";
+                ExperimentTitle.Text = "Radial drop interaction — M2";
                 Instructions.Text = $"M2 radial experiment: drag prepared fixtures, tap/release {overlay.ActivationLabel}, then drop on an example format sector. Center/gaps/outside reject; {overlay.RejectionLabel} rejects. Labels are visual examples; no conversion is performed.";
+            }
         }
         catch (Exception ex) { Status.Text = $"Prototype unavailable: {ex.Message}"; }
         Closed += (_, _) => { overlay?.Dispose(); overlay = null; };

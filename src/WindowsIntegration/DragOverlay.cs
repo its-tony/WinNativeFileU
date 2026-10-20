@@ -22,14 +22,17 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly bool requireHeldActivation;
     private readonly IOverlayPresentation? presentation;
     private bool presentationReady;
+    private bool resizingPresentation;
     private string? selectedFormat;
     private readonly InteractionSession session = new();
-    private nint hwnd;
+    private nint hwnd, inputWindow;
+    private bool inputRegistered;
     private bool oleInitialized, registered, activationRegistered, rejectionRegistered, disposed, cancelled, acceptable, dragInside, overLogged, logHealthy = true;
     private readonly int threadId = Environment.CurrentManagedThreadId;
     private string caption = "M1 fixture receiver\nDrop: record paths only; originals untouched";
     public event Action<string>? StatusChanged;
     internal InteractionState SessionState => session.State;
+    internal nint InputWindow => inputWindow;
     public string ActivationLabel => shortcuts.ActivationLabel;
     public string RejectionLabel => shortcuts.RejectionLabel;
 
@@ -77,6 +80,18 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             {
                 presentation.Initialize(hwnd);
                 presentationReady = true;
+                // WinUI owns a child input site. A separate child owned by this
+                // receiver captures OLE without replacing any framework registration.
+                inputWindow = Native.CreateWindowExW(0x08080000, className, "WinNativeFileU radial input",
+                    0x40000000, 0, 0, 1, 1, hwnd, 0, cls.Instance, 0);
+                if (inputWindow == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
+                // Alpha zero and WS_EX_TRANSPARENT pass input through. Alpha one
+                // keeps this surface hit-testable with a 1/255 visual contribution.
+                if (!Native.SetLayeredWindowAttributes(inputWindow, 0, 1, 2)) throw new Win32Exception(Marshal.GetLastWin32Error());
+                hr = Native.RegisterDragDrop(inputWindow, this);
+                Marshal.ThrowExceptionForHR(hr);
+                inputRegistered = true;
+                Log("RegisterInputDragDrop", new { hr, hwnd = inputWindow.ToInt64(), alpha = 1 });
                 ResizePresentation();
                 Log("PresentationReady", new { type = presentation.GetType().Name, presentation.WidthDip, presentation.HeightDip });
             }
@@ -93,7 +108,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             if (!nativeTestMode) ObserveDisplays();
             Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString(), requireHeldActivation });
         }
-        catch { Dispose(); throw; }
+        catch (Exception ex) { Log("InitializationFailed", new { type = ex.GetType().Name, hr = ex.HResult }); Dispose(); throw; }
     }
 
     public void Arm()
@@ -146,6 +161,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             presentation?.WidthDip ?? 360, presentation?.HeightDip ?? 160);
         var (x, y, width, height) = placement;
         if (!Native.SetWindowPos(hwnd, -1, x, y, width, height, 0x50)) { Finish("ShowFailed"); return; }
+        if (inputWindow != 0)
+        {
+            Native.InvalidateRect(inputWindow, 0, true);
+            Native.UpdateWindow(inputWindow);
+            Log("InputHitTest", new { atCursor = Native.WindowFromPoint(cursor).ToInt64(), expected = inputWindow.ToInt64(), atInput = Native.WindowFromPoint(cursor) == inputWindow });
+        }
         Native.InvalidateRect(hwnd, 0, true);
         Log("Armed", new { origin, profile = shortcuts.Name, before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, work = info.Work, requireHeldActivation, pointer = activationPointer ?? readPointer() });
         StatusChanged?.Invoke($"Target armed. Release {ActivationLabel}; drop only prepared fixtures.");
@@ -321,7 +342,26 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
 
     private void ResizePresentation()
     {
-        if (presentationReady && Native.GetClientRect(hwnd, out var rect)) presentation!.Resize(rect.Right, rect.Bottom);
+        if (!presentationReady || resizingPresentation || !Native.GetClientRect(hwnd, out var rect)) return;
+        resizingPresentation = true;
+        try
+        {
+            presentation!.Resize(rect.Right, rect.Bottom);
+            if (presentation.IsCircular)
+            {
+                nint region = Native.CreateEllipticRgn(0, 0, rect.Right, rect.Bottom);
+                if (region == 0) throw new Win32Exception("Could not create radial window region.");
+                if (Native.SetWindowRgn(hwnd, region, true) == 0)
+                {
+                    int error = Marshal.GetLastWin32Error();
+                    Native.DeleteObject(region); // Ownership transfers only on success.
+                    throw new Win32Exception(error);
+                }
+            }
+            if (inputWindow != 0 && !Native.SetWindowPos(inputWindow, 0, 0, 0, rect.Right, rect.Bottom, 0x50))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+        }
+        finally { resizingPresentation = false; }
     }
     private bool Log(string name, object details)
     {
@@ -379,7 +419,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 return 0;
             }
             if (msg == 0x21) return 3; // MA_NOACTIVATE
-            if (msg == 5) ResizePresentation(); // WM_SIZE, owned presentation only.
+            if (msg == 5 && window == hwnd) ResizePresentation(); // WM_SIZE for parent only.
             if (msg == 0x10) { Cancel(); return 0; }
             if (msg == 0x2E0) Log("DpiChanged", new { dpi = (uint)wp & 0xFFFF });
             if (msg == 0xF)
@@ -387,9 +427,10 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 var dc = Native.BeginPaint(window, out var paint);
                 try
                 {
-                    if (presentation != null) return 0;
+                    if (presentation != null && window != inputWindow) return 0;
                     Native.GetClientRect(window, out var rect);
                     Native.FillRect(dc, ref rect, 6);
+                    if (window == inputWindow) return 0;
                     rect.Left += 16; rect.Top += 16; rect.Right -= 16;
                     Native.SetTextColor(dc, 0); Native.SetBkMode(dc, 1);
                     Native.DrawTextW(dc, caption, -1, ref rect, 0x10);
@@ -405,10 +446,13 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     public void Dispose()
     {
         if (disposed) return;
+        if (inputRegistered) { int hr = Native.RevokeDragDrop(inputWindow); Log("RevokeInputDragDrop", new { hr }); inputRegistered = false; }
         if (registered) { int hr = Native.RevokeDragDrop(hwnd); Log("RevokeDragDrop", new { hr }); registered = false; }
         if (activationRegistered) Native.UnregisterHotKey(hwnd, 8);
         if (rejectionRegistered) Native.UnregisterHotKey(hwnd, 9);
+        presentationReady = false;
         presentation?.Dispose();
+        if (inputWindow != 0) { Native.DestroyWindow(inputWindow); inputWindow = 0; }
         if (hwnd != 0) Native.DestroyWindow(hwnd);
         Native.UnregisterClassW(className, Native.GetModuleHandleW(null));
         if (oleInitialized) Native.OleUninitialize();

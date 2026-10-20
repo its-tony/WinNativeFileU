@@ -148,6 +148,7 @@ public sealed class NativeReceiverTests
         var data = new FixtureDataObject([file]);
         using (var target = new DragOverlay(fixtures, log, true, () => new(true, false), presentation: presentation))
         {
+            Assert.NotEqual(0, target.InputWindow);
             target.Arm();
             uint effect = 7;
             target.DragEnter(data, 1, default, ref effect);
@@ -165,6 +166,8 @@ public sealed class NativeReceiverTests
         Assert.True(presentation.Disposed);
         var events = File.ReadLines(log).Select(line => JsonDocument.Parse(line).RootElement.Clone()).ToArray();
         var accepted = events.Where(e => e.GetProperty("name").GetString() == "DropAccepted").ToArray();
+        Assert.Contains(events, e => e.GetProperty("name").GetString() == "RegisterInputDragDrop" && e.GetProperty("details").GetProperty("hr").GetInt32() == 0);
+        Assert.Contains(events, e => e.GetProperty("name").GetString() == "RevokeInputDragDrop" && e.GetProperty("details").GetProperty("hr").GetInt32() == 0);
         Assert.Equal(scenario is "sector" or "centerThenSector" ? 1 : 0, accepted.Length);
         if (accepted.Length > 0)
         {

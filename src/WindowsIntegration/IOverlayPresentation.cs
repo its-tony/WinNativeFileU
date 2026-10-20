@@ -5,6 +5,7 @@ public interface IOverlayPresentation : IDisposable
 {
     int WidthDip { get; }
     int HeightDip { get; }
+    bool IsCircular => false;
     void Initialize(nint parentWindow);
     void Resize(int clientWidth, int clientHeight);
     void Reset();
