@@ -1,5 +1,5 @@
 {
-  "scope": "M2 radial Explorer receipt/reentry verified; milestone incomplete",
+  "scope": "M2 bounded radial prototype accepted2026-10-20; no conversion/general accessibility qualification",
   "build": {
     "exitCode": 0,
     "warnings": 0,
@@ -28,10 +28,6 @@
     "rejection blocks acceptance",
     "work area placement"
   ],
-  "pending": [
-    "final held-gated valid sector delivery and shutdown",
-    "physical high contrast/screen reader/other displays"
-  ],
   "privateEvidence": [
     "m2-ole-build-01.json",
     "m2-ole-build-02.json",
@@ -52,12 +48,38 @@
     "m2-input-final-01.jsonl",
     "m2-input-close-result-01.json",
     "m2-held-ready-01.jsonl",
-    "m2-held-ready-result-01.json"
+    "m2-held-ready-result-01.json",
+    "m2-completion-final-01.jsonl",
+    "m2-completion-result-01.json"
   ],
   "limits": [
     "Owner-confirmed reception; not aesthetic acceptance",
     "Relevant Armed sampled mouse-up; Enter9/Drop8 retain Control",
     "Gate disabled; no released-key gesture claim",
     "No conversion or sample-format compatibility claim"
+  ],
+  "finalTrial": {
+    "gatedBatches": 4,
+    "filesPerBatch": 2,
+    "recordedFinalFormat": "PNG",
+    "requestedFormat": "JPEG",
+    "dropKeys": [
+      40,
+      40,
+      0,
+      40
+    ],
+    "foregroundPreserved": true,
+    "revokeInputHr": 0,
+    "revokeParentHr": 0,
+    "windowAbsent": true,
+    "postCloseManifestUnchanged": true
+  },
+  "validationLimits": [
+    "Physical screen reader/high contrast/other displays not tested",
+    "No intermediate key-up trace before mouse-up; oneDrop0 and3Drop40",
+    "No JPEG receipt claim; requested JPEG differs from final PNG",
+    "Preview accessibility/settings are local visual workflow, not conversion",
+    "No performance/reliability/appearance approval"
   ]
 }

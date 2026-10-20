@@ -348,7 +348,7 @@
     },
     {
       "id": "M2_OLE_DESKTOP",
-      "state": "EN_PROGRESO",
+      "state": "VERIFICADO",
       "attempts": 4,
       "equivalent_failures": 1,
       "evidence": [
@@ -361,11 +361,25 @@
         "evidence\\private\\m2-input-center-escape-result-01.json",
         "evidence\\private\\m2-input-close-result-01.json",
         "evidence\\private\\m2-held-launch-01.json",
-        "evidence\\private\\m2-held-ready-result-01.json"
+        "evidence\\private\\m2-held-ready-result-01.json",
+        "evidence\\private\\m2-completion-result-01.json"
       ],
       "success_criterion": "Island ready/noactivate control then actual Explorer radial selection and rejection",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Final held gate Ready/Register0/Letters and actual disabled Arm; idle hotkey declined with no Armed. Prior center/Escape/reject/input shutdown verified; need final held valid sector delivery."
+      "next_step": "M2 bounded native radial integration verified:4held-gated Explorer batches count2/COPY1/PNG,one Drop keys0 and3keys40; focus/work area DPI144 preserved. Owner success confirmed, requested JPEG differs from recorded PNG and is not claimed. Center/Escape/reject/reentry antecedents retained. Normal input+parent Revoke0, fresh window absence and post-close unchanged manifest.60prior tests/source unchanged; no conversion/general accessibility qualification."
+    },
+    {
+      "id": "M2_ACCEPTANCE",
+      "state": "VERIFICADO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m2-completion-path-review-01.json",
+        "evidence\\private\\m2-completion-review-01.json"
+      ],
+      "success_criterion": "Review scoped M2 report, actual evidence, source/test identity, privacy and local documentation commit",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Reviewed seven-task M2 prototype matrix,4real gated PNG batches/requestedJPEG and keys40/40/0/40 limits,earlier finals and normal Revoke0/window absent/hash preservation. Static reference/evidence/privacy checks pass,source unchanged/prior60green. M2 scoped completion documented; M3 needs new instruction."
     }
   ],
   "history": [
@@ -1784,6 +1798,39 @@
       "evidence": "evidence\\private\\m2-held-ready-result-01.json",
       "sha256": "a3261897fa5f5ff9c24f056847a146e5c193282f110aae0ef3c49232841ed725",
       "note": "Final held gate Ready/Register0/Letters and actual disabled Arm; idle hotkey declined with no Armed. Prior center/Escape/reject/input shutdown verified; need final held valid sector delivery."
+    },
+    {
+      "at": "2026-10-20T10:26:18.875555-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "VERIFICADO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-completion-result-01.json",
+      "sha256": "e6af6c665c47884c374ce86d421928781719ff7923b083f0aee39578442946fd",
+      "note": "M2 bounded native radial integration verified:4held-gated Explorer batches count2/COPY1/PNG,one Drop keys0 and3keys40; focus/work area DPI144 preserved. Owner success confirmed, requested JPEG differs from recorded PNG and is not claimed. Center/Escape/reject/reentry antecedents retained. Normal input+parent Revoke0, fresh window absence and post-close unchanged manifest.60prior tests/source unchanged; no conversion/general accessibility qualification."
+    },
+    {
+      "at": "2026-10-20T10:28:38.495735-06:00",
+      "id": "M2_ACCEPTANCE",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T10:28:38.830591-06:00",
+      "id": "M2_ACCEPTANCE",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-completion-path-review-01.json",
+      "sha256": "7928847d87889dfb9660012b30c0c8163064cfaaf15c248327828c96b07312b5",
+      "note": "Review candidate path policy and whitespace after scoped M2 report; manual evidence/content review still required before acceptance commit"
+    },
+    {
+      "at": "2026-10-20T10:30:05.016913-06:00",
+      "id": "M2_ACCEPTANCE",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-completion-review-01.json",
+      "sha256": "db572849163c69241ba35b334f6b9ef8db1fea3c47c51f0729636b52424313e9",
+      "note": "Reviewed seven-task M2 prototype matrix,4real gated PNG batches/requestedJPEG and keys40/40/0/40 limits,earlier finals and normal Revoke0/window absent/hash preservation. Static reference/evidence/privacy checks pass,source unchanged/prior60green. M2 scoped completion documented; M3 needs new instruction."
     }
   ]
 }

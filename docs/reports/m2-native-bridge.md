@@ -1,6 +1,6 @@
 # M2 — Puente radial nativo en validación
 
-Implementación inicial9147737, corrección96fb9d7. Estado: recepción radial real verificada; M2 sigue parcial. Las etiquetas son ejemplos y no se realiza conversión.
+Implementación inicial9147737, corrección96fb9d7. Historial de integración; aceptación final acotada en [m2-completion.md](m2-completion.md),2026-10-20. Las etiquetas son ejemplos y no se realiza conversión.
 
 Build Windows m2-ole-build-02.json: salida0,0advertencias/errores,60tests aprobados (27Core+33integración). Cuatro pruebas nuevas verifican con presentación sintética sector aceptado, centro inicial seguido de sector, sector seguido de Drop en centro y rechazo explícito; tres casos numéricos cubren ubicación radial. El conjunto anterior de fixtures/efectos/cancelación sigue aprobado. No equivale a despacho Explorer ni a pruebas físicas de escalas.
 
@@ -18,4 +18,4 @@ Centro/rechazo/Escape corroborados por el propietario y el diario m2-input-cente
 
 El run corregido anterior cerró: RevokeInputDragDrop0 y RevokeDragDrop0, inventario posterior sin ventana y manifiesto post-cierre intacto (m2-input-final-01.jsonl/m2-input-close-result-01.json). No es una auditoría universal de recursos. La parada de Computer Use por Escape se respetó; el20 de octubre se reanudó por instrucción explícita.
 
-Última validación: nuevo run RequireHeldActivation=true, ambos registros0 y Ready STA/Letters. UI real con Arm deshabilitado; CtrlAltD idle produce ActivationDeclined sin Armed. Evidencia m2-held-ready-01.jsonl/m2-held-ready-result-01.json; pendiente entrega válida y cierre de este run según [protocolo](../verification/m2-manual-protocol.md). Alto contraste, lector de pantalla y otras configuraciones físicas siguen sin validar. Aceptación estética aún no establecida por el éxito funcional. M3 permanece fuera de alcance.
+Última validación: RequireHeldActivation=true, ambos registros0/Ready STA/Letters, Arm deshabilitado e idle ActivationDeclined. Después cuatro activaciones retenidas conservan foco y reciben lotes de2; formato final PNG en todas, keys40/40/0/40. Se conserva la discrepancia con el JPEG solicitado, sin afirmar recepción JPEG ni ocultar modificadoras retenidas. Cierre final con ambos Revoke0, ventana ausente y manifiesto intacto. Evidencia m2-completion-final-01.jsonl/m2-completion-result-01.json. Alto contraste, lector de pantalla y otras configuraciones físicas siguen sin validar; no aprobación estética final por inferencia del éxito funcional. M3 requiere instrucción nueva.

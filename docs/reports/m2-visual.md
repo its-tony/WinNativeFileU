@@ -1,6 +1,6 @@
 # M2 — Primera superficie radial
 
-Estado: preview verificado en Windows; M2 sigue en curso. No recepción Explorer ni conversión en este modo.
+Informe histórico del19 de octubre: preview verificado en Windows. El20 se completó M2 en el alcance del [informe de aceptación](m2-completion.md). No recepción Explorer ni conversión en este modo de preview.
 
 Componente WinUI con siete sectores de ejemplo, centro y huecos sin acción, selección separada de confirmación, flechas/Home/End/Enter/Space/Escape y botones con nombres accesibles. Ventana ajustable con temas System/Light/Dark, tamaño320..480, opción Reduce motion y Acrylic administrado por Windows con fallback sólido. No modifica preferencias Windows ni registra teclas globales.
 

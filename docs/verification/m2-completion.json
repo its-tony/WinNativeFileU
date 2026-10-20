@@ -1,0 +1,69 @@
+{
+  "state": "VERIFICADO",
+  "scope": "M2 bounded Windows radial prototype",
+  "date": "2026-10-20",
+  "report": "docs/reports/m2-completion.md",
+  "sourceCommit": "96fb9d7",
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "passed": 60,
+    "core": 27,
+    "integration": 33,
+    "rerunOnClosure": false,
+    "sourceUnchanged": true
+  },
+  "features": [
+    "radial layout",
+    "WinUI Acrylic with fallback",
+    "sector selection",
+    "animations and motion preference",
+    "preview themes",
+    "preview keyboard and UIA semantics",
+    "preview size and bounded native position"
+  ],
+  "finalExplorerTrial": {
+    "gatedBatches": 4,
+    "filesPerBatch": 2,
+    "recordedFinalFormat": "PNG",
+    "requestedFormat": "JPEG",
+    "dropKeys": [
+      40,
+      40,
+      0,
+      40
+    ],
+    "foregroundPreserved": true,
+    "revokeInputHr": 0,
+    "revokeParentHr": 0,
+    "windowAbsent": true,
+    "postCloseManifestUnchanged": true
+  },
+  "otherObserved": [
+    "PNG batch/Unicode",
+    "outside Leave/reentry",
+    "center NONE without receipt",
+    "Escape closes thumbnail and radial",
+    "explicit rejection latch/Leave without receipt"
+  ],
+  "limits": [
+    "Physical screen reader/high contrast/other displays not tested",
+    "No intermediate key-up trace before mouse-up; oneDrop0 and3Drop40",
+    "No JPEG receipt claim; requested JPEG differs from final PNG",
+    "Preview accessibility/settings are local visual workflow, not conversion",
+    "No performance/reliability/appearance approval",
+    "One physical DPI144 display",
+    "Fixtures only; example formats imply no converters",
+    "Outside release may require explicit close",
+    "F8 physical unresolved; Letters used"
+  ],
+  "nextMilestone": "M3, not authorized or started",
+  "privateEvidence": [
+    "m2-input-build-01.json",
+    "m2-input-core-01.trx",
+    "m2-input-integration-01.trx",
+    "m2-completion-final-01.jsonl",
+    "m2-completion-result-01.json"
+  ]
+}
