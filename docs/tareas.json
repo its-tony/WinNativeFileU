@@ -333,29 +333,39 @@
     {
       "id": "M2_OLE_BUILD",
       "state": "VERIFICADO",
-      "attempts": 2,
-      "equivalent_failures": 1,
+      "attempts": 3,
+      "equivalent_failures": 0,
       "evidence": [
         "evidence\\private\\m2-ole-build-01.json",
         "evidence\\private\\m2-ole-build-02.json",
-        "evidence\\private\\m2-ole-build-02.json"
+        "evidence\\private\\m2-ole-build-02.json",
+        "evidence\\private\\m2-input-build-01.json",
+        "evidence\\private\\m2-input-build-01.json"
       ],
       "success_criterion": "Optional radial presentation compiles and native selection/drop boundary regressions pass",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Reviewed locked restore/build0,0warnings/errors,60passed:27Core+33integration. Four new radial selection/drop native callbacks plus3placement cases; fake presentation does not prove XAML OLE dispatch or Explorer."
+      "next_step": "Changed native input plane build0,0warnings/errors;60tests passed27Core33integration. Four radial callbacks now verify own child Register/Revoke0; no actual Explorer dispatcher claim."
     },
     {
       "id": "M2_OLE_DESKTOP",
       "state": "EN_PROGRESO",
-      "attempts": 1,
-      "equivalent_failures": 0,
+      "attempts": 4,
+      "equivalent_failures": 1,
       "evidence": [
         "evidence\\private\\m2-ole-launch-01.json",
-        "evidence\\private\\m2-ole-ready-result-01.json"
+        "evidence\\private\\m2-ole-ready-result-01.json",
+        "evidence\\private\\m2-ole-owner-failure-result-01.json",
+        "evidence\\private\\m2-input-launch-01.json",
+        "evidence\\private\\m2-input-ready-result-01.json",
+        "evidence\\private\\m2-input-png-result-01.json",
+        "evidence\\private\\m2-input-center-escape-result-01.json",
+        "evidence\\private\\m2-input-close-result-01.json",
+        "evidence\\private\\m2-held-launch-01.json",
+        "evidence\\private\\m2-held-ready-result-01.json"
       ],
       "success_criterion": "Island ready/noactivate control then actual Explorer radial selection and rejection",
       "abandon_condition": "Two equivalent failures require new evidence",
-      "next_step": "Real island Ready/Register0/rendered at144; idle hotkey preserves foreground and CancelIdle works. Need physical Explorer radial delivery before integration acceptance; no retry of blocked cross-window automation."
+      "next_step": "Final held gate Ready/Register0/Letters and actual disabled Arm; idle hotkey declined with no Armed. Prior center/Escape/reject/input shutdown verified; need final held valid sector delivery."
     }
   ],
   "history": [
@@ -1658,6 +1668,122 @@
       "evidence": "evidence\\private\\m2-ole-ready-result-01.json",
       "sha256": "d194a29ac07576c9f98233537f6194d72fad4b6698f6a2cbf01a8d49b1071a99",
       "note": "Real island Ready/Register0/rendered at144; idle hotkey preserves foreground and CancelIdle works. Need physical Explorer radial delivery before integration acceptance; no retry of blocked cross-window automation."
+    },
+    {
+      "at": "2026-10-19T22:08:33.611521-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-ole-owner-failure-result-01.json",
+      "sha256": "b75c67849416ca56da786b0899d7bc825a14fa63bffdfaba883eac9a75e54532",
+      "note": "Owner confirms no highlight/receipt and poor static-looking presentation. Snapshot has held activation and preserved Explorer foreground but0Enter/Over/DropAccepted. Old parent-only route failed; do not repeat unchanged. Investigate owned input plane without replacing framework registration."
+    },
+    {
+      "at": "2026-10-19T22:10:45.143995-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\WindowsIntegration\\DragOverlay.cs",
+      "sha256": "bd126c6f3aa254e4fa6303d5b513af033a2ce5a0273d85233300e75613ece0a8",
+      "note": "New input route after real owner failure: own alpha1 layered child registered OLE above island, native hit diagnostics, paired revocation, circular compact presentation and correct M2 title; rebuild all regressions"
+    },
+    {
+      "at": "2026-10-19T22:11:02.598416-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T22:11:45.415890-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-build-01.json",
+      "sha256": "cdb149c67664fbfab8a8aa89e654a162d64a497c031ec7f653722c6d2b6b0fe9",
+      "note": "Build changed owned native input plane and compact circular radial after0callbacks real failure; inspect tests before runtime claim"
+    },
+    {
+      "at": "2026-10-19T22:12:08.619864-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-build-01.json",
+      "sha256": "cdb149c67664fbfab8a8aa89e654a162d64a497c031ec7f653722c6d2b6b0fe9",
+      "note": "Changed native input plane build0,0warnings/errors;60tests passed27Core33integration. Four radial callbacks now verify own child Register/Revoke0; no actual Explorer dispatcher claim."
+    },
+    {
+      "at": "2026-10-19T22:12:11.816053-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T22:12:12.949407-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-launch-01.json",
+      "sha256": "d2f5d61fcad27e0b58d8d945ac805fe580f6e4d7a2ff5c56179f5b04d10e4f22",
+      "note": "New route after parent-only0callbacks failure: owned layered child OLE input surface, smaller circular radial; inspect native hit-test and actual UI before physical retrial"
+    },
+    {
+      "at": "2026-10-19T22:12:58.537003-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-ready-result-01.json",
+      "sha256": "eacd83dd1340f1a4fab02e4262697a88bbd64c686d531ccc398861bc6baef44b",
+      "note": "Changed route: own child OLE registration0 and WindowFromPoint atInput true verified at idle; circular400DIP rendered, focus preserved and idle reject works. New physical Explorer trial needed; old parent-only failure retained."
+    },
+    {
+      "at": "2026-10-19T22:15:46.899545-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-png-result-01.json",
+      "sha256": "e5348b09051a1adf599cff4a0c73c8971527e90b67cfd8cd828bb4a98fd5275d",
+      "note": "Owner success corroborated: real Explorer2files/Unicode, radial changes, Leave held outside/reentry, DropAccepted PNG/COPY1/previewOnly and unchanged hashes. Armed mouse-up, Enter9/Drop8 so no during-drag/released-key claim; center/Escape/reject and gate pending."
+    },
+    {
+      "at": "2026-10-19T22:17:09.785486-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-center-escape-result-01.json",
+      "sha256": "fc6718a6564b10e3a9097255bbdc181875e1d390e85379478a6caf53fc5b52bf",
+      "note": "Owner and real journal corroborate center NONE/no acceptance, explicit reject Tracking latch/Leave and Escape-down Leave closes. Held activation/focus immediate data corroborated, gate off. Final held-gated positive delivery and shutdown remain."
+    },
+    {
+      "at": "2026-10-20T10:09:24.940768-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-input-close-result-01.json",
+      "sha256": "44b8175071880c9e98b716e4d836a8189f58942a90b4e2e068cdf3a9368a8901",
+      "note": "Previous corrected run now has input/parent Revoke0, fresh window absence and post-close unchanged manifest. Center/Escape/reject corroborated already; only final held-gated valid drop and closure remain for integration acceptance."
+    },
+    {
+      "at": "2026-10-20T10:09:29.148786-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T10:09:30.027397-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-held-launch-01.json",
+      "sha256": "36ea49ca202e5d747eb4737084f5669295d3782db5d73cc9e3721ace858da140",
+      "note": "Final discriminating held-gate radial run; source96fb9d7 and60passing tests unchanged, inspect Ready and idle decline before physical valid sector drop"
+    },
+    {
+      "at": "2026-10-20T10:10:11.319933-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-held-ready-result-01.json",
+      "sha256": "a3261897fa5f5ff9c24f056847a146e5c193282f110aae0ef3c49232841ed725",
+      "note": "Final held gate Ready/Register0/Letters and actual disabled Arm; idle hotkey declined with no Armed. Prior center/Escape/reject/input shutdown verified; need final held valid sector delivery."
     }
   ]
 }

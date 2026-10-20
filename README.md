@@ -18,7 +18,7 @@ An optional native radial bridge is under validation (60 tests passing, includin
 pwsh -NoProfile -File scripts/start-prototype.ps1 -ShortcutProfile Letters -Radial
 ```
 
-This hosts WinUI inside the native fixture receiver and records the selected example format. Startup and idle focus preservation are observed; actual Explorer delivery over the WinUI child is pending. See the [M2 protocol](docs/verification/m2-manual-protocol.md). It performs no file conversion.
+This hosts WinUI inside the native fixture receiver and records the selected example format. A registered native input child now sits above the visual island, after the parent-only route failed. Actual Explorer batch delivery to PNG and reentry are observed, with unchanged originals; center rejection, Escape and explicit rejection are also corroborated. The final held-gate positive delivery remains pending for this radial. The corrected surface is circular and400DIP. See the [M2 report](docs/reports/m2-native-bridge.md) and [protocol](docs/verification/m2-manual-protocol.md). It performs no file conversion.
 
 Latest M1 build passed **42 tests**:16 Core and26 integration (16 hidden native receiver cases,1 profile case and9 placement cases). The held-mouse gate rejects idle/Escape/button prearming and late drops; two real Explorer gated batch trials passed. Original names/counts/lengths/hashes remained unchanged after normal close, RevokeDragDrop hr0 and window absence. F8 physical delivery remains unresolved; Letters is verified. Outside release may keep the receiver visible until explicit rejection, a documented limitation. Historical diagnostics remain in the [M1 continuation report](docs/reports/m1-resume.md).
 

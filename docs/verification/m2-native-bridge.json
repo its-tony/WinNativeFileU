@@ -1,8 +1,63 @@
 {
-  "scope": "M2 native radial bridge, partial; milestone incomplete",
-  "build": {"exitCode": 0, "warnings": 0, "errors": 0, "passed": 60, "core": 27, "integration": 33},
-  "observed": ["WinUI island in native receiver", "PresentationReady and RegisterDragDrop S_OK", "STA Ready", "idle activation preserves foreground", "idle rejection closes session", "DPI144 and 460DIP radial surface"],
-  "syntheticCoverage": ["radial drop recomputes sector", "center rejects stale selection", "rejection blocks acceptance", "work area placement"],
-  "pending": ["Explorer dispatch over WinUI child", "actual selected-format delivery", "radial rejection/reentry/Escape", "held gate on radial", "normal island shutdown", "physical accessibility and other display configurations"],
-  "privateEvidence": ["m2-ole-build-01.json", "m2-ole-build-02.json", "m2-ole-core-02.trx", "m2-ole-integration-02.trx", "m2-ole-ready-01.jsonl", "m2-ole-ready-result-01.json"]
+  "scope": "M2 radial Explorer receipt/reentry verified; milestone incomplete",
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "passed": 60,
+    "core": 27,
+    "integration": 33
+  },
+  "observed": [
+    "Own native child and parent OLE registration S_OK",
+    "WindowFromPoint atInput true",
+    "circular400DIP surface at DPI144",
+    "idle activation preserves foreground",
+    "real Explorer receipt2files/Unicode with selectedFormat PNG and COPY1",
+    "held-button outside Leave and reentry",
+    "unchanged fixture manifests",
+    "center NONE/no acceptance corroborated by owner and Leave",
+    "explicit rejection during Tracking latches then Leave without acceptance",
+    "Escape-down Leave closes native radial; owner confirms thumbnail gone",
+    "prior run input/parent Revoke S_OK, subsequent window absence and post-close hashes unchanged",
+    "new held-gate run Ready and idle ActivationDeclined, Arm disabled"
+  ],
+  "syntheticCoverage": [
+    "radial drop recomputes sector",
+    "center rejects stale selection",
+    "rejection blocks acceptance",
+    "work area placement"
+  ],
+  "pending": [
+    "final held-gated valid sector delivery and shutdown",
+    "physical high contrast/screen reader/other displays"
+  ],
+  "privateEvidence": [
+    "m2-ole-build-01.json",
+    "m2-ole-build-02.json",
+    "m2-ole-core-02.trx",
+    "m2-ole-integration-02.trx",
+    "m2-ole-ready-01.jsonl",
+    "m2-ole-ready-result-01.json",
+    "m2-ole-owner-failure-01.jsonl",
+    "m2-ole-failed-run-final-01.jsonl",
+    "m2-input-build-01.json",
+    "m2-input-core-01.trx",
+    "m2-input-integration-01.trx",
+    "m2-input-ready-01.jsonl",
+    "m2-input-png-success-01.jsonl",
+    "m2-input-png-result-01.json",
+    "m2-input-center-escape-01.jsonl",
+    "m2-input-center-escape-result-01.json",
+    "m2-input-final-01.jsonl",
+    "m2-input-close-result-01.json",
+    "m2-held-ready-01.jsonl",
+    "m2-held-ready-result-01.json"
+  ],
+  "limits": [
+    "Owner-confirmed reception; not aesthetic acceptance",
+    "Relevant Armed sampled mouse-up; Enter9/Drop8 retain Control",
+    "Gate disabled; no released-key gesture claim",
+    "No conversion or sample-format compatibility claim"
+  ]
 }
