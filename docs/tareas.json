@@ -329,6 +329,33 @@
       "success_criterion": "Real preview UI shows radial sectors and verified theme/keyboard/selection/size behavior; not OLE integration or conversion",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Corrected build04 preview observed: legible Light/System and Dark, initial status visible, PNG accessible actual status, ReduceMotion log and normal Closed. Prior keyboard verified in03; no screen reader/system high contrast/Explorer integration claim."
+    },
+    {
+      "id": "M2_OLE_BUILD",
+      "state": "VERIFICADO",
+      "attempts": 2,
+      "equivalent_failures": 1,
+      "evidence": [
+        "evidence\\private\\m2-ole-build-01.json",
+        "evidence\\private\\m2-ole-build-02.json",
+        "evidence\\private\\m2-ole-build-02.json"
+      ],
+      "success_criterion": "Optional radial presentation compiles and native selection/drop boundary regressions pass",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Reviewed locked restore/build0,0warnings/errors,60passed:27Core+33integration. Four new radial selection/drop native callbacks plus3placement cases; fake presentation does not prove XAML OLE dispatch or Explorer."
+    },
+    {
+      "id": "M2_OLE_DESKTOP",
+      "state": "EN_PROGRESO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m2-ole-launch-01.json",
+        "evidence\\private\\m2-ole-ready-result-01.json"
+      ],
+      "success_criterion": "Island ready/noactivate control then actual Explorer radial selection and rejection",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Real island Ready/Register0/rendered at144; idle hotkey preserves foreground and CancelIdle works. Need physical Explorer radial delivery before integration acceptance; no retry of blocked cross-window automation."
     }
   ],
   "history": [
@@ -1568,6 +1595,69 @@
       "evidence": "evidence\\private\\m2-visual-result-04.json",
       "sha256": "997cddb9c3cded72ed624907132dc61ec2aa8bdf56f334d5901076193095259f",
       "note": "Corrected build04 preview observed: legible Light/System and Dark, initial status visible, PNG accessible actual status, ReduceMotion log and normal Closed. Prior keyboard verified in03; no screen reader/system high contrast/Explorer integration claim."
+    },
+    {
+      "at": "2026-10-19T21:52:28.773460-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:52:38.465324-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-ole-build-01.json",
+      "sha256": "d41af689c17033c46c43dbd4fcadd456d0510aad64958255b558a89882efdbd7",
+      "note": "Compile optional WinUI island/native selection bridge and synthetic radial drop boundary cases; no real Explorer claim"
+    },
+    {
+      "at": "2026-10-19T21:53:06.866342-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:53:44.044743-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-ole-build-02.json",
+      "sha256": "54e639944a8bc8177aacf8bba30180910f85e6556a6ac8de57c48e36fd9d1b20",
+      "note": "First sandbox invocation exited1 with empty output and no new artifacts; use reviewed Windows build execution scope used by successful visual build04, inspect compiler/tests before acceptance"
+    },
+    {
+      "at": "2026-10-19T21:54:00.463868-06:00",
+      "id": "M2_OLE_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-ole-build-02.json",
+      "sha256": "54e639944a8bc8177aacf8bba30180910f85e6556a6ac8de57c48e36fd9d1b20",
+      "note": "Reviewed locked restore/build0,0warnings/errors,60passed:27Core+33integration. Four new radial selection/drop native callbacks plus3placement cases; fake presentation does not prove XAML OLE dispatch or Explorer."
+    },
+    {
+      "at": "2026-10-19T21:54:04.884347-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:54:06.112478-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-ole-launch-01.json",
+      "sha256": "cb86e57540e05d154edb7d45cd92014ddc7ba9103915380a760006d7e225b368",
+      "note": "Launch optional radial island receiver with Letters and fresh disposable fixtures; inspect Ready, presentation and actual UI before gestures"
+    },
+    {
+      "at": "2026-10-19T21:54:51.095032-06:00",
+      "id": "M2_OLE_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-ole-ready-result-01.json",
+      "sha256": "d194a29ac07576c9f98233537f6194d72fad4b6698f6a2cbf01a8d49b1071a99",
+      "note": "Real island Ready/Register0/rendered at144; idle hotkey preserves foreground and CancelIdle works. Need physical Explorer radial delivery before integration acceptance; no retry of blocked cross-window automation."
     }
   ]
 }

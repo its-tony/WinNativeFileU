@@ -12,6 +12,14 @@ M2 is in progress. The separate radial visual preview builds with **53 passing t
 pwsh -NoProfile -File scripts/start-radial-preview.ps1
 ```
 
+An optional native radial bridge is under validation (60 tests passing, including synthetic selection/drop boundaries):
+
+```powershell
+pwsh -NoProfile -File scripts/start-prototype.ps1 -ShortcutProfile Letters -Radial
+```
+
+This hosts WinUI inside the native fixture receiver and records the selected example format. Startup and idle focus preservation are observed; actual Explorer delivery over the WinUI child is pending. See the [M2 protocol](docs/verification/m2-manual-protocol.md). It performs no file conversion.
+
 Latest M1 build passed **42 tests**:16 Core and26 integration (16 hidden native receiver cases,1 profile case and9 placement cases). The held-mouse gate rejects idle/Escape/button prearming and late drops; two real Explorer gated batch trials passed. Original names/counts/lengths/hashes remained unchanged after normal close, RevokeDragDrop hr0 and window absence. F8 physical delivery remains unresolved; Letters is verified. Outside release may keep the receiver visible until explicit rejection, a documented limitation. Historical diagnostics remain in the [M1 continuation report](docs/reports/m1-resume.md).
 
 Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.

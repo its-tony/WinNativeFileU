@@ -1,0 +1,8 @@
+{
+  "scope": "M2 native radial bridge, partial; milestone incomplete",
+  "build": {"exitCode": 0, "warnings": 0, "errors": 0, "passed": 60, "core": 27, "integration": 33},
+  "observed": ["WinUI island in native receiver", "PresentationReady and RegisterDragDrop S_OK", "STA Ready", "idle activation preserves foreground", "idle rejection closes session", "DPI144 and 460DIP radial surface"],
+  "syntheticCoverage": ["radial drop recomputes sector", "center rejects stale selection", "rejection blocks acceptance", "work area placement"],
+  "pending": ["Explorer dispatch over WinUI child", "actual selected-format delivery", "radial rejection/reentry/Escape", "held gate on radial", "normal island shutdown", "physical accessibility and other display configurations"],
+  "privateEvidence": ["m2-ole-build-01.json", "m2-ole-build-02.json", "m2-ole-core-02.trx", "m2-ole-integration-02.trx", "m2-ole-ready-01.jsonl", "m2-ole-ready-result-01.json"]
+}
