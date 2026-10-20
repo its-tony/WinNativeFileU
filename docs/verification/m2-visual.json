@@ -1,0 +1,7 @@
+{
+  "scope": "M2 visual preview only; milestone incomplete",
+  "build": {"exitCode": 0, "warnings": 0, "errors": 0, "passed": 53, "core": 27, "integration": 26},
+  "observed": ["Light/System and Dark legibility", "PNG confirmation and actual accessible status text", "Right/Enter/Escape in prior runtime", "ReduceMotion enabled event", "normal Closed event"],
+  "pending": ["radial OLE integration", "Explorer focus and gesture", "physical high contrast", "screen reader", "multiple physical displays and DPI"],
+  "privateEvidence": ["m2-visual-build-04.json", "m2-visual-core-04.trx", "m2-visual-integration-04.trx", "m2-visual-final-04.jsonl", "m2-visual-result-04.json"]
+}

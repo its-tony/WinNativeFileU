@@ -291,6 +291,44 @@
       "success_criterion": "Windows locked build and held-activation gate/native fixture/placement regressions pass; no Explorer claim from tests",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Locked restore/build0,0warnings/errors;42passed:16Core+16hidden native receiver+1profile+9placement. Gate denies idle/Escape/button prearm and rejects late drops; held case accepts. Geometry scales/extreme coordinates tested synthetically; Explorer/display runtime still pending."
+    },
+    {
+      "id": "M2_VISUAL_BUILD",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m2-visual-build-01.json",
+        "evidence\\private\\m2-visual-build-01.json",
+        "evidence\\private\\m2-visual-build-02.json",
+        "evidence\\private\\m2-visual-build-02.json",
+        "evidence\\private\\m2-visual-build-03.json",
+        "evidence\\private\\m2-visual-build-03.json",
+        "evidence\\private\\m2-visual-build-04.json",
+        "evidence\\private\\m2-visual-build-04.json"
+      ],
+      "attempts": 4,
+      "equivalent_failures": 0,
+      "success_criterion": "WinUI radial preview and pure selection regressions build/pass on Windows; actual UI inspection separate from OLE integration",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Observed contrast/status/height fixes compile with53passed tests,0warnings/errors; actual revised UI pending"
+    },
+    {
+      "id": "M2_VISUAL_DESKTOP",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m2-visual-launch-01.json",
+        "evidence\\private\\m2-visual-startup-failure-01.json",
+        "evidence\\private\\m2-visual-launch-02.json",
+        "evidence\\private\\m2-02f50b262a2e40a898a3b740b561c9f2\\events.jsonl.failure.json",
+        "evidence\\private\\m2-visual-launch-03.json",
+        "evidence\\private\\m2-visual-first-ui-result-01.json",
+        "evidence\\private\\m2-visual-launch-04.json",
+        "evidence\\private\\m2-visual-result-04.json"
+      ],
+      "attempts": 7,
+      "equivalent_failures": 1,
+      "success_criterion": "Real preview UI shows radial sectors and verified theme/keyboard/selection/size behavior; not OLE integration or conversion",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Corrected build04 preview observed: legible Light/System and Dark, initial status visible, PNG accessible actual status, ReduceMotion log and normal Closed. Prior keyboard verified in03; no screen reader/system high contrast/Explorer integration claim."
     }
   ],
   "history": [
@@ -1306,6 +1344,230 @@
       "evidence": "evidence\\private\\m1-completion-result-01.json",
       "sha256": "ec8e858c5ac5454167d15395d512cc92aff8efe147334316085453640f949aa6",
       "note": "M1 scoped feasibility verified:2real gated held-button hotkey activations -> immediate Explorer Enter/Over count2 -> released-key Drop COPY, unchanged foreground/work area DPI144 and hashes. Owner confirms release ordering; first-only Over means intermediate keys1 not captured, limit explicit. Prior Escape/reentry/rejection/outside evidence retained; normal close Revoke0/window absent.42tests green. Owner-authorized M2 may begin, no M3/push."
+    },
+    {
+      "at": "2026-10-19T21:13:30.581247-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:14:17.786377-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-visual-build-01.json",
+      "sha256": "0f8d2b3c3baf3225f0e160b50734552029bdf7505628fac5f52064731a12c66b",
+      "note": "Compile radial WinUI preview and pure geometry/selection tests; inspect real results before UI or OLE claims"
+    },
+    {
+      "at": "2026-10-19T21:14:53.927012-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-visual-build-01.json",
+      "sha256": "0f8d2b3c3baf3225f0e160b50734552029bdf7505628fac5f52064731a12c66b",
+      "note": "Windows locked build0,0warnings/errors;53tests passed27Core+26integration.11new radial cases cover sector labels/gaps/center/invalid geometry, hover-versus-confirm, cancel and navigation wrap. Actual UI/Explorer integration separate."
+    },
+    {
+      "at": "2026-10-19T21:14:54.073669-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:14:54.734507-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m2-visual-launch-01.json",
+      "sha256": "a02d27adb651f7c8960f93c43dad4eafee894d76ee2e2824869a07002fdd0253",
+      "note": "Launch focusable M2 visual preview only; inspect actual UI before claims"
+    },
+    {
+      "at": "2026-10-19T21:16:12.040808-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-visual-startup-failure-01.json",
+      "sha256": "f2598674687da36a36b568347fc4bff1fc8cff25ed59ff73b8dac68ce028f856",
+      "note": "First preview startup crashed before Ready/window. Own Application Error Microsoft.UI.Xaml.dll exception0xc000027b observed; cause not identified. Added exclusive managed failure log, do not repeat unchanged startup.53build/tests remain green, no UI acceptance."
+    },
+    {
+      "at": "2026-10-19T21:16:12.207221-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\App\\App.xaml.cs",
+      "sha256": "d73298a8b0c4aa50d82f79f8565bfaf52762334ae322258cbb0a7808e8394415",
+      "note": "New startup failure recorder needed to diagnose runtime crash; source changed so rebuild before new diagnostic launch"
+    },
+    {
+      "at": "2026-10-19T21:16:12.345634-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:16:31.354070-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-visual-build-02.json",
+      "sha256": "71e45f65ff890791919a3a21be069102085da444890ed3caac579748e8db74df",
+      "note": "Build new exclusive failure recorder after startup crash; UI still unverified"
+    },
+    {
+      "at": "2026-10-19T21:17:11.024686-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m2-visual-build-02.json",
+      "sha256": "71e45f65ff890791919a3a21be069102085da444890ed3caac579748e8db74df",
+      "note": "Changed diagnostic code locked build0 and53tests passed with0warnings/errors; no runtime acceptance"
+    },
+    {
+      "at": "2026-10-19T21:17:11.170053-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:17:11.802982-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-visual-launch-02.json",
+      "sha256": "99bed48b46adcd04c6b72d497e4f6fec0cc5076b85e4943c554af9cfa41b76c5",
+      "note": "Diagnostic startup after adding private exclusive exception recorder; inspect failure evidence before further launch"
+    },
+    {
+      "at": "2026-10-19T21:18:19.619306-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "FALLO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-02f50b262a2e40a898a3b740b561c9f2\\events.jsonl.failure.json",
+      "sha256": "b39b30d295c9ac30b9f35f0968ba97529f5e16ef6d4d172b4a6909613e51ffc4",
+      "note": "Second startup failure captured exact COM0x80070490 subscribing AccessibilitySettings.HighContrastChanged in preview constructor. Close old global subscription strategy after2failures; no UI acceptance."
+    },
+    {
+      "at": "2026-10-19T21:18:19.781478-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "REAPERTURA",
+      "evidence": "src\\App\\RadialPreviewWindow.cs",
+      "sha256": "02df041dc0cf28689d1f149d06b769a0614daa630b1d3d8820abd2af0a11b796",
+      "note": "New proven cause: global contrast event subscription fails. Replaced with official per-window ThemeSettings created after Loaded and lifecycle cleanup; old failed route is not repeated."
+    },
+    {
+      "at": "2026-10-19T21:18:19.934227-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\App\\RadialPreviewWindow.cs",
+      "sha256": "02df041dc0cf28689d1f149d06b769a0614daa630b1d3d8820abd2af0a11b796",
+      "note": "Compile per-window ThemeSettings fix for exact captured startup failure"
+    },
+    {
+      "at": "2026-10-19T21:18:20.087230-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:18:41.229345-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-visual-build-03.json",
+      "sha256": "8f5bca62c02d22570b059993b93c504729c66185cdf8fe20c0cef4077c58f726",
+      "note": "Build corrected per-window contrast lifecycle and prior53regressions; runtime still pending"
+    },
+    {
+      "at": "2026-10-19T21:24:54.993542-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m2-visual-build-03.json",
+      "sha256": "8f5bca62c02d22570b059993b93c504729c66185cdf8fe20c0cef4077c58f726",
+      "note": "Per-window ThemeSettings fix compiled with53passed tests and0warnings/errors; old event subscription failure preserved, actual UI still separate"
+    },
+    {
+      "at": "2026-10-19T21:24:55.155778-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:24:55.854298-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 5,
+      "evidence": "evidence\\private\\m2-visual-launch-03.json",
+      "sha256": "c1054234c43fec9ff3abb6bc2218c4ba8ed0608debc7e5245151ccc902be3d4c",
+      "note": "Changed cause: per-window contrast API after Loaded replaces failed subscription. Inspect actual preview Ready/window."
+    },
+    {
+      "at": "2026-10-19T21:28:01.803832-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "FALLO",
+      "attempt": 6,
+      "evidence": "evidence\\private\\m2-visual-first-ui-result-01.json",
+      "sha256": "834b04463dddf937bedca6818ae186e318f581101e4384880bffb43b85f92f60",
+      "note": "Startup fixed and click/Right/Enter/Escape work. New visual review defect: Dark foreground on light outer backdrop, UIA status fixed name hides text and initial viewport clips status. Source changed to theme Window.Content, legibility tint, actual status name and larger initial height; no repeated unchanged test."
+    },
+    {
+      "at": "2026-10-19T21:28:02.046645-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\App\\RadialPreviewWindow.cs",
+      "sha256": "932717ef7072e0b62f2f66d6fd92ddcd4d9bbfbcd6f26e67312c4e2fc25fc31d",
+      "note": "Changed actual UI defects: outer theme/backdrop, status automation text and initial window height"
+    },
+    {
+      "at": "2026-10-19T21:28:02.268929-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:28:21.262635-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-visual-build-04.json",
+      "sha256": "cbfad1e46ecec0d7ec4c0b4bc29a504e5307f79c16e32dcfb2271ee2f1011dc1",
+      "note": "Compile observed contrast/status/layout fixes; regression suite and real UI follow"
+    },
+    {
+      "at": "2026-10-19T21:29:20.152168-06:00",
+      "id": "M2_VISUAL_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m2-visual-build-04.json",
+      "sha256": "cbfad1e46ecec0d7ec4c0b4bc29a504e5307f79c16e32dcfb2271ee2f1011dc1",
+      "note": "Observed contrast/status/height fixes compile with53passed tests,0warnings/errors; actual revised UI pending"
+    },
+    {
+      "at": "2026-10-19T21:29:20.343649-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-19T21:29:21.223738-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 7,
+      "evidence": "evidence\\private\\m2-visual-launch-04.json",
+      "sha256": "80327e880f89df820c7c67058c09a29d52d1d9873b52144a666f95dd711b4fdc",
+      "note": "Inspect changed outer theme, actual status automation text and initial viewport after observed visual defects"
+    },
+    {
+      "at": "2026-10-19T21:48:50.794694-06:00",
+      "id": "M2_VISUAL_DESKTOP",
+      "event": "VERIFICADO",
+      "attempt": 7,
+      "evidence": "evidence\\private\\m2-visual-result-04.json",
+      "sha256": "997cddb9c3cded72ed624907132dc61ec2aa8bdf56f334d5901076193095259f",
+      "note": "Corrected build04 preview observed: legible Light/System and Dark, initial status visible, PNG accessible actual status, ReduceMotion log and normal Closed. Prior keyboard verified in03; no screen reader/system high contrast/Explorer integration claim."
     }
   ]
 }

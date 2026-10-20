@@ -6,6 +6,12 @@ Current scope: **M1 feasibility complete for local fixtures, Letters shortcuts a
 
 ## Development
 
+M2 is in progress. The separate radial visual preview builds with **53 passing tests** (27 Core,26 integration). Its Light/Dark appearance, selection, keyboard controls and actual accessible status text have been inspected on Windows. Explorer integration remains pending; format labels are visual examples. See the [preview report](docs/reports/m2-visual.md).
+
+```powershell
+pwsh -NoProfile -File scripts/start-radial-preview.ps1
+```
+
 Latest M1 build passed **42 tests**:16 Core and26 integration (16 hidden native receiver cases,1 profile case and9 placement cases). The held-mouse gate rejects idle/Escape/button prearming and late drops; two real Explorer gated batch trials passed. Original names/counts/lengths/hashes remained unchanged after normal close, RevokeDragDrop hr0 and window absence. F8 physical delivery remains unresolved; Letters is verified. Outside release may keep the receiver visible until explicit rejection, a documented limitation. Historical diagnostics remain in the [M1 continuation report](docs/reports/m1-resume.md).
 
 Use the [physical validation protocol](docs/verification/m1-manual-protocol.md) to distinguish button activation from F8 during dragging and to record cancellation, reentry, focus and DPI results.
@@ -77,6 +83,6 @@ No conversion engine project is included.
 Start with [research overview](docs/research/tangerine/overview.md), [sources](docs/research/tangerine/sources.md), [independent specification](docs/functional-specification.md) and [Windows feasibility](docs/research/tangerine/feasibility.md).
 
 R0 → M0 foundation → M1 actual Windows drag feasibility → M2 radial UI → M3 conversion → M4 background integration → M5 beta. **Do not begin the next milestone without the owner's instruction.** Unit tests and a successful build cannot prove an Explorer gesture.
-The owner authorized completing M1 and then proceeding to M2 on2026-10-19; M2 remains gated on M1 verification.
+The owner authorized completing M1 and then proceeding to M2 on2026-10-19; M1 is verified and M2 is underway.
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [MIT license](LICENSE)
