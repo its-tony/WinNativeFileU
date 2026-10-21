@@ -2,11 +2,21 @@
 
 An original open source Windows 11 file utility, inspired by keyboard-assisted contextual workflows. Files will be processed locally. This project is independent of Tangerine and its developer.
 
-Current scope: **M4 resident prototype complete within documented limits**. Settings, hide/restore, a show shortcut, duplicate-instance rejection and actual tray-menu Open/Hide/Exit are verified on Windows. Sign-in startup is an explicit opt-in and was never enabled during tests. See [M4 acceptance and limits](docs/reports/m4-resident.md). M3 PNG ↔ BMP conversion remains in its separate workbench; the M2 radial remains a fixture receipt/selection preview. See [M3 acceptance](docs/reports/m3-completion.md), [M2 acceptance](docs/reports/m2-completion.md), [M1 acceptance](docs/reports/m1-completion.md) and [current status](ESTADO.md).
+Current scope: **M5 integrated conversion prerequisite verified within documented limits; packaging and public beta pending**. The resident connects Windows image/folder pickers and an Explorer radial to PNG ↔ BMP conversion. Real selected-file and radial batches produced six generated color-grid outputs with exact independently checked pixels. Actual Cancel retained one completed file and left no partial files; normal Exit released resources. See [flow acceptance](docs/reports/m5-conversion-flow.md) and [current status](ESTADO.md). Earlier scope and limits remain in the [M4](docs/reports/m4-resident.md), [M3](docs/reports/m3-completion.md), [M2](docs/reports/m2-completion.md) and [M1](docs/reports/m1-completion.md) reports.
 
 ## Development
 
-The latest locked build passed **116 tests**: 46 Core, 45 Windows integration and 25 converters, with no compiler warnings or errors. The tray integration test requires an interactive Windows shell; remote CI has not been run.
+The latest locked build passed **131 tests**: 47 Core, 54 Windows integration and 30 converters, with no compiler warnings or errors. The tray integration test requires an interactive Windows shell; remote CI has not been run.
+
+In the resident, choose an existing local output folder, then use Choose images and Convert selected. Alternatively, start dragging images in Explorer, hold the mouse button, tap and release **Ctrl+Alt+D**, then drop on an enabled PNG/BMP sector. **Ctrl+Alt+X** rejects the drag; Escape cancels at its source. Choose the output folder again each session. One job runs at a time, with up to eight distinct images of the same source format. Mixed formats and same-format copies are rejected. Each result has a unique suffix; existing files are preserved. Cancel conversion requests cancellation of the running job and retains completed results; that button was verified with a real batch. Exit requests cancellation and waits for cleanup; closing to tray keeps the job running. Close during active work remains unverified.
+
+To launch an isolated flow with generated fixtures and startup controls disabled:
+
+```powershell
+pwsh -NoProfile -File scripts/start-image-flow.ps1 -IncludeCancellationFixtures
+```
+
+The optional cancellation fixtures use about384MB of disk. The launcher prints a private session.json path; check originals and partial files with `scripts/check-image-flow.ps1 -SessionFile <session.json>`. That checker verifies hashes, not pixels. See [ADR0011](docs/decisions/0011-selected-image-conversion.md). Header eligibility reads at most32bytes per image and is not complete validation; the worker validates the full container and pixels before publication. No callback latency benchmark has been performed.
 
 Running the App without diagnostic arguments opens resident settings. Close hides the window when the preference is enabled; **Ctrl+Alt+W** or the notification icon opens it again. Choose **Exit WinNativeFileU** to stop the resident. Preferences also allow Ctrl+Alt+Shift+W or no shortcut. A shortcut conflict preserves the old binding. Settings live in LocalAppData/WinNativeFileU, with previous versions preserved on save. Invalid/future settings are preserved and require repair before saving. A duplicate resident for the same settings root/session exits; it does not forward activation.
 
@@ -106,20 +116,20 @@ No input hooks or automatic startup changes are made. Only an explicit action in
 - src/App: WinUI presentation and lifecycle.
 - src/Core: platform-independent domain model; no file I/O.
 - src/Converters: bounded Windows PNG/BMP codecs, local path/container validation and new-output publication.
-- src/WindowsIntegration: fixture-only HWND/OLE target plus separate resident tray/hotkeys/settings/ownership/startup adapters.
+- src/WindowsIntegration: HWND/OLE target with fixture mode or explicit image queue adapter, plus resident tray/hotkeys/settings/ownership/startup adapters.
 - tests/Core.Tests: safety boundaries for activation, accepted data and reset.
 - tests/Converters.Tests: real codec round trips, pixels, hashes, cancellation, collision and error cases.
 - docs/research/tangerine: evidence, functional analysis and Windows feasibility.
 - docs/decisions: architecture decisions.
 - evidence/private: ignored original research/build output; reviewed summaries belong in docs.
 
-The conversion engine is separate from the radial OLE preview; format labels in that preview do not imply engine capabilities.
+The historical seven-label radial preview remains a separate diagnostic mode. The resident uses a two-format PNG/BMP radial connected to the engine; labels in the historical preview do not imply additional codecs.
 
 ## Research and roadmap
 
 Start with [research overview](docs/research/tangerine/overview.md), [sources](docs/research/tangerine/sources.md), [independent specification](docs/functional-specification.md) and [Windows feasibility](docs/research/tangerine/feasibility.md).
 
 R0 → M0 foundation → M1 actual Windows drag feasibility → M2 radial UI → M3 conversion → M4 background integration → M5 beta. **Do not begin the next milestone without the owner's instruction.** Unit tests and a successful build cannot prove an Explorer gesture.
-The owner authorized M1 then M2 on 2026-10-19, M3 and then M4 on 2026-10-20. M1–M4 bounded scopes are verified in their reports. M5 requires a new instruction.
+The owner authorized M1 then M2 on 2026-10-19, and M3, M4 and M5 on 2026-10-20. M1–M4 bounded scopes are verified in their reports. M5 connects the conversion workflow first; installer, distribution review and beta preparation remain pending. No push or publication is authorized.
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [MIT license](LICENSE)

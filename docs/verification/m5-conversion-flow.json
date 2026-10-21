@@ -1,0 +1,34 @@
+{
+  "state": "VERIFICADO",
+  "date": "2026-10-20",
+  "scope": "Bounded M5 integrated conversion prerequisite; full beta milestone remains in progress",
+  "report": "docs/reports/m5-conversion-flow.md",
+  "sourceCommit": "2a0626f",
+  "build": { "lockedRestore": true, "exitCode": 0, "warnings": 0, "errors": 0, "passed": 131, "core": 47, "integration": 54, "converters": 30 },
+  "actualJobs": [
+    { "entry": "Windows pickers", "format": "PNG", "saved": 2, "cancelled": false },
+    { "entry": "Explorer radial", "format": "PNG", "saved": 2, "cancelled": false },
+    { "entry": "Explorer radial", "format": "BMP", "saved": 2, "cancelled": false },
+    { "entry": "Panel Convert", "format": "PNG", "saved": 8, "cancelled": false },
+    { "entry": "Panel Convert and Cancel", "format": "PNG", "saved": 1, "cancelled": true }
+  ],
+  "independentPixelCheck": { "outputs": 6, "dimensions": "3x2", "exactRgbColors": true, "scope": "Generated six-color grid only; nine large outputs not independently pixel-validated" },
+  "preservation": { "originals": 10, "originalHashesUnchanged": true, "earlierOutputHashesUnchanged": true, "outputs": 15, "ownedPartials": 0 },
+  "normalExit": { "inputOleRevoke": 0, "parentOleRevoke": 0, "residentCleanupSuccesses": 5, "residentClosed": true, "freshWindowListEmpty": true, "processAbsent": true, "startupUnchanged": true },
+  "preservedFailures": [
+    "Two clicks through owner could not target external PickerHost; owner completed native picker, automated modal-click strategy closed",
+    "Automated Cancel arrived after the seven-second batch; subsequent direct human Convert/Cancel correlates true cancellation",
+    "Earlier Cancelled report concerned drag rejection; no job cancellation inferred from it"
+  ],
+  "limits": [
+    "One actual display DPI144; drop modifier flags remain present, no independent full key-up trace",
+    "Current center-drop physical trial unobserved; synthetic center check and historical M2 evidence remain distinct",
+    "CtrlAltX and Escape reject current real drags without jobs",
+    "Picker cancellation, busy close, end-session, reader, high contrast and other-display validation unrun",
+    "Header eligibility is not complete image validation or callback-latency guarantee",
+    "Only bounded local PNG/BMP variants; no hostile-filesystem or power-loss guarantee",
+    "No installer, final payload attribution, clean-machine test, remote CI, push or publication"
+  ],
+  "privateEvidence": [ "m5-flow-build-01.json", "m5-flow-core-01.trx", "m5-flow-integration-01.trx", "m5-flow-converters-01.trx", "m5-picker-control-failures-01.json", "m5-cancel-late-01.json", "m5-flow-completion-resident-01.jsonl", "m5-flow-completion-ole-01.jsonl", "m5-flow-completion-result-01.json" ],
+  "nextStep": "Continue remaining M5 packaging, installer, payload licenses, versioning and release preparation; publication requires approval"
+}

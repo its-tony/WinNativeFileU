@@ -1,4 +1,13 @@
 # Hipótesis
+
+Estado vigente EXP-M5-05: H-FLOW y H-FLOW-CANCEL VERIFIED IN WINDOWS PROTOTYPE, alcance docs/reports/m5-conversion-flow.md. Nuevo trabajo directo de8seleccionados termina Cancelledtrue/1publicado/0errores y UI Cancelled1; no se atribuye éxito al clic automatizado tardío previo. Cierre normal ambosOLE0/cincolimpiezastrue/proceso+ventana ausentes/Run y hashes intactos/0temporales. Busy close/picker cancel/end-session y full M5 siguen pendientes. Las notas inferiores conservan estados históricos.
+
+Actualización M5: H-FLOW VERIFIED IN WINDOWS PROTOTYPE para pickers→2PNG y Explorer/radial→2PNG→2BMP; seis imágenes generadas3×2 con RGB exacto independiente, hashes originales intactos. No demuestra otras variantes ni fiabilidad general. Rechazo actual observado por CtrlAltX y Escape, no Drop en centro. H-PICKER-AUTO BLOQUEADO: dos fallos de targeting owner/PickerHost; no repetir clicks idénticos. Owner completó los pickers. H-FLOW-CANCEL pendiente UI; motor/lote cancelado en tests. Evidencias y límites en ESTADO.md/ADR0011.
+
+H-FLOW-CANCEL: reporte humano Cancelled no corroborado; UI recuperada muestra Finished2 y diario solo rechazos de arrastre. Cambiar a selector para aislar botón, sin clasificarlo como fallo del motor ni repetir el mismo gesto. H-PACKAGING-TOOLS: OBSERVED MakeAppx/Signtool en SDK22000 y ayuda MakeAppx; ausencia anterior de PATH/cache no cubría ese directorio. No instalación/firma demostrada.
+
+EXP-M5-04: selector8BMP y job8éxitos en7.032s; Cancel automatizado tardío, no cancelación. M5_CANCEL_BUTTON un fallo de timing; se cambia a dos clicks humanos con selección ya cargada. H-DEPENDENCIES OBSERVED graph16/App y NuGet7proyectos sin entradas vulnerables a la consulta, no ausencia universal de vulnerabilidades ni atribución final/licencias resueltas.
+
 | ID | Estado | Proposición y límite |
 |---|---|---|
 | H-R0 | DOCUMENTADO | El flujo tap/release/drop está descrito en la web actual; App Store conserva texto de mantener Shift. Divergencia sin resolver en app nativa. |
@@ -47,3 +56,7 @@
 | H-M4-LOCATION-RUNTIME | OBSERVED Windows, ubicación no visibilidad | Dos GetRect propios S_OK/bounds no vacíos en nuevo run (inicio y Check). UI muestra resultado; no permite inferir presencia física/menu ni causa del fallo del icono genérico. |
 
 | H-M4-ACCEPTANCE | VERIFIED IN WINDOWS PROTOTYPE, acotado | Nuevo icono confirmado por propietario y menú real1/2/0/1/3, Show trasHide/Exit, cinco limpiezastrue/proceso ausente/Run intacto/0temporales.116tests. Causa del genérico no encontrado desconocida. Límites startup/logon/restart/accesibilidad/DPI y separación radial/motor en informe. |
+
+| H-M5-FLOW | DOCUMENTADO / implementación pendiente | Pickers públicos permiten selección explícita; OLE debe copiar paths y encolar fuera del callback, filtrar formatos reales y mantener COPY/NONE sin reemplazar originales. Falta implementación y reproducción. |
+
+| H-M5-FLOW-BUILD | VERIFICADO en Windows,131tests | Nuevos15casos prueban targets comunes, batch real/Unicode/hashes/cancelación y snapshots OLE/COPY/rechazo; notificaciones directas y picker no ensayado todavía. |

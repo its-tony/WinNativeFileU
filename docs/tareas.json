@@ -503,6 +503,86 @@
       "success_criterion": "Read only own Run value for unchanged fingerprint in permitted execution scope",
       "abandon_condition": "Two equivalent denials close default-sandbox reads",
       "next_step": "Readonly own Run fingerprint succeeds in reviewed scope, unchanged; no real startup registration tested"
+    },
+    {
+      "id": "M5_FLOW_BUILD",
+      "state": "VERIFICADO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-flow-build-01.json",
+        "evidence\\private\\m5-flow-build-01.json"
+      ],
+      "success_criterion": "Real selectable-file and radial-to-engine flow compiles; regression/safety/batch/cancellation tests",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Locked131passed47Core54integration30converters,0warnings/errors; real batch codecs/cancel/hashes and native synthetic queue boundary cases. Unique TRX saved; real pickers and Explorer conversion pending"
+    },
+    {
+      "id": "M5_FLOW_DESKTOP",
+      "state": "VERIFICADO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-flow-launch-01.json",
+        "evidence\\private\\m5-flow-picker-radial-01.json",
+        "evidence\\private\\m5-flow-completion-result-01.json"
+      ],
+      "success_criterion": "Owner-selected output/images plus actual Explorer radial conversion, pixels/hashes/error/cancel evidence",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Bounded real picker2PNG/radial2PNG/radial2BMP exact six-grid pixels, eight-large completed and one retained in cancelled batch. Normal Exit bothOLE hr0/five native cleanups/process+window absent/Run unchanged/inputs+prior outputs intact. Full M5 beta remains pending."
+    },
+    {
+      "id": "M5_FLOW_REVIEW",
+      "state": "VERIFICADO",
+      "attempts": 2,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-flow-path-review-01.json",
+        "evidence\\private\\m5-flow-path-review-02.json",
+        "evidence\\private\\m5-flow-completion-review-01.json"
+      ],
+      "success_criterion": "Review integrated-flow scope/limitations/privacy and local commits before packaging",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Reviewed unchanged source2a0626f/131green,5actual jobs/six exact grids/true Cancel retaining1/normal cleanup and immutable hashes/links/privacy. Two modal failures and late automated Cancel preserved. Flow prerequisite complete; full M5 packaging/distribution pending."
+    },
+    {
+      "id": "M5_PICKER_CONTROL",
+      "state": "BLOQUEADO",
+      "attempts": 2,
+      "equivalent_failures": 2,
+      "evidence": [
+        "evidence\\private\\m5-picker-control-failures-01.json",
+        "evidence\\private\\m5-picker-control-failures-01.json"
+      ],
+      "success_criterion": "Control the native modal only through a returned target window",
+      "abandon_condition": "Two equivalent binding failures close owner-bound modal clicks",
+      "next_step": "Second equivalent owner-bound modal click rejected by PickerHost ownership. Strategy closed; owner completed native picker manually."
+    },
+    {
+      "id": "M5_DEPENDENCIES",
+      "state": "EN_PROGRESO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-dependency-audit-01.json",
+        "evidence\\private\\m5-dependency-inventory-01.json"
+      ],
+      "success_criterion": "Review dependency metadata and known-vulnerability response, then attribute final distribution files before beta",
+      "abandon_condition": "Two equivalent failures close that audit strategy; preserve uncertainty",
+      "next_step": "App lock graph16packages/local notices inventoried and public NuGet audit7projects exit0 without vulnerability entries; final payload/runtime attribution and distribution obligations remain pending."
+    },
+    {
+      "id": "M5_CANCEL_BUTTON",
+      "state": "VERIFICADO",
+      "attempts": 2,
+      "equivalent_failures": 1,
+      "evidence": [
+        "evidence\\private\\m5-cancel-late-01.json",
+        "evidence\\private\\m5-flow-completion-result-01.json"
+      ],
+      "success_criterion": "Actual running job cancelled through panel button and correlated result/hash/cleanup",
+      "abandon_condition": "Two equivalent failures stop that control strategy",
+      "next_step": "Owner direct Convert then Cancel, UI actual Cancelled1/0error and journal Cancelledtrue with one retained result. Ten originals/previous outputs intact, no partials; earlier late automated click retained."
     }
   ],
   "history": [
@@ -2393,6 +2473,166 @@
       "evidence": "evidence\\private\\m4-completion-review-01.json",
       "sha256": "50308c902cdc7bf5792e9acb711355a6586631d5a8df8a13738bb7f8f683fb94",
       "note": "Reviewed six-task bounded M4 matrix,116green source7c7062b unchanged, owner visibility/real tray1/2/0/1/3 and five cleanuptrue/process gone/Run unchanged. Failure retained, refs/hashes/links/privacy pass. Sign-in/logon/restart/physical accessibility limits explicit; no M5"
+    },
+    {
+      "event": "USUARIO",
+      "note": "2026-10-20: sigamos entonces authorizes M5. Owner explicitly chooses to connect user-selected files and radial conversion first, before packaging a beta. No push/release/startup activation."
+    },
+    {
+      "at": "2026-10-20T20:46:40.893613-06:00",
+      "id": "M5_FLOW_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T20:47:10.439475-06:00",
+      "id": "M5_FLOW_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-build-01.json",
+      "sha256": "5c6c7c8081729dd95c6070f20f555ce7fe9dac06ca740dddd15c9e65f4d7f96e",
+      "note": "Compile first integrated picker/radial queue/batch conversion and execute regression tests before real UI claims; no publish/startup"
+    },
+    {
+      "at": "2026-10-20T20:48:39.290756-06:00",
+      "id": "M5_FLOW_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-build-01.json",
+      "sha256": "5c6c7c8081729dd95c6070f20f555ce7fe9dac06ca740dddd15c9e65f4d7f96e",
+      "note": "Locked131passed47Core54integration30converters,0warnings/errors; real batch codecs/cancel/hashes and native synthetic queue boundary cases. Unique TRX saved; real pickers and Explorer conversion pending"
+    },
+    {
+      "at": "2026-10-20T20:48:42.528019-06:00",
+      "id": "M5_FLOW_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T20:48:44.474551-06:00",
+      "id": "M5_FLOW_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-launch-01.json",
+      "sha256": "33882b00d52832a08c71d37e1be17201a98e0e5e28c9b702549fdff71b7a79c0",
+      "note": "Prepare independent BMP fixtures and8large cancellation fixtures, baseline hashes, isolated resident with startup disabled; inspect UI and actual pickers before drag request"
+    },
+    {
+      "at": "2026-10-20T20:57:09.828332-06:00",
+      "id": "M5_PICKER_CONTROL",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-picker-control-failures-01.json",
+      "sha256": "7ef0c00eeeb08df85ae3cfb82f62d20eee585ba6c7f24c71c2e3f3acbab47517",
+      "note": "First modal click through owner rejected by target bounds; no application failure."
+    },
+    {
+      "at": "2026-10-20T20:57:10.083998-06:00",
+      "id": "M5_PICKER_CONTROL",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-picker-control-failures-01.json",
+      "sha256": "7ef0c00eeeb08df85ae3cfb82f62d20eee585ba6c7f24c71c2e3f3acbab47517",
+      "note": "Second equivalent owner-bound modal click rejected by PickerHost ownership. Strategy closed; owner completed native picker manually."
+    },
+    {
+      "at": "2026-10-20T20:57:10.352161-06:00",
+      "id": "M5_FLOW_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-picker-radial-01.json",
+      "sha256": "f9cf7c543e66be92ac6c63bf067f0fcf0a56d53b84c645c383553d073980b42f",
+      "note": "Owner and immutable journal correlate native picker and real Explorer radial jobs, two PNGs each, exact independent six-color pixels. Roundtrip/rejection/cancellation and cleanup pending."
+    },
+    {
+      "at": "2026-10-20T21:11:18.069353-06:00",
+      "id": "M5_FLOW_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T21:11:18.474348-06:00",
+      "id": "M5_FLOW_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-path-review-01.json",
+      "sha256": "7d968efccbe6fd30a157748593fd649acac1b46ab5e408419d0d40d5aec8ab9b",
+      "note": "Review candidate paths and whitespace after three bounded source commits; source remains identical to131green build. Runtime cancellation and cleanup still pending."
+    },
+    {
+      "at": "2026-10-20T21:15:21.981337-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T21:15:30.781244-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-dependency-audit-01.json",
+      "sha256": "f368382015d9ceaeb4c1d83144165d042c0716e1b659fb9f73ecc113ec0bc897",
+      "note": "Query public NuGet known-vulnerability data with installed SDK, no restore/install; local graph metadata inventoried separately, final distribution attribution pending."
+    },
+    {
+      "at": "2026-10-20T21:17:12.319628-06:00",
+      "id": "M5_CANCEL_BUTTON",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-cancel-late-01.json",
+      "sha256": "73f7a8ee925e82d5b6d666a1aeeff91d06978d3f235327ff4f05098d217e9a78",
+      "note": "Automated Cancel arrived after successful7second8-file batch. Timing strategy failed once; already selected files permit manual direct buttons without another drag."
+    },
+    {
+      "at": "2026-10-20T21:18:27.939926-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-dependency-inventory-01.json",
+      "sha256": "acd20dd7f849b6c9c5867afe23411102a0254816aa0daab8222d66dff53d30a4",
+      "note": "App lock graph16packages/local notices inventoried and public NuGet audit7projects exit0 without vulnerability entries; final payload/runtime attribution and distribution obligations remain pending."
+    },
+    {
+      "at": "2026-10-20T21:21:53.893129-06:00",
+      "id": "M5_CANCEL_BUTTON",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-flow-completion-result-01.json",
+      "sha256": "2a747612fad59e37b511978329df915e06b4ab2fa79cf36961f1cdcaf979f989",
+      "note": "Owner direct Convert then Cancel, UI actual Cancelled1/0error and journal Cancelledtrue with one retained result. Ten originals/previous outputs intact, no partials; earlier late automated click retained."
+    },
+    {
+      "at": "2026-10-20T21:21:54.211089-06:00",
+      "id": "M5_FLOW_DESKTOP",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-flow-completion-result-01.json",
+      "sha256": "2a747612fad59e37b511978329df915e06b4ab2fa79cf36961f1cdcaf979f989",
+      "note": "Bounded real picker2PNG/radial2PNG/radial2BMP exact six-grid pixels, eight-large completed and one retained in cancelled batch. Normal Exit bothOLE hr0/five native cleanups/process+window absent/Run unchanged/inputs+prior outputs intact. Full M5 beta remains pending."
+    },
+    {
+      "at": "2026-10-20T21:23:39.816825-06:00",
+      "id": "M5_FLOW_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T21:23:40.243549-06:00",
+      "id": "M5_FLOW_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-flow-path-review-02.json",
+      "sha256": "04398c2b02622787503ffaddb188476a315114bd4641480b5d64d625ea6e463c",
+      "note": "Review new acceptance report, summary and distribution inventory after real Cancel and normal cleanup; source remains2a0626f identical to131green. Verify evidence hashes/scope/links next."
+    },
+    {
+      "at": "2026-10-20T21:24:59.089991-06:00",
+      "id": "M5_FLOW_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-flow-completion-review-01.json",
+      "sha256": "f985689a53e5b8cb026c486a59552e933ad9ee97f67d539b187d21b680216df2",
+      "note": "Reviewed unchanged source2a0626f/131green,5actual jobs/six exact grids/true Cancel retaining1/normal cleanup and immutable hashes/links/privacy. Two modal failures and late automated Cancel preserved. Flow prerequisite complete; full M5 packaging/distribution pending."
     }
   ]
 }
