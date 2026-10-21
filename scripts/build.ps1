@@ -1,4 +1,4 @@
-param([switch]$LockedRestore)
+param([switch]$LockedRestore, [switch]$RestoreOnly)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 Push-Location $root
@@ -16,11 +16,14 @@ try {
     if ($LockedRestore) { $restoreArgs += '--locked-mode' }
     & $dotnet @restoreArgs
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    if ($RestoreOnly) { exit 0 }
     & $dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & $dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release --logger 'trx;LogFileName=core.trx' --results-directory artifacts/test-results
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & $dotnet test tests/WindowsIntegration.Tests/WinNativeFileU.WindowsIntegration.Tests.csproj --no-build --no-restore -c Release --logger 'trx;LogFileName=windows-integration.trx' --results-directory artifacts/test-results
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    & $dotnet test tests/Converters.Tests/WinNativeFileU.Converters.Tests.csproj --no-build --no-restore -c Release --logger 'trx;LogFileName=converters.trx' --results-directory artifacts/test-results
     exit $LASTEXITCODE
 }
 finally { Pop-Location }
