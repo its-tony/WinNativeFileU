@@ -21,8 +21,10 @@ namespace WinNativeFileU.Desktop;
 public sealed class RadialMenuControl : UserControl
 {
     private const double Side = 420;
-    private static readonly string[] Labels = ["PNG", "JPEG", "WebP", "AVIF", "TIFF", "BMP", "PDF"];
-    private readonly RadialMenuState state = new(Labels.Length);
+    private readonly string[] Labels;
+    private readonly HashSet<string> available;
+    private readonly bool conversionMode;
+    private readonly RadialMenuState state;
     private readonly Canvas canvas = new() { Width = Side, Height = Side, Background = new SolidColorBrush(Colors.Transparent) };
     private readonly List<PathShape> sectors = [];
     private readonly List<ToggleButton> buttons = [];
@@ -34,11 +36,16 @@ public sealed class RadialMenuControl : UserControl
     public bool ExternalDragSelection { get; set; }
     public event Action<string>? PreviewChanged;
 
-    public RadialMenuControl()
+    public RadialMenuControl() : this(false) { }
+    public RadialMenuControl(bool conversionMode)
     {
+        this.conversionMode = conversionMode;
+        Labels = conversionMode ? ["PNG", "BMP"] : ["PNG", "JPEG", "WebP", "AVIF", "TIFF", "BMP", "PDF"];
+        state = new(Labels.Length);
+        available = conversionMode ? [] : new(Labels);
         Width = Height = Side;
         Content = canvas;
-        AutomationProperties.SetName(this, "Output format radial preview");
+        AutomationProperties.SetName(this, conversionMode ? "Conversion output format" : "Output format radial preview");
         for (int i = 0; i < Labels.Length; i++)
         {
             int index = i;
@@ -46,8 +53,8 @@ public sealed class RadialMenuControl : UserControl
             sectors.Add(path); canvas.Children.Add(path);
             var label = new TextBlock { Text = Labels[i], FontSize = 15, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold, HorizontalAlignment = HorizontalAlignment.Center };
             var button = new ToggleButton { Content = label, Width = 86, Height = 44, Padding = new Thickness(0), BorderThickness = new Thickness(0), Background = new SolidColorBrush(Colors.Transparent), UseSystemFocusVisuals = true };
-            AutomationProperties.SetName(button, Labels[i] + " format preview");
-            AutomationProperties.SetHelpText(button, "Select a visual example. No conversion is performed.");
+            AutomationProperties.SetName(button, Labels[i] + (conversionMode ? " output format" : " format preview"));
+            AutomationProperties.SetHelpText(button, conversionMode ? "Drop to convert into the selected output folder. BMP requires opaque pixels." : "Select a visual example. No conversion is performed.");
             button.GotFocus += (_, _) => Select(index);
             button.Click += (_, _) => { Select(index); Confirm(); };
             var point = state.LabelPoint(i, Side);
@@ -74,11 +81,18 @@ public sealed class RadialMenuControl : UserControl
         PreviewChanged?.Invoke("Selection cleared. No files opened or converted.");
     }
 
+    public void SetAvailableFormats(IReadOnlyList<string> formats)
+    {
+        available.Clear(); foreach (string format in formats) if (Labels.Contains(format)) available.Add(format);
+        state.Cancel(); Paint();
+    }
+
     public void RefreshAppearance() => Paint();
 
     public string? SelectDragPoint(double x, double y)
     {
         int? index = state.HitTest(x, y, Side);
+        if (index is int hit && !available.Contains(Labels[hit])) index = null;
         Select(index);
         return index is int selected ? Labels[selected] : null;
     }
@@ -140,6 +154,8 @@ public sealed class RadialMenuControl : UserControl
         for (int i = 0; i < sectors.Count; i++)
         {
             bool selected = state.SelectedIndex == i;
+            bool enabled = available.Contains(Labels[i]);
+            buttons[i].IsEnabled = enabled; sectors[i].Opacity = buttons[i].Opacity = enabled ? 1 : 0.35;
             sectors[i].Fill = new SolidColorBrush(selected ? (contrast ? foreground : accent) : background);
             sectors[i].Stroke = new SolidColorBrush(contrast ? foreground : dark ? Color.FromArgb(255, 78, 86, 102) : Color.FromArgb(255, 211, 211, 208));
             buttons[i].IsChecked = selected;
@@ -147,7 +163,9 @@ public sealed class RadialMenuControl : UserControl
         }
         centerTitle.Foreground = centerDetail.Foreground = new SolidColorBrush(foreground);
         centerTitle.Text = state.SelectedIndex is int index ? Labels[index] : ExternalDragSelection ? "Drag to choose" : "Choose a format";
-        centerDetail.Text = state.SelectedIndex is null ? (ExternalDragSelection ? "DROP ON A SECTOR" : "VISUAL PREVIEW") : ExternalDragSelection ? "EXAMPLE FORMAT" : "SELECTED";
+        centerDetail.Text = conversionMode
+            ? available.Count == 0 ? "WAITING FOR IMAGES" : state.SelectedIndex is null ? "ENABLED SECTORS ONLY" : "DROP TO CONVERT"
+            : state.SelectedIndex is null ? (ExternalDragSelection ? "DROP ON A SECTOR" : "VISUAL PREVIEW") : ExternalDragSelection ? "EXAMPLE FORMAT" : "SELECTED";
     }
 
     private void Animate(UIElement element, float from)

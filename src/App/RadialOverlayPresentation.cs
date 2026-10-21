@@ -14,7 +14,7 @@ using Windows.UI.ViewManagement;
 namespace WinNativeFileU.Desktop;
 
 /// <summary>WinUI island in the owned native OLE window; never activates a Window or reads file data.</summary>
-public sealed class RadialOverlayPresentation : IOverlayPresentation
+public sealed class RadialOverlayPresentation(bool conversionMode = false) : IOverlayPresentation
 {
     private DesktopWindowXamlSource? source;
     private RadialMenuControl? radial;
@@ -30,7 +30,7 @@ public sealed class RadialOverlayPresentation : IOverlayPresentation
     {
         source = new DesktopWindowXamlSource();
         source.Initialize(Win32Interop.GetWindowIdFromWindow(parentWindow));
-        radial = new RadialMenuControl { ExternalDragSelection = true, IsHitTestVisible = false };
+        radial = new RadialMenuControl(conversionMode) { ExternalDragSelection = true, IsHitTestVisible = false };
         root = new Border
         {
             Padding = new Thickness(20),
@@ -48,7 +48,8 @@ public sealed class RadialOverlayPresentation : IOverlayPresentation
     public void Resize(int clientWidth, int clientHeight) =>
         source?.SiteBridge.MoveAndResize(new RectInt32(0, 0, Math.Max(1, clientWidth), Math.Max(1, clientHeight)));
 
-    public void Reset() { rejected = false; radial?.Reset(); }
+    public void Reset() { rejected = false; radial?.Reset(); if (conversionMode) radial?.SetAvailableFormats([]); }
+    public void SetAvailableFormats(IReadOnlyList<string> formats) { if (conversionMode) radial?.SetAvailableFormats(formats); }
     public void Reject() { rejected = true; radial?.ShowRejection(); }
 
     public string? SelectAt(double x, double y, double clientWidth, double clientHeight)

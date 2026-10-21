@@ -28,7 +28,9 @@ public sealed class ResidentWindow : Window
     private readonly bool isolated;
     private ResidentSettings settings = new();
     private ResidentHost? host;
-    private bool exiting;
+    private readonly ImageConversionPanel conversion;
+    private DragOverlay? conversionOverlay;
+    private bool exiting, closeAfterConversion;
 
     public ResidentWindow(string root, ResidentInstance ownership, bool isolatedProfile)
     {
@@ -48,9 +50,15 @@ public sealed class ResidentWindow : Window
         foreach (string label in new[] { "Disabled", "Ctrl+Alt+W", "Ctrl+Alt+Shift+W" }) shortcut.Items.Add(label);
         AutomationProperties.SetName(theme, "Resident appearance"); AutomationProperties.SetName(shortcut, "Resident shortcut");
         AutomationProperties.SetAutomationId(status, "ResidentStatus"); AutomationProperties.SetAutomationId(startupStatus, "StartupStatus");
-        content.Children.Add(theme); content.Children.Add(shortcut); content.Children.Add(closeToTray); content.Children.Add(save);
-        content.Children.Add(new TextBlock { Text = "Start at sign-in", FontSize = 20 });
-        content.Children.Add(startupStatus); content.Children.Add(startupAction);
+        conversion = new ImageConversionPanel(this, Log);
+        conversion.JobStarted += () => ShowSettings("conversion");
+        conversion.JobFinished += () => { if (closeAfterConversion) Close(); };
+        content.Children.Add(conversion);
+        var preferences = new StackPanel { Spacing = 12 };
+        preferences.Children.Add(theme); preferences.Children.Add(shortcut); preferences.Children.Add(closeToTray); preferences.Children.Add(save);
+        preferences.Children.Add(new TextBlock { Text = "Start at sign-in", FontSize = 20 });
+        preferences.Children.Add(startupStatus); preferences.Children.Add(startupAction);
+        content.Children.Add(new Expander { Header = "Resident settings", Content = preferences, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Stretch });
         var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
         var exit = new Button { Content = "Exit WinNativeFileU" }; actions.Children.Add(hide); actions.Children.Add(exit);
         content.Children.Add(actions);
@@ -84,19 +92,28 @@ public sealed class ResidentWindow : Window
         }
         catch (Exception ex) { hide.IsEnabled = save.IsEnabled = false; status.Text = "Notification area unavailable. Closing this window will exit."; Log("ResidentUnavailable", new { type = ex.GetType().Name }); }
         RefreshStartup();
+        try
+        {
+            conversionOverlay = new DragOverlay(root, Path.Combine(root, "conversion-drop-" + Guid.NewGuid().ToString("N") + ".jsonl"),
+                PrototypeShortcutProfile.Letters, requireHeldActivation: true, presentation: new RadialOverlayPresentation(conversionMode: true), fileDropHandler: conversion);
+            conversionOverlay.StatusChanged += message => { if (!conversion.IsBusy) status.Text = message; };
+            Log("ConversionFlowReady", new { radial = true, startupChanged = false });
+        }
+        catch (Exception ex) { status.Text = "Drag conversion unavailable. Choose images still works: " + ex.Message; Log("ConversionRadialUnavailable", new { type = ex.GetType().Name }); }
         save.Click += (_, _) => SaveSettings(); hide.Click += (_, _) => HideSettings(); exit.Click += (_, _) => Exit();
         startupAction.Click += (_, _) => ChangeStartup();
         AppWindow.Closing += (_, args) =>
         {
-            if (ResidentPolicy.HideOnClose(settings.CloseToTray, host?.TrayReady == true, exiting)) { args.Cancel = true; HideSettings(); }
+            if (ResidentPolicy.HideOnClose(settings.CloseToTray, host?.TrayReady == true, exiting)) { args.Cancel = true; HideSettings(); return; }
+            if (conversion.IsBusy) { args.Cancel = true; exiting = true; closeAfterConversion = true; conversion.Cancel(); status.Text = "Waiting for selection/conversion cancellation and cleanup…"; }
         };
         Closed += (_, _) =>
         {
-            try { host?.Dispose(); instance.Dispose(); Log("ResidentClosed", new { }); }
+            try { conversionOverlay?.Dispose(); conversion.Dispose(); host?.Dispose(); instance.Dispose(); Log("ResidentClosed", new { }); }
             finally { journal.Dispose(); }
         };
         var work = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary).WorkArea;
-        AppWindow.Resize(new SizeInt32(Math.Min(1000, work.Width - 48), Math.Min(1050, work.Height - 48)));
+        AppWindow.Resize(new SizeInt32(Math.Min(1320, work.Width - 48), Math.Min(1350, work.Height - 48)));
         Log("ResidentReady", new { processId = Environment.ProcessId, isolated, settings, startupChanged = false, tray = host?.TrayReady == true });
     }
 
