@@ -440,6 +440,69 @@
       "success_criterion": "Observe owned workbench without competing with manual user input",
       "abandon_condition": "Two equivalent control refusals stop automated input until a new condition",
       "next_step": "Bounded resumed control succeeded after human completion; previous two tool refusals preserved, no universal automation claim"
+    },
+    {
+      "id": "M4_BUILD",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m4-build-01.json",
+        "src\\App\\ResidentWindow.cs",
+        "evidence\\private\\m4-build-02.json",
+        "evidence\\private\\m4-build-02.json",
+        "evidence\\private\\m4-build-03.json",
+        "evidence\\private\\m4-build-03.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "success_criterion": "Locked Windows build and meaningful resident/settings/lifecycle tests",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Locked116passed46Core45integration25converters,0warnings/errors; own icon lifecycle/GetRect diagnostic compile and tests pass. Unique TRX preserved; physical icon still unverified"
+    },
+    {
+      "id": "M4_DESKTOP",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m4-launch-01.json",
+        "evidence\\private\\m4-runtime-result-01.json",
+        "evidence\\private\\m4-owner-tray-failure-01.json",
+        "evidence\\private\\m4-launch-02.json",
+        "evidence\\private\\m4-icon-result-01.json",
+        "evidence\\private\\m4-completion-result-01.json"
+      ],
+      "attempts": 3,
+      "equivalent_failures": 1,
+      "success_criterion": "Real tray resident hide/restore/hotkey/settings/exit, private evidence and no automatic startup changes",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Owner sees new icon and confirms reopen/Exit. Real TrayMenu1/2/0/1/3 correlates show/hide/reopen/exit; five cleanuptrue, process absent, Run unchanged/no partials.116green. Earlier generic failure preserved; logon/restart/physical accessibility untested"
+    },
+    {
+      "id": "M4_REVIEW",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m4-path-review-01.json",
+        "evidence\\private\\m4-review-01.json",
+        "evidence\\private\\m4-completion-path-review-01.json",
+        "evidence\\private\\m4-completion-review-01.json"
+      ],
+      "attempts": 2,
+      "equivalent_failures": 0,
+      "success_criterion": "Review six roadmap tasks, evidence and limitations; no M5 or release",
+      "abandon_condition": "Two equivalent failures; new evidence required to reopen",
+      "next_step": "Reviewed six-task bounded M4 matrix,116green source7c7062b unchanged, owner visibility/real tray1/2/0/1/3 and five cleanuptrue/process gone/Run unchanged. Failure retained, refs/hashes/links/privacy pass. Sign-in/logon/restart/physical accessibility limits explicit; no M5"
+    },
+    {
+      "id": "M4_REGISTRY_READ",
+      "state": "VERIFICADO",
+      "attempts": 2,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m4-sandbox-registry-01.json",
+        "evidence\\private\\m4-sandbox-registry-01.json",
+        "evidence\\private\\m4-runtime-result-01.json"
+      ],
+      "success_criterion": "Read only own Run value for unchanged fingerprint in permitted execution scope",
+      "abandon_condition": "Two equivalent denials close default-sandbox reads",
+      "next_step": "Readonly own Run fingerprint succeeds in reviewed scope, unchanged; no real startup registration tested"
     }
   ],
   "history": [
@@ -2097,6 +2160,239 @@
       "evidence": "evidence\\private\\m3-completion-review-01.json",
       "sha256": "c2c683ec3b53609b3d4037e8cfb468a0814605452b22c802c82ab829e3ec9027",
       "note": "Reviewed seven M3 tasks and bounded report against92green TRX, real2conversion/pixel/hash/UI/collision/close evidence; refs/hashes/links/path policy pass and source1fee7f7 unchanged. M3 initial engine complete; no radial handoff or M4 authorization"
+    },
+    {
+      "event": "USUARIO",
+      "note": "2026-10-20: Sgamos after M3 final report authorizes M4 resident integration. Autostart remains explicit opt-in; no M5/push/release."
+    },
+    {
+      "at": "2026-10-20T19:10:32.861531-06:00",
+      "id": "M4_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:10:48.071192-06:00",
+      "id": "M4_BUILD",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-build-01.json",
+      "sha256": "0b62b79872e2ec522f84b9b44393ff1dbe37c5fc96429e4105b4d4f7b310a7a8",
+      "note": "Compile resident native tray/settings/startup opt-in/ownership and execute new tests with real HWND/tray/hotkey registration; startup tests use memory adapter only"
+    },
+    {
+      "at": "2026-10-20T19:11:15.069045-06:00",
+      "id": "M4_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "src\\App\\ResidentWindow.cs",
+      "sha256": "d32fc2a8816ac60a6f575c9462a74e1332a3851328afac6999be8ecfe4c65533",
+      "note": "Changed WinUI color namespace after CS0234 and replaced blocking Task mutex contender with bounded dedicated thread; no repeat of failing source"
+    },
+    {
+      "at": "2026-10-20T19:11:17.544655-06:00",
+      "id": "M4_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:11:49.730295-06:00",
+      "id": "M4_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-build-02.json",
+      "sha256": "5487f466b7280fa5fe391d35f497f3035935f8671da5735a8e4aaee240d992e0",
+      "note": "Build changed color namespace and same-thread mutex ownership test after recorded compiler failure; execute all suites and preserve unique TRX before any next build"
+    },
+    {
+      "at": "2026-10-20T19:12:17.016489-06:00",
+      "id": "M4_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-build-02.json",
+      "sha256": "5487f466b7280fa5fe391d35f497f3035935f8671da5735a8e4aaee240d992e0",
+      "note": "Locked113passed46Core42integration25converters,0warnings/errors. Native owned tray/HWND/hotkey conflict/disposal real; direct notifications synthetic, startup adapter memory. Unique TRX preserved; actual UI pending"
+    },
+    {
+      "at": "2026-10-20T19:12:21.330858-06:00",
+      "id": "M4_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:12:22.531686-06:00",
+      "id": "M4_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-launch-01.json",
+      "sha256": "8bb83875889fbbcdd992e5a8fa275ab24f17779be7e17629fc2476c243189fa5",
+      "note": "Launch own resident with isolated settings root and startup controls disabled; inspect real UI/tray/hide/hotkey/settings/duplicate/shutdown without changing Run"
+    },
+    {
+      "at": "2026-10-20T19:17:58.428087-06:00",
+      "id": "M4_REGISTRY_READ",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-sandbox-registry-01.json",
+      "sha256": "6cce2f7aa294488a7484859bd28567b0b380f3b4b72ea277a4ba0e95c4862b5e",
+      "note": "First default sandbox check-resident read denied; no startup write or app failure"
+    },
+    {
+      "at": "2026-10-20T19:17:58.662278-06:00",
+      "id": "M4_REGISTRY_READ",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-sandbox-registry-01.json",
+      "sha256": "6cce2f7aa294488a7484859bd28567b0b380f3b4b72ea277a4ba0e95c4862b5e",
+      "note": "Second default sandbox start-resident read denied; close this execution scope"
+    },
+    {
+      "at": "2026-10-20T19:17:58.880730-06:00",
+      "id": "M4_REGISTRY_READ",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m4-72692a8d641841d6b4a1125ee23cd868\\check-d69275bc7f604fcc9514bc3d0fa0568d.json",
+      "sha256": "40a47a6caf06bf5b672b71a674dedbb928bbf9d1624e7e88e9cbf6f15b29f5be",
+      "note": "Changed to reviewed Windows execution scope; actual readonly fingerprint succeeds, startup unchanged"
+    },
+    {
+      "at": "2026-10-20T19:17:59.113982-06:00",
+      "id": "M4_REGISTRY_READ",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-runtime-result-01.json",
+      "sha256": "b1f3ffc9433e034d833d7d7246659ccb4efa01dcf27c88faef6df6133f438e72",
+      "note": "Readonly own Run fingerprint succeeds in reviewed scope, unchanged; no real startup registration tested"
+    },
+    {
+      "at": "2026-10-20T19:17:59.365810-06:00",
+      "id": "M4_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-runtime-result-01.json",
+      "sha256": "b1f3ffc9433e034d833d7d7246659ccb4efa01dcf27c88faef6df6133f438e72",
+      "note": "Actual dark/save/hide/hotkey/duplicate/exit and hidden restart verified; awaiting owner tray context-menu trial, no logon or Explorer restart claim"
+    },
+    {
+      "at": "2026-10-20T19:22:47.479264-06:00",
+      "id": "M4_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:22:48.259024-06:00",
+      "id": "M4_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-path-review-01.json",
+      "sha256": "f3632e47c414d2c564ffc8c62f0c6423d2239c6fe25dd3e3e0de6912ff71a809",
+      "note": "Review M4 code/documentation candidates with manual tray acceptance still pending; no claim of M4 completion"
+    },
+    {
+      "at": "2026-10-20T19:22:52.063468-06:00",
+      "id": "M4_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m4-review-01.json",
+      "sha256": "4c31412c4359fcba6fb189abc2711590a67e751bec437c5731f18f6f20b7c544",
+      "note": "Reviewed113TRX, six-task scope, sourcebd0abf8 unchanged, refs/hashes/links/privacy; M4 closure awaits real tray-menu owner evidence, no logon/Explorer restart claim"
+    },
+    {
+      "at": "2026-10-20T19:24:24.005398-06:00",
+      "id": "M4_DESKTOP",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-owner-tray-failure-01.json",
+      "sha256": "558db3e27c3e847d4a79301873a38a7f3bafe5d72afd77434946a1e1631c36a8",
+      "note": "Owner cannot find tray icon;0real TrayMenu. Registration success is not visibility. Stop unchanged trial; implement own GetRect diagnostic and distinct icon, no Windows taskbar setting changes"
+    },
+    {
+      "at": "2026-10-20T19:30:00.219390-06:00",
+      "id": "M4_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\WindowsIntegration\\ResidentHost.cs",
+      "sha256": "8b8a360c4c83246fdd025504dbfa7f7afbd3e640ecba1f6d03755e6673964c63",
+      "note": "New evidence after owner icon-not-found: original owned icon, own Shell_NotifyIconGetRect diagnostic and UI Check button; preserve prior113green and rebuild changed source"
+    },
+    {
+      "at": "2026-10-20T19:30:03.218455-06:00",
+      "id": "M4_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:30:46.434779-06:00",
+      "id": "M4_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m4-build-03.json",
+      "sha256": "68b217af03102a826f011b51d04947661bb8a882943cd50ac043cd1c348e769f",
+      "note": "Compile changed own-icon/GetRect diagnostic and execute native resource cleanup/bounds cases; no real startup writes"
+    },
+    {
+      "at": "2026-10-20T19:31:47.871002-06:00",
+      "id": "M4_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m4-build-03.json",
+      "sha256": "68b217af03102a826f011b51d04947661bb8a882943cd50ac043cd1c348e769f",
+      "note": "Locked116passed46Core45integration25converters,0warnings/errors; own icon lifecycle/GetRect diagnostic compile and tests pass. Unique TRX preserved; physical icon still unverified"
+    },
+    {
+      "at": "2026-10-20T19:31:50.951191-06:00",
+      "id": "M4_DESKTOP",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:31:52.191284-06:00",
+      "id": "M4_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m4-launch-02.json",
+      "sha256": "6529ffbfc8fc2b0d549ff093661d6cf90ce14699abcd03b06cc53f0cf4a8ecef",
+      "note": "Changed source after owner no-icon: new original blue diamond and own GetRect diagnostic; inspect shell bounds before any new manual request. Startup still disabled"
+    },
+    {
+      "at": "2026-10-20T19:33:22.745471-06:00",
+      "id": "M4_DESKTOP",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m4-icon-result-01.json",
+      "sha256": "173a7efab63a726510d1f3fdf5555ea8e372e43274fca702eb30c3c32aaa82c5",
+      "note": "Changed own blue-diamond icon now returns2GetRect S_OK/nonempty; Check status visible. Bounds are not physical visibility. New owner trial pending; prior generic failure preserved"
+    },
+    {
+      "at": "2026-10-20T19:36:09.691598-06:00",
+      "id": "M4_DESKTOP",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m4-completion-result-01.json",
+      "sha256": "6b3b4d5829c839796001580e3b16ce675784659a1669874edc03688a03588715",
+      "note": "Owner sees new icon and confirms reopen/Exit. Real TrayMenu1/2/0/1/3 correlates show/hide/reopen/exit; five cleanuptrue, process absent, Run unchanged/no partials.116green. Earlier generic failure preserved; logon/restart/physical accessibility untested"
+    },
+    {
+      "at": "2026-10-20T20:32:11.749397-06:00",
+      "id": "M4_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T20:32:12.060361-06:00",
+      "id": "M4_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-completion-path-review-01.json",
+      "sha256": "3e169234d5f6f8de2d4c606be63ad36827bf02f79f03887cf6d0f77ad35d33e6",
+      "note": "Final path/whitespace review after owner-correlated real tray-menu acceptance; inspect immutable evidence hashes,116TRX and scoped limitations next"
+    },
+    {
+      "at": "2026-10-20T20:32:13.332874-06:00",
+      "id": "M4_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m4-completion-review-01.json",
+      "sha256": "50308c902cdc7bf5792e9acb711355a6586631d5a8df8a13738bb7f8f683fb94",
+      "note": "Reviewed six-task bounded M4 matrix,116green source7c7062b unchanged, owner visibility/real tray1/2/0/1/3 and five cleanuptrue/process gone/Run unchanged. Failure retained, refs/hashes/links/privacy pass. Sign-in/logon/restart/physical accessibility limits explicit; no M5"
     }
   ]
 }

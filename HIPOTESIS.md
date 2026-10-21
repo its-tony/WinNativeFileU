@@ -29,3 +29,21 @@
 | H-M3-CODEC | VERIFIED IN WINDOWS PROTOTYPE, motor inicial acotado | Locked build92verde y banco real BMP→PNG→BMP3×2; parser BMP independiente confirma píxeles, hashes de entrada intactos, OutputExists UI y cierre normal. Solo PNG RGB/RGBA8 no entrelazado y BMP24/32, límites64MiB/16MP; sin integración radial ni compatibilidad general. |
 | H-M3-INTEGRITY | FALLO conservado / corrección verificada en casos probados | IDAT zlib corrupto con CRC reparado produjo alpha en decoder. Validación previa de zlib/filas/filtros ahora devuelve InvalidImage y pasa suite25conversores. No es certificación completa PNG ni fuzzing; CRC/decoder aislados no acreditan integridad. |
 | H-M3-CANCEL | VERIFICADO en motor, UI pendiente | Cuatro etapas canceladas, incluida publicación con temporal real, conservan original y no publican salida. Cancelación tardía conserva resultado; bloqueo real de limpieza devuelve CleanupFailed y retiene evidencia. Botón Cancel/cierre ocupado no ensayados físicamente. |
+
+| H-M4-RESIDENT | DOCUMENTADO / implementación pendiente | Shell_NotifyIcon versión4, HWND propio, AppWindow.Hide y RegisterHotKey permiten residencia por eventos; falta reproducción. Run HKCU es opt-in, no activar durante pruebas ni inferir logon real de tests. |
+
+| H-M4-BUILD | FALLO de compilación conservado / corrección pendiente | build01 no resuelve Windows.UI.Colors en WinUI y advierte espera Task en test; se corrigen namespace e hilo de contienda. No diagnosticar fallo de Shell/tray ni ejecutar UI vieja. |
+
+| H-M4-BUILD-02 | VERIFICADO en Windows, suite acotada | Locked113verde,0warnings/errors; nuevos21casos incluyen real HWND/Shell_NotifyIcon/hotkey/conflictos/liberación y settings/mutex. No prueba icon-click/tecla física/logon real; startup usa memoria. |
+
+| H-M4-RUNTIME | OBSERVED Windows, parcial | Ajustes Dark/guardado/cierre a tray/hotkey automatizada desde otra ventana/duplicado/reinicio oculto/Exit con limpieza real observados. Menú físico tray pendiente; ninguna ejecución de inicio de sesión ni reinicio Explorer. |
+
+| H-M4-TRAY-VISIBLE | FALLO de ensayo humano, causa pendiente | Propietario no encuentra icono; Add/versiontrue y HWND activo no prueban visibilidad. Investigar bounds del icono propio y distinguirlo visualmente antes de repetir; no atribuir a overflow sin evidencia. |
+
+| H-M4-LOCATION | DOCUMENTADO / implementación pendiente de build | GetRect del icono propio separa registro y bounds; ni S_OK ni bounds prueban visibilidad. Nuevo icono azul/rombo distinguible no implica reparación demostrada. |
+
+| H-M4-BUILD-03 | VERIFICADO en Windows,116tests | Icono propio/GetRect/botón Check compilan sin warnings; tests cubren error/bounds vacíos y cleanup del icono. Falta ubicación real del nuevo run/visibilidad física; no declarar reparado el fallo anterior. |
+
+| H-M4-LOCATION-RUNTIME | OBSERVED Windows, ubicación no visibilidad | Dos GetRect propios S_OK/bounds no vacíos en nuevo run (inicio y Check). UI muestra resultado; no permite inferir presencia física/menu ni causa del fallo del icono genérico. |
+
+| H-M4-ACCEPTANCE | VERIFIED IN WINDOWS PROTOTYPE, acotado | Nuevo icono confirmado por propietario y menú real1/2/0/1/3, Show trasHide/Exit, cinco limpiezastrue/proceso ausente/Run intacto/0temporales.116tests. Causa del genérico no encontrado desconocida. Límites startup/logon/restart/accesibilidad/DPI y separación radial/motor en informe. |

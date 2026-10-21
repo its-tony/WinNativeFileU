@@ -1,0 +1,97 @@
+{
+  "state": "VERIFICADO",
+  "scope": "M4 bounded resident prototype; actual tray menu verified, sign-in registration/logon untested",
+  "date": "2026-10-20",
+  "report": "docs/reports/m4-resident.md",
+  "sourceCommit": "7c7062b",
+  "build": {
+    "lockedRestore": true,
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "passed": 116,
+    "core": 46,
+    "integration": 45,
+    "converters": 25
+  },
+  "roadmapTasks": [
+    "tray icon",
+    "explicit opt-in startup",
+    "settings",
+    "hotkeys",
+    "event-driven idle behavior",
+    "lifecycle"
+  ],
+  "observed": [
+    "Dark theme saved, visible and reloaded after restart",
+    "Close hides settings while process remains alive",
+    "Automated CtrlAltW from Explorer restores settings and logs registered action",
+    "Same-profile duplicate exits AlreadyRunning",
+    "Explicit Exit removes hotkey/icon/HWND/class with successful API results and process exit",
+    "Hidden restart retains preferences and recovers via shortcut",
+    "Own Run fingerprint unchanged; isolated sign-in controls disabled",
+    "Owner sees original blue/white diamond icon",
+    "Own Shell_NotifyIconGetRect S_OK/nonempty at add and Check; not visibility proof",
+    "Actual tray menu commands1/2/0/1/3 -> Open/Hide/dismiss/Open/Exit",
+    "Five cleanup successes including owned HICON; process absent after tray Exit"
+  ],
+  "idleSample": {
+    "elapsedMs": 3019.2824,
+    "cpuMs": 15.625,
+    "workingSetBytes": 146931712,
+    "handles": 1033,
+    "benchmark": false,
+    "source": "Earlier build02 first runtime; not repeated after icon change"
+  },
+  "limits": [
+    "Actual sign-in registration/logon intentionally untested; startup tests use memory adapter",
+    "Actual Explorer restart/TaskbarCreated and end-session not reproduced",
+    "No physical keyboard, reader, high-contrast or other-display qualification",
+    "Native test callbacks are synthetic despite real registration APIs",
+    "Interactive Windows shell required for native tray test; remote CI not run",
+    "One resident per settings root/session, no duplicate activation IPC",
+    "Previous settings backups retained without pruning; no hostile-filesystem/registry race protection",
+    "Earlier generic icon not found; cause unknown. New original icon confirmed in one owner trial; no general appearance/performance qualification",
+    "Radial and conversion workbench remain separate; no M5/push/release"
+  ],
+  "privateEvidence": [
+    "m4-build-01.json",
+    "m4-build-02.json",
+    "m4-core-02.trx",
+    "m4-integration-02.trx",
+    "m4-converters-02.trx",
+    "m4-runtime-result-01.json",
+    "m4-resident-snapshot-01.jsonl",
+    "m4-resident-snapshot-02.jsonl",
+    "m4-sandbox-registry-01.json",
+    "m4-build-03.json",
+    "m4-core-03.trx",
+    "m4-integration-03.trx",
+    "m4-converters-03.trx",
+    "m4-owner-tray-failure-01.json",
+    "m4-icon-diagnostic-01.jsonl",
+    "m4-icon-result-01.json",
+    "m4-completion-final-01.jsonl",
+    "m4-completion-result-01.json"
+  ],
+  "nextStep": "Await new instruction for M5 or radial-engine integration; no automatic advance",
+  "finalTrayTrial": {
+    "ownerConfirmed": true,
+    "menuCommands": [
+      1,
+      2,
+      0,
+      1,
+      3
+    ],
+    "showAfterHide": true,
+    "ownedIconDestroyed": true,
+    "hotkeyRemoved": true,
+    "trayRemoved": true,
+    "windowDestroyed": true,
+    "classRemoved": true,
+    "processAbsent": true,
+    "startupUnchanged": true,
+    "partialCount": 0
+  }
+}

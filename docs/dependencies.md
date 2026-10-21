@@ -9,4 +9,6 @@ The SDK ZIP has official Microsoft URL and SHA512 provenance in ignored evidence
 
 M3 Converters calls the operating system's Windows.Graphics.Imaging PNG/BMP codecs through the existing Windows SDK projection. It adds no external image package or downloaded executable. Its test project reuses the existing test package versions; App now references Converters and lock graphs were regenerated and verified with locked restore. This does not establish support for every Windows codec input or replace a deployment/license review.
 
+M4 uses public user32/shell32 functions, .NET registry, JSON and named mutex APIs. No new package, tray framework, executable or installer was added. Tray and hotkey integration tests require an interactive Windows shell; this is an environment requirement, not a new redistributed component. Real sign-in startup and remote CI have not been verified.
+
 Before any beta distribution: inspect resolved package license expressions/files and native third-party notices, include required notices, review vulnerabilities, remove unneeded dependencies and validate runtime/deployment prerequisites. No claim of completed distribution/license audit is made here. FFmpeg, external image libraries and PDF engines have not been added.
