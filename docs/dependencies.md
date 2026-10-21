@@ -7,4 +7,6 @@ The Windows App SDK metapackage brings multiple Microsoft modules (including mod
 
 The SDK ZIP has official Microsoft URL and SHA512 provenance in ignored evidence. It is not redistributed. Private source research and tools are never bundled with the app.
 
-Before any beta distribution: inspect resolved package license expressions/files and native third-party notices, include required notices, review vulnerabilities, remove unneeded dependencies and validate runtime/deployment prerequisites. No claim of completed distribution/license audit is made here. FFmpeg/image/PDF engines have not been added.
+M3 Converters calls the operating system's Windows.Graphics.Imaging PNG/BMP codecs through the existing Windows SDK projection. It adds no external image package or downloaded executable. Its test project reuses the existing test package versions; App now references Converters and lock graphs were regenerated and verified with locked restore. This does not establish support for every Windows codec input or replace a deployment/license review.
+
+Before any beta distribution: inspect resolved package license expressions/files and native third-party notices, include required notices, review vulnerabilities, remove unneeded dependencies and validate runtime/deployment prerequisites. No claim of completed distribution/license audit is made here. FFmpeg, external image libraries and PDF engines have not been added.

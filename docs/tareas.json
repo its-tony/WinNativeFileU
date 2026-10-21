@@ -380,6 +380,66 @@
       "success_criterion": "Review scoped M2 report, actual evidence, source/test identity, privacy and local documentation commit",
       "abandon_condition": "Two equivalent failures require new evidence",
       "next_step": "Reviewed seven-task M2 prototype matrix,4real gated PNG batches/requestedJPEG and keys40/40/0/40 limits,earlier finals and normal Revoke0/window absent/hash preservation. Static reference/evidence/privacy checks pass,source unchanged/prior60green. M2 scoped completion documented; M3 needs new instruction."
+    },
+    {
+      "id": "M3_ENGINE_BUILD",
+      "state": "VERIFICADO",
+      "attempts": 3,
+      "equivalent_failures": 1,
+      "evidence": [
+        "evidence\\private\\m3-engine-build-01.json",
+        "evidence\\private\\m3-engine-build-01.json",
+        "evidence\\private\\m3-workbench-build-01.json",
+        "src\\Converters\\LocalImageConverter.cs",
+        "evidence\\private\\m3-workbench-build-02.json",
+        "evidence\\private\\m3-workbench-build-02.json"
+      ],
+      "success_criterion": "Compile real PNG/BMP converter and run safety, output pixel, cancellation and collision tests",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Locked Windows restore/build0,0warnings/errors;92passed34Core33integration25converters. Strict zlib check corrects bad-deflate case; real PNG-BMP roundtrip/collisions/cancel remain green. UI not yet verified."
+    },
+    {
+      "id": "M3_WORKBENCH",
+      "state": "VERIFICADO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m3-workbench-launch-01.json",
+        "evidence\\private\\m3-workbench-result-01.json"
+      ],
+      "success_criterion": "Execute real converter in app workbench and corroborate output/progress/error with fixture hashes",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Owner confirms steps; journal2completed conversions PNG/BMP and automated OutputExists observed, exact independent BMP pixels, inputs unchanged, no partials, Closed and fresh window absence. Cancel UI/reader/other displays untested"
+    },
+    {
+      "id": "M3_REVIEW",
+      "state": "VERIFICADO",
+      "attempts": 3,
+      "equivalent_failures": 1,
+      "evidence": [
+        "evidence\\private\\m3-locked-restore-only-01.json",
+        "evidence\\private\\m3-locked-restore-only-01.json",
+        "evidence\\private\\m3-locked-restore-only-02.json",
+        "evidence\\private\\m3-path-review-01.json",
+        "evidence\\private\\m3-completion-review-01.json"
+      ],
+      "success_criterion": "Review M3 scope, evidence, privacy and local commits without M4",
+      "abandon_condition": "Two equivalent failures require new evidence",
+      "next_step": "Reviewed seven M3 tasks and bounded report against92green TRX, real2conversion/pixel/hash/UI/collision/close evidence; refs/hashes/links/path policy pass and source1fee7f7 unchanged. M3 initial engine complete; no radial handoff or M4 authorization"
+    },
+    {
+      "id": "M3_UI_CONTROL",
+      "state": "VERIFICADO",
+      "evidence": [
+        "evidence\\private\\m3-ui-control-refusals-01.json",
+        "evidence\\private\\m3-ui-control-refusals-01.json",
+        "evidence\\private\\m3-workbench-result-01.json"
+      ],
+      "attempts": 2,
+      "equivalent_failures": 0,
+      "success_criterion": "Observe owned workbench without competing with manual user input",
+      "abandon_condition": "Two equivalent control refusals stop automated input until a new condition",
+      "next_step": "Bounded resumed control succeeded after human completion; previous two tool refusals preserved, no universal automation claim"
     }
   ],
   "history": [
@@ -1831,6 +1891,212 @@
       "evidence": "evidence\\private\\m2-completion-review-01.json",
       "sha256": "db572849163c69241ba35b334f6b9ef8db1fea3c47c51f0729636b52424313e9",
       "note": "Reviewed seven-task M2 prototype matrix,4real gated PNG batches/requestedJPEG and keys40/40/0/40 limits,earlier finals and normal Revoke0/window absent/hash preservation. Static reference/evidence/privacy checks pass,source unchanged/prior60green. M2 scoped completion documented; M3 needs new instruction."
+    },
+    {
+      "event": "USUARIO",
+      "note": "2026-10-20: Bueno continuemos after explicit M2 closure and M3 next-step report authorizes continuing with M3. No M4/push/release."
+    },
+    {
+      "at": "2026-10-20T18:40:21.350847-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:41:14.550418-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-engine-build-01.json",
+      "sha256": "38deb5ec259904f5f549ecfc7e588adc8c97f028072fa90af303273d1e4103cc",
+      "note": "Initial restore generates locks for converter projects using existing dependencies; compile WinRT codec engine and execute real pixel/collision/cancellation tests before any runtime claim"
+    },
+    {
+      "at": "2026-10-20T18:42:33.197140-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-engine-build-01.json",
+      "sha256": "38deb5ec259904f5f549ecfc7e588adc8c97f028072fa90af303273d1e4103cc",
+      "note": "Initial real Windows build0,0warnings/errors;89passed34Core33integration22converters. Real native BMP-PNG-BMP pixel roundtrip/Unicode/hashes,CRC/truncation/APNG marker,alpha rejection,limits,no-overwrite incl late race/concurrent writers,cancel and cleanup failure pass. First restore generated locks; final locked build still needed after app workbench."
+    },
+    {
+      "at": "2026-10-20T18:46:20.010448-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "src\\Converters\\LocalImageConverter.cs",
+      "sha256": "d5f650bc6a5239e8b6d126743b1b583fee67a0c54834022ad98bb98499c37d66",
+      "note": "Refine reserved device names and add valid-container/bad-deflate error test; workbench adds App project reference so regenerate graph then verify locked restore separately"
+    },
+    {
+      "at": "2026-10-20T18:46:20.171834-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:46:47.209988-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m3-workbench-build-01.json",
+      "sha256": "b8804b432d5e8993295461e9e8b7b0d962415dda1c2c9d12b13939c9b62d56fb",
+      "note": "Build real conversion workbench and refined engine tests; restore generates changed App lock graph, runtime workbench and locked restore pending"
+    },
+    {
+      "at": "2026-10-20T18:49:36.882153-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "src\\Converters\\LocalImageConverter.cs",
+      "sha256": "c74822135ce22771070d5909052562438ded103d97ea82973c08b58066dfc617",
+      "note": "Changed condition after corrupt-deflate test: independently validate bounded PNG zlib/scanline count/filter before Windows decoder; restrict RGB/RGBA8 noninterlaced. Do not repeat decoder-only trust strategy."
+    },
+    {
+      "at": "2026-10-20T18:49:37.035842-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:49:57.554991-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m3-workbench-build-02.json",
+      "sha256": "691c103657d18e3554c5996176291cd09147a07a56d6b165e468777ab92e7bff",
+      "note": "Locked restore build after strict PNG raster validation and workbench responsiveness/preview handling fix; inspect actual tests and UI next"
+    },
+    {
+      "at": "2026-10-20T18:50:39.292129-06:00",
+      "id": "M3_ENGINE_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m3-workbench-build-02.json",
+      "sha256": "691c103657d18e3554c5996176291cd09147a07a56d6b165e468777ab92e7bff",
+      "note": "Locked Windows restore/build0,0warnings/errors;92passed34Core33integration25converters. Strict zlib check corrects bad-deflate case; real PNG-BMP roundtrip/collisions/cancel remain green. UI not yet verified."
+    },
+    {
+      "at": "2026-10-20T18:50:42.073979-06:00",
+      "id": "M3_WORKBENCH",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:50:43.308242-06:00",
+      "id": "M3_WORKBENCH",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-workbench-launch-01.json",
+      "sha256": "9fa09ecfaf6e5fa8d4f50ddd7e0895c50f20913d024e64ad01a0c8f459eb9d43",
+      "note": "Launch new generated BMP fixture workbench; inspect Ready/window and perform real UI conversion before acceptance"
+    },
+    {
+      "at": "2026-10-20T18:56:10.437494-06:00",
+      "id": "M3_UI_CONTROL",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-ui-control-refusals-01.json",
+      "sha256": "cd71f3397476e58a1e04b1892a73a9e2d845382813034511db804776766f438c",
+      "note": "First input refused by tool because of manual user activity; not an application conversion failure"
+    },
+    {
+      "at": "2026-10-20T18:56:10.665488-06:00",
+      "id": "M3_UI_CONTROL",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m3-ui-control-refusals-01.json",
+      "sha256": "cd71f3397476e58a1e04b1892a73a9e2d845382813034511db804776766f438c",
+      "note": "Second equivalent refusal stopped automated clicks; no third unchanged retry"
+    },
+    {
+      "at": "2026-10-20T18:56:10.901781-06:00",
+      "id": "M3_UI_CONTROL",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m3-workbench-result-01.json",
+      "sha256": "a993907cabae6b4ced6fa57113b4b2036fe6a8f569dc738250b6c99926084be5",
+      "note": "New condition: owner completed manual conversion and replied; fresh UI observed, one collision click succeeded and host closed normally"
+    },
+    {
+      "at": "2026-10-20T18:56:11.132164-06:00",
+      "id": "M3_UI_CONTROL",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m3-workbench-result-01.json",
+      "sha256": "a993907cabae6b4ced6fa57113b4b2036fe6a8f569dc738250b6c99926084be5",
+      "note": "Bounded resumed control succeeded after human completion; previous two tool refusals preserved, no universal automation claim"
+    },
+    {
+      "at": "2026-10-20T18:56:11.371528-06:00",
+      "id": "M3_WORKBENCH",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-workbench-result-01.json",
+      "sha256": "a993907cabae6b4ced6fa57113b4b2036fe6a8f569dc738250b6c99926084be5",
+      "note": "Owner confirms steps; journal2completed conversions PNG/BMP and automated OutputExists observed, exact independent BMP pixels, inputs unchanged, no partials, Closed and fresh window absence. Cancel UI/reader/other displays untested"
+    },
+    {
+      "at": "2026-10-20T18:56:11.592619-06:00",
+      "id": "M3_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:56:21.077141-06:00",
+      "id": "M3_REVIEW",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-locked-restore-only-01.json",
+      "sha256": "e836b621ff083718daebac4fd70ab4f2009eaf3e420a15f538f68c2174ca8337",
+      "note": "Exercise build script RestoreOnly branch with pinned lockfiles; prior full locked92tests remain authoritative"
+    },
+    {
+      "at": "2026-10-20T18:56:41.437220-06:00",
+      "id": "M3_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m3-locked-restore-only-01.json",
+      "sha256": "e836b621ff083718daebac4fd70ab4f2009eaf3e420a15f538f68c2174ca8337",
+      "note": "RestoreOnly sandbox invocation exited1 with empty stdout/stderr; no compiler failure inferred. Change to reviewed Windows execution scope already used for green full build"
+    },
+    {
+      "at": "2026-10-20T18:56:45.047286-06:00",
+      "id": "M3_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T18:56:46.717087-06:00",
+      "id": "M3_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m3-locked-restore-only-02.json",
+      "sha256": "aabd6889370a71285afd6fff6d7aa0c07aae00ef96274dbfb2c08e5783d010db",
+      "note": "Changed to reviewed Windows execution scope after empty sandbox exit1; exercise RestoreOnly without rebuilding green source"
+    },
+    {
+      "at": "2026-10-20T19:00:32.541304-06:00",
+      "id": "M3_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-20T19:00:32.882143-06:00",
+      "id": "M3_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m3-path-review-01.json",
+      "sha256": "4a28645d17c130a28b90bd64639c9f3d5416253d377a1c91f472864093b7fd5a",
+      "note": "Review final M3 candidate paths/whitespace; manual content and evidence checks follow, no rerun of unchanged92green source"
+    },
+    {
+      "at": "2026-10-20T19:01:15.996811-06:00",
+      "id": "M3_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m3-completion-review-01.json",
+      "sha256": "c2c683ec3b53609b3d4037e8cfb468a0814605452b22c802c82ab829e3ec9027",
+      "note": "Reviewed seven M3 tasks and bounded report against92green TRX, real2conversion/pixel/hash/UI/collision/close evidence; refs/hashes/links/path policy pass and source1fee7f7 unchanged. M3 initial engine complete; no radial handoff or M4 authorization"
     }
   ]
 }

@@ -2,11 +2,23 @@
 
 An original open source Windows 11 file utility, inspired by keyboard-assisted contextual workflows. Files will be processed locally. This project is independent of Tangerine and its developer.
 
-Current scope: **M2 radial prototype complete within documented limits**. WinUI presentation and real Explorer fixture receipt/selection, reentry and cancellation are verified on one physical DPI144 display. The final held-gated run received four PNG batches; one Drop recorded released keys, three retained Ctrl/Alt. The request named JPEG, while the actual final label was PNG. Originals remained unchanged. See the [M2 acceptance and limits](docs/reports/m2-completion.md), [M1 acceptance](docs/reports/m1-completion.md) and [current status](ESTADO.md). Conversion, tray and startup remain later work; M3 requires a new owner instruction.
+Current scope: **M3 initial offline conversion engine complete within documented limits**. PNG ↔ BMP conversion is verified on Windows, with new outputs, no overwrite, cancellation, progress stages and typed errors. A separate WinUI workbench converts generated images; the M2 radial remains a fixture receipt/selection preview. See [M3 acceptance and limits](docs/reports/m3-completion.md), [M2 acceptance](docs/reports/m2-completion.md), [M1 acceptance](docs/reports/m1-completion.md) and [current status](ESTADO.md). Tray, startup and M4 have not begun.
 
 ## Development
 
-The separate radial visual preview was validated with53tests (27Core,26integration); the latest integrated source passes **60 tests** (27Core,33integration). Light/Dark appearance, selection, keyboard controls and actual accessible status text have been inspected on Windows. Format labels remain visual examples. See the [preview report](docs/reports/m2-visual.md).
+The latest locked restore/build passed **92 tests**: 34 Core, 33 Windows integration and 25 converters, with no compiler warnings or errors. The initial engine accepts noninterlaced 8-bit RGB/RGBA PNG and 24/32-bit Windows BMP, subject to decoder validation. Limits: 64 MiB input, 16 million pixels, 16,384 pixels per side, fixed local drives and detected ordinary paths. BMP output requires opaque pixels. Outputs are normalized to sRGB / 96 DPI without copying metadata or profiles. JPEG, WebP, AVIF and PDF conversion are not implemented.
+
+Launch the generated-image conversion workbench after building:
+
+```powershell
+pwsh -NoProfile -File scripts/start-conversion-workbench.ps1
+```
+
+Select an input, inspect the detected format/dimensions, choose a new output filename and press Convert. Use result as input enables a round trip. The launcher prints a private run.json path; validate original hashes and absence of partial files with `scripts/check-conversion-workbench.ps1 -RunFile <run.json>`. That checker does not validate pixels. Native tests and an independent BMP parser verified the generated color-grid round trip. Cancel is implemented and tested in the engine at four stages; clicking Cancel or closing during active work has not been verified in the UI. The workbench has no file picker or radial handoff. See [ADR0009](docs/decisions/0009-m3-initial-image-engine.md).
+
+Publication uses an exclusive temporary file followed by a move without replacement. Existing destinations, including a late collision, are preserved. Cancellation before publication removes the owned temporary when possible; a cleanup failure reports its path. This is not a hostile-filesystem sandbox or a power-loss durability guarantee.
+
+The separate radial visual preview was validated with53tests (27Core,26integration); M2's integrated source passed **60 tests** (27Core,33integration). Light/Dark appearance, selection, keyboard controls and actual accessible status text have been inspected on Windows. Format labels remain visual examples. See the [preview report](docs/reports/m2-visual.md).
 
 ```powershell
 pwsh -NoProfile -File scripts/start-radial-preview.ps1
@@ -44,6 +56,7 @@ dotnet restore WinNativeFileU.slnx -p:Platform=x64 --locked-mode
 dotnet build WinNativeFileU.slnx --no-restore -c Release -p:Platform=x64
 dotnet test tests/Core.Tests/WinNativeFileU.Core.Tests.csproj --no-build --no-restore -c Release
 dotnet test tests/WindowsIntegration.Tests/WinNativeFileU.WindowsIntegration.Tests.csproj --no-build --no-restore -c Release
+dotnet test tests/Converters.Tests/WinNativeFileU.Converters.Tests.csproj --no-build --no-restore -c Release
 ```
 
 Running the App without prototype arguments opens instructions. To prepare disposable files, a baseline SHA256 manifest and a private journal:
@@ -78,19 +91,21 @@ No input hooks or startup changes are made. The unpackaged build includes Window
 
 - src/App: WinUI presentation and lifecycle.
 - src/Core: platform-independent domain model; no file I/O.
+- src/Converters: bounded Windows PNG/BMP codecs, local path/container validation and new-output publication.
 - src/WindowsIntegration: fixture-only HWND/OLE target, hotkey registration, placement and private diagnostics.
 - tests/Core.Tests: safety boundaries for activation, accepted data and reset.
+- tests/Converters.Tests: real codec round trips, pixels, hashes, cancellation, collision and error cases.
 - docs/research/tangerine: evidence, functional analysis and Windows feasibility.
 - docs/decisions: architecture decisions.
 - evidence/private: ignored original research/build output; reviewed summaries belong in docs.
 
-No conversion engine project is included.
+The conversion engine is separate from the radial OLE preview; format labels in that preview do not imply engine capabilities.
 
 ## Research and roadmap
 
 Start with [research overview](docs/research/tangerine/overview.md), [sources](docs/research/tangerine/sources.md), [independent specification](docs/functional-specification.md) and [Windows feasibility](docs/research/tangerine/feasibility.md).
 
 R0 → M0 foundation → M1 actual Windows drag feasibility → M2 radial UI → M3 conversion → M4 background integration → M5 beta. **Do not begin the next milestone without the owner's instruction.** Unit tests and a successful build cannot prove an Explorer gesture.
-The owner authorized completing M1 then M2 on2026-10-19; both prototypes are verified within their reports' scope. M3 has not been started or authorized.
+The owner authorized M1 then M2 on 2026-10-19 and M3 on 2026-10-20. Their bounded scopes are verified in the completion reports. M4 requires a new instruction.
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [MIT license](LICENSE)

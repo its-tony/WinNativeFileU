@@ -1,0 +1,61 @@
+{
+  "state": "VERIFICADO",
+  "scope": "M3 initial offline PNG/BMP conversion engine and generated-image workbench",
+  "date": "2026-10-20",
+  "report": "docs/reports/m3-completion.md",
+  "sourceCommit": "1fee7f7",
+  "build": {
+    "lockedRestore": true,
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "passed": 92,
+    "core": 34,
+    "integration": 33,
+    "converters": 25
+  },
+  "roadmapTasks": ["abstractions", "initial engine", "format detection", "conversion", "progress", "errors", "tests"],
+  "observedWorkbench": {
+    "completedFormats": ["PNG", "BMP"],
+    "dimensions": [3, 2],
+    "independentBmpPixelRoundtripEqual": true,
+    "originalsUnchanged": true,
+    "outputExistsUiAndJournal": true,
+    "noPartialsThisRun": true,
+    "closedAndWindowAbsent": true,
+    "radialConversion": false
+  },
+  "testedEngine": [
+    "Real Windows codecs and exact decoded pixels",
+    "Unicode input with misleading extension and unchanged source hashes",
+    "Existing/same-source/late/concurrent destination collision",
+    "Cancellation at four stages and owned temporary cleanup",
+    "Late cancellation and observer failure preserve published result",
+    "Actual locked-temporary CleanupFailed with deliberately retained private evidence",
+    "Alpha-to-BMP rejection, corrupt CRC/truncation/zlib, APNG marker, size and path limits"
+  ],
+  "limits": [
+    "PNG RGB/RGBA8 noninterlaced; Windows BMP24/32 subject to decoder",
+    "64 MiB input, 16 million pixels, 16384 pixels per side",
+    "Only opaque BMP output; sRGB and 96 DPI without copied metadata/profiles",
+    "Fixed local drives; detected path checks are not a hostile-filesystem sandbox",
+    "No crash/power-loss durability guarantee or full PNG conformance/fuzz audit",
+    "Cancel button and close-during-work not manually verified",
+    "No reader/high-contrast/other-display qualification",
+    "No radial-to-engine handoff, general file picker, tray or startup"
+  ],
+  "privateEvidence": [
+    "m3-engine-build-01.json",
+    "m3-workbench-build-01.json",
+    "m3-workbench-build-02.json",
+    "m3-workbench-core-02.trx",
+    "m3-workbench-integration-02.trx",
+    "m3-workbench-converters-02.trx",
+    "m3-workbench-final-01.jsonl",
+    "m3-workbench-result-01.json",
+    "m3-ui-control-refusals-01.json",
+    "m3-locked-restore-only-01.json",
+    "m3-locked-restore-only-02.json"
+  ],
+  "nextMilestone": "M4 requires a new owner instruction"
+}
