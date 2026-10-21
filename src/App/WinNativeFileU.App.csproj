@@ -18,6 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
     <ProjectReference Include="../Core/WinNativeFileU.Core.csproj" />
+    <ProjectReference Include="../Converters/WinNativeFileU.Converters.csproj" />
     <ProjectReference Include="../WindowsIntegration/WinNativeFileU.WindowsIntegration.csproj" />
   </ItemGroup>
 </Project>
