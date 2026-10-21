@@ -9,6 +9,49 @@ namespace WinNativeFileU.Converters;
 /// <summary>Single-image Windows codec engine. All writes are new outputs; no original is mutated.</summary>
 public sealed class LocalImageConverter : IImageConverter
 {
+    /// <summary>Bounded header-only eligibility probe for UI/OLE. Full container/pixel validation still runs at conversion.</summary>
+    public static ImageFileFormat ProbeLocalImage(string sourcePath)
+    {
+        string path = LocalPath(sourcePath);
+        CheckAncestors(path, input: true);
+        using var file = OpenSource(path);
+        Span<byte> header = stackalloc byte[32];
+        int count = (int)Math.Min(file.Length, header.Length);
+        file.ReadExactly(header[..count]);
+        var format = ImageConversionPolicy.DetectSignature(header[..count]);
+        if (format == null) throw Error(ConversionError.UnsupportedInput, "Choose actual PNG or BMP images.");
+        uint width, height;
+        if (format == ImageFileFormat.Png)
+        {
+            if (count < 29 || !header.Slice(12, 4).SequenceEqual("IHDR"u8)) throw Error(ConversionError.InvalidImage, "PNG header is incomplete.");
+            if (header[24] != 8 || header[25] is not (2 or 6) || header[28] != 0)
+                throw Error(ConversionError.UnsupportedInput, "Choose noninterlaced 8-bit RGB/RGBA PNG images.");
+            width = BinaryPrimitives.ReadUInt32BigEndian(header[16..]); height = BinaryPrimitives.ReadUInt32BigEndian(header[20..]);
+        }
+        else
+        {
+            if (count < 30) throw Error(ConversionError.InvalidImage, "BMP header is incomplete.");
+            if (BinaryPrimitives.ReadUInt32LittleEndian(header[14..]) is not (40 or 108 or 124)
+                || BinaryPrimitives.ReadUInt16LittleEndian(header[28..]) is not (24 or 32))
+                throw Error(ConversionError.UnsupportedInput, "Choose 24/32-bit Windows BMP images.");
+            int w = BinaryPrimitives.ReadInt32LittleEndian(header[18..]); long h = Math.Abs((long)BinaryPrimitives.ReadInt32LittleEndian(header[22..]));
+            if (w <= 0 || h > uint.MaxValue) throw Error(ConversionError.LimitsExceeded, "Image dimensions are outside the supported limits.");
+            width = (uint)w; height = (uint)h;
+        }
+        if (!ImageConversionPolicy.DimensionsAllowed(width, height)) throw Error(ConversionError.LimitsExceeded, "Image exceeds the supported dimensions.");
+        return format.Value;
+    }
+
+    public static IReadOnlyList<ImageFileFormat> ProbeSelection(IReadOnlyList<string> paths)
+    {
+        if (paths.Count is 0 or > ImageBatchPolicy.MaximumFiles || paths.Any(path => path.Length > 1024)
+            || paths.Distinct(StringComparer.OrdinalIgnoreCase).Count() != paths.Count)
+            throw Error(ConversionError.LimitsExceeded, "Choose one to eight distinct images.");
+        var targets = ImageBatchPolicy.CommonTargets(paths.Select(ProbeLocalImage));
+        if (targets.Count == 0) throw Error(ConversionError.IncompatibleTarget, "Choose images with the same source format for this batch.");
+        return targets;
+    }
+
     public static string ValidateLocalDirectory(string path)
     {
         string full = LocalPath(path);

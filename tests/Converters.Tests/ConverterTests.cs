@@ -249,7 +249,7 @@ public sealed class ConverterTests
     private static readonly byte[] Pixels = [0, 0, 255, 255, 0, 255, 0, 255, 255, 0, 0, 255, 0, 255, 255, 255, 255, 0, 255, 255, 255, 255, 255, 255];
     private static byte[] Hash(string path) => SHA256.HashData(File.ReadAllBytes(path));
 
-    private static void WriteBmp(string path)
+    internal static void WriteBmp(string path)
     {
         byte[] bmp = new byte[78]; "BM"u8.CopyTo(bmp); BinaryPrimitives.WriteInt32LittleEndian(bmp.AsSpan(2), bmp.Length);
         BinaryPrimitives.WriteInt32LittleEndian(bmp.AsSpan(10), 54); BinaryPrimitives.WriteInt32LittleEndian(bmp.AsSpan(14), 40);
