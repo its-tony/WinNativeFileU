@@ -82,6 +82,8 @@ public sealed class ResidentTests
         using (host)
         {
             Assert.True(host.TrayReady); Assert.True(ResidentNative.IsWindow(hwnd));
+            var location = host.QueryTrayLocation("native-test");
+            Assert.Equal(location.HResult == 0 && location.Right > location.Left && location.Bottom > location.Top, location.Located);
             host.SetShortcut(ResidentShortcut.ControlAltW);
             int shown = 0; host.ShowRequested += () => shown++;
             using (var other = new ResidentHost((_, _) => { }))
@@ -96,9 +98,17 @@ public sealed class ResidentTests
             host.SetShortcut(ResidentShortcut.None); host.DispatchHotkeyForTest(); Assert.Equal(2, shown);
         }
         Assert.False(ResidentNative.IsWindow(hwnd)); Assert.Contains("TrayRemoved", events);
+        Assert.Contains("TrayLocation", events); Assert.Contains("OwnedIconDestroyed", events);
         host.Dispose(); // Idempotent; subsequent ownership can register the released shortcuts.
         using var next = new ResidentHost((_, _) => { }); next.SetShortcut(ResidentShortcut.ControlAltW);
     });
+
+    [Theory]
+    [InlineData(0, 1, 2, 21, 22, true)]
+    [InlineData(-1, 1, 2, 21, 22, false)]
+    [InlineData(0, 0, 0, 0, 0, false)]
+    public void LocationDoesNotTreatFailureOrEmptyBoundsAsLocated(int hr, int left, int top, int right, int bottom, bool expected) =>
+        Assert.Equal(expected, new TrayIconLocation(hr, left, top, right, bottom).Located);
 
     private sealed class StartupMemory : IStartupValueStore
     {

@@ -4,6 +4,11 @@ using WinNativeFileU.Core;
 
 namespace WinNativeFileU.WindowsIntegration;
 
+public sealed record TrayIconLocation(int HResult, int Left, int Top, int Right, int Bottom)
+{
+    public bool Located => HResult == 0 && Right > Left && Bottom > Top;
+}
+
 /// <summary>Event-driven owned HWND, notification icon and one registered show shortcut; no input hook or timer.</summary>
 public sealed class ResidentHost : IDisposable
 {
@@ -12,7 +17,7 @@ public sealed class ResidentHost : IDisposable
     private readonly Native.WindowProc procedure;
     private readonly Action<string, object> log;
     private readonly int thread = Environment.CurrentManagedThreadId;
-    private nint hwnd;
+    private nint hwnd, icon;
     private bool disposed, classRegistered;
     private int hotkeyId;
     private ResidentShortcut shortcut;
@@ -29,6 +34,7 @@ public sealed class ResidentHost : IDisposable
         log = journal; procedure = Procedure;
         try
         {
+            icon = ResidentIcon.Create();
             var cls = new Native.WindowClass { Size = (uint)Marshal.SizeOf<Native.WindowClass>(), Proc = procedure,
                 Instance = Native.GetModuleHandleW(null), Name = className };
             if (Native.RegisterClassExW(ref cls) == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -74,7 +80,7 @@ public sealed class ResidentHost : IDisposable
     private ResidentNative.IconData Data() => new()
     {
         Size = (uint)Marshal.SizeOf<ResidentNative.IconData>(), Window = hwnd, Id = 1,
-        Flags = 0x87, Callback = TrayMessage, Icon = ResidentNative.LoadIconW(0, (nint)32512),
+        Flags = 0x87, Callback = TrayMessage, Icon = icon,
         Tip = "WinNativeFileU — Open settings", Info = "", InfoTitle = "", Version = 4
     };
 
@@ -88,7 +94,19 @@ public sealed class ResidentHost : IDisposable
             RemoveIcon();
             throw new Win32Exception("Notification icon version 4 could not be selected.");
         }
-        Write("TrayAdded", new { version = 4 });
+        Write("TrayAdded", new { version = 4, icon = "original-blue-diamond", dataSize = Marshal.SizeOf<ResidentNative.IconData>() });
+        QueryTrayLocation("after-add");
+    }
+
+    public TrayIconLocation QueryTrayLocation(string origin = "user")
+    {
+        AssertThread();
+        var identifier = new ResidentNative.IconIdentifier
+        { Size = (uint)Marshal.SizeOf<ResidentNative.IconIdentifier>(), Window = hwnd, Id = 1 };
+        int hr = ResidentNative.Shell_NotifyIconGetRect(ref identifier, out var rect);
+        var result = new TrayIconLocation(hr, rect.Left, rect.Top, rect.Right, rect.Bottom);
+        Write("TrayLocation", new { origin, result });
+        return result; // Bounds are diagnostic evidence, not proof of physical visibility or shell clicks.
     }
 
     private void RemoveIcon()
@@ -160,6 +178,7 @@ public sealed class ResidentHost : IDisposable
         AssertThread();
         if (hotkeyId != 0) { Write("ResidentHotkeyRemoved", new { success = Native.UnregisterHotKey(hwnd, hotkeyId) }); hotkeyId = 0; }
         RemoveIcon();
+        if (icon != 0) { Write("OwnedIconDestroyed", new { success = ResidentNative.DestroyIcon(icon) }); icon = 0; }
         if (hwnd != 0) { Write("ResidentWindowDestroyed", new { success = Native.DestroyWindow(hwnd) }); hwnd = 0; }
         if (classRegistered) Write("ResidentClassRemoved", new { success = Native.UnregisterClassW(className, Native.GetModuleHandleW(null)) });
         disposed = true;
@@ -168,6 +187,8 @@ public sealed class ResidentHost : IDisposable
 
 internal static class ResidentNative
 {
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct IconIdentifier { public uint Size; public nint Window; public uint Id; public Guid Guid; }
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct IconData
     {
@@ -180,7 +201,9 @@ internal static class ResidentNative
         public uint InfoFlags; public Guid Guid; public nint BalloonIcon;
     }
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool Shell_NotifyIconW(uint message, ref IconData data);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)] internal static extern nint LoadIconW(nint instance, nint resource);
+    [DllImport("shell32.dll")] internal static extern int Shell_NotifyIconGetRect(ref IconIdentifier identifier, out Native.Rect rect);
+    [DllImport("user32.dll", SetLastError = true)] internal static extern nint CreateIcon(nint instance, int width, int height, byte planes, byte bitsPerPixel, byte[] andBits, byte[] xorBits);
+    [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool DestroyIcon(nint icon);
     [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)] internal static extern uint RegisterWindowMessageW(string message);
     [DllImport("user32.dll")] internal static extern nint CreatePopupMenu();
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool AppendMenuW(nint menu, uint flags, nuint id, string text);

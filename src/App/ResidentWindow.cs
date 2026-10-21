@@ -43,7 +43,7 @@ public sealed class ResidentWindow : Window
         }
         Title = "WinNativeFileU — Resident settings";
         content.Children.Add(new TextBlock { Text = "WinNativeFileU", FontSize = 30 });
-        content.Children.Add(new TextBlock { Text = "Keep the app available in the notification area. Open settings from its icon or your shortcut; choose Exit to stop it.", TextWrapping = TextWrapping.Wrap });
+        content.Children.Add(new TextBlock { Text = "Look for the blue icon with a white diamond in the notification area or its hidden icons. Open settings from that icon or your shortcut; choose Exit to stop the app.", TextWrapping = TextWrapping.Wrap });
         foreach (var value in Enum.GetValues<ResidentTheme>()) theme.Items.Add(value.ToString());
         foreach (string label in new[] { "Disabled", "Ctrl+Alt+W", "Ctrl+Alt+Shift+W" }) shortcut.Items.Add(label);
         AutomationProperties.SetName(theme, "Resident appearance"); AutomationProperties.SetName(shortcut, "Resident shortcut");
@@ -53,7 +53,17 @@ public sealed class ResidentWindow : Window
         content.Children.Add(startupStatus); content.Children.Add(startupAction);
         var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
         var exit = new Button { Content = "Exit WinNativeFileU" }; actions.Children.Add(hide); actions.Children.Add(exit);
-        content.Children.Add(actions); content.Children.Add(status);
+        content.Children.Add(actions);
+        var checkTray = new Button { Content = "Check tray icon" };
+        checkTray.Click += (_, _) =>
+        {
+            if (host == null) { status.Text = "The notification icon is unavailable."; return; }
+            var location = host.QueryTrayLocation();
+            status.Text = location.Located
+                ? "Windows reports a location for the blue diamond icon. It may be under hidden icons; this does not confirm that it is visible."
+                : "Windows did not report a location for the notification icon. Keep this window available and use Exit to stop the app.";
+        };
+        content.Children.Add(checkTray); content.Children.Add(status);
         Content = new ScrollViewer { Content = content, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
         content.ActualThemeChanged += (_, _) => UpdateBackground();
 
