@@ -23,6 +23,27 @@ public partial class App : Application
                 int index = Array.IndexOf(commandLine, name);
                 return index >= 0 && index + 1 < commandLine.Length ? commandLine[index + 1] : null;
             }
+            if (!commandLine.Contains("--conversion-workbench") && !commandLine.Contains("--radial-preview") && !commandLine.Contains("--prototype-root"))
+            {
+                string? customRoot = Option("--resident-root");
+                string root = customRoot ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WinNativeFileU");
+                if (customRoot == null) Directory.CreateDirectory(root);
+                var instance = new WinNativeFileU.WindowsIntegration.ResidentInstance(root);
+                if (!instance.Acquired)
+                {
+                    instance.Dispose();
+                    string duplicate = Path.Combine(root, "duplicate-" + Guid.NewGuid().ToString("N") + ".json");
+                    using var file = new FileStream(duplicate, FileMode.CreateNew, FileAccess.Write);
+                    System.Text.Json.JsonSerializer.Serialize(file, new { at = DateTimeOffset.Now, processId = Environment.ProcessId, result = "AlreadyRunning", startupChanged = false });
+                    Exit(); return;
+                }
+                try
+                {
+                    var resident = new ResidentWindow(root, instance, customRoot != null);
+                    window = resident; resident.Start(commandLine.Contains("--resident-minimized")); return;
+                }
+                catch { instance.Dispose(); throw; }
+            }
             window = commandLine.Contains("--conversion-workbench")
                 ? new ConversionWorkbenchWindow(Option("--conversion-root") ?? throw new ArgumentException("Conversion run root required."), Option("--conversion-log") ?? throw new ArgumentException("Conversion journal required."))
                 : commandLine.Contains("--radial-preview")
