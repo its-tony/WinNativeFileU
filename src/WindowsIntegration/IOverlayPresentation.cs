@@ -10,5 +10,6 @@ public interface IOverlayPresentation : IDisposable
     void Resize(int clientWidth, int clientHeight);
     void Reset();
     void Reject();
+    void SetAvailableFormats(IReadOnlyList<string> formats) { }
     string? SelectAt(double x, double y, double clientWidth, double clientHeight);
 }

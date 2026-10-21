@@ -7,7 +7,7 @@ using WinNativeFileU.Core;
 
 namespace WinNativeFileU.WindowsIntegration;
 
-/// <summary>Fixture-only OLE experiment, owned by the WinUI STA. No file mutations.</summary>
+/// <summary>Owned OLE receiver: fixture-only by default, or an explicit bounded conversion queue adapter.</summary>
 [ComVisible(true), ClassInterface(ClassInterfaceType.None)]
 public sealed class DragOverlay : IOleDropTarget, IDisposable
 {
@@ -21,6 +21,8 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private readonly PrototypeShortcuts shortcuts;
     private readonly bool requireHeldActivation;
     private readonly IOverlayPresentation? presentation;
+    private readonly IFileDropHandler? fileDropHandler;
+    private IReadOnlyList<string> availableFormats = [];
     private bool presentationReady;
     private bool resizingPresentation;
     private string? selectedFormat;
@@ -37,19 +39,21 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     public string RejectionLabel => shortcuts.RejectionLabel;
 
     public DragOverlay(string fixtureRoot, string logPath, PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys,
-        bool requireHeldActivation = false, IOverlayPresentation? presentation = null)
-        : this(fixtureRoot, logPath, false, ReadPointer, profile, requireHeldActivation: requireHeldActivation, presentation: presentation) { }
+        bool requireHeldActivation = false, IOverlayPresentation? presentation = null, IFileDropHandler? fileDropHandler = null)
+        : this(fixtureRoot, logPath, false, ReadPointer, profile, requireHeldActivation: requireHeldActivation, presentation: presentation, fileDropHandler: fileDropHandler) { }
 
     // Hidden receiver tests use native OLE registration and HGLOBAL decoding,
     // but neither register hotkeys nor show/move any desktop window.
     internal DragOverlay(string fixtureRoot, string logPath, bool nativeTestMode, Func<PointerObservation> readPointer,
         PrototypeShortcutProfile profile = PrototypeShortcutProfile.FunctionKeys, Func<bool?>? isPointerOverReceiver = null,
-        bool requireHeldActivation = false, IOverlayPresentation? presentation = null)
+        bool requireHeldActivation = false, IOverlayPresentation? presentation = null, IFileDropHandler? fileDropHandler = null)
     {
         shortcuts = PrototypeShortcuts.For(profile);
         this.nativeTestMode = nativeTestMode;
         this.requireHeldActivation = requireHeldActivation;
         this.presentation = presentation;
+        this.fileDropHandler = fileDropHandler;
+        if (fileDropHandler != null && presentation == null) throw new ArgumentException("Conversion drops require a format presentation.");
         this.readPointer = readPointer;
         this.isPointerOverReceiver = isPointerOverReceiver ?? (nativeTestMode ? () => false : ObservePointerOverReceiver);
         root = Path.GetFullPath(fixtureRoot);
@@ -72,7 +76,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             };
             if (Native.RegisterClassExW(ref cls) == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
             Log("WindowClassRegistered", new { });
-            hwnd = Native.CreateWindowExW(0x08000088, className, presentation == null ? "WinNativeFileU M1 Drop Target" : "WinNativeFileU M2 Radial Target",
+            hwnd = Native.CreateWindowExW(0x08000088, className, fileDropHandler != null ? "WinNativeFileU Conversion Radial" : presentation == null ? "WinNativeFileU M1 Drop Target" : "WinNativeFileU M2 Radial Target",
                 presentation == null ? 0x80800000u : 0x80000000u, 0, 0, 360, 160, 0, 0, cls.Instance, 0);
             if (hwnd == 0) throw new Win32Exception(Marshal.GetLastWin32Error());
             Log("WindowCreated", new { hwnd = hwnd.ToInt64() });
@@ -106,7 +110,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             if (!nativeTestMode && (!activationRegistered || !rejectionRegistered))
                 throw new Win32Exception($"{ActivationLabel}/{RejectionLabel} could not be registered; no hotkey is assumed available.");
             if (!nativeTestMode) ObserveDisplays();
-            Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString(), requireHeldActivation });
+            Log("Ready", new { root, os = Environment.OSVersion.Version.ToString(), runtime = Environment.Version.ToString(), apartment = Thread.CurrentThread.GetApartmentState().ToString(), requireHeldActivation, conversionMode = fileDropHandler != null });
         }
         catch (Exception ex) { Log("InitializationFailed", new { type = ex.GetType().Name, hr = ex.HResult }); Dispose(); throw; }
     }
@@ -135,6 +139,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
     private void Arm(string origin, PointerObservation? activationPointer = null)
     {
         AssertThread();
+        if (fileDropHandler?.CanAccept == false) { Log("ActivationDeclined", new { origin, reason = "ConversionBusyOrOutputRequired" }); return; }
         if (session.State != InteractionState.Idle)
         {
             Log("ArmIgnored", new { state = session.State.ToString(), pointer = readPointer() });
@@ -146,6 +151,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         cancelled = acceptable = false;
         selectedFormat = null;
         presentation?.Reset();
+        if (fileDropHandler != null) { availableFormats = []; presentation?.SetAvailableFormats(availableFormats); }
         if (nativeTestMode) { Log("ArmedForNativeTest", new { profile = shortcuts.Name }); return; }
         caption = $"M1 fixture receiver\nDrag fixture files here. {RejectionLabel} rejects.\nRelease {ActivationLabel}: target stays open.";
         var before = Native.GetForegroundWindow();
@@ -169,7 +175,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         }
         Native.InvalidateRect(hwnd, 0, true);
         Log("Armed", new { origin, profile = shortcuts.Name, before = before.ToInt64(), after = Native.GetForegroundWindow().ToInt64(), cursor, x, y, width, height, dpi, work = info.Work, requireHeldActivation, pointer = activationPointer ?? readPointer() });
-        StatusChanged?.Invoke($"Target armed. Release {ActivationLabel}; drop only prepared fixtures.");
+        StatusChanged?.Invoke(fileDropHandler != null ? $"Radial ready. Release {ActivationLabel} and drop on an enabled PNG/BMP sector." : $"Target armed. Release {ActivationLabel}; drop only prepared fixtures.");
     }
 
     public void Cancel()
@@ -203,6 +209,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             AssertThread();
             if (session.State != InteractionState.AwaitingData || cancelled || !logHealthy) return 0;
             var files = ReadFiles(data);
+            if (!PrepareFormats(files)) return 0;
             acceptable = true;
             session.EnterAcceptedTarget();
             effect = DropPolicy.Effect(allowed, SelectFormat(point), cancelled);
@@ -270,7 +277,17 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             if (session.State != InteractionState.Tracking || DropPolicy.Effect(allowed, acceptable && logHealthy && SelectFormat(point), cancelled) == 0)
             { Log("DropRejected", new { allowed, cancelled }); return 0; }
             var files = ReadFiles(data);
+            if (!PrepareFormats(files) || !SelectFormat(point)) { Log("DropRejected", new { reason = "ChangedOrIneligibleSelection" }); return 0; }
             session.ReceiveDrop(files);
+            if (fileDropHandler != null)
+            {
+                if (selectedFormat == null || !Log("ConversionDropValidated", new { count = files.Length, selectedFormat })
+                    || !fileDropHandler.TryAccept(Array.AsReadOnly(files), selectedFormat))
+                { Log("DropRejected", new { reason = "JobNotQueued" }); return 0; }
+                effect = DropPolicy.Copy; // Queue commit: later diagnostic failure cannot turn this accepted operation into NONE.
+                Log("DropAccepted", new { allowed, effect, keys, count = files.Length, files, selectedFormat, previewOnly = false, conversionQueued = true });
+                return 0;
+            }
             if (Log("DropAccepted", new { allowed, effect = DropPolicy.Copy, keys, count = files.Length, files, selectedFormat, previewOnly = presentation != null }))
             {
                 effect = DropPolicy.Copy;
@@ -293,7 +310,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 || Native.GlobalSize(medium.unionmember) < 20 || Native.GlobalSize(medium.unionmember) > 2_097_152)
                 throw new NotSupportedException("Bounded HGLOBAL required.");
             uint count = Native.DragQueryFileW(medium.unionmember, uint.MaxValue, null, 0);
-            if (count == 0 || count > DropPolicy.MaximumFiles) throw new NotSupportedException("Selection exceeds experiment limit.");
+            if (count == 0 || count > (fileDropHandler == null ? DropPolicy.MaximumFiles : ImageBatchPolicy.MaximumFiles)) throw new NotSupportedException("Selection exceeds the file limit.");
             var files = new List<string>();
             for (uint i = 0; i < count; i++)
             {
@@ -302,6 +319,12 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
                 var path = new StringBuilder((int)length + 1);
                 if (Native.DragQueryFileW(medium.unionmember, i, path, length + 1) != length) throw new NotSupportedException("Incomplete path.");
                 string full = path.ToString();
+                if (fileDropHandler != null)
+                {
+                    if (!IsLocalDriveSyntax(full) || full.Length > 1024) throw new NotSupportedException("Bounded absolute local image paths required.");
+                    files.Add(full); // The explicit conversion handler checks attributes/header before any file can be accepted.
+                    continue;
+                }
                 if (!DropPolicy.IsWithinFixtureRoot(root, full) || HasReparseAncestor(full)) throw new NotSupportedException("Outside fixture boundary.");
                 var attrs = File.GetAttributes(full);
                 if ((attrs & (FileAttributes.Directory | FileAttributes.Offline | FileAttributes.ReparsePoint)) != 0)
@@ -311,6 +334,19 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
             return files.ToArray();
         }
         finally { Native.ReleaseStgMedium(ref medium); }
+    }
+
+    private static bool IsLocalDriveSyntax(string path) => path.Length >= 3 && char.IsAsciiLetter(path[0])
+        && path[1] == ':' && path[2] == '\\' && !path.Contains('/') && !path.AsSpan(2).Contains(':');
+
+    private bool PrepareFormats(IReadOnlyList<string> files)
+    {
+        if (fileDropHandler == null) return true;
+        if (!fileDropHandler.CanAccept) return false;
+        availableFormats = fileDropHandler.GetAvailableFormats(files).ToArray();
+        if (availableFormats.Any(format => format is not ("PNG" or "BMP"))) throw new NotSupportedException("Unsupported conversion target.");
+        presentation?.SetAvailableFormats(availableFormats);
+        return availableFormats.Count != 0;
     }
 
     private static bool HasReparseAncestor(string path)
@@ -332,6 +368,7 @@ public sealed class DragOverlay : IOleDropTarget, IDisposable
         if (presentation == null) return true;
         if (cancelled || !Native.ScreenToClient(hwnd, ref point) || !Native.GetClientRect(hwnd, out var rect)) return false;
         string? format = presentation.SelectAt(point.X, point.Y, rect.Right, rect.Bottom);
+        if (fileDropHandler != null && (format == null || !availableFormats.Contains(format))) format = null;
         if (format != selectedFormat)
         {
             selectedFormat = format;
