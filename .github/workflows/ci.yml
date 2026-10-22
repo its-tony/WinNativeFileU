@@ -1,4 +1,4 @@
-name: Windows foundation
+name: Windows regression
 on:
   push:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
           global-json-file: global.json
       - name: Restore, compile and test
         shell: pwsh
-        run: ./scripts/build.ps1 -LockedRestore
+        run: ./scripts/build.ps1 -LockedRestore -Headless
       - name: Test results
         if: always()
         uses: actions/upload-artifact@v4

@@ -75,6 +75,7 @@ public sealed class ResidentTests
     }
 
     [Fact]
+    [Trait("Category", "InteractiveShell")]
     public void NativeTrayHotkeyConflictAndDisposalUseOwnedResources() => OnSta(() =>
     {
         var events = new List<string>(); var host = new ResidentHost((name, _) => events.Add(name));

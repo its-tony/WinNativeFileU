@@ -1,0 +1,40 @@
+name: Prepare unsigned Windows candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Regression without interactive tray test
+        shell: pwsh
+        run: ./scripts/build.ps1 -LockedRestore -Headless
+      - name: Prepare verified portable compiler
+        shell: pwsh
+        run: ./scripts/install-local-inno.ps1
+      - name: Stage local candidate
+        shell: pwsh
+        run: ./scripts/package.ps1 -OutputRoot artifacts/candidate
+      - name: Candidate artifacts for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-win-x64-candidate
+          path: |
+            artifacts/candidate/*.zip
+            artifacts/candidate/*-setup.exe
+            artifacts/candidate/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 7
+      - name: Test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-test-results
+          path: artifacts/test-results
+          if-no-files-found: ignore
