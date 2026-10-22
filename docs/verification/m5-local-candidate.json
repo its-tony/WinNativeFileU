@@ -1,0 +1,36 @@
+{
+  "state": "VERIFICADO_LOCAL",
+  "date": "2026-10-21",
+  "timezone": "America/Guatemala",
+  "scope": "Local candidate preparation and bounded Windows qualification; Public Beta unpublished",
+  "report": "docs/reports/m5-local-candidate.md",
+  "version": "0.1.0-beta.1",
+  "productSourceCommit": "1e4ec281f6e1090481d39c8be793a4c29a42a6d9",
+  "sourceChangesPresent": false,
+  "repositoryChangesPresentAtPackaging": true,
+  "runtimeVersion": "10.0.13",
+  "windowsAppSdk": "2.5.1",
+  "deployment": "self-contained folder, Windows11 x64, unsigned",
+  "build": { "locked": true, "exitCode": 0, "warnings": 0, "errors": 0, "passed": 131, "core": 47, "integration": 54, "converters": 30 },
+  "headlessLocal": { "exitCode": 0, "passed": 130, "core": 47, "integration": 53, "converters": 30, "excluded": "One InteractiveShell tray test", "remoteActionsRun": false },
+  "payload": { "manifestEntries": 553, "manifestAdditional": true, "noticePackageVersionPairs": 16, "innoNoticeIncluded": true, "binaryResourceFiles": 510, "upstreamExactHashes": 504, "originalGeneratedOutputs": 6, "unattributed": 0 },
+  "artifactHashes": {
+    "WinNativeFileU-0.1.0-beta.1-win-x64.zip": "ec2a9bf53e78f2917d5014bc624cb1c4b14374a809630de0f12ff37d31d6cb76",
+    "WinNativeFileU-0.1.0-beta.1-win-x64-setup.exe": "a9d320c13da736f779acb536b6ac33ffa27da2b6ae666238ff3d987e62e103fc"
+  },
+  "integrity": { "zipExtractVerified": true, "changedFileRejected": true, "unlistedFileRejected": true, "sourceArchiveUnchanged": true },
+  "testIdentity": { "installExit": 0, "uninstallExit": 0, "nonemptyRefusalExit": 7, "runningInstallRefusalExit": 1, "runningUninstallRefusalExit": 1, "loadedBundledClrAndWinUI": true, "normalExitOleRevoke": [0, 0], "normalExitCleanupSuccesses": 5, "processAbsent": true },
+  "normalIdentity": { "privateSpaceUnicodeDestination": true, "installExit": 0, "manifestVerified": true, "startMenuTargetWorkingDirectoryVerified": true, "uninstallExit": 0, "registrationShortcutKnownFilesRemoved": true },
+  "preservationBothIdentities": { "unknownAddedFile": true, "externalProfileFixture": true, "runValue": true, "automaticStartupEnabled": false },
+  "installedWorkbench": { "conversions": 2, "formats": ["PNG", "BMP"], "independentExactGridRgb": true, "dimensions": "3x2", "originalsUnchanged": true, "outputExistsRejected": true, "outputs": 2, "partials": 0, "normalClosed": true, "processAbsent": true, "newPickerRadialGesture": false },
+  "advisoryQuery": { "date": "2026-10-21", "source": "Public NuGet.org", "projects": 7, "exitCode": 0, "reportedVulnerabilityEntries": 0, "implicitRuntimePacksComprehensivelyCovered": false },
+  "preservedFailures": [
+    "Global runtime pin requested wrong Windows SDK pack; corrected framework-specific metadata",
+    "Global RID changed referenced library locked graphs; corrected App-owned RID",
+    "Installed Hidden resident capture/activation failed twice; changed fresh explicit Normal workbench succeeded without establishing the cause",
+    "Earlier picker modal targeting and late automated Cancel failures remain in flow report"
+  ],
+  "privateEvidence": ["m5-package-build-02.json", "m5-package-core-02.trx", "m5-package-integration-02.trx", "m5-package-converters-02.trx", "m5-headless-build-01.json", "m5-headless-core-01.trx", "m5-headless-integration-01.trx", "m5-headless-converters-01.trx", "m5-package-candidate-01.json", "m5-final-integrity-test-01.json", "m5-install-result-01.json", "m5-installed-ui-control-01.json", "m5-installed-visible-ready-01.json", "m5-installed-conversion-result-01.json", "m5-dependency-audit-02.json"],
+  "limits": ["Unsigned/unpublished; no publisher trust or clean-machine qualification", "Default install location and interactive wizard unrun", "Remote CI unrun", "Real logon and matching Run-value removal unrun", "Busy Exit, end-session, picker cancellation unrun", "Reader/high contrast/additional physical displays unrun", "Bounded PNG/BMP variants; no hostile-filesystem or power-loss guarantee", "Dependency minimization and journal retention pending"],
+  "nextStep": "Review candidate and choose further qualification/distribution policy; no automatic publication or new milestone"
+}

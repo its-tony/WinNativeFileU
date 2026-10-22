@@ -1,20 +1,23 @@
-# Distribution review — M5 preparation
+# Distribution review — local M5 candidate
 
-Date: 2026-10-20, America/Guatemala. **In progress; no package or public beta approved.** This is a technical inventory, not a statement that all redistribution obligations have been satisfied.
+Date: 2026-10-21, America/Guatemala. **Technical review of the unsigned local 0.1.0-beta.1 candidate; no public release approved.** Source/packager inputs: `1e4ec281f6e1090481d39c8be793a4c29a42a6d9`, with `sourceChangesPresent=false`. Separate tracking/harness changes at packaging time are recorded as `repositoryChangesPresent=true`.
 
-The application source retains its existing MIT license. Third-party runtime files have their own terms; the source license does not relicense those binaries. The App lock graph contains16NuGet package/version pairs. Local nuspec/license/notice metadata was inventoried in private evidence m5-dependency-inventory-01.json. The final publish directory and .NET runtime files have not yet been attributed, so this is not a complete distribution bill of materials.
+The source retains its existing MIT license. Bundled third-party files retain their own terms. The final payload includes `LICENSE.txt`, `DISTRIBUTION-TERMS.txt`, `THIRD-PARTY-NOTICES.json`, `BINARY-ATTRIBUTION.json` and unchanged notices under `licenses/`. The installer presents source and Windows App SDK binary terms, with the other applicable terms included in the payload. This technical inventory does not constitute legal advice or blanket redistribution approval.
 
-| Group | Observed metadata | Remaining work |
-|---|---|---|
-| Windows App SDK2.5.1 and modules | Local Microsoft Windows App SDK terms and notices; redistribution section covers files placed with the app by the package, subject to its requirements | Retain applicable terms/notices and review the exact payload before distribution |
-| WebView2 SDK1.0.3719.77 | Local license and notice files | Attribute any shipped loader/SDK files; do not infer bundled browser runtime from the dependency graph |
-| Windows AI MachineLearning2.1.74 | Local license and ThirdPartyNotices | Distinguish package dependency from app usage and actual shipped files; no AI feature is implemented here |
-| System.Numerics.Tensors9.0.0 | MIT expression, license and third-party notices | Include required notices if present in final payload |
-| Windows SDK BuildTools/MSIX | Build-time tools, including a license URL or local SDK license | Do not copy build tools into the product payload |
-| .NET runtime | Development SDK present; current App build is framework-dependent for .NET | Choose and verify deployment model, inventory any bundled runtime and include its notices |
+| Payload group | Evidence and retained terms |
+|---|---|
+| .NET runtime 10.0.13, win-x64 | Self-contained configuration, runtime-pack bytes, original LICENSE and notices. Installed process loaded its bundled coreclr.dll. |
+| Windows App SDK 2.5.1 and resolved modules | Original binary license/notices; exact bytes attributed against NuGet and embedded x64 MSIX entries. Installed process loaded its bundled Microsoft.UI.Xaml.dll. |
+| Windows SDK.NET.Ref 10.0.22000.57 | Implicit published runtime pack, absent from the App NuGet lock inventory alone. Original official SDK license RTF and CsWinRT license at the commit embedded in WinRT.Runtime 2.2.0.48161 retained with fixed hashes. |
+| WebView2 SDK 1.0.3719.77, Windows AI MachineLearning 2.1.74, Tensors 9.0.0 | Included notices; shipped bytes attributed separately. Dependency presence does not demonstrate a browser/AI feature or a bundled full browser runtime. |
+| Inno Setup 7.1.0 | Original installer technology notice/license included. Official portable compiler verified by fixed/upstream SHA256 and valid Pyrsys B.V. Authenticode before use. Build tools excluded from product. |
 
-Installed SDK10.0.402 help confirms `dotnet package list --no-restore --include-transitive --vulnerable --format json --source …`. Querying the public NuGet.org source for the seven-project solution returned exit0, no stderr and no vulnerability entries. This is a dated feed response, not proof of absence of vulnerabilities or a license audit. No restore or package update was performed. Evidence m5-dependency-audit-01.json.
+The notice inventory has **16 package/version pairs plus Inno Setup**. The manifest contains **553 files**, with `files.json` itself additional. Binary/resource attribution covers **510 files: 504 exact SHA256 matches and six original compiled/generated outputs**, with zero unknown entries. The modified .NET apphost is explicitly covered by runtime terms. Dependency minimization and size optimization remain future work. SDK/build tools, test packages, private evidence, debug symbols and signing secrets are excluded.
 
-Windows SDK22000/x64 contains MakeAppx and Signtool. MakeAppx usage printed its supported commands; no package was built. An earlier check limited to PATH/NuGet cache did not cover this installed SDK directory. [Microsoft's deployment overview](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/) describes the packaging choices. [Microsoft's signing guide](https://learn.microsoft.com/en-us/windows/msix/package/sign-msix-package-guide) documents signing and test trust requirements. No certificate was created or trusted, and no security setting was changed. Tool availability is not an installed-product test.
+Pinned supplemental originals: [Microsoft SDK license](https://download.microsoft.com/download/0/F/F/0FF2B061-47DD-4F55-89B6-FD1D8C44F14D/sdk_license.rtf), SHA256 `dd07eb178e00c6bba4148457fc00ff77cd4887eb521d504186fe59c9ec8bbe62`; [CsWinRT exact-commit license](https://raw.githubusercontent.com/microsoft/CsWinRT/8649ee3eeb2445ca2a36d80d878ef60b96a6c65d/LICENSE), SHA256 `9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b`.
 
-Remaining M5 gates: accepted integrated flow, versioning, reproducible payload, complete notices/attribution, installer and isolated install/uninstall verification, regression checks on that payload, CI artifact preparation, user documentation and release review. Remote CI and clean-machine deployment are unrun. Publication still requires the owner's approval.
+Public NuGet vulnerability query rerun on 2026-10-21: seven projects, exit 0, no vulnerability entries and no stderr. No restore/update occurred. This is a dated feed response for its reported graph; implicit runtime packs, OS codecs and unlisted advisories are not comprehensively audited by it. Evidence: `m5-dependency-audit-02.json`.
+
+Actual local qualification: ZIP integrity and changed/unlisted-file rejection; both installer identities installed/uninstalled in private Unicode/space paths; normal Start menu shortcut target verified then removed; running-app/occupied-directory refusal; installed workbench PNG/BMP round trip with independent exact grid pixels; original files, unknown added files, external profile fixtures and Run value preserved. [Full report](reports/m5-local-candidate.md), [ADR0012](decisions/0012-local-beta-packaging.md).
+
+No certificate was created/trusted or security setting changed. The installer/app are unsigned. Clean-machine deployment, default-location/UI wizard, real logon, matching startup-value removal and remote CI remain unrun. The [release procedure](RELEASING.md) preserves these gates; public distribution needs separate owner authorization.
