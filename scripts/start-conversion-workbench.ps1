@@ -1,4 +1,4 @@
-param([switch]$PrepareOnly)
+param([switch]$PrepareOnly, [string]$Executable, [switch]$ShowWindow)
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
 $run = Join-Path $project ('evidence/private/m3-' + [guid]::NewGuid().ToString('N'))
@@ -31,7 +31,8 @@ Write-BmpFixture (Join-Path $inputs 'large-opaque.bmp') 2048 2048
 $before = @(Get-ChildItem -LiteralPath $inputs -File | ForEach-Object {
     @{ name=$_.Name; length=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }
 })
-$exe = Join-Path $project 'src/App/bin/Release/net10.0-windows10.0.22000.0/win-x64/WinNativeFileU.App.exe'
+$exe = if($Executable) { [IO.Path]::GetFullPath($Executable) } else { Join-Path $project 'src/App/bin/Release/net10.0-windows10.0.22000.0/win-x64/WinNativeFileU.App.exe' }
+if([IO.Path]::GetFileName($exe) -cne 'WinNativeFileU.App.exe') { throw 'The explicit executable must be the built WinNativeFileU.App.exe.' }
 $log = Join-Path $run 'events.jsonl'
 $metadata = @{ run=$run; inputs=$inputs; outputs=$outputs; log=$log; executable=$exe; before=$before; date=(Get-Date).ToString('o') }
 $runFile = Join-Path $run 'run.json'
@@ -39,7 +40,8 @@ $metadata | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $runFile
 if (!$PrepareOnly) {
     if (!(Test-Path -LiteralPath $exe)) { throw 'Build Release before launching the workbench.' }
     $arguments = @('--conversion-workbench', '--conversion-root', ('"'+$run+'"'), '--conversion-log', ('"'+$log+'"'))
-    $process = Start-Process -FilePath $exe -ArgumentList $arguments -WindowStyle Hidden -PassThru
+    $style=if($ShowWindow) { 'Normal' } else { 'Hidden' }
+    $process = Start-Process -FilePath $exe -ArgumentList $arguments -WindowStyle $style -PassThru
     $process.Id | Set-Content -LiteralPath (Join-Path $run 'pid.txt')
 }
 Write-Output $runFile

@@ -1,4 +1,4 @@
-param([string]$RunFile, [switch]$StartHidden)
+param([string]$RunFile, [switch]$StartHidden, [string]$Executable, [switch]$ShowWindow)
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
 if ($RunFile) { $run = (Get-Content -LiteralPath $RunFile -Raw | ConvertFrom-Json).run }
@@ -7,7 +7,8 @@ else {
     New-Item -ItemType Directory -Path $run -ErrorAction Stop | Out-Null
 }
 if (!(Test-Path -LiteralPath $run -PathType Container)) { throw 'Existing resident test directory required.' }
-$exe = Join-Path $project 'src/App/bin/Release/net10.0-windows10.0.22000.0/win-x64/WinNativeFileU.App.exe'
+$exe = if($Executable) { [IO.Path]::GetFullPath($Executable) } else { Join-Path $project 'src/App/bin/Release/net10.0-windows10.0.22000.0/win-x64/WinNativeFileU.App.exe' }
+if([IO.Path]::GetFileName($exe) -cne 'WinNativeFileU.App.exe') { throw 'The explicit executable must be the built WinNativeFileU.App.exe.' }
 if (!(Test-Path -LiteralPath $exe)) { throw 'Build Release before starting the resident.' }
 $key = [Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Software\Microsoft\Windows\CurrentVersion\Run')
 try { $value = if ($key) { $key.GetValue('WinNativeFileU', $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames) } else { $null } }
@@ -18,7 +19,8 @@ $before = if (Test-Path -LiteralPath $settingsPath -PathType Leaf) { (Get-FileHa
 $arguments = @('--resident', '--resident-root', ('"'+$run+'"'))
 if ($StartHidden) { $arguments += '--resident-minimized' }
 $started = (Get-Date).ToString('o')
-$process = Start-Process -FilePath $exe -ArgumentList $arguments -WindowStyle Hidden -PassThru
+$style=if($ShowWindow) { 'Normal' } else { 'Hidden' }
+$process = Start-Process -FilePath $exe -ArgumentList $arguments -WindowStyle $style -PassThru
 $meta = @{ run=$run; executable=$exe; pid=$process.Id; date=$started; startupFingerprint=$fingerprint; settingsBeforeHash=$before; isolated=$true; startHidden=[bool]$StartHidden }
 $metadataPath = Join-Path $run ('launch-'+[guid]::NewGuid().ToString('N')+'.json')
 $meta | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $metadataPath
