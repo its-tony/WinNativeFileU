@@ -4,10 +4,14 @@ namespace WinNativeFileU.Desktop;
 
 public partial class App : Application
 {
+    // Installation/uninstallation must wait for every app mode in this Windows session.
+    // Keep the named handle until process termination, including asynchronous shutdown.
+    private static readonly System.Threading.Mutex InstallationPresence = new(false, @"Local\WinNativeFileU.Running");
     private Window? window;
 
     public App()
     {
+        GC.KeepAlive(InstallationPresence);
         InitializeComponent();
         UnhandledException += (_, args) => RecordPreviewFailure(args.Exception);
     }

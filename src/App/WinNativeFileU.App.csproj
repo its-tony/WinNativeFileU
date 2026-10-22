@@ -14,8 +14,10 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>false</SelfContained>
+    <BundledRuntimeVersion>10.0.13</BundledRuntimeVersion>
   </PropertyGroup>
   <ItemGroup>
+    <FrameworkReference Update="Microsoft.NETCore.App" RuntimeFrameworkVersion="$(BundledRuntimeVersion)" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
     <ProjectReference Include="../Core/WinNativeFileU.Core.csproj" />
     <ProjectReference Include="../Converters/WinNativeFileU.Converters.csproj" />
