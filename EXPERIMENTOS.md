@@ -1,5 +1,33 @@
 # Bitácora
 
+## EXP-M5-12 — RamaCI local e inputs comprometidos
+
+2026-10-21: build -LockedRestore -Headless salida0/0warnings/errors y130tests47Core53integración30conversores. FiltroCategory excluye exactamente1InteractiveShell; full131local anterior sigueevidencia de ese caso. TRX exclusivosm5-headless-{core,integration,converters}-01 y m5-headless-build-01.json. No se ejecutóGitHubActions. Commitsc27a72b/f20e0be/1e4ec28 guardan versión/guard,paqueteverificado yCImanualsinrelease. Packageahoraexigeinputsproducto/packagerlimpios eISCCbytesfijos; trackers/harness/docsnoincluidos enproducto se distinguen conrepositoryChangesPresent. Se hará nuevo candidato de los inputs comprometidos y ensayoaislado; no se reutiliza02/03comoartifactfinal por dirtymetadata.
+
+## EXP-M5-11 — Atribución y negativas del manifiesto
+
+2026-10-21: publish03 salida0,553entradasmanifiesto+files.json,avisos16paquetes+Inno. Atribuciónbinaria510 (504SHAexactos contraNuGet/MSIXx64,6originales/generados incluyendoapphost),0sinatribuir; no es una evaluación legal ni firma. SDKref/CsWinRTlicencias originales fijadas/copiadassincambios. Dossetups yZIP compilados; m5-package-publish-03.json. test-package-integrity01 salida0: extracciónZIPvalidada,mutaciónUSERGUIDEen copia detectada, restauración de esacopia luegoarchivoextra detectado, ZIP/payloadoriginalconservados. Mutacióny resultado privados guardados; m5-integrity-test-01.json. Stagings anteriores no se alteran. PróximoHeadlesslocalparaprobarbranchCI, commits de código, nuevo candidato definitivo de fuente comprometida e instalación aislada; sin push/release/trust/startup.
+
+## EXP-M5-10 — Primer paquete compilado e inventario real
+
+2026-10-21: publish02 salida0, runtimeconfig includedFrameworksNETCore10.0.13 sin framework externo,550archivos manifiesto/ZIP/setup normal ytestidentity compiladosInno7.1.0. m5-package-publish-02.json/result-02.json yartifacts/m5-candidate-02 preservados. No instalación todavía. Inventario deps real detectaWindows.SDK.NET.Refruntimepack10.0.22000.57 omitido enlockgraph; DLLWinRT.Runtime2.2.0.48161 informa commit8649ee3eeb2445ca2a36d80d878ef60b96a6c65d. Se obtienenSDKlicenseRTF desdeURL oficial delnuspec (hashDD07...) yMITCsWinRTdeesecommit(hash9906...), íntegros y fijados enhelper; originales/provenance privados. Stage de avisos incorpora runtimepacks y atribuidor exige SHA256match de cada binario contraNuGet/MSIXx64, oclasificación deoutputspropios. Próximo publish03 verifica esa nuevaatribución; no se declara legalapproval ni origen de bytes no comprobados. Sourceversion/mutexcommitc27a72b, C#131verde sin cambios.
+
+## EXP-M5-09 — Publish RID y lockfiles
+
+2026-10-21: publish01 sale1 NU1004 en Core/Converters/WindowsIntegration por-rwin-x64global que cambia los RIDs respecto a lockfiles; App restore sí descargóruntime oficial pero no se logró publish/installer. Evidencia m5-package-publish-01.json y staging fallido preservados. Tracker M5_PACKAGE_BUILD cierra por dos fallos registrados (pin global y RID, causas distintas); se reabre explícitamente con scripts/package.ps1 cambiado y razón nueva. Se quita-rCLI y conserva RuntimeIdentifierwin-x64local del App y locked restore. No se cambian locks ni C# de131verde. Próximo publish02 a directorio nuevo; no tercer intento idéntico.
+
+## EXP-M5-08 — Regresión del cambio de empaquetado
+
+2026-10-21: configuración corregida compila locked salida0/0advertencias/errores y131tests (47Core54integración30conversores), incluido InteractiveShell local. m5-package-build-02.json y TRX m5-package-{core,integration,converters}-02.trx inmutables. ISCC instalado --version devuelve7.1.0. No se cambió fuente C# después del verde. Próximo experimento publish+noticechecker+Inno, sin inferir instalación/ejecución independiente del SDK ni éxito del mutex todavía.
+
+## EXP-M5-07 — Fallo de pin global del runtime
+
+2026-10-21: build locked package01 sale1 con NU1505 al duplicar PackageDownloadWindowsSDK.NET.Ref10.0.22000.57/10.0.13 y NETSDK1112; no hubo tests nuevos. Evidencia m5-package-build-01.json preservada. Targets instalados muestran RuntimeFrameworkVersion global en ProcessFrameworkReferences; fuentes primarias dotnet también distinguen metadata por FrameworkReference. Se reemplaza propiedad global por BundledRuntimeVersion y metadata solo Microsoft.NETCore.App, sin forzar WindowsSDKPackageVersion ni cambiarlockfiles. Siguiente experimento build02 sobre configuración nueva; no se repite el fallo idéntico ni se presenta como fallo del producto.
+
+## EXP-M5-06 — Herramienta oficial y preparación del candidato
+
+2026-10-21: continua autoriza tareas restantes M5 local. ISCC/7z no aparecen en PATH; makecab/winget disponibles, SDKMakeAppx/Signtool previamente comprobados. Fuentes primarias Microsoft/Inno leídas para folder self-contained, privilegios, mutex y no cierre forzado. Inno oficial7.1.0-x64 descargado, SHA2560362A383ED217D4C4239B5933866DD96D3EB2102737DA92F80F6057A4B40DF2F coincide upstream; Authenticode Valid/Pyrsys B.V. Preparación /PORTABLE=1/CURRENTUSER/NORESTART en.tools, salida0; ayuda realISCC leída. Licencia/avisos conservados, sin registro de tool ni producto/startup/trust. m5-inno-acquire-01.json y provenance exclusivo. M5_PACKAGE_TOOLS VERIFICADO. Implementación nueva de versión/runtime/publicación/installer/manifest/licencias/CI y mutex de presencia queda pendiente de build y runtime; no atribuirle éxito por documentación. Próximo experimento: build completo locked, luego paquete e instalación aislada sin eliminar evidencia fallida.
+
 ## EXP-M5-05 — Cancel real y cierre normal del flujo
 
 2026-10-20: propietario pulsa Convert→Cancel directamente con8BMP ya seleccionados y confirma éxito. Diario nuevo Cancelledtrue/1resultado publicado/0errores, UI accesible y screenshot del propio panel Cancelled1. Primera captura estaba ocluida por otra app; solo se activó la ventana propia y se volvió a observar antes de actuar. Exit real desde botón observado. Primer inventario aún ve ventana durante cierre; segundo fresco devuelve vacío. RevokeInputDragDrop/RevokeDragDrop0 y cincolimpiezastrue del residente con ResidentClosed; checker Windows revisado confirma proceso ausente y Run sin cambios. Checker imágenes:10originales/SHA256 intactos,15resultados; comparación de todos los checks conserva outputs previos y0temporales. Solo6cuadrículas pequeñas tienen píxeles independientes;9grandes no se califican así. Script privado de correlación valida5jobs (2,2,2,8,1) con último cancelado,131TRX, fuente2a0626f sin cambios, recursos y hashes. Evidencia m5-flow-completion-result-01.json y snapshots inmutables m5-flow-completion-{resident,ole}-01.jsonl. M5_CANCEL_BUTTON/M5_FLOW_DESKTOP VERIFICADO; informe/JSON público acotado. Busy close/picker cancel/end-session sin ensayo; beta/empaquetado pendientes. Fallos previos preservados, sin nuevas pruebas idénticas.
@@ -313,3 +341,24 @@ Revisión final M4: m4-completion-path-review-01.json salida0; m4-completion-rev
 Propietario autoriza M5 y elige conectar primero archivos elegidos y radial al motor. Pickers WinRT/InitializeWithWindow documentados por Microsoft; no equivalencia con reproducción. Herramientas publish/package-list --help inicialmente fallaron por CLI_HOME predeterminado fuera de sandbox; se cambió a .tools/cli-home y ambas ayudas respondieron. No repetir CLI_HOME predeterminado ni inferir fallo de publish. No se dispone de compilador de instalador en PATH; empaquetado se pospone al flujo integrado por elección explícita. Próxima build de código nuevo/tests, no startup/push/release.
 
 Resultado EXP-M5-01: m5-flow-build-01.json locked restore/build0,0warnings/errors,131aprobadas47Core54integración30conversores. TRX exclusivos -01. Batch códecs reales/outputs únicos/Unicode/hash/destino existente y cancelación tras primerresultado/Publishing probados. Cabecera elegible pero CRC corrupto falla validación completa sin publicar. OLE nativo con adapter sintético cubre accept/center/disabled/changed/busy/queueReject/moveOnly/tooMany/cancel; no Explorer real ni imágenes de usuario convertidas aún. Próximo experimento: selección con pickers sobre fixtures generados y entrega radial real.
+
+## EXP-M5-13 — Installed candidate / normal close / changed visible target
+Test installer exit0, occupied destination7, running install/uninstall1/1; installed CLR+WinUI module paths corroborated. Owner Exit has both OLE0/five cleanuptrue/process absent; immutable closed snapshots and normal-close.json in private installation run. Prior installed resident UI control failed twice (black capture/activation), closed strategy. Fresh workbench explicit Normal now readable before input; task reopened with m5-installed-visible-ready-01.json. No causal proof Hidden caused the failure. Startup never enabled.
+
+
+## EXP-M5-14 — Installed workbench
+Explicit Normal fresh target readable. Actual clicks Convert / Use result as input / Convert / Convert produced2Completed and OutputExists; normal AltF4 Closed/process absent. Independent stdlib parser checks original/PNG/BMP six-color3x2 grid exactly, both input hashes intact/2outputs/no partials. Evidence m5-installed-conversion-result-01.json, immutable events-final.jsonl. No product code changed; no clean-machine/picker/radial repeat claim. Next native test-identity uninstall.
+
+
+## EXP-M5-15 — Both native installers
+Test identity AfterExit exit0, knownfiles/key removed, unknown/profile/Run intact. Normal identity prechecks found no registration/link; exact normal setup installed0, manifest matches, real Start menu link target+working directory match private destination; native uninstall0 removed link/key/knownfiles and retained unknown/profile/Run. No app launch or startup in normal-identity smoke. Evidence m5-install-uninstall-01.json / m5-normal-install-test-01.json / combined m5-install-result-01.json. No default-location/interactive wizard/clean-machine/logon test.
+
+
+## EXP-M5-16 — Final integrity / advisories / correlation
+Final frozen1e4ec28 candidate ZIP extraction/hash verification passes; changed/unlisted disposable copy rejected/source+archive intact. Advisory refresh publicNuGet21oct exit0/7projects/noentries, no restore/update and no exhaustive runtimepack audit. m5-candidate-correlation-01.json cross-checks553manifest entries,26declared notices plus source/Inno originals,510attributions504exact+6own/0unknown,131full/130filtered TRX, installed normal-close/uninstall/pixels, publicsummary+links/source unchanged. Final Windows read confirms no processes/targetwindows/keys/link; App+setup NotSigned. Evidences m5-final-integrity-test-01.json/m5-dependency-audit-02.json/m5-candidate-review-01.json/m5-final-desktop-01.json. Docs-only/harness changes do not rebuild artifact. Next final path/content review and local commits; no publication.
+
+
+Final path review01 detected added blank lines at EOF in five tracking docs; no blocked paths/missing research. Preserve exit1, trim only trailing blank lines and rerun path/whitespace review02; no product or artifact changes.
+
+## EXP-M5-17 — Local review delivery
+Final path02 exit0/no blocked paths/no missing research; EOF-only failure01 retained. Manual content review and m5-local-review-final-01.json bind report/summary hashes to correlation/path/final desktop snapshots; product/packager inputs unchanged1e4ec28, artifacts intact. Harness committed e956100. M5 local preparation delivered; public-beta publication remains pending and no next milestone starts automatically. Final documentation local commit follows; no push/startup/trust.

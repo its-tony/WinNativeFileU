@@ -1,5 +1,19 @@
 # Hipótesis
 
+H-HEADLESS VERIFIED local:130tests (47/53/30),exactamente1InteractiveShell filtrado; full131previo retenido. Configuración de workflow sin ejecución remota. Candidato final se construirá tras commitsc27a72b/f20e0be/1e4ec28; dirty source solo para diagnóstico explícito. Instalación/runtime/uninstall todavía pendientes.
+
+H-LICENSE-BYTES OBSERVED en publish03:16avisospaquete,510binarios clasificados (504matchesSHAexacto +6generadospropios),0desconocidos. H-MANIFEST verificada conZIPextraído y negativas de cambio/archivo añadido; checksums no acreditan publishertrust ni legalapproval. H-INSTALL sigue pendiente. PróximoHeadlessverifica filtradoexplícitoCI, noShellrealremoto.
+
+H-PUBLISH verificada parcialmente: publish02 autocontenido y550archivos/manifiesto/ZIP/normal+testInno salida0. H-LICENSE-PAYLOAD pendiente: deps implícitosSDK.NET.Ref y WinRT.Runtime exigenavisos además del graphApp; se fijaron fuentes oficiales SDKRTF/CsWinRTcommit y se implementó comparación exacta de binarios contra NuGet/MSIX. No inferir atribución exhaustiva hasta ejecutar y revisar resultado.
+
+H-PUBLISH-RID global descartada: publish01 NU1004 por cambiar RIDs de bibliotecas bloqueadas. Nuevo script hereda win-x64 local del App y elimina-r CLIglobal; no altera lockfiles ni fuente C# verde. Reapertura con evidencia nueva obligatoria por estado cerrado; publish02 pendiente.
+
+H-PIN-RUNTIME global descartada por build01 NU1505/NETSDK1112: afecta también WindowsSDK.NET.Ref. Nueva configuración fija metadata únicamente Microsoft.NETCore.App; build02 pendiente. No inferir fallo de codec ni ejecución de tests de ese error de restauración/build.
+
+Build02 verifica la configuración metadataNETCore con131verde/0warnings/errors. H-PAYLOAD todavía no demostrado hasta publish; mutex compila, bloqueo real de setup/uninstall pendiente. TRX exclusivos preservados antes de otra prueba.
+
+2026-10-21 H-INSTALLER-TOOLS VERIFIED: Inno7.1.0 portable, hash fijo+upstream y firma esperada válidos; ayuda instalada corroborada. No prueba aún compilación de installer. H-PAYLOAD/H-INSTALL: propuestas .NET10.0.13+AppSDKself-contained, manifiesto/notices, installer per-user sin autoarranque y negativas de app viva/carpeta no vacía. Build/ejecución/instalación pendientes. CI headless filtrará explícitamente1caso InteractiveShell, sin equipararlo a suite local completa o ejecución remota.
+
 Estado vigente EXP-M5-05: H-FLOW y H-FLOW-CANCEL VERIFIED IN WINDOWS PROTOTYPE, alcance docs/reports/m5-conversion-flow.md. Nuevo trabajo directo de8seleccionados termina Cancelledtrue/1publicado/0errores y UI Cancelled1; no se atribuye éxito al clic automatizado tardío previo. Cierre normal ambosOLE0/cincolimpiezastrue/proceso+ventana ausentes/Run y hashes intactos/0temporales. Busy close/picker cancel/end-session y full M5 siguen pendientes. Las notas inferiores conservan estados históricos.
 
 Actualización M5: H-FLOW VERIFIED IN WINDOWS PROTOTYPE para pickers→2PNG y Explorer/radial→2PNG→2BMP; seis imágenes generadas3×2 con RGB exacto independiente, hashes originales intactos. No demuestra otras variantes ni fiabilidad general. Rechazo actual observado por CtrlAltX y Escape, no Drop en centro. H-PICKER-AUTO BLOQUEADO: dos fallos de targeting owner/PickerHost; no repetir clicks idénticos. Owner completó los pickers. H-FLOW-CANCEL pendiente UI; motor/lote cancelado en tests. Evidencias y límites en ESTADO.md/ADR0011.
@@ -60,3 +74,14 @@ EXP-M5-04: selector8BMP y job8éxitos en7.032s; Cancel automatizado tardío, no 
 | H-M5-FLOW | DOCUMENTADO / implementación pendiente | Pickers públicos permiten selección explícita; OLE debe copiar paths y encolar fuera del callback, filtrar formatos reales y mantener COPY/NONE sin reemplazar originales. Falta implementación y reproducción. |
 
 | H-M5-FLOW-BUILD | VERIFICADO en Windows,131tests | Nuevos15casos prueban targets comunes, batch real/Unicode/hashes/cancelación y snapshots OLE/COPY/rechazo; notificaciones directas y picker no ensayado todavía. |
+
+H-M5-visible: changing launcher from Hidden to Normal and using fresh installed workbench produces readable screenshot; observed, not proof of cause of resident control failure. Installed conversions still pending.
+
+
+H-M5-installed-codecs VERIFIED IN WINDOWS PROTOTYPE: exact installed candidate diagnostic workbench2conversions with independent grid pixels and collision rejection; not a clean-machine or new physical radial trial.
+
+
+H-M5-install verified in bounded local test: exact normal and test identities install/uninstall/private Unicode-space paths, correct shortcut and retention. Self-contained observed loaded CLR+WinUI from payload; clean-machine independence remains untested.
+
+
+H-M5-candidate VERIFIED LOCAL: self-contained exactbytes, paired installers and generated-grid roundtrip verified on this Windows desktop. Implicit SDK projection notices and upstream hashes present. Clean-machine independence, trust/publisher/remoteCI and broad compatibility remain hypotheses/unrun; technicalnotice/advisory checks do not establish legal/security approval. Next owner candidate review, not automatic public release.

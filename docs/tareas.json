@@ -560,16 +560,18 @@
     },
     {
       "id": "M5_DEPENDENCIES",
-      "state": "EN_PROGRESO",
-      "attempts": 1,
+      "state": "VERIFICADO",
+      "attempts": 2,
       "equivalent_failures": 0,
       "evidence": [
         "evidence\\private\\m5-dependency-audit-01.json",
-        "evidence\\private\\m5-dependency-inventory-01.json"
+        "evidence\\private\\m5-dependency-inventory-01.json",
+        "evidence\\private\\m5-dependency-audit-02.json",
+        "evidence\\private\\m5-candidate-correlation-01.json"
       ],
       "success_criterion": "Review dependency metadata and known-vulnerability response, then attribute final distribution files before beta",
       "abandon_condition": "Two equivalent failures close that audit strategy; preserve uncertainty",
-      "next_step": "App lock graph16packages/local notices inventoried and public NuGet audit7projects exit0 without vulnerability entries; final payload/runtime attribution and distribution obligations remain pending."
+      "next_step": "Technical exact payload review:16package/version notices plus Inno,26declared notices hash-checked plus source/Inno;510binary/resources504exact+6own/0unknown. Implicit SDK/CsWinRT fixed hashes retained. Dated NuGet7projects noentries; not legal/security approval or exhaustive runtime audit; minimization pending."
     },
     {
       "id": "M5_CANCEL_BUTTON",
@@ -583,6 +585,87 @@
       "success_criterion": "Actual running job cancelled through panel button and correlated result/hash/cleanup",
       "abandon_condition": "Two equivalent failures stop that control strategy",
       "next_step": "Owner direct Convert then Cancel, UI actual Cancelled1/0error and journal Cancelledtrue with one retained result. Ten originals/previous outputs intact, no partials; earlier late automated click retained."
+    },
+    {
+      "id": "M5_PACKAGE_TOOLS",
+      "state": "VERIFICADO",
+      "attempts": 1,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-inno-acquire-01.json",
+        "evidence\\private\\m5-inno-acquire-01.json"
+      ],
+      "success_criterion": "Pinned official compiler acquired with hash/authenticity verification, portable local preparation and installed help",
+      "abandon_condition": "Two equivalent failures; reopen only with changed evidence",
+      "next_step": "Official pinned Inno7.1.0 SHA256 matches upstream and fixed expected value, valid Pyrsys B.V. Authenticode, portable preparation under.tools, installed help read; compiler/license retained privately, no system tool registration or product install."
+    },
+    {
+      "id": "M5_PACKAGE_BUILD",
+      "state": "VERIFICADO",
+      "attempts": 8,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-package-build-01.json",
+        "src\\App\\WinNativeFileU.App.csproj",
+        "evidence\\private\\m5-package-build-02.json",
+        "evidence\\private\\m5-package-publish-01.json",
+        "evidence\\private\\m5-package-publish-02.json",
+        "evidence\\private\\m5-package-publish-result-02.json",
+        "evidence\\private\\m5-package-publish-03.json",
+        "evidence\\private\\m5-integrity-test-01.json",
+        "evidence\\private\\m5-package-candidate-01.json",
+        "evidence\\private\\m5-final-integrity-test-01.json",
+        "evidence\\private\\m5-candidate-correlation-01.json"
+      ],
+      "success_criterion": "Versioned self-contained payload, notices, manifest, portable archive and per-user installer built",
+      "abandon_condition": "Two equivalent failures; reopen only with changed evidence",
+      "next_step": "Frozen1e4ec28 product/packager unchanged candidate0.1.0-beta.1,553entries+manifest,ZIP/setup hashes exact, final integrity negatives pass;131full/130filtered green, installed runtime/conversions/install/uninstall corroborated. Unsigned/unpublished/no clean-machine or bit-for-bit claim."
+    },
+    {
+      "id": "M5_INSTALL_TEST",
+      "state": "VERIFICADO",
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-install-prepare-01.json",
+        "evidence\\private\\m5-install-uninstall-01.json",
+        "evidence\\private\\m5-normal-install-test-01.json",
+        "evidence\\private\\m5-install-result-01.json"
+      ],
+      "success_criterion": "Isolated install/update refusal/payload hashes/launch/conversion/normal close/uninstall and preservation checks",
+      "abandon_condition": "Two equivalent failures; reopen only with changed evidence",
+      "next_step": "Both identities installed/uninstalled0 in private Unicode-space destinations, normal Start menu target verified then shortcut/key/knownfiles removed, unknown/profile/Run preserved. Occupied7 and running install/uninstall1/1 refused; bundled CLR/WinUI paths and owner Exit cleanup corroborated. Default path/wizard/logon/real matching Run removal untested."
+    },
+    {
+      "id": "M5_RELEASE_REVIEW",
+      "state": "VERIFICADO",
+      "attempts": 4,
+      "equivalent_failures": 1,
+      "evidence": [
+        "evidence\\private\\m5-headless-build-01.json",
+        "evidence\\private\\m5-candidate-review-01.json",
+        "evidence\\private\\m5-candidate-path-review-01.json",
+        "evidence\\private\\m5-candidate-path-review-02.json",
+        "evidence\\private\\m5-local-review-final-01.json"
+      ],
+      "success_criterion": "Regression, CI artifact preparation, docs/licenses/versioning and local release candidate reviewed without publication",
+      "abandon_condition": "Two equivalent failures; reopen only with changed evidence",
+      "next_step": "Local M5 candidate review complete: frozen inputs/hash correlation/131full+130headless/26notices+510attribution/bothinstaller identities/installed pixels/normal cleanup/source unchanged. Path02pass after EOF whitespace fix; earlier failure retained. User guide/release procedure/report/summary reviewed; unsigned/unpublished/no remoteCI/cleanmachine claim."
+    },
+    {
+      "id": "M5_INSTALLED_UI",
+      "state": "VERIFICADO",
+      "attempts": 3,
+      "equivalent_failures": 0,
+      "evidence": [
+        "evidence\\private\\m5-installed-ui-control-01.json",
+        "evidence\\private\\m5-installed-ui-control-01.json",
+        "evidence\\private\\m5-installed-pixel-check-01.json",
+        "evidence\\private\\m5-installed-conversion-result-01.json"
+      ],
+      "success_criterion": "Interact with exact installed GUI using returned windows; distinguish tool control from actual app results",
+      "abandon_condition": "Two equivalent activation failures close that binding/control strategy",
+      "next_step": "Changed visible workbench from installed exact candidate passes2PNG/BMP conversions, exact six-color independent pixels, original hashes/2outputs/no partials, OutputExists, Closed and process absence. Prior Hidden resident control2failures retained; no causal/general automation claim."
     }
   ],
   "history": [
@@ -2633,6 +2716,386 @@
       "evidence": "evidence\\private\\m5-flow-completion-review-01.json",
       "sha256": "f985689a53e5b8cb026c486a59552e933ad9ee97f67d539b187d21b680216df2",
       "note": "Reviewed unchanged source2a0626f/131green,5actual jobs/six exact grids/true Cancel retaining1/normal cleanup and immutable hashes/links/privacy. Two modal failures and late automated Cancel preserved. Flow prerequisite complete; full M5 packaging/distribution pending."
+    },
+    {
+      "event": "USUARIO",
+      "note": "2026-10-21 continua authorizes remaining M5 packaging after bounded conversion-flow acceptance. Local artifacts/test installation only; no publication."
+    },
+    {
+      "at": "2026-10-21T18:19:32.271675-06:00",
+      "id": "M5_PACKAGE_TOOLS",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:19:40.478220-06:00",
+      "id": "M5_PACKAGE_TOOLS",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-inno-acquire-01.json",
+      "sha256": "74054084ad30fa49b7a9c5ad630d5329a506483b9b6f5be4e4629e7aa4320978",
+      "note": "Acquire official pinned Inno7.1.0 compiler, require upstream hash plus valid expected Authenticode, prepare portable under.tools only, inspect installed help. No app install/startup/publication."
+    },
+    {
+      "at": "2026-10-21T18:21:54.927622-06:00",
+      "id": "M5_PACKAGE_TOOLS",
+      "event": "VERIFICADO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-inno-acquire-01.json",
+      "sha256": "74054084ad30fa49b7a9c5ad630d5329a506483b9b6f5be4e4629e7aa4320978",
+      "note": "Official pinned Inno7.1.0 SHA256 matches upstream and fixed expected value, valid Pyrsys B.V. Authenticode, portable preparation under.tools, installed help read; compiler/license retained privately, no system tool registration or product install."
+    },
+    {
+      "at": "2026-10-21T18:25:05.234963-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:25:27.704127-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-package-build-01.json",
+      "sha256": "3ff50b669f980bc47fd2967125bebcac95f0fb5ac0783d89cef95f1b0b8ec7fe",
+      "note": "Compile new version/runtime/presence mutex and run full regression with InteractiveShell included before publish/install claims. Prior131TRX immutable copies preserved."
+    },
+    {
+      "at": "2026-10-21T18:26:10.811987-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "src\\App\\WinNativeFileU.App.csproj",
+      "sha256": "af111a900461c49fceac033c8d0faf2fe2f27809c6005a5e69d507d14008cd17",
+      "note": "After recorded NU1505/NETSDK1112, changed from global RuntimeFrameworkVersion to metadata on Microsoft.NETCore.App only; preserve SDK Windows reference, rerun changed configuration."
+    },
+    {
+      "at": "2026-10-21T18:26:10.944810-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:26:44.314895-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-package-build-02.json",
+      "sha256": "030d94152678fcfdd2e3d252789f9a6e3af1d48e3ea7daea07a5eba52d5f2bd5",
+      "note": "Build corrected per-framework runtime pin and run full local regression including InteractiveShell; first global-pin failure retained."
+    },
+    {
+      "at": "2026-10-21T18:27:34.918550-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:27:42.854225-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "FALLO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-package-publish-01.json",
+      "sha256": "0d51c82ba688448e50bdf71bf14a53407c69da78ee6439693b231582e4291eea",
+      "note": "First self-contained folder publish after131green, stage unchanged licenses/notices, verify hash manifest, create ZIP and compile unsigned normal/test installers. Preserve any failed staging; not a release."
+    },
+    {
+      "at": "2026-10-21T18:28:20.537286-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "REAPERTURA",
+      "evidence": "scripts\\package.ps1",
+      "sha256": "0e5cd34164cab5e2280b0812c1e66821a366dd51e38dd0f0608bc230efa68991",
+      "note": "Changed evidence after NU1004: remove global-r which changed referenced library lock graphs; use App-owned RuntimeIdentifier and keep locked restore. Previous pin and RID failures retained, no repeat of either unchanged strategy."
+    },
+    {
+      "at": "2026-10-21T18:28:20.688990-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:29:22.574382-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m5-package-publish-02.json",
+      "sha256": "90f7dd1f23f48afb1b3df15ee67b29d9cda8706f9abd390ae76810a4c8d26ce0",
+      "note": "Publish changed per-App RID configuration into new staging, preserve failed directory and lockfiles; compile payload/installers only if manifest/notices checks pass."
+    },
+    {
+      "at": "2026-10-21T18:35:18.985259-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m5-package-publish-result-02.json",
+      "sha256": "a5103594dd8a3778bed57ffeae8fac5c25a78eb6a2d3c4b61bf55dcfc24c2da1",
+      "note": "Per-App RID publish succeeds: self-contained550-file staging, ZIP and normal/test Inno compiles. Not final: actual deps reveal implicit Windows SDK.NET.Ref runtimepack; add pinned SDK/CsWinRT notices and exact binary attribution before qualification."
+    },
+    {
+      "at": "2026-10-21T18:36:06.983444-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:37:23.712666-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 5,
+      "evidence": "evidence\\private\\m5-package-publish-03.json",
+      "sha256": "0298a9caa1c1ee0759bf1633512c83e52979e331cdccfc6ca6c3ae98b7061bbc",
+      "note": "Build new staging with implicit SDK/CsWinRT pinned notices and mandatory exact binary attribution, preserving02. Source C#131green now committed c27a72b; packaging scripts still under qualification."
+    },
+    {
+      "at": "2026-10-21T18:37:33.617906-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:37:47.683819-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 6,
+      "evidence": "evidence\\private\\m5-integrity-test-01.json",
+      "sha256": "3382e2b79e783267c6b5dd6179d2f057061a9b9e55993941ee4d53234b28dd9a",
+      "note": "Verify ZIP extraction against manifest, detect changed and unlisted files only in disposable copy, preserve archive/payload; published attribution has no unknown binary bytes."
+    },
+    {
+      "at": "2026-10-21T18:39:03.449897-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:39:34.372446-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-headless-build-01.json",
+      "sha256": "ad652458d3cc914dc76fe30be911bf6580c2d057887e8a2ad780c6d25ff741b8",
+      "note": "Exercise explicit Headless build branch locally, excluding only InteractiveShell trait. Full131local TRX02 already preserved; expect130filtered, not a remote CI or tray test."
+    },
+    {
+      "at": "2026-10-21T18:40:55.588028-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:42:21.241020-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 7,
+      "evidence": "evidence\\private\\m5-package-candidate-01.json",
+      "sha256": "74865120b37c6bd0e19900a28a42db1d468c9a80cac26e1add135d6158a066f8",
+      "note": "Build review candidate from committed product/packager inputs1e4ec28, fixed compiler hash, no dirty source allowed. Full131 and filtered130 already recorded; next install only private test identity."
+    },
+    {
+      "at": "2026-10-21T18:43:04.795835-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:44:10.340363-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "EN_PROGRESO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-install-prepare-01.json",
+      "sha256": "5e77de159ffd0276449b30264cd2cd961bbb0ad4589a6f42e9abbbcee55eb4e2",
+      "note": "Install exact review payload using separate test identity/private Unicode-space directory; verify manifest, actual bundled CLR+WinUI module paths and refusal of occupied destination/running install+uninstall. Leave app open for normal UI close, no startup changes."
+    },
+    {
+      "at": "2026-10-21T18:47:18.792022-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "FALLO",
+      "attempt": 1,
+      "evidence": "evidence\\private\\m5-installed-ui-control-01.json",
+      "sha256": "b8eb131fcdac66a216cab6d879f1da13ee78a181938b2180c694856d523e14a7",
+      "note": "First installed resident capture black, activation failed; no app input successful and no conversion failure inferred."
+    },
+    {
+      "at": "2026-10-21T18:47:19.042983-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "FALLO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-installed-ui-control-01.json",
+      "sha256": "b8eb131fcdac66a216cab6d879f1da13ee78a181938b2180c694856d523e14a7",
+      "note": "Recovered exact target and single activation retry failed identically. Strategy closed. Owner reports normal Exit; verify journal before any changed visible-mode target."
+    },
+    {
+      "at": "2026-10-21T18:50:29.233577-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "REAPERTURA",
+      "evidence": "evidence\\private\\m5-installed-visible-ready-01.json",
+      "sha256": "3180cc1ad3f057eec1dbcc57ffbe1e3a154f7943ec9b1d832826088fda3f1fc7",
+      "note": "New condition: prior resident normally exited; fresh explicit Normal workbench has readable nonblack screenshot and generated3x2 grid. Reopen for bounded installed conversions, not repeat Hidden resident activation."
+    },
+    {
+      "at": "2026-10-21T18:52:26.977811-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:52:27.280363-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-installed-pixel-check-01.json",
+      "sha256": "c8d914fcc5babda0259a6f7ad523f82cf1f6a2e1ed000d74b525aceb9fff5939",
+      "note": "Visible installed workbench2conversions plus OutputExists and normal close; independently check exact PNG/BMP generated-grid pixels and original hashes."
+    },
+    {
+      "at": "2026-10-21T18:52:43.450153-06:00",
+      "id": "M5_INSTALLED_UI",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-installed-conversion-result-01.json",
+      "sha256": "dc32aed880e97f1a9121b6f0cf29bf1ab27b8a5765200437375eef68a80b575a",
+      "note": "Changed visible workbench from installed exact candidate passes2PNG/BMP conversions, exact six-color independent pixels, original hashes/2outputs/no partials, OutputExists, Closed and process absence. Prior Hidden resident control2failures retained; no causal/general automation claim."
+    },
+    {
+      "at": "2026-10-21T18:52:43.749677-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:52:46.551490-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-install-uninstall-01.json",
+      "sha256": "5af8e8544cb53a8b41f35dea943dcf32a03a8a0ae62705e9fffa47ab6ee7171c",
+      "note": "After owner Exit and installed workbench normal close, validate exact private target/uninstaller hash/no reparse/process absent, uninstall owned test identity and verify preserved unknown file/profile/Run."
+    },
+    {
+      "at": "2026-10-21T18:53:30.297273-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:53:54.326839-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "EN_PROGRESO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-normal-install-test-01.json",
+      "sha256": "9338ecaf3054790b6ac33109811100bb969a3edac57901640c014ce1a1f80d06",
+      "note": "Test exact normal installer identity and Start menu shortcut in fresh private space/Unicode destination only if no existing registration/shortcut; validate target/manifest then known-file native uninstall and preservation, no app launch/startup."
+    },
+    {
+      "at": "2026-10-21T18:54:22.962074-06:00",
+      "id": "M5_INSTALL_TEST",
+      "event": "VERIFICADO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-install-result-01.json",
+      "sha256": "b03ec71436502b2168e416ecd6e990366ebb6fdd000d8679ffe10b345632db45",
+      "note": "Both identities installed/uninstalled0 in private Unicode-space destinations, normal Start menu target verified then shortcut/key/knownfiles removed, unknown/profile/Run preserved. Occupied7 and running install/uninstall1/1 refused; bundled CLR/WinUI paths and owner Exit cleanup corroborated. Default path/wizard/logon/real matching Run removal untested."
+    },
+    {
+      "at": "2026-10-21T18:54:23.286412-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:54:43.243259-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "EN_PROGRESO",
+      "attempt": 8,
+      "evidence": "evidence\\private\\m5-final-integrity-test-01.json",
+      "sha256": "f6108fc2e5fdc36f9f5b36eddb57800ccc20a4e456b65eea5edda0c0bcb5dfbf",
+      "note": "Qualify frozen committed-source final candidate ZIP with manifest and changed/unlisted negative cases in new disposable copy, preserve archive/payload; no product code changes or repeated full suite."
+    },
+    {
+      "at": "2026-10-21T18:54:55.373743-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:55:04.264873-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-dependency-audit-02.json",
+      "sha256": "5920e8b6564b4a752a96e16595491ec56b5ad5099b68f73bffcf08b4d8cf888a",
+      "note": "Refresh dated public NuGet known-vulnerability response for current committed graph after self-contained candidate, no restore/update/upload. Does not audit implicit runtimepacks or establish security/license approval."
+    },
+    {
+      "at": "2026-10-21T18:58:51.237909-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T18:58:53.961176-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-candidate-review-01.json",
+      "sha256": "7e331ffe083c88c5d1f077070f3a4f9521ec43ffd3a636fe092b982bb8576f7f",
+      "note": "Correlate exact final hashes/manifests/notices/510 attribution/immutable131+130TRX/installed close+uninstall+pixels/advisory graph/source unchanged and reviewed public links/privacy; no remoteCI/publication claim."
+    },
+    {
+      "at": "2026-10-21T19:00:56.699604-06:00",
+      "id": "M5_PACKAGE_BUILD",
+      "event": "VERIFICADO",
+      "attempt": 8,
+      "evidence": "evidence\\private\\m5-candidate-correlation-01.json",
+      "sha256": "48277c15d570e0b0f4df5ad9a45d87f619205c5272121503d4456b9193de4a2f",
+      "note": "Frozen1e4ec28 product/packager unchanged candidate0.1.0-beta.1,553entries+manifest,ZIP/setup hashes exact, final integrity negatives pass;131full/130filtered green, installed runtime/conversions/install/uninstall corroborated. Unsigned/unpublished/no clean-machine or bit-for-bit claim."
+    },
+    {
+      "at": "2026-10-21T19:00:57.059246-06:00",
+      "id": "M5_DEPENDENCIES",
+      "event": "VERIFICADO",
+      "attempt": 2,
+      "evidence": "evidence\\private\\m5-candidate-correlation-01.json",
+      "sha256": "48277c15d570e0b0f4df5ad9a45d87f619205c5272121503d4456b9193de4a2f",
+      "note": "Technical exact payload review:16package/version notices plus Inno,26declared notices hash-checked plus source/Inno;510binary/resources504exact+6own/0unknown. Implicit SDK/CsWinRT fixed hashes retained. Dated NuGet7projects noentries; not legal/security approval or exhaustive runtime audit; minimization pending."
+    },
+    {
+      "at": "2026-10-21T19:00:57.403598-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T19:00:58.128468-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "FALLO",
+      "attempt": 3,
+      "evidence": "evidence\\private\\m5-candidate-path-review-01.json",
+      "sha256": "81637b44c78f554ec47794caebaf92d44d0082721c57f4a4269898d4183d0ce9",
+      "note": "Final path/whitespace policy after candidate reports/guide/release procedure and verified install harness; manual content/evidence correlation separate, product/artifacts unchanged."
+    },
+    {
+      "at": "2026-10-21T19:01:36.275841-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "RESERVA",
+      "note": "Proceso en curso; si se interrumpe, revisar evidencia y reabrir explícitamente"
+    },
+    {
+      "at": "2026-10-21T19:01:36.738352-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "EN_PROGRESO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m5-candidate-path-review-02.json",
+      "sha256": "b1127a93954fee03d3272476a47b85d68ed8f7f4f26ef504a34147c522dfcc41",
+      "note": "Changed docs: removed only trailing EOF blank lines flagged in01; rerun bounded path/whitespace policy, preserve prior failure. Source and frozen artifacts unchanged."
+    },
+    {
+      "at": "2026-10-21T19:02:30.952338-06:00",
+      "id": "M5_RELEASE_REVIEW",
+      "event": "VERIFICADO",
+      "attempt": 4,
+      "evidence": "evidence\\private\\m5-local-review-final-01.json",
+      "sha256": "90678e34d45f3ea912adba4f06d68a1c4a5dbf9e6a705e51feb024ddd7c90326",
+      "note": "Local M5 candidate review complete: frozen inputs/hash correlation/131full+130headless/26notices+510attribution/bothinstaller identities/installed pixels/normal cleanup/source unchanged. Path02pass after EOF whitespace fix; earlier failure retained. User guide/release procedure/report/summary reviewed; unsigned/unpublished/no remoteCI/cleanmachine claim."
     }
   ]
 }
